@@ -4,11 +4,9 @@
 namespace ft {
     class vector {
         private :
-            int _qwe;
         public :
             vector() {}
             ~vector() {}
-            int getqwe() const ;
     };
 }
 
