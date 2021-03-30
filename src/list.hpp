@@ -1,25 +1,24 @@
-#ifndef FT_STACK_H
-#define FT_STACK_H
+#ifndef FT_LIST_H
+#define FT_LIST_H
 
 #include <iostream>
 
-// THIS SUCKS
 namespace ft {
     template <typename T>
-    class stack {
+    class list {
         private :
             T * _content;
             int _size;
         public :
             // constructors / destructors
-            stack() {
+            list() {
                 std::cout << "constructor" << std::endl;
                 _content = new T();
                 _size = int();
                 _content[0] = T();
             }
 
-            ~stack() {
+            ~list() {
                 if (_content != NULL) {
                     delete [] _content;
                 }
@@ -55,4 +54,6 @@ namespace ft {
     };
 }
 
-#endif // FT_STACK_H
+#endif // FT_LIST_H
+
+#endif // LIST_H
