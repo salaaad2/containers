@@ -2,20 +2,31 @@
 #define FT_LIST_H
 
 #include <iostream>
+#include <list>
 
 namespace ft {
-    template <typename T>
+    template <typename T, typename Alloc = std::allocator<T> >
     class list {
         private :
-            T * _content;
+            struct _node {
+                T _content;
+                T * _next;
+            };
+            _node * _list;
             int _size;
         public :
             // constructors / destructors
-            list() {
-                std::cout << "constructor" << std::endl;
-                _content = new T();
-                _size = int();
-                _content[0] = T();
+            list() { }
+
+            list(size_t n, const T & value) {
+                size_t i = 0;
+                _list = new _node[n];
+
+                while (i < n) {
+                    _list[i]._content = value;
+                    _list[i]._next = (i == (n - 1)) ? &_list[0] : &_list[i + 1];
+                    _size++;
+                }
             }
 
             ~list() {
@@ -31,21 +42,10 @@ namespace ft {
             // }
 
             // member functions
-            void push (T & val) {
-                T * tmp;
-                int i;
-
-                tmp = new T[_size + 1];
-                for (i = 0; i < _size; i++) {
-                    tmp[i] = _content[i];
+            void print(void) {
+                while (_list->next != &_list[0]) {
+                    std::cout << "list content : " << _list->_content << std::endl;
                 }
-                tmp[i] = val;
-                _size++;
-                _content = tmp;
-            }
-
-            T & top (void) const {
-                return (_content[_size - 1]);
             }
 
             int const & size(void) {

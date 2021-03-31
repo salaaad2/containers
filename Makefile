@@ -12,7 +12,8 @@ OBJS_DIR		 = obj/
 #--------------------------------- FILES --------------------------------------#
 #==============================================================================#
 SRCS_NAME		  = containers
-SRCS_NAME		 += stack
+SRCS_NAME		 += list
+#SRCS_NAME		 += stack
 #SRCS_NAME		 += vector
 #------------------------------------------------------------------------------#
 SRCS			 = $(addprefix ${SRCS_DIR}, $(addsuffix .cpp, ${SRCS_NAME}))
