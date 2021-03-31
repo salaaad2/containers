@@ -2,6 +2,7 @@
 
 * LIST
 **** /usr/include/c++/10/iostream/bits/stl_list.h
+linked list where last element has a pointer to the first one
 ** allocators ?
 ** Member functions
 *** (constructor)

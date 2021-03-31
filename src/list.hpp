@@ -13,19 +13,19 @@ namespace ft {
                 _node * _next;
             };
             _node * _list;
-            int _size;
+            size_t _size;
         public :
             // constructors / destructors
             list() { }
 
-            list(size_t n, const T & value) {
-                size_t i = 0;
+            list(size_t n, const T & value) : _size(0) {
                 _list = new _node[n];
 
-                while (i < n) {
-                    _list[i]._content = value;
-                    _list[i]._next = (i == (n - 1)) ? &_list[0] : &_list[i + 1];
+                while (_size < n) {
+                    _list[_size]._content = value;
+                    _list[_size]._next = (_size == (n - 1)) ? &_list[0] : &_list[_size + 1];
                     _size++;
+                    std::cout << "add " << _list[_size - 1]._content << "at index " << _size << std::endl;
                 }
             }
 
@@ -39,7 +39,9 @@ namespace ft {
 
             // member functions
             void print(void) {
-                while (_list->_next != &_list[0]) {
+                _node *ptr = _list[0];
+
+                while (ptr->_next != NULL) {
                     std::cout << "list content : " << _list->_content << std::endl;
                 }
             }

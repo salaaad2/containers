@@ -6,5 +6,6 @@ int main(void) {
 
     ft::list<int, std::allocator<int> > qwe(2, value);
 
+    qwe.print();
     return (0);
 }
