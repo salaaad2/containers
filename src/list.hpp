@@ -10,7 +10,7 @@ namespace ft {
         private :
             struct _node {
                 T _content;
-                T * _next;
+                _node * _next;
             };
             _node * _list;
             int _size;
@@ -29,11 +29,7 @@ namespace ft {
                 }
             }
 
-            ~list() {
-                if (_content != NULL) {
-                    delete [] _content;
-                }
-            }
+            ~list() { }
 
             // void pop (void) {
             //     if (_content[_size - 1] != NULL) {
@@ -43,7 +39,7 @@ namespace ft {
 
             // member functions
             void print(void) {
-                while (_list->next != &_list[0]) {
+                while (_list->_next != &_list[0]) {
                     std::cout << "list content : " << _list->_content << std::endl;
                 }
             }
@@ -55,5 +51,3 @@ namespace ft {
 }
 
 #endif // FT_LIST_H
-
-#endif // LIST_H
