@@ -10,16 +10,15 @@ namespace ft {
             typedef size_t size_type;
 
             explicit vector () {
-                // TODO
                 _size = 0;
                 _capacity = 8;
+                _elements = new value_type[_capacity];
             }
 
             explicit vector (size_type n,
                              const value_type& val = value_type()) {
-                // TODO allocate 8 16 32 64
-                _size = n;
-                _capacity = (n << 2);
+                _size = n * 2;
+                _capacity = 256; // TODO allocate 8 16 32 64
                 _elements = new value_type[_capacity];
                 for (size_type i = 0; i < _size; i++) { _elements[i] = val; }
             }
@@ -33,6 +32,8 @@ namespace ft {
             //     // TODO
             // }
             //
+
+            ~vector() {};
 
             size_type capacity (void) {
                 return (this->_capacity);
