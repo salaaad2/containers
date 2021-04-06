@@ -1,8 +1,11 @@
 #include "containers.hpp"
 
+#include <vector>
+
 int main(void) {
     size_t qwe = 9;
 
+    std::vector<int> truevect (100, 2);
     ft::vector<int> svect;
 
     ft::vector<int> unovect;
@@ -21,7 +24,13 @@ int main(void) {
     std::cout << quavect.size() << " " << quavect.capacity() << std::endl;
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
-    cinvect[80] = 12;
+    try {
+        truevect.at(10000) = 12;
+        cinvect[100] = 12;
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
 
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
