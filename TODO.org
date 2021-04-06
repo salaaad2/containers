@@ -1,5 +1,11 @@
 #+TITLE: Container TODO
 
+* VECTOR
+** Member functions
+*** (constructor)
+*** (destructor)
+*** operator=
+
 * LIST
 **** /usr/include/c++/10/iostream/bits/stl_list.h
 linked list where last element has a pointer to the first one
@@ -47,7 +53,6 @@ linked list where last element has a pointer to the first one
 *** sort
 *** reverse
 
-* VECTOR
 * MAP
 * STACK [SCRAPPED]
 ** needs an underlying container : vector
