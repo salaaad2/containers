@@ -34,15 +34,24 @@ namespace ft {
                 return ;
             }
 
-            vector & operator=(vector const & rhs) {
-                _capacity = rhs.capacity();
-                _size = rhs.size();
+            vector & operator=(vector const & x) {
+                _capacity = x.capacity();
+                _size = x.size();
                 _elements = new value_type[_size];
-                for (size_type i = 0; i < _size; i++) {_elements[i] = rhs[i];}
+                for (size_type i = 0; i < _size; i++) {_elements[i] = x[i];}
                 return *this;
             }
 
-            value_type & operator[](size_type n) const
+            value_type const & at(size_type n) const
+            { return (_elements[n]); }
+
+            value_type & at(size_type n)
+            { return (_elements[n]); }
+
+            value_type const & operator[](size_type n) const
+            { return (_elements[n]); }
+
+            value_type & operator[](size_type n)
             { return (_elements[n]); }
 
             ~vector() {

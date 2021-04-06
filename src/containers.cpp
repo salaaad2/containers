@@ -21,6 +21,8 @@ int main(void) {
     std::cout << quavect.size() << " " << quavect.capacity() << std::endl;
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
+    cinvect[80] = 12;
+
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
     }
