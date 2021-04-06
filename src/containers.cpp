@@ -4,13 +4,14 @@ int main(void) {
     std::cout << "cool args bro, take a look at them : " << std::endl;
     size_t qwe = 9;
 
+    std::vector<int> svect;
+
     ft::vector<int> unovect;
     ft::vector<int> dosvect(qwe, 200);
     ft::vector<int> trevect(100, 200);
     ft::vector<int> quavect(trevect);
 
-    std::vector<int> svect;
-
+    // ft::vector<int>::iterator itb = unovect.begin();
 
     std::cout << unovect.size() << " " << unovect.capacity() << std::endl;
     std::cout << dosvect.size() << " " << dosvect.capacity() << std::endl;

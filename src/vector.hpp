@@ -10,6 +10,7 @@ namespace ft {
         public :
             typedef T value_type;
             typedef size_t size_type;
+            typedef random_access_iterator<value_type> iterator;
 
             explicit vector () {
                 _size = 0;
@@ -20,27 +21,14 @@ namespace ft {
 
             explicit vector (size_type n,
                              const value_type& val = value_type()) {
-                _size = n;
-                _capacity = 8; // TODO allocate 8 16 32 64
-                while (_capacity < n)
-                    _capacity *= 2;
-                _elements = new value_type[_capacity];
-                for (size_type i = 0; i < _size; i++) { _elements[i] = val; }
-                return ;
+                fill_vect(n, val);
             }
 
             template <class InputIterator>
             vector (InputIterator first, InputIterator last) {
-                _capacity = 256; // TODO
-                _size = last - first;
-                _elements = new value_type[_capacity];
-                size_type i = 0;
-                while (first != last) {
-                    _elements[i] = first;
-                    first++;
-                    i++;
-                }
+                fill_vect(first, last);
             }
+
 
             vector (const vector &x) {
                 *this = x;
@@ -71,10 +59,44 @@ namespace ft {
                 return (this->_size);
             }
 
+
+            iterator begin()
+            {
+                return _elements + 0;
+            }
+
+            iterator end()
+            {
+                return _elements + _size;
+            }
+
         private :
             size_type _size;
             size_type _capacity;
             value_type * _elements;
+
+            void fill_vect (size_type n,
+                    const value_type& val = value_type()) {
+                _size = n;
+                _capacity = 8; // TODO allocate 8 16 32 64
+                while (_capacity < n)
+                    _capacity *= 2;
+                _elements = new value_type[_capacity];
+                for (size_type i = 0; i < _size; i++) { _elements[i] = val; }
+                return ;
+            }
+
+            void fill_vect(iterator first, iterator last) {
+                _capacity = 256; // TODO
+                _size = last - first;
+                _elements = new value_type[_capacity];
+                size_type i = 0;
+                while (first != last) {
+                    _elements[i] = first;
+                    first++;
+                    i++;
+                }
+            }
     };
 }
 

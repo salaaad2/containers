@@ -45,17 +45,6 @@ class random_access_iterator {
         {
             return this->ptr != iter.ptr;
         }
-
-        random_access_iterator begin()
-        {
-            return this->mBuffer;
-        }
-
-
-        random_access_iterator end()
-        {
-            return this->mBuffer + this->mSize;
-        }
     private :
         T * ptr;
 };
