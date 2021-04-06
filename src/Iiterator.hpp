@@ -1,6 +1,7 @@
 #ifndef IITERATOR_H_
 #define IITERATOR_H_
-template <class T> class Iiterator {
+template <class T>
+class Iiterator {
 public:
   virtual ~Iiterator(){};
   virtual T *getPointer() const = 0;

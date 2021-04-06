@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "random_access_iterator.hpp"
+
 namespace ft {
     template < class T> class vector {
         public :
@@ -29,7 +31,15 @@ namespace ft {
 
             template <class InputIterator>
             vector (InputIterator first, InputIterator last) {
-                // TODO
+                _capacity = 256; // TODO
+                _size = last - first;
+                _elements = new value_type[_capacity];
+                size_type i = 0;
+                while (first != last) {
+                    _elements[i] = first;
+                    first++;
+                    i++;
+                }
             }
 
             vector (const vector &x) {
@@ -40,21 +50,24 @@ namespace ft {
             vector & operator=(vector const & rhs) {
                 _capacity = rhs.capacity();
                 _size = rhs.size();
-                for (size_type i = 0; i < _size; i++ ) {_elements[i] = rhs[i];}
-                return ;
+                _elements = new value_type[_size];
+                for (size_type i = 0; i < _size; i++) {_elements[i] = rhs[i];}
+                return *this;
             }
 
-            value_type & operator[](size_type n) {
+            value_type & operator[](size_type n) const {
                 return (_elements[n]);
             }
 
-            ~vector() {};
+            ~vector() {
+                // TODO
+            };
 
-            size_type capacity (void) {
+            size_type capacity (void) const {
                 return (this->_capacity);
             }
 
-            size_type size (void) {
+            size_type size (void) const {
                 return (this->_size);
             }
 
