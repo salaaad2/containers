@@ -13,14 +13,13 @@ int main(void) {
     ft::vector<int>::iterator itb = trevect.begin();
     ft::vector<int>::iterator ite = trevect.end();
 
+    ft::vector<int> cinvect(itb, ite);
+    std::cout << *itb << *ite << std::endl;
     std::cout << unovect.size() << " " << unovect.capacity() << std::endl;
     std::cout << dosvect.size() << " " << dosvect.capacity() << std::endl;
     std::cout << trevect.size() << " " << trevect.capacity() << std::endl;
     std::cout << quavect.size() << " " << quavect.capacity() << std::endl;
-    std::cout << *itb << *ite << std::endl;
-
-
-    ft::vector<int> cinvect(itb, ite);
+    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
     return (0);
 }
