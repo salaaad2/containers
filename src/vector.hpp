@@ -42,31 +42,24 @@ namespace ft {
                 return *this;
             }
 
-            value_type & operator[](size_type n) const {
-                return (_elements[n]);
-            }
+            value_type & operator[](size_type n) const
+            { return (_elements[n]); }
 
             ~vector() {
                 // TODO
             };
 
-            size_type capacity (void) const {
-                return (this->_capacity);
-            }
+            size_type capacity (void) const
+            { return (this->_capacity); }
 
-            size_type size (void) const {
-                return (this->_size);
-            }
+            size_type size (void) const
+            { return (this->_size); }
 
             iterator begin()
-            {
-                return _elements;
-            }
+            { return _elements; }
 
             iterator end()
-            {
-                return _elements + (_size - 1);
-            }
+            { return _elements + (_size - 1); }
 
         private :
             size_type _size;
@@ -85,7 +78,7 @@ namespace ft {
                 }
                 return ;
             }
-
+// TODO finish what you started
             void fill_vect(iterator first, iterator last) {
                 _size = 90;
                 std::cout << _size << std::endl;
