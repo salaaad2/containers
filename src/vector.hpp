@@ -76,7 +76,7 @@ namespace ft {
             void fill_vect (size_type n,
                     const value_type& val = value_type()) {
                 _size = n;
-                _capacity = 8; // TODO allocate 8 16 32 64
+                _capacity = 8;
                 while (_capacity < _size)
                     _capacity *= 2;
                 _elements = new value_type[_capacity];
@@ -87,7 +87,8 @@ namespace ft {
             }
 
             void fill_vect(iterator first, iterator last) {
-                _size = last - first;
+                _size = 90;
+                std::cout << _size << std::endl;
                 while (_capacity < _size)
                     _capacity *= 2;
                 _elements = new value_type[_capacity];
