@@ -62,7 +62,7 @@ namespace ft {
 
             iterator begin()
             {
-                return _elements + 0;
+                return _elements;
             }
 
             iterator end()

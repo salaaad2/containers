@@ -11,11 +11,12 @@ int main(void) {
     ft::vector<int> trevect(100, 200);
     ft::vector<int> quavect(trevect);
 
-    // ft::vector<int>::iterator itb = unovect.begin();
+    ft::vector<int>::iterator itb = dosvect.begin();
 
     std::cout << unovect.size() << " " << unovect.capacity() << std::endl;
     std::cout << dosvect.size() << " " << dosvect.capacity() << std::endl;
     std::cout << trevect.size() << " " << trevect.capacity() << std::endl;
     std::cout << quavect.size() << " " << quavect.capacity() << std::endl;
+    std::cout << *itb << std::endl;
     return (0);
 }

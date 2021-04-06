@@ -6,47 +6,50 @@
 template <class T>
 class random_access_iterator {
     public :
+// constructors
+        random_access_iterator(T * ptr) : _ptr(ptr) {}
+
         random_access_iterator& operator++()
         {
-            this->ptr ++;
+            this->_ptr ++;
             return *this;
         }
 // Prefix overloading
         random_access_iterator& operator--()
         {
-            this->ptr --;
+            this->_ptr --;
             return *this;
         }
 
 // Postfix overloading
         random_access_iterator& operator++(int)
         {
-            this->ptr ++;
+            this->_ptr ++;
             return *this;
         }
 // Postfix overloading
         random_access_iterator& operator--(int)
         {
-            this->ptr --;
+            this->_ptr --;
             return *this;
         }
 
         T& operator*()
         {
-            return *this->ptr;
+            return *this->_ptr;
         }
 
         bool operator==(const random_access_iterator& iter)
         {
-            return this->ptr == iter.ptr;
+            return this->_ptr == iter._ptr;
         }
 
         bool operator!=(const random_access_iterator& iter)
         {
-            return this->ptr != iter.ptr;
+            return this->_ptr != iter._ptr;
         }
     private :
-        T * ptr;
+        T * _ptr;
 };
 
 #endif // RANDOM_ACCESS_ITERATOR_H_
