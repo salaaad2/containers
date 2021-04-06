@@ -9,6 +9,11 @@ class random_access_iterator {
 // constructors
         random_access_iterator(T * ptr) : _ptr(ptr) {}
 
+        random_access_iterator& operator-(random_access_iterator & rhs)
+        {
+            return (this->_ptr - rhs._ptr);
+        }
+
         random_access_iterator& operator++()
         {
             this->_ptr ++;

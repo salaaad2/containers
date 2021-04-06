@@ -29,7 +29,6 @@ namespace ft {
                 fill_vect(first, last);
             }
 
-
             vector (const vector &x) {
                 *this = x;
                 return ;
@@ -59,7 +58,6 @@ namespace ft {
                 return (this->_size);
             }
 
-
             iterator begin()
             {
                 return _elements;
@@ -67,7 +65,7 @@ namespace ft {
 
             iterator end()
             {
-                return _elements + _size;
+                return _elements + (_size - 1);
             }
 
         private :
@@ -79,20 +77,23 @@ namespace ft {
                     const value_type& val = value_type()) {
                 _size = n;
                 _capacity = 8; // TODO allocate 8 16 32 64
-                while (_capacity < n)
+                while (_capacity < _size)
                     _capacity *= 2;
                 _elements = new value_type[_capacity];
-                for (size_type i = 0; i < _size; i++) { _elements[i] = val; }
+                for (size_type i = 0; i < _size; i++) {
+                    _elements[i] = val;
+                }
                 return ;
             }
 
             void fill_vect(iterator first, iterator last) {
-                _capacity = 256; // TODO
                 _size = last - first;
+                while (_capacity < _size)
+                    _capacity *= 2;
                 _elements = new value_type[_capacity];
                 size_type i = 0;
                 while (first != last) {
-                    _elements[i] = first;
+                    _elements[i] = *first;
                     first++;
                     i++;
                 }
