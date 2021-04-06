@@ -57,7 +57,7 @@ namespace ft {
               { throw out_of_range(); }
               return (_elements[n]); }
 
-// member functions
+// member functions TODO: insert remove etc
             value_type const & at(size_type n) const
             { if (n > _size)
               { throw out_of_range(); }
@@ -94,7 +94,7 @@ namespace ft {
             size_type _size;
             size_type _capacity;
             value_type * _elements;
-// stuff TODO finish what you started
+// stuff TODO finish what you started. maybe add versatility for insert ?
             void fill_vect (size_type n,
                             const value_type& val = value_type()) {
                 _size = n;
@@ -109,8 +109,7 @@ namespace ft {
             }
 
             void fill_vect(iterator first, iterator last) {
-                _size = 90;
-                std::cout << _size << std::endl;
+                _size = 16;
                 _capacity = 8;
                 while (_capacity < _size)
                     _capacity *= 2;

@@ -5,12 +5,12 @@
 int main(void) {
     size_t qwe = 9;
 
-    std::vector<int> truevect (100, 2);
     ft::vector<int> svect;
 
     ft::vector<int> unovect;
     ft::vector<int> dosvect(qwe, 200);
-    ft::vector<int> trevect(100, 2);
+   std::vector<int> truevect (16, 2);
+    ft::vector<int> trevect(16, 2);
     ft::vector<int> quavect(trevect);
 
     ft::vector<int>::iterator itb = trevect.begin();
@@ -23,6 +23,7 @@ int main(void) {
     std::cout << trevect.size() << " " << trevect.capacity() << std::endl;
     std::cout << quavect.size() << " " << quavect.capacity() << std::endl;
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
 
     try {
         truevect.at(10000) = 12;
