@@ -15,6 +15,7 @@ int main(void) {
 
     ft::vector<int>::iterator itb = trevect.begin();
     ft::vector<int>::iterator ite = trevect.end();
+    std::vector<int>::iterator  trueit;
 
     std::cout << "print iterators"<< *itb << *ite << std::endl;
     ft::vector<int> cinvect(itb, ite);
@@ -40,12 +41,20 @@ int main(void) {
 
     std::cout << "second print" << std::endl;
     std::cout << "print iterators"<< *itb << *ite << std::endl;
-    std::cout << cinvect[0] << *itb << *ite << std::endl;
-    itb = cinvect.begin();
-    itb++;
-    cinvect.insert(itb, 42);
 
-    for (size_t i = 0; i < cinvect.size(); i++) {
+    itb = cinvect.begin();
+    cinvect.insert(itb, 42);
+    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+
+    for (size_t i = 0; i < truevect.size(); i++) {
+        std::cout << "[" << cinvect[i] << "]"<< std::endl;
+    }
+
+
+    trueit = truevect.begin();
+    truevect.insert(trueit, 42);
+    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
+    for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
     }
 

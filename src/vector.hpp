@@ -65,16 +65,15 @@ namespace ft {
                 size_type tmp = 0;
 
                 if (n < _size) {
-                    tmp = _size;
-                    while (tmp > n) {
-                        _elements = NULL;
-                        tmp--;
+                    for (tmp = _size; tmp > n; tmp--) {
+                        _elements[tmp] = val;
                     }
                 }
-                if (n > _capacity) {
-                    // realloc to fit
+                else if (n > _capacity) {
+                    _capacity = n;
+                    // realloc
                 }
-                else if (n > _size && n < _capacity) {
+                if (n > _size && n < _capacity) {
                     tmp = _size;
                     while (tmp < n) {
                         _elements[tmp] = val;
@@ -90,11 +89,13 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                if (_size == _capacity || spos > _size)
+                spos++;
+                if (_size >= _capacity || spos >= _size)
                 {
                     resize(_capacity * 2);
                 }
                 _elements[spos] = val;
+                _size++;
                 return (position++);
             }
 
