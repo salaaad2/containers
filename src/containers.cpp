@@ -46,16 +46,5 @@ int main(void) {
     for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << "[" << truevect[i] << "]"<< std::endl;
     }
-
-std::cout << "test iterators" << std::endl;
-
-std::vector<int> var(truevect.begin(), truevect.end());
-
-std::cout << truevect.size() << std::endl;
-
-
-
-
-
     return (0);
 }

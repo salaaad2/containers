@@ -61,6 +61,7 @@ namespace ft {
 
 // member functions TODO: insert remove etc
 // resize & insert interlinked. cells. interlinked
+// swap : std::swap
             void resize(size_type n, value_type val = value_type()) {
                 size_type tmp = 0;
 
@@ -98,7 +99,10 @@ namespace ft {
                 {
                     resize(_capacity * 2);
                 }
-                _elements[spos] = val;
+                for (size_type tmp = 0; tmp < capacity(); tmp++) {
+                    _elements[tmp + 1] = _elements[tmp];
+                }
+                _elements[spos - 1] = val;
                 _size++;
                 return (position++);
             }
