@@ -94,15 +94,15 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                spos++;
-                if (_size >= _capacity || spos >= _size)
+                spos += (spos == 0) ? 0 : 1;
+                if (_size >= _capacity)
                 {
                     resize(_capacity * 2);
                 }
-                for (size_type tmp = 0; tmp < capacity(); tmp++) {
-                    _elements[tmp + 1] = _elements[tmp];
-                }
-                _elements[spos - 1] = val;
+                // for (size_type tmp = 0; tmp < capacity(); tmp++) {
+                //     _elements[tmp + 1] = _elements[tmp];
+                // }
+                _elements[spos] = val;
                 _size++;
                 return (position++);
             }
@@ -154,7 +154,6 @@ namespace ft {
                 for (size_type i = 0; i < _size; i++) {
                     _elements[i] = val;
                 }
-                return ;
             }
 
             void fill_vect(iterator first, iterator last) {
