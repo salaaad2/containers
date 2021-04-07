@@ -69,15 +69,19 @@ namespace ft {
                         _elements[tmp] = val;
                     }
                 }
-                else if (n > _capacity) {
-                    _capacity = n;
-                    // realloc
-                }
-                if (n > _size && n < _capacity) {
-                    tmp = _size;
-                    while (tmp < n) {
-                        _elements[tmp] = val;
+                else if (n > _capacity || n > _size) {
+                    while (_capacity < n) {
+                        _capacity *= 2;
                     }
+                    value_type * tmpel = new value_type[_capacity];
+                    for (tmp = 0; tmp < size(); tmp++) {
+                        tmpel[tmp] = _elements[tmp];
+                    }
+                    for (; tmp < n; tmp++) {
+                        tmpel[tmp] = val;
+                    }
+                    delete [] _elements;
+                    _elements = tmpel;
                 }
             }
 
@@ -167,6 +171,7 @@ namespace ft {
                     first++;
                     i++;
                 }
+                _elements[i] = *first;
             }
     };
 }

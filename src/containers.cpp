@@ -19,6 +19,9 @@ int main(void) {
 
     std::cout << "print iterators"<< *itb << *ite << std::endl;
     ft::vector<int> cinvect(itb, ite);
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << "[" << cinvect[i] << "]"<< std::endl;
+    }
     std::cout << "print iterators"<< *itb << *ite << std::endl;
     std::cout << unovect.size() << " " << unovect.capacity() << std::endl;
     std::cout << dosvect.size() << " " << dosvect.capacity() << std::endl;
@@ -27,36 +30,32 @@ int main(void) {
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
 
-    try {
-        truevect.at(10000) = 12;
-        cinvect[100] = 12;
-    }
-    catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
+    std::cout << "my vector" << std::endl;
+    itb = cinvect.begin();
+    cinvect.insert(itb, 42);
+    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
     }
 
-    std::cout << "second print" << std::endl;
-    std::cout << "print iterators"<< *itb << *ite << std::endl;
-
-    itb = cinvect.begin();
-    cinvect.insert(itb, 42);
-    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
-
-    for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << "[" << cinvect[i] << "]"<< std::endl;
-    }
-
-
+    std::cout << "actual vector" << std::endl;
     trueit = truevect.begin();
     truevect.insert(trueit, 42);
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
     for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << "[" << cinvect[i] << "]"<< std::endl;
+        std::cout << "[" << truevect[i] << "]"<< std::endl;
     }
+
+std::cout << "test iterators" << std::endl;
+
+std::vector<int> var(truevect.begin(), truevect.end());
+
+std::cout << truevect.size() << std::endl;
+
+
+
+
 
     return (0);
 }
