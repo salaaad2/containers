@@ -99,9 +99,7 @@ namespace ft {
                 {
                     resize(_capacity * 2);
                 }
-                // for (size_type tmp = 0; tmp < capacity(); tmp++) {
-                //     _elements[tmp + 1] = _elements[tmp];
-                // }
+                // TODO : find a smart way to push
                 _elements[spos] = val;
                 _size++;
                 return (position++);
