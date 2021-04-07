@@ -60,16 +60,25 @@ namespace ft {
               return (_elements[n]); }
 
 // member functions TODO: insert remove etc
+// resize & insert interlinked. cells. interlinked
             void resize(size_type n, value_type val = value_type()) {
                 size_type tmp = 0;
 
                 if (n < _size) {
-                    while (_size > n) {
-                        delete _elements[_size];
+                    tmp = _size;
+                    while (tmp > n) {
+                        _elements = NULL;
+                        tmp--;
                     }
                 }
-                else if (n > _size) {
-                    while ()
+                if (n > _capacity) {
+                    // realloc to fit
+                }
+                else if (n > _size && n < _capacity) {
+                    tmp = _size;
+                    while (tmp < n) {
+                        _elements[tmp] = val;
+                    }
                 }
             }
 
@@ -81,7 +90,7 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                if (_size == _capacity)
+                if (_size == _capacity || spos > _size)
                 {
                     resize(_capacity * 2);
                 }
