@@ -36,7 +36,9 @@ namespace ft {
                 return ;
             }
 
-            ~vector() { };
+            ~vector() {
+                delete [] _elements;
+            };
 
 // operators
             vector & operator=(vector const & x) {
@@ -58,6 +60,35 @@ namespace ft {
               return (_elements[n]); }
 
 // member functions TODO: insert remove etc
+            void resize(size_type n, value_type val = value_type()) {
+                size_type tmp = 0;
+
+                if (n < _size) {
+                    while (_size > n) {
+                        delete _elements[_size];
+                    }
+                }
+                else if (n > _size) {
+                    while ()
+                }
+            }
+
+            iterator insert (iterator position, const value_type &val) {
+                iterator tmp = begin();
+                size_type spos = 0;
+
+                while (tmp != position) {
+                    tmp++;
+                    spos++;
+                }
+                if (_size == _capacity)
+                {
+                    resize(_capacity * 2);
+                }
+                _elements[spos] = val;
+                return (position++);
+            }
+
             value_type const & at(size_type n) const
             { if (n > _size)
               { throw out_of_range(); }
@@ -81,7 +112,7 @@ namespace ft {
             iterator end()
             { return _elements + (_size - 1); }
 
-// exceptions TODO out of range is explicit. get back on that one
+// exceptions TODO true out of range is explicit. get back on that one
             class out_of_range : public std::exception {
                 public :
                     virtual const char * what() const throw() {

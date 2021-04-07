@@ -3,21 +3,22 @@
 #include <vector>
 
 int main(void) {
-    size_t qwe = 9;
+    size_t qwe = 8;
 
     ft::vector<int> svect;
 
     ft::vector<int> unovect;
     ft::vector<int> dosvect(qwe, 200);
-   std::vector<int> truevect (16, 2);
-    ft::vector<int> trevect(16, 2);
+   std::vector<int> truevect (8, 2);
+    ft::vector<int> trevect(8, 2);
     ft::vector<int> quavect(trevect);
 
     ft::vector<int>::iterator itb = trevect.begin();
     ft::vector<int>::iterator ite = trevect.end();
 
+    std::cout << "print iterators"<< *itb << *ite << std::endl;
     ft::vector<int> cinvect(itb, ite);
-    std::cout << *itb << *ite << std::endl;
+    std::cout << "print iterators"<< *itb << *ite << std::endl;
     std::cout << unovect.size() << " " << unovect.capacity() << std::endl;
     std::cout << dosvect.size() << " " << dosvect.capacity() << std::endl;
     std::cout << trevect.size() << " " << trevect.capacity() << std::endl;
@@ -32,6 +33,17 @@ int main(void) {
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
+
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << "[" << cinvect[i] << "]"<< std::endl;
+    }
+
+    std::cout << "second print" << std::endl;
+    std::cout << "print iterators"<< *itb << *ite << std::endl;
+    std::cout << cinvect[0] << *itb << *ite << std::endl;
+    itb = cinvect.begin();
+    itb++;
+    cinvect.insert(itb, 42);
 
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
