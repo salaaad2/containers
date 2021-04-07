@@ -6,7 +6,7 @@
 #include "random_access_iterator.hpp"
 
 namespace ft {
-    template < class T> class vector {
+    template <class T> class vector {
         public :
 // typedefs
             typedef T value_type;
@@ -109,7 +109,13 @@ namespace ft {
             }
 
             void fill_vect(iterator first, iterator last) {
-                _size = 16;
+                iterator tmp = first;
+
+                while (tmp != last) {
+                    _size++;
+                    tmp++;
+                }
+                _size += 1;
                 _capacity = 8;
                 while (_capacity < _size)
                     _capacity *= 2;
