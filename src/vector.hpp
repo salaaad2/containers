@@ -62,9 +62,12 @@ namespace ft {
               { throw out_of_range(); }
               return (_elements[n]); }
 
-// member functions TODO: insert remove etc
-// resize & insert interlinked. cells. interlinked
-// swap : std::swap
+// member functions TODO: insert / resize better conditions
+//
+            void swap (vector &x) {
+                std::swap(*this, x);
+            }
+
             void resize(size_type n, value_type val = value_type()) {
                 size_type tmp = 0;
 
@@ -88,7 +91,7 @@ namespace ft {
                     _elements = tmpel;
                 }
             }
-// todo one from these two
+// TODO: one from these two
             void insert (iterator position, size_type n, const value_type &val) {
                 iterator tmp = begin();
                 size_type spos = 0;
@@ -106,7 +109,6 @@ namespace ft {
                     tmpel[i] = _elements[i];
 
                 }
-                std::cout << "[spos]" << spos << std::endl;
                 for (size_type i = spos; i < n; i++) {
                     tmpel[i] = val;
                 }
@@ -131,7 +133,6 @@ namespace ft {
                 if (_size >= _capacity) {
                     resize(_capacity * 2);
                 }
-// copy, then push everything after [pos]
                 value_type * tmpel = new value_type[_capacity];
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
@@ -145,6 +146,15 @@ namespace ft {
                 return (position++);
             }
 
+            void push_back(const value_type & val) {
+                insert(end(), val);
+            }
+
+            void pop_back() {
+                // remove(end());
+            }
+
+// accessors
             value_type const & at(size_type n) const
             { if (n > _size)
               { throw out_of_range(); }
@@ -172,12 +182,15 @@ namespace ft {
 
             value_type const * & data() const
             {return (_elements); }
-
+// capacity
             size_type capacity (void) const
             { return (this->_capacity); }
 
             size_type size (void) const
             { return (this->_size); }
+
+            bool empty (void) const
+            { return (this->_size == 0); }
 
 // iterators
             iterator begin()
@@ -199,7 +212,7 @@ namespace ft {
             size_type _size;
             size_type _capacity;
             value_type * _elements;
-// stuff TODO finish what you started. maybe add versatility for insert ?
+// constructor helpers
             void fill_vect (size_type n,
                             const value_type& val = value_type()) {
                 _size = n;
