@@ -7,6 +7,7 @@ template <class T>
 class random_access_iterator {
     public :
 // constructors
+        random_access_iterator() : _ptr(NULL) {}
         random_access_iterator(T * ptr) : _ptr(ptr) {}
 
 // Prefix overloading
@@ -55,6 +56,9 @@ class random_access_iterator {
         random_access_iterator &operator-=(int rhs)
         { this->_ptr -= rhs;
           return *this; }
+
+        void setPtr(T * ptr)
+        { this->_ptr = ptr; }
 
     private :
         T * _ptr;

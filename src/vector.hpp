@@ -89,6 +89,7 @@ namespace ft {
                     }
                     delete [] _elements;
                     _elements = tmpel;
+                    _it.setPtr(_elements);
                 }
             }
 // TODO: one from these two
@@ -117,8 +118,11 @@ namespace ft {
                     tmpel[i] = _elements[j];
                     j++;
                 }
+                delete [] _elements;
                 _elements = tmpel;
                 _size += n;
+                position += n;
+                _it.setPtr(_elements);
             }
 
             iterator insert (iterator position, const value_type &val) {
@@ -136,14 +140,18 @@ namespace ft {
                 value_type * tmpel = new value_type[_capacity];
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
+                    position++;
                 }
                 for (size_type i = spos + 1; i < (size() + 1); i++) {
                     tmpel[i] = _elements[i - 1];
+                    position++;
                 }
                 tmpel[spos] = val;
+                delete [] _elements;
                 _elements = tmpel;
                 _size++;
-                return (position++);
+                _it.setPtr(_elements);
+                return (_it);
             }
 
             iterator erase (iterator position) {
@@ -162,8 +170,10 @@ namespace ft {
                     tmpel[i] = _elements[j];
                     j += (j == spos) ? 2 : 1;
                 }
+                delete [] _elements;
                 _elements = tmpel;
                 _size--;
+                _it.setPtr(_elements);
                 return (position);
             }
 
@@ -233,6 +243,7 @@ namespace ft {
 
         private :
 // attributes
+            iterator _it;
             size_type _size;
             size_type _capacity;
             value_type * _elements;
@@ -247,6 +258,7 @@ namespace ft {
                 for (size_type i = 0; i < _size; i++) {
                     _elements[i] = val;
                 }
+                _it.setPtr(_elements);
             }
 
             void fill_vect(iterator first, iterator last) {
@@ -268,6 +280,7 @@ namespace ft {
                     i++;
                 }
                 _elements[i] = *first;
+                _it.setPtr(_elements);
             }
     };
 }

@@ -35,26 +35,25 @@ int main(void) {
     cinvect.insert(itb, 1, 42);
     itb = cinvect.end();
     cinvect.insert(itb, 42);
-    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
-    for (size_t i = 0; i < cinvect.size(); i++) {
-        std::cout << "[" << cinvect[i] << "]"<< std::endl;
-    }
-
-    std::cout << "actual vector" << std::endl;
+    std::cout << "-========= important tests =========-" << std::endl;
     trueit = truevect.begin();
     truevect.insert(trueit, 1, 42);
     trueit = truevect.end();
     truevect.insert(trueit, 42);
+    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
-    for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
-    }
+    std::cout << "itb    after insert : "<< *itb << std::endl;
+    std::cout << "trueit after insert : "<< *trueit << std::endl;
 
     trueit = truevect.begin();
+    itb    =  cinvect.begin();
+    truevect.erase(trueit);
+     cinvect.erase(itb);
+    std::cout << "itb    after erase : "<< *itb << std::endl;
+    std::cout << "trueit after erase : "<< *trueit << std::endl;
+    trueit = truevect.begin();
     itb    = cinvect.begin();
-    trueit++;
-    itb++;
     truevect.erase(trueit);
     cinvect.erase(itb);
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
