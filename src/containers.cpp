@@ -32,7 +32,7 @@ int main(void) {
 
     std::cout << "my vector" << std::endl;
     itb = cinvect.begin();
-    cinvect.insert(itb, 8, 42);
+    cinvect.insert(itb, 2, 42);
     itb = cinvect.end();
     cinvect.insert(itb, 42);
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
@@ -43,23 +43,29 @@ int main(void) {
 
     std::cout << "actual vector" << std::endl;
     trueit = truevect.begin();
-    truevect.insert(trueit, 8, 42);
+    truevect.insert(trueit, 2, 42);
     trueit = truevect.end();
     truevect.insert(trueit, 42);
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
     for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << "[" << truevect[i] << "]"<< std::endl;
+        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
 
-    truevect.push_back(19);
+    trueit = truevect.begin();
+    trueit++;
+    trueit++;
+    itb = cinvect.begin();
+    itb++;
+    itb++;
+    truevect.erase(trueit);
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
-    cinvect.push_back(19);
+    cinvect.erase(itb);
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
     for (size_t i = 0; i < cinvect.size(); i++) {
-        std::cout << "[" << cinvect[i] << "]"<< std::endl;
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
     for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << "[" << truevect[i] << "]"<< std::endl;
+        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
     return (0);
 }

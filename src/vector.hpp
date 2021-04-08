@@ -146,6 +146,26 @@ namespace ft {
                 return (position++);
             }
 
+            iterator erase (iterator position) {
+                iterator tmp = begin();
+                size_type spos = 0;
+
+                while (tmp != position) {
+                    tmp++;
+                    spos++;
+                }
+                spos += (spos == 0) ? 0 : 1;
+                value_type * tmpel = new value_type[_capacity];
+                size_type j = 0;
+                for (size_type i = 0; i < size() - 1; i++) {
+                    tmpel[i] = _elements[j];
+                    j += (j == spos) ? 2 : 1;
+                }
+                _elements = tmpel;
+                _size--;
+                return (position);
+            }
+
             void push_back(const value_type & val) {
                 insert(end(), val);
             }
