@@ -149,14 +149,15 @@ namespace ft {
             iterator erase (iterator position) {
                 iterator tmp = begin();
                 size_type spos = 0;
+                size_type j = 0;
 
                 while (tmp != position) {
                     tmp++;
                     spos++;
                 }
-                spos += (spos == 0) ? 0 : 1;
+                if (spos == 0) { j = 1; }
+                else {spos += 1;}
                 value_type * tmpel = new value_type[_capacity];
-                size_type j = 0;
                 for (size_type i = 0; i < size() - 1; i++) {
                     tmpel[i] = _elements[j];
                     j += (j == spos) ? 2 : 1;

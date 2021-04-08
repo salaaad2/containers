@@ -32,7 +32,7 @@ int main(void) {
 
     std::cout << "my vector" << std::endl;
     itb = cinvect.begin();
-    cinvect.insert(itb, 2, 42);
+    cinvect.insert(itb, 1, 42);
     itb = cinvect.end();
     cinvect.insert(itb, 42);
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
@@ -43,7 +43,7 @@ int main(void) {
 
     std::cout << "actual vector" << std::endl;
     trueit = truevect.begin();
-    truevect.insert(trueit, 2, 42);
+    truevect.insert(trueit, 1, 42);
     trueit = truevect.end();
     truevect.insert(trueit, 42);
     std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
@@ -52,14 +52,12 @@ int main(void) {
     }
 
     trueit = truevect.begin();
+    itb    = cinvect.begin();
     trueit++;
-    trueit++;
-    itb = cinvect.begin();
-    itb++;
     itb++;
     truevect.erase(trueit);
-    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
     cinvect.erase(itb);
+    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
