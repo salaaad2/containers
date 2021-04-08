@@ -37,7 +37,10 @@ namespace ft {
             }
 
             ~vector() {
-                delete [] _elements;
+                if (_elements)
+                {
+                    delete [] _elements;
+                }
             };
 
 // operators
@@ -99,8 +102,16 @@ namespace ft {
                 {
                     resize(_capacity * 2);
                 }
-                // TODO : find a smart way to push
-                _elements[spos] = val;
+// copy, then push everything after [pos]
+                value_type * tmpel = new value_type[_capacity];
+                for (size_type i = 0; i < size(); i++) {
+                    tmpel[i] = _elements[i];
+                }
+                for (size_type i = spos + 1; i < (size() + 1); i++) {
+                    tmpel[i] = _elements[i - 1];
+                }
+                tmpel[spos] = val;
+                _elements = tmpel;
                 _size++;
                 return (position++);
             }
@@ -114,6 +125,24 @@ namespace ft {
             { if (n > _size)
               { throw out_of_range(); }
               return (_elements[n]); }
+
+            value_type & front()
+            {return (_elements[0]); }
+
+            value_type & back()
+            {return (_elements[_size]); }
+
+            value_type * & data()
+            {return (_elements); }
+
+            value_type const & front() const
+            {return (_elements[0]); }
+
+            value_type const & back() const
+            {return (_elements[_size]); }
+
+            value_type const * & data() const
+            {return (_elements); }
 
             size_type capacity (void) const
             { return (this->_capacity); }

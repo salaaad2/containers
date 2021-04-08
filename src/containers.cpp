@@ -33,7 +33,10 @@ int main(void) {
     std::cout << "my vector" << std::endl;
     itb = cinvect.begin();
     cinvect.insert(itb, 42);
-    itb = cinvect.end();
+    itb = cinvect.begin();
+    itb++;
+    itb++;
+    itb++;
     cinvect.insert(itb, 42);
     std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
