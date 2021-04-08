@@ -48,6 +48,14 @@ class random_access_iterator {
         random_access_iterator &operator-(int rhs)
         { return this->_ptr - rhs; }
 
+        random_access_iterator &operator+=(int rhs)
+        { this->_ptr += rhs;
+          return *this; }
+
+        random_access_iterator &operator-=(int rhs)
+        { this->_ptr -= rhs;
+          return *this; }
+
     private :
         T * _ptr;
 };
