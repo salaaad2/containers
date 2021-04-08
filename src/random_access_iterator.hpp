@@ -20,12 +20,12 @@ class random_access_iterator {
           return *this; }
 
 // Postfix overloading
-        random_access_iterator& operator++(int)
-        { this->_ptr ++;
+        virtual random_access_iterator& operator++(int)
+        { ++*this;
           return *this; }
 
         random_access_iterator& operator--(int)
-        { this->_ptr --;
+        { --*this;
           return *this; }
 
         T& operator*() const

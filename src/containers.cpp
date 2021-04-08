@@ -41,13 +41,15 @@ int main(void) {
     truevect.insert(trueit, 1, 42);
     trueit = truevect.end();
     truevect.insert(trueit, 42);
-    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
-    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
     std::cout << "itb    after insert : "<< *itb << std::endl;
     std::cout << "trueit after insert : "<< *trueit << std::endl;
+    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
 
     trueit = truevect.begin();
     itb    =  cinvect.begin();
+    std::cout << "itb    before erase : "<< *itb << std::endl;
+    std::cout << "trueit before erase : "<< *trueit << std::endl;
     truevect.erase(trueit);
      cinvect.erase(itb);
     std::cout << "itb    after erase : "<< *itb << std::endl;

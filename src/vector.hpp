@@ -140,11 +140,9 @@ namespace ft {
                 value_type * tmpel = new value_type[_capacity];
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
-                    position++;
                 }
                 for (size_type i = spos + 1; i < (size() + 1); i++) {
                     tmpel[i] = _elements[i - 1];
-                    position++;
                 }
                 tmpel[spos] = val;
                 delete [] _elements;
@@ -228,10 +226,10 @@ namespace ft {
 
 // iterators
             iterator begin()
-            { return _elements; }
+            { return iterator(_elements); }
 
             iterator end()
-            { return _elements + (_size - 1); }
+            { return iterator(_elements + (_size - 1)); }
 
 // exceptions TODO true out of range is explicit. get back on that one
             class out_of_range : public std::exception {
