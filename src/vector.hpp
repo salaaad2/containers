@@ -186,6 +186,9 @@ namespace ft {
             size_type capacity (void) const
             { return (this->_capacity); }
 
+            size_type max_size (void) const
+            { return (this->_capacity * 987); }
+
             size_type size (void) const
             { return (this->_size); }
 

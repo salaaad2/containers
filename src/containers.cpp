@@ -50,5 +50,16 @@ int main(void) {
     for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << "[" << truevect[i] << "]"<< std::endl;
     }
+
+    truevect.push_back(19);
+    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
+    cinvect.push_back(19);
+    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << "[" << cinvect[i] << "]"<< std::endl;
+    }
+    for (size_t i = 0; i < truevect.size(); i++) {
+        std::cout << "[" << truevect[i] << "]"<< std::endl;
+    }
     return (0);
 }
