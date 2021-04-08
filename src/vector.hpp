@@ -88,6 +88,36 @@ namespace ft {
                     _elements = tmpel;
                 }
             }
+// todo one from these two
+            void insert (iterator position, size_type n, const value_type &val) {
+                iterator tmp = begin();
+                size_type spos = 0;
+
+                while (tmp != position) {
+                    tmp++;
+                    spos++;
+                }
+                spos += (spos == 0) ? 0 : 1;
+                if ((_size + n) >= _capacity) {
+                    resize(_capacity * 2);
+                }
+                value_type * tmpel = new value_type[_capacity];
+                for (size_type i = 0; i < size(); i++) {
+                    tmpel[i] = _elements[i];
+
+                }
+                std::cout << "[spos]" << spos << std::endl;
+                for (size_type i = spos; i < n; i++) {
+                    tmpel[i] = val;
+                }
+                size_type j = spos;
+                for (size_type i = spos + n; i < (size() + n); i++) {
+                    tmpel[i] = _elements[j];
+                    j++;
+                }
+                _elements = tmpel;
+                _size += n;
+            }
 
             iterator insert (iterator position, const value_type &val) {
                 iterator tmp = begin();
@@ -98,8 +128,7 @@ namespace ft {
                     spos++;
                 }
                 spos += (spos == 0) ? 0 : 1;
-                if (_size >= _capacity)
-                {
+                if (_size >= _capacity) {
                     resize(_capacity * 2);
                 }
 // copy, then push everything after [pos]
