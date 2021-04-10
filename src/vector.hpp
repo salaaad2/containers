@@ -68,6 +68,21 @@ namespace ft {
                 std::swap(*this, x);
             }
 
+            void reserve(size_type n) {
+                size_type tmp;
+                if (n > _capacity) {
+                    _capacity = n;
+                    std::cout << _capacity << std::endl;
+                    value_type * tmpel = new value_type[_capacity];
+                    for (tmp = 0; tmp < size(); tmp++) {
+                        tmpel[tmp] = _elements[tmp];
+                    }
+                    delete [] _elements;
+                    _elements = tmpel;
+                    _capacity = n;
+                }
+            }
+
             void resize(size_type n, value_type val = value_type()) {
                 size_type tmp = 0;
 
@@ -129,9 +144,12 @@ namespace ft {
                 iterator tmp = begin();
                 size_type spos = 0;
 
-                while (tmp != position) {
-                    tmp++;
-                    spos++;
+                if (position != end())
+                {
+                    while (tmp != position) {
+                        tmp++;
+                        spos++;
+                    }
                 }
                 spos += (spos == 0) ? 0 : 1;
                 if (_size >= _capacity) {
@@ -172,7 +190,8 @@ namespace ft {
                 _elements = tmpel;
                 _size--;
                 _it.setPtr(_elements);
-                return (position);
+                position++; // TODO: ceci ne fait rien
+                return (_it);
             }
 
             void push_back(const value_type & val) {
@@ -180,7 +199,7 @@ namespace ft {
             }
 
             void pop_back() {
-                // remove(end());
+                erase(end());
             }
 
 // accessors

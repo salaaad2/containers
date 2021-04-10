@@ -66,5 +66,20 @@ int main(void) {
     for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
+
+    std::cout << "-========= reserve tests =========-" << std::endl;
+    ft::vector<int> foo;
+   std::vector<int> bar;
+    std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    std::cout << bar.size() << " " << bar.capacity() << std::endl;
+
+    foo.reserve(100);
+    //foo.push_back(12);
+    for (size_t i = 0; i < 100; i++) {foo.push_back(i);}
+    bar.reserve(100);
+    for (size_t i = 0; i < 100; i++) {bar.push_back(i);}
+    std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    std::cout << bar.size() << " " << bar.capacity() << std::endl;
+
     return (0);
 }
