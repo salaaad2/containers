@@ -127,7 +127,6 @@ namespace ft {
                 }
                 for (size_type i = spos; i < (spos + n); i++) {
                     tmpel[i] = val;
-                    std::cout << val << i <<  std::endl;
                 }
                 size_type j = spos;
                 for (size_type i = spos + n; j < (olds); i++) {
@@ -154,14 +153,15 @@ namespace ft {
             iterator erase (iterator position) {
                 iterator tmp = begin();
                 size_type spos = 0;
-                size_type j = 0;
 
                 while (tmp != position) {
                     tmp++;
                     spos++;
                 }
                 value_type * tmpel = new value_type[_capacity];
-                for (size_type i = 0; i < size() - 1; i++) {
+                size_type j = 0;
+                j += (j == spos) ? 1 : 0;
+                for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[j];
                     j += (j == spos) ? 2 : 1;
                 }
@@ -169,7 +169,6 @@ namespace ft {
                 _elements = tmpel;
                 _size--;
                 _it.setPtr(_elements);
-                position++; // TODO: ceci ne fait rien
                 return (_it);
             }
 
