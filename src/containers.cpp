@@ -55,13 +55,17 @@ int main(void) {
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
+    std::cout << "----" << std::endl;
     for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
 
+    // TODO: iterators
     std::cout << "-========= erase tests =========-" << std::endl;
-    trueit = truevect.begin();
-    itb    =  cinvect.begin();
+    trueit = truevect.end();
+    itb    =  cinvect.end();
+    itb--;
+    trueit--;
     // std::cout << "itb    before erase : "<< *itb << std::endl;
     // std::cout << "trueit before erase : "<< *trueit << std::endl;
      truevect.erase(trueit);
@@ -69,6 +73,22 @@ int main(void) {
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
+    std::cout << "----" << std::endl;
+    for (size_t i = 0; i < truevect.size(); i++) {
+        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+    }
+
+    std::cout << "-========= push/pop _back tests =========-" << std::endl;
+     truevect.pop_back();
+     truevect.pop_back();
+     truevect.pop_back();
+      cinvect.pop_back();
+      cinvect.pop_back();
+      cinvect.pop_back();
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
+    std::cout << "----" << std::endl;
     for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }

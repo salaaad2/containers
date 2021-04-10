@@ -16,7 +16,7 @@ namespace ft {
 // constructors TODO destructor
             explicit vector () {
                 _size = 0;
-                _capacity = 8;
+                _capacity = 0;
                 _elements = new value_type[_capacity];
                 return ;
             }
@@ -27,7 +27,8 @@ namespace ft {
             }
 
             template <class InputIterator>
-            vector (InputIterator first, InputIterator last) {
+            vector (InputIterator first,
+                    InputIterator last) {
                 fill_vect(first, last);
             }
 
@@ -63,9 +64,12 @@ namespace ft {
               return (_elements[n]); }
 
 // member functions TODO: insert / resize better conditions
-//
+// swap fullswap
             void swap (vector &x) {
-                std::swap(*this, x);
+                std::swap(_elements, x.data());
+                std::swap(_size, x.size());
+                std::swap(_capacity, x.capacity());
+                std::swap(_it, x.begin());
             }
 
             void reserve(size_type n) {
@@ -83,7 +87,8 @@ namespace ft {
                 }
             }
 
-            void resize(size_type n, value_type val = value_type()) {
+            void resize(size_type n,
+                        value_type val = value_type()) {
                 size_type tmp = 0;
 
                 if (n < _size) {
@@ -107,8 +112,10 @@ namespace ft {
                     _it.setPtr(_elements);
                 }
             }
-// TODO: one from these two WATCH ME
-            void _insert(iterator position, size_type n, const value_type val = value_type()) {
+
+            void _insert(iterator & position,
+                         size_type n,
+                         const value_type val = value_type()) {
                 iterator tmp = begin();
                 size_type spos = 0;
                 size_type olds = size();
@@ -136,16 +143,20 @@ namespace ft {
                 delete [] _elements;
                 _elements = tmpel;
                 _size += n;
-                position += n;
                 _it.setPtr(_elements);
+                _it += n;
+                position = _it;
             }
 
-            iterator insert (iterator position, size_type n, const value_type &val = value_type()) {
+            iterator insert (iterator position,
+                             size_type n,
+                             const value_type &val = value_type()) {
                 _insert(position, n, val);
                 return (position);
             }
 
-            iterator insert (iterator position, const value_type &val = value_type()) {
+            iterator insert (iterator position,
+                             const value_type &val = value_type()) {
                 _insert(position, 1, val);
                 return (position);
             }
@@ -159,8 +170,7 @@ namespace ft {
                     spos++;
                 }
                 value_type * tmpel = new value_type[_capacity];
-                size_type j = 0;
-                j += (j == spos) ? 1 : 0;
+                size_type j = (spos == 0) ? 1 : 0;
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[j];
                     j += (j == spos) ? 2 : 1;
@@ -169,6 +179,7 @@ namespace ft {
                 _elements = tmpel;
                 _size--;
                 _it.setPtr(_elements);
+                _it--;
                 return (_it);
             }
 
@@ -256,7 +267,8 @@ namespace ft {
                 _it.setPtr(_elements);
             }
 
-            void fill_vect(iterator first, iterator last) {
+            void fill_vect(iterator first,
+                           iterator last) {
                 iterator tmp = first;
 
                 while (tmp != last) {
