@@ -32,8 +32,10 @@ int main(void) {
 
     std::cout << "my vector" << std::endl;
     itb = cinvect.begin();
+    itb++;
     cinvect.insert(itb, 1, 42);
     itb = cinvect.end();
+    // std::cout << "add value n times" << spos << n << val << std::endl;
     cinvect.insert(itb, 42);
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;

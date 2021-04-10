@@ -107,10 +107,11 @@ namespace ft {
                     _it.setPtr(_elements);
                 }
             }
-// TODO: one from these two
-            void insert (iterator position, size_type n, const value_type &val) {
+// TODO: one from these two WATCH ME
+            void _insert(iterator position, size_type n, const value_type val = value_type()) {
                 iterator tmp = begin();
                 size_type spos = 0;
+                size_type olds = size();
 
                 while (tmp != position) {
                     tmp++;
@@ -124,11 +125,12 @@ namespace ft {
                     tmpel[i] = _elements[i];
 
                 }
-                for (size_type i = spos; i < n; i++) {
+                for (size_type i = spos; i < (spos + n); i++) {
                     tmpel[i] = val;
+                    std::cout << val << i <<  std::endl;
                 }
                 size_type j = spos;
-                for (size_type i = spos + n; i < (size() + n); i++) {
+                for (size_type i = spos + n; j < (olds); i++) {
                     tmpel[i] = _elements[j];
                     j++;
                 }
@@ -139,30 +141,14 @@ namespace ft {
                 _it.setPtr(_elements);
             }
 
-            iterator insert (iterator position, const value_type &val) {
-                iterator tmp = begin();
-                size_type spos = 0;
+            iterator insert (iterator position, size_type n, const value_type &val = value_type()) {
+                _insert(position, n, val);
+                return (position);
+            }
 
-                while (tmp != position) {
-                    tmp++;
-                    spos++;
-                }
-                if (_size >= _capacity) {
-                    resize(_capacity * 2);
-                }
-                value_type * tmpel = new value_type[_capacity];
-                for (size_type i = 0; i < size(); i++) {
-                    tmpel[i] = _elements[i];
-                }
-                for (size_type i = spos + 1; i < (size() + 1); i++) {
-                    tmpel[i] = _elements[i - 1];
-                }
-                tmpel[spos] = val;
-                delete [] _elements;
-                _elements = tmpel;
-                _size++;
-                _it.setPtr(_elements);
-                return (_it);
+            iterator insert (iterator position, const value_type &val = value_type()) {
+                _insert(position, 1, val);
+                return (position);
             }
 
             iterator erase (iterator position) {
@@ -187,7 +173,7 @@ namespace ft {
                 return (_it);
             }
 
-            void push_back(const value_type & val) {
+            void push_back(const value_type & val = value_type()) {
                 insert(end(), val);
             }
 
@@ -265,7 +251,7 @@ namespace ft {
                 while (_capacity < _size)
                     _capacity *= 2;
                 _elements = new value_type[_capacity];
-                for (size_type i = 0; i <= _size; i++) {
+                for (size_type i = 0; i < _size; i++) {
                     _elements[i] = val;
                 }
                 _it.setPtr(_elements);
@@ -278,7 +264,6 @@ namespace ft {
                     _size++;
                     tmp++;
                 }
-                _size += 1;
                 _capacity = 8;
                 while (_capacity < _size)
                     _capacity *= 2;
