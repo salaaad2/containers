@@ -116,7 +116,6 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                spos += (spos == 0) ? 0 : 1;
                 if ((_size + n) >= _capacity) {
                     resize(_capacity * 2);
                 }
@@ -144,14 +143,10 @@ namespace ft {
                 iterator tmp = begin();
                 size_type spos = 0;
 
-                if (position != end())
-                {
-                    while (tmp != position) {
-                        tmp++;
-                        spos++;
-                    }
+                while (tmp != position) {
+                    tmp++;
+                    spos++;
                 }
-                spos += (spos == 0) ? 0 : 1;
                 if (_size >= _capacity) {
                     resize(_capacity * 2);
                 }
@@ -179,8 +174,6 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                if (spos == 0) { j = 1; }
-                else {spos += 1;}
                 value_type * tmpel = new value_type[_capacity];
                 for (size_type i = 0; i < size() - 1; i++) {
                     tmpel[i] = _elements[j];
@@ -248,7 +241,7 @@ namespace ft {
             { return iterator(_elements); }
 
             iterator end()
-            { return iterator(_elements + (_size - 1)); }
+            { return iterator(_elements + _size); }
 
 // exceptions TODO true out of range is explicit. get back on that one
             class out_of_range : public std::exception {
@@ -272,7 +265,7 @@ namespace ft {
                 while (_capacity < _size)
                     _capacity *= 2;
                 _elements = new value_type[_capacity];
-                for (size_type i = 0; i < _size; i++) {
+                for (size_type i = 0; i <= _size; i++) {
                     _elements[i] = val;
                 }
                 _it.setPtr(_elements);

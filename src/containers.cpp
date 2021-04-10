@@ -35,51 +35,55 @@ int main(void) {
     cinvect.insert(itb, 1, 42);
     itb = cinvect.end();
     cinvect.insert(itb, 42);
-
-    std::cout << "-========= important tests =========-" << std::endl;
-    trueit = truevect.begin();
-    truevect.insert(trueit, 1, 42);
-    trueit = truevect.end();
-    truevect.insert(trueit, 42);
-    std::cout << "itb    after insert : "<< *itb << std::endl;
-    std::cout << "trueit after insert : "<< *trueit << std::endl;
-    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
-    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
-
-    trueit = truevect.begin();
-    itb    =  cinvect.begin();
-    std::cout << "itb    before erase : "<< *itb << std::endl;
-    std::cout << "trueit before erase : "<< *trueit << std::endl;
-    truevect.erase(trueit);
-     cinvect.erase(itb);
-    std::cout << "itb    after erase : "<< *itb << std::endl;
-    std::cout << "trueit after erase : "<< *trueit << std::endl;
-    trueit = truevect.begin();
-    itb    = cinvect.begin();
-    truevect.erase(trueit);
-    cinvect.erase(itb);
-    std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
-    std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
     for (size_t i = 0; i < cinvect.size(); i++) {
-        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
-    }
-    for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+        std::cout << "[" << cinvect[i] << "]"<< std::endl;
     }
 
-    std::cout << "-========= reserve tests =========-" << std::endl;
-    ft::vector<int> foo;
-   std::vector<int> bar;
-    std::cout << foo.size() << " " << foo.capacity() << std::endl;
-    std::cout << bar.size() << " " << bar.capacity() << std::endl;
+   //  std::cout << "-========= important tests =========-" << std::endl;
+   //  trueit = truevect.begin();
+   //  truevect.insert(trueit, 1, 42);
+   //  trueit = truevect.end();
+   //  truevect.insert(trueit, 42);
+   //  std::cout << "itb    after insert : "<< *itb << std::endl;
+   //  std::cout << "trueit after insert : "<< *trueit << std::endl;
+   //  std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+   //  std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
 
-    foo.reserve(100);
-    //foo.push_back(12);
-    for (size_t i = 0; i < 100; i++) {foo.push_back(i);}
-    bar.reserve(100);
-    for (size_t i = 0; i < 100; i++) {bar.push_back(i);}
-    std::cout << foo.size() << " " << foo.capacity() << std::endl;
-    std::cout << bar.size() << " " << bar.capacity() << std::endl;
+   //  trueit = truevect.begin();
+   //  itb    =  cinvect.begin();
+   //  std::cout << "itb    before erase : "<< *itb << std::endl;
+   //  std::cout << "trueit before erase : "<< *trueit << std::endl;
+   //  truevect.erase(trueit);
+   //   cinvect.erase(itb);
+   //  std::cout << "itb    after erase : "<< *itb << std::endl;
+   //  std::cout << "trueit after erase : "<< *trueit << std::endl;
+   //  trueit = truevect.begin();
+   //  itb    = cinvect.begin();
+   //  truevect.erase(trueit);
+   //  cinvect.erase(itb);
+   //  std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
+   //  std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+   //  for (size_t i = 0; i < cinvect.size(); i++) {
+   //      std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+   //  }
+   //  for (size_t i = 0; i < truevect.size(); i++) {
+   //      std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+   //  }
+
+   //  std::cout << "-========= reserve tests =========-" << std::endl;
+   //  ft::vector<int> foo;
+   // std::vector<int> bar;
+   //  std::cout << foo.size() << " " << foo.capacity() << std::endl;
+   //  std::cout << bar.size() << " " << bar.capacity() << std::endl;
+
+   //  foo.reserve(100);
+   //  foo.insert(foo.begin(), 12);
+   //  foo.insert(foo.end(), 12);
+   //  // for (size_t i = 0; i < 100; i++) {foo.insert(foo.end(), 21);}
+   //  bar.reserve(100);
+   //  for (size_t i = 0; i < 100; i++) {bar.insert(bar.end(), 21);}
+   //  std::cout << foo.size() << " " << foo.capacity() << std::endl;
+   //  std::cout << bar.size() << " " << bar.capacity() << std::endl;
 
     return (0);
 }
