@@ -97,7 +97,7 @@ int main(void) {
     // std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
     // std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
 
-   //  std::cout << "-========= reserve tests =========-" << std::endl;
+    std::cout << "-========= reserve tests =========-" << std::endl;
     ft::vector<int> foo;
    std::vector<int> bar;
     std::cout << foo.size() << " " << foo.capacity() << std::endl;
@@ -110,5 +110,33 @@ int main(void) {
     std::cout << foo.size() << " " << foo.capacity() << std::endl;
     std::cout << bar.size() << " " << bar.capacity() << std::endl;
 
+    std::cout << "-========= clear tests =========-" << std::endl;
+    foo.clear();
+    bar.clear();
+    std::cout << bar.size() << " " << bar.capacity() << std::endl;
+    std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    std::cout << "-========= swap =========-" << std::endl;
+    ft::vector<int> swaptest(cinvect.begin(), cinvect.end());
+    swaptest.insert(swaptest.end(), 12);
+    swaptest.insert(swaptest.end(), 12);
+    swaptest.insert(swaptest.end(), 12);
+    swaptest.swap(cinvect);
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
+    std::cout << "----" << std::endl;
+    for (size_t i = 0; i < swaptest.size(); i++) {
+        std::cout << i << " [" << swaptest[i] << "]"<< std::endl;
+    }
+    // std::cout << "-========= erase =========-" << std::endl;
+    // truevect.insert(truevect.end(), 12);
+    //  cinvect.insert(cinvect.end(), 12);
+    // for (size_t i = 0; i < cinvect.size(); i++) {
+    //     std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    // }
+    // std::cout << "----" << std::endl;
+    // for (size_t i = 0; i < truevect.size(); i++) {
+    //     std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+    // }
     return (0);
 }

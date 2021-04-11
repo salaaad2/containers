@@ -66,10 +66,10 @@ namespace ft {
 // member functions TODO: insert / resize better conditions
 // swap fullswap
             void swap (vector &x) {
-                std::swap(_elements, x.data());
-                std::swap(_size, x.size());
-                std::swap(_capacity, x.capacity());
-                std::swap(_it, x.begin());
+                std::swap(&_elements, x.data());
+                std::swap(&_size, x.size());
+                std::swap(&_capacity, x.capacity());
+                std::swap(&_it, x.begin());
             }
 
             void reserve(size_type n) {
@@ -182,6 +182,13 @@ namespace ft {
                 return (_it);
             }
 
+            void clear() {
+                for (size_type i = 0; i < size(); i++) {
+                    _elements[i] = ~_elements[i];
+                }
+                _size = 0;
+            }
+
             void push_back(const value_type & val = value_type()) {
                 insert(end(), val);
             }
@@ -206,9 +213,6 @@ namespace ft {
 
             value_type & back()
             {return (_elements[_size]); }
-
-            value_type * & data()
-            {return (_elements); }
 
             value_type const & front() const
             {return (_elements[0]); }
