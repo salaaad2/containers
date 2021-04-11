@@ -76,7 +76,6 @@ namespace ft {
                 size_type tmp;
                 if (n > _capacity) {
                     _capacity = n;
-                    std::cout << _capacity << std::endl;
                     value_type * tmpel = new value_type[_capacity];
                     for (tmp = 0; tmp < size(); tmp++) {
                         tmpel[tmp] = _elements[tmp];
@@ -124,7 +123,7 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                if ((_size + n) >= _capacity) {
+                if ((_size + n) > _capacity) {
                     resize(_capacity * 2);
                 }
                 value_type * tmpel = new value_type[_capacity];
