@@ -55,8 +55,7 @@ int main(void) {
         std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
 
-    // TODO: iterators
-    std::cout << "-========= erase tests =========-" << std::endl;
+    std::cout << "-========= erase/iter tests =========-" << std::endl;
     trueit = truevect.begin();
     itb    =  cinvect.begin();
     std::cout << "itb    before erase : "<< *itb << std::endl;

@@ -163,13 +163,13 @@ namespace ft {
             iterator _erase(iterator position, size_type n) {
                 iterator tmp = begin();
                 size_type spos = 0;
-                size_type j = -1;
+                size_type j = (spos == 0) ? 0 : -1;
 
                 while (tmp != position) {
                     tmp++;
                     spos++;
                 }
-                std::cout << n << spos << std::endl;
+                std::cout << "n : " <<  n << "spos : " << spos << std::endl;
                 value_type * tmpel = new value_type[_capacity];
                 for (size_type i = 0; i < size(); i++) {
                     j += (j == spos) ? n : 1;
@@ -177,10 +177,10 @@ namespace ft {
                 }
                 delete [] _elements;
                 _elements = tmpel;
-                _size -= (n - 1);
+                _size -= n;
                 _it.setPtr(_elements);
                 position = _it;
-                return (_it);
+                return (position);
             }
 
             iterator erase (iterator first, iterator last) {
@@ -191,31 +191,12 @@ namespace ft {
                     tmp++;
                     n++;
                 }
-                return(_erase(first, n + 1));
+                return(_erase(first, n));
 
             }
 
             iterator erase (iterator position) {
-                return (_erase(position, 2));
-                // iterator tmp = begin();
-                // size_type spos = 0;
-
-                // while (tmp != position) {
-                //     tmp++;
-                //     spos++;
-                // }
-                // value_type * tmpel = new value_type[_capacity];
-                // size_type j = (spos == 0) ? 1 : 0;
-                // for (size_type i = 0; i < size(); i++) {
-                //     tmpel[i] = _elements[j];
-                //     j += (j == spos) ? 2 : 1;
-                // }
-                // delete [] _elements;
-                // _elements = tmpel;
-                // _size--;
-                // _it.setPtr(_elements);
-                // position = _it;
-                // return (_it);
+                return (_erase(position, 1));
             }
 
             void clear() {
