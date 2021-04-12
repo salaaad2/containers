@@ -147,6 +147,18 @@ namespace ft {
                 position = _it;
             }
 
+            template <class InputIterator>
+            void insert(iterator position, InputIterator first, InputIterator last) {
+                InputIterator tmp = first;
+                size_type ipos = 0;
+
+                while (tmp != last) {
+                    _insert(position + ipos, 1, *tmp);
+                    tmp++;
+                    ipos++;
+                }
+            }
+
             iterator insert (iterator position,
                              size_type n,
                              const value_type &val = value_type()) {
