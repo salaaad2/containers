@@ -2,6 +2,7 @@
 #define FT_VECTOR_H
 
 #include <iostream>
+#include <type_traits>
 
 #include "random_access_iterator.hpp"
 
@@ -14,25 +15,26 @@ namespace ft {
             typedef random_access_iterator<value_type> iterator;
 
 // constructors TODO destructor
-            explicit vector () {
-                _size = 0;
-                _capacity = 0;
-                _elements = new value_type[_capacity];
+            explicit vector () :
+            _elements(NULL), _size(0), _capacity(0) {
                 return ;
             }
 
             explicit vector (size_type n,
                              const value_type& val = value_type()) {
-                fill_vect(n, val);
+                fill_vect(n, val, std::__true_type());
             }
 
             template <class InputIterator>
             vector (InputIterator first,
                     InputIterator last) {
-                fill_vect(first, last);
+                typedef typename std::is_integral<InputIterator>::type Integral;
+
+                fill_vect(first, last, Integral());
             }
 
-            vector (const vector &x) {
+            vector (const vector &x) :
+            _elements(NULL), _size(0), _capacity(0) {
                 *this = x;
                 return ;
             }
@@ -147,18 +149,6 @@ namespace ft {
                 position = _it;
             }
 
-            template <class InputIterator>
-            void insert(iterator position, InputIterator first, InputIterator last) {
-                InputIterator tmp = first;
-                size_type ipos = 0;
-
-                while (tmp != last) {
-                    _insert(position + ipos, 1, *tmp);
-                    tmp++;
-                    ipos++;
-                }
-            }
-
             iterator insert (iterator position,
                              size_type n,
                              const value_type &val = value_type()) {
@@ -172,7 +162,22 @@ namespace ft {
                 return (position);
             }
 
-            iterator _erase(iterator position, size_type n) {
+            template <class InputIterator>
+            void insert(iterator position,
+                        InputIterator first,
+                        InputIterator last) {
+                InputIterator tmp = first;
+                size_type ipos = 0;
+
+                while (tmp != last) {
+                    _insert(position + ipos, 1, *tmp);
+                    tmp++;
+                    ipos++;
+                }
+            }
+
+            iterator _erase(iterator position,
+                            size_type n) {
                 iterator tmp = begin();
                 size_type spos = 0;
                 size_type j = (spos == 0) ? 0 : -1;
@@ -282,12 +287,13 @@ namespace ft {
         private :
 // attributes
             iterator _it;
+            value_type * _elements;
             size_type _size;
             size_type _capacity;
-            value_type * _elements;
 // constructor helpers
             void fill_vect (size_type n,
-                            const value_type& val = value_type()) {
+                            const value_type & val,
+                            std::__true_type) {
                 _size = n;
                 _capacity = 8;
                 while (_capacity < _size)
@@ -299,27 +305,34 @@ namespace ft {
                 _it.setPtr(_elements);
             }
 
-            void fill_vect(iterator first,
-                           iterator last) {
-                iterator tmp = first;
-
-                while (tmp != last) {
-                    _size++;
-                    tmp++;
-                }
-                _capacity = 8;
-                while (_capacity < _size)
-                    _capacity *= 2;
-                _elements = new value_type[_capacity];
-                size_type i = 0;
-                while (first != last) {
-                    _elements[i] = *first;
-                    first++;
-                    i++;
-                }
-                _elements[i] = *first;
-                _it.setPtr(_elements);
+            template<class InputIterator>
+            void fill_vect(InputIterator first,
+                           InputIterator last,
+                           std::false_type) {
+                std::cout << *first << *last << "qwe" << std::endl;
             }
+
+            // void fill_vect(iterator first,
+            //                iterator last) {
+            //     iterator tmp = first;
+
+            //     while (tmp != last) {
+            //         _size++;
+            //         tmp++;
+            //     }
+            //     _capacity = 8;
+            //     while (_capacity < _size)
+            //         _capacity *= 2;
+            //     _elements = new value_type[_capacity];
+            //     size_type i = 0;
+            //     while (first != last) {
+            //         _elements[i] = *first;
+            //         first++;
+            //         i++;
+            //     }
+            //     _elements[i] = *first;
+            //     _it.setPtr(_elements);
+            // }
     };
 }
 
