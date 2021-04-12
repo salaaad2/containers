@@ -160,26 +160,62 @@ namespace ft {
                 return (position);
             }
 
-            iterator erase (iterator position) {
+            iterator _erase(iterator position, size_type n) {
                 iterator tmp = begin();
                 size_type spos = 0;
+                size_type j = -1;
 
                 while (tmp != position) {
                     tmp++;
                     spos++;
                 }
+                std::cout << n << spos << std::endl;
                 value_type * tmpel = new value_type[_capacity];
-                size_type j = (spos == 0) ? 1 : 0;
                 for (size_type i = 0; i < size(); i++) {
+                    j += (j == spos) ? n : 1;
                     tmpel[i] = _elements[j];
-                    j += (j == spos) ? 2 : 1;
                 }
                 delete [] _elements;
                 _elements = tmpel;
-                _size--;
+                _size -= (n - 1);
                 _it.setPtr(_elements);
-                _it--;
+                position = _it;
                 return (_it);
+            }
+
+            iterator erase (iterator first, iterator last) {
+                iterator tmp = first;
+                size_type n = 0;
+
+                while (tmp != last) {
+                    tmp++;
+                    n++;
+                }
+                return(_erase(first, n + 1));
+
+            }
+
+            iterator erase (iterator position) {
+                return (_erase(position, 2));
+                // iterator tmp = begin();
+                // size_type spos = 0;
+
+                // while (tmp != position) {
+                //     tmp++;
+                //     spos++;
+                // }
+                // value_type * tmpel = new value_type[_capacity];
+                // size_type j = (spos == 0) ? 1 : 0;
+                // for (size_type i = 0; i < size(); i++) {
+                //     tmpel[i] = _elements[j];
+                //     j += (j == spos) ? 2 : 1;
+                // }
+                // delete [] _elements;
+                // _elements = tmpel;
+                // _size--;
+                // _it.setPtr(_elements);
+                // position = _it;
+                // return (_it);
             }
 
             void clear() {

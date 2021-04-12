@@ -65,11 +65,9 @@ class random_access_iterator {
 //
 // Arithmetic overload
 //
-        random_access_iterator &operator+(const random_access_iterator &rhs)
-        { return this->_ptr + rhs._ptr; }
-
         random_access_iterator &operator+(int rhs)
-        { return this->_ptr + rhs; }
+                { random_access_iterator tmp = *this;
+                        return tmp += rhs; }
 
         random_access_iterator &operator-(const random_access_iterator &rhs)
         { return this->_ptr - rhs._ptr; }
