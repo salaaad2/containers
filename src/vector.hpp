@@ -115,7 +115,8 @@ namespace ft {
                 }
             }
 
-            void assign(size_type n, const value_type & val) {
+            void assign(size_type n,
+					const value_type & val) {
 				delete [] _elements;
                 fill_vect(n, val, std::true_type());
             }
@@ -192,12 +193,11 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                value_type * tmpel = new value_type[_capacity];
                 size_type i = 0;
                 while (i < size()) {
                     if (j != spos)
                     {
-                        tmpel[i] = _elements[j];
+                        _elements[i] = _elements[j];
                         j++;
                         i++;
                     }
@@ -206,15 +206,13 @@ namespace ft {
                         j += n;
                     }
                 }
-                delete [] _elements;
-                _elements = tmpel;
                 _size -= n;
                 _it.setPtr(_elements);
-                position = _it;
                 return (position);
             }
 
-            iterator erase (iterator first, iterator last) {
+            iterator erase (iterator first,
+					iterator last) {
                 iterator tmp = first;
                 size_type n = 0;
 
