@@ -85,7 +85,9 @@ int main(void) {
     std::cout << "-========= erase @ end tests =========-" << std::endl;
     trueit = truevect.end();
     itb    =  cinvect.end();
-    //trueit = truevect.erase(trueit);
+    trueit--;
+    itb--;
+    trueit = truevect.erase(trueit);
     itb =     cinvect.erase(itb);
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
@@ -94,44 +96,52 @@ int main(void) {
     for (size_t i = 0; i < truevect.size(); i++) {
         std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
-    // // std::cout << "-========= push/pop _back tests =========-" << std::endl;
-    //  truevect.pop_back();
-    //   cinvect.pop_back();
-    // for (size_t i = 0; i < cinvect.size(); i++) {
-    //     std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
-    // }
-    // std::cout << "----\n" << std::endl;
-    // for (size_t i = 0; i < truevect.size(); i++) {
-    //     std::cout << i << " [" << truevect[i] << "]"<< std::endl;
-    // }
-   //  std::cout << "-========= iter tests =========-" << std::endl;
-   //  trueit = truevect.begin();
-   //  itb    = cinvect.begin();
-   //  std::cout << "dereference itb : "<< *itb << std::endl;
-   //  std::cout << "dereference itt : "<< *trueit << std::endl;
-   //  // truevect.erase(trueit);
-   //  // cinvect.erase(itb);
-   //  // std::cout << truevect.size() << " " << truevect.capacity() << std::endl;
-   //  // std::cout << cinvect.size() << " " << cinvect.capacity() << std::endl;
+    std::cout << "-========= push/pop _back tests =========-" << std::endl;
+     truevect.pop_back();
+      cinvect.pop_back();
+     truevect.push_back(90);
+      cinvect.push_back(90);
+     truevect.pop_back();
+      cinvect.pop_back();
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
+    std::cout << "----\n" << std::endl;
+    for (size_t i = 0; i < truevect.size(); i++) {
+        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+    }
+    std::cout << "-========= reserve tests =========-" << std::endl;
+    ft::vector<int> foo;
+   std::vector<int> bar;
+    std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    std::cout << bar.size() << " " << bar.capacity() << std::endl;
 
-   //  std::cout << "-========= reserve tests =========-" << std::endl;
-   //  ft::vector<int> foo;
-   // std::vector<int> bar;
-   //  std::cout << foo.size() << " " << foo.capacity() << std::endl;
-   //  std::cout << bar.size() << " " << bar.capacity() << std::endl;
+    foo.reserve(100);
+    for (size_t i = 0; i < 8; i++) {foo.push_back(21);}
+    bar.reserve(100);
+    for (size_t i = 0; i < 8; i++) {bar.push_back(21);}
+    std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    std::cout << bar.size() << " " << bar.capacity() << std::endl;
 
-   //  foo.reserve(100);
-   //  for (size_t i = 0; i < 101; i++) {foo.insert(foo.end(), 21);}
-   //  bar.reserve(100);
-   //  for (size_t i = 0; i < 101; i++) {bar.insert(bar.end(), 21);}
-   //  std::cout << foo.size() << " " << foo.capacity() << std::endl;
-   //  std::cout << bar.size() << " " << bar.capacity() << std::endl;
-
-   //  std::cout << "-========= clear tests =========-" << std::endl;
-   //  foo.clear();
-   //  bar.clear();
-   //  std::cout << bar.size() << " " << bar.capacity() << std::endl;
-   //  std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    std::cout << "-========= clear tests =========-" << std::endl;
+    for (size_t i = 0; i < foo.size(); i++) {
+        std::cout << i << " [" << foo[i] << "]"<< std::endl;
+    }
+    std::cout << "----\n" << std::endl;
+    for (size_t i = 0; i < bar.size(); i++) {
+        std::cout << i << " [" << bar[i] << "]"<< std::endl;
+    }
+    foo.clear();
+    bar.clear();
+    std::cout << bar.size() << " " << bar.capacity() << std::endl;
+    std::cout << foo.size() << " " << foo.capacity() << std::endl;
+    for (size_t i = 0; i < foo.size(); i++) {
+        std::cout << i << " [" << foo[i] << "]"<< std::endl;
+    }
+    std::cout << "----\n" << std::endl;
+    for (size_t i = 0; i < bar.size(); i++) {
+        std::cout << i << " [" << bar[i] << "]"<< std::endl;
+    }
     // std::cout << "-========= swap =========-" << std::endl;
     // ft::vector<int> swaptest(cinvect.begin(), cinvect.end());
     // swaptest.insert(swaptest.end(), 12);
