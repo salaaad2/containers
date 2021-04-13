@@ -142,19 +142,28 @@ int main(void) {
     for (size_t i = 0; i < bar.size(); i++) {
         std::cout << i << " [" << bar[i] << "]"<< std::endl;
     }
-    // std::cout << "-========= swap =========-" << std::endl;
-    // ft::vector<int> swaptest(cinvect.begin(), cinvect.end());
-    // swaptest.insert(swaptest.end(), 12);
-    // swaptest.insert(swaptest.end(), 12);
-    // swaptest.insert(swaptest.end(), 12);
-    // // swaptest.swap(cinvect);
-    // for (size_t i = 0; i < cinvect.size(); i++) {
-    //     std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
-    // }
-    // std::cout << "----\n" << std::endl;
-    // for (size_t i = 0; i < swaptest.size(); i++) {
-    //     std::cout << i << " [" << swaptest[i] << "]"<< std::endl;
-    // }
+    std::cout << "-========= swap =========-" << std::endl;
+    std::cout << "-cinvect :: --" << std::endl;
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
+    std::cout << "-swaptest :: --" << std::endl;
+    ft::vector<int> swaptest(cinvect.begin(), cinvect.end());
+    swaptest.insert(swaptest.end(), 12);
+    swaptest.insert(swaptest.end(), 12);
+    swaptest.insert(swaptest.end(), 12);
+    for (size_t i = 0; i < swaptest.size(); i++) {
+        std::cout << i << " [" << swaptest[i] << "]"<< std::endl;
+    }
+    swaptest.swap(cinvect);
+    std::cout << "-post :: --" << std::endl;
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
+    std::cout << "----\n" << std::endl;
+    for (size_t i = 0; i < swaptest.size(); i++) {
+        std::cout << i << " [" << swaptest[i] << "]"<< std::endl;
+    }
     // std::cout << "-========= erase =========-" << std::endl;
     // truevect.insert(truevect.end(), 12);
     //  cinvect.insert(cinvect.end(), 12);
