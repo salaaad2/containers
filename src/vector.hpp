@@ -180,20 +180,31 @@ namespace ft {
                             size_type n) {
                 iterator tmp = begin();
                 size_type spos = 0;
-                size_type j = (spos == 0) ? 0 : -1;
+                size_type j = 0;
 
                 while (tmp != position) {
                     tmp++;
                     spos++;
                 }
-                std::cout << "n : " <<  n << "spos : " << spos << std::endl;
+                std::cout << "spos : " << spos << std::endl;
                 value_type * tmpel = new value_type[_capacity];
-                for (size_type i = 0; i < size(); i++) {
-                    j += (j == spos) ? n : 1;
-                    tmpel[i] = _elements[j];
+                size_type i = 0;
+                while (i < size()) {
+                    if (j != spos)
+                    {
+                        tmpel[i] = _elements[j];
+                        std::cout << "copy : " << j << " : " << _elements[j] << std::endl;
+                        j++;
+                        i++;
+                    }
+                    else
+                    {
+                        j += n;
+                    }
                 }
                 delete [] _elements;
                 _elements = tmpel;
+                std::cout << _elements[11] << std::endl;
                 _size -= n;
                 _it.setPtr(_elements);
                 position = _it;
@@ -209,7 +220,6 @@ namespace ft {
                     n++;
                 }
                 return(_erase(first, n));
-
             }
 
             iterator erase (iterator position) {
@@ -228,7 +238,7 @@ namespace ft {
             }
 
             void pop_back() {
-                erase(end());
+                _erase(end(), 1);
             }
 
 // accessors
@@ -328,10 +338,6 @@ namespace ft {
                  _elements[i] = *first;
                  _it.setPtr(_elements);
             }
-
-            // void fill_vect(iterator first,
-            //                iterator last) {
-            // }
     };
 }
 

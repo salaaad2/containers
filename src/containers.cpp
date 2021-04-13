@@ -60,18 +60,20 @@ int main(void) {
     itb    =  cinvect.begin();
     std::cout << "itb    before erase : "<< *itb << std::endl;
     std::cout << "trueit before erase : "<< *trueit << std::endl;
+    trueit++;
+    itb++;
     trueit = truevect.erase(trueit);
     itb =     cinvect.erase(itb);
-    std::cout << "itb    after erase : "<< *itb << std::endl;
-    std::cout << "trueit after erase : "<< *trueit << std::endl;
-    trueit = truevect.erase(trueit);
-    itb =     cinvect.erase(itb);
-    ft::vector<int>::iterator asd = itb;
-    asd += 3;
-    std::cout << *asd << "\n";
-    std::cout << *itb << "\n";
-    cinvect.erase(itb, asd);
-    truevect.erase(trueit, trueit + 3);
+    // std::cout << "itb    after erase : "<< *itb << std::endl;
+    // std::cout << "trueit after erase : "<< *trueit << std::endl;
+    // trueit = truevect.erase(trueit);
+    // itb =     cinvect.erase(itb);
+    // ft::vector<int>::iterator asd = itb;
+    // asd += 3;
+    // std::cout << *asd << "\n";
+    // std::cout << *itb << "\n";
+    // cinvect.erase(itb, asd);
+    // truevect.erase(trueit, trueit + 3);
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
@@ -80,20 +82,30 @@ int main(void) {
         std::cout << i << " [" << truevect[i] << "]"<< std::endl;
     }
 
-   //  std::cout << "-========= push/pop _back tests =========-" << std::endl;
-   //   truevect.pop_back();
-   //   truevect.pop_back();
-   //   truevect.pop_back();
-   //    cinvect.pop_back();
-   //    cinvect.pop_back();
-   //    cinvect.pop_back();
-   //  for (size_t i = 0; i < cinvect.size(); i++) {
-   //      std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
-   //  }
-   //  std::cout << "----" << std::endl;
-   //  for (size_t i = 0; i < truevect.size(); i++) {
-   //      std::cout << i << " [" << truevect[i] << "]"<< std::endl;
-   //  }
+    // std::cout << "-========= erase @ end tests =========-" << std::endl;
+    // trueit = truevect.end();
+    // itb    =  cinvect.end();
+    // trueit--;
+    // itb--;
+    // trueit = truevect.erase(trueit);
+    // itb =     cinvect.erase(itb);
+    // for (size_t i = 0; i < cinvect.size(); i++) {
+    //     std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    // }
+    // std::cout << "----" << std::endl;
+    // for (size_t i = 0; i < truevect.size(); i++) {
+    //     std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+    // }
+    // // std::cout << "-========= push/pop _back tests =========-" << std::endl;
+    //  truevect.pop_back();
+    //   cinvect.pop_back();
+    // for (size_t i = 0; i < cinvect.size(); i++) {
+    //     std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    // }
+    // std::cout << "----" << std::endl;
+    // for (size_t i = 0; i < truevect.size(); i++) {
+    //     std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+    // }
    //  std::cout << "-========= iter tests =========-" << std::endl;
    //  trueit = truevect.begin();
    //  itb    = cinvect.begin();
