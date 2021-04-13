@@ -186,14 +186,12 @@ namespace ft {
                     tmp++;
                     spos++;
                 }
-                std::cout << "spos : " << spos << std::endl;
                 value_type * tmpel = new value_type[_capacity];
                 size_type i = 0;
                 while (i < size()) {
                     if (j != spos)
                     {
                         tmpel[i] = _elements[j];
-                        std::cout << "copy : " << j << " : " << _elements[j] << std::endl;
                         j++;
                         i++;
                     }
@@ -204,7 +202,6 @@ namespace ft {
                 }
                 delete [] _elements;
                 _elements = tmpel;
-                std::cout << _elements[11] << std::endl;
                 _size -= n;
                 _it.setPtr(_elements);
                 position = _it;
