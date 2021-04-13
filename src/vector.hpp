@@ -138,10 +138,11 @@ namespace ft {
                     tmpel = new value_type[_capacity]; // TODO inval operators only onr realloc
                 }
                 else
+                {
                     tmpel = _elements;
+                }
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
-
                 }
                 for (size_type i = spos; i < (spos + n); i++) {
                     tmpel[i] = val;
@@ -288,10 +289,10 @@ namespace ft {
 
 // iterators
             iterator begin()
-            { return iterator(_elements); }
+            { return _elements; }
 
             iterator end()
-            { return iterator(_elements + _size); }
+            { return _elements + _size; }
 
 
             // reverse_iterator rbegin()
@@ -334,7 +335,7 @@ namespace ft {
                            InputIterator last,
                            std::false_type) {
                  iterator tmp = first;
-
+//TODO: std::bad_alloc
                  while (tmp != last) {
                      _size++;
                      tmp++;
@@ -342,6 +343,7 @@ namespace ft {
                  _capacity = 8;
                  while (_capacity < _size)
                      _capacity *= 2;
+                 std::cout << _size << " qweqwe "<< _capacity << std::endl;
                  _elements = new value_type[_capacity];
                  size_type i = 0;
                  while (first != last) {

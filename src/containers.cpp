@@ -17,7 +17,7 @@ int main(void) {
     ft::vector<int>::iterator ite = trevect.end();
     std::vector<int>::iterator trueit;
 
-    std::cout << "print iterators"<< *itb << *ite << std::endl;
+    // std::cout << "print iterators"<< *itb << *ite << std::endl;
     ft::vector<int> cinvect(itb, ite);
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
@@ -148,7 +148,7 @@ int main(void) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
     std::cout << "-swaptest :: --" << std::endl;
-    ft::vector<int> swaptest(cinvect.begin(), cinvect.end());
+    ft::vector<int> swaptest(1, 12);
     swaptest.insert(swaptest.end(), 12);
     swaptest.insert(swaptest.end(), 12);
     swaptest.insert(swaptest.end(), 12);
@@ -175,16 +175,14 @@ int main(void) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
     std::cout << "-========= erase @ end tests HOPE =========-" << std::endl;
-     ft::vector<int> ael(9,12);
-    std::vector<int> bel(9,12);
+     ft::vector<int> ael(6 ,12);
+    std::vector<int> bel(6 ,12);
      ft::vector<int>::iterator aeli;
     std::vector<int>::iterator beli;
     aeli = ael.begin();
     beli = bel.begin();
-    aeli += 1;
-    beli += 1;
-    aeli = ael.insert(aeli, 1, 89);
-    beli = bel.insert(beli,  1,89);
+    aeli = ael.insert(aeli, 2, 89);
+    beli = bel.insert(beli, 2, 89);
     std::cout << "itb    after insert : "<< *aeli << std::endl;
     std::cout << "trueit after insert : "<< *beli << std::endl;
     for (size_t i = 0; i < ael.size(); i++) {
