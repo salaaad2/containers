@@ -128,6 +128,7 @@ namespace ft {
                 size_type spos = 0;
                 size_type olds = size();
                 value_type * tmpel;
+                value_type * copy = new value_type[_capacity];
 
                 while (tmp != position) {
                     tmp++;
@@ -143,13 +144,14 @@ namespace ft {
                 }
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
+                    copy[i] = _elements[i];
                 }
                 for (size_type i = spos; i < (spos + n); i++) {
                     tmpel[i] = val;
                 }
                 size_type j = spos;
                 for (size_type i = spos + n; j < (olds); i++) {
-                    tmpel[i] = _elements[j];
+                    tmpel[i] = copy[j];
                     j++;
                 }
                 if (_elements != tmpel)
@@ -159,7 +161,6 @@ namespace ft {
                 }
                 _size += n;
                 _it.setPtr(_elements);
-                _it += n;
                 position = _it;
             }
 

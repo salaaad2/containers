@@ -2,6 +2,7 @@
 -Wall
 -Werror
 -Wextra
+-isystem/usr/include
 -isystem/usr/local/include
 -isystem/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1
 -isystem/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include
