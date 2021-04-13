@@ -116,6 +116,7 @@ namespace ft {
             }
 
             void assign(size_type n, const value_type & val) {
+				delete [] _elements;
                 fill_vect(n, val, std::true_type());
             }
 
