@@ -175,22 +175,24 @@ int main(void) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
     }
     std::cout << "-========= erase @ end tests HOPE =========-" << std::endl;
-    std::vector<int> ael(1, 12);
-     ft::vector<int> bel(1, 12);
-    std::vector<int>::iterator aeli;
-     ft::vector<int>::iterator beli;
+     ft::vector<int> ael(9,12);
+    std::vector<int> bel(9,12);
+     ft::vector<int>::iterator aeli;
+    std::vector<int>::iterator beli;
     aeli = ael.begin();
     beli = bel.begin();
-    aeli = ael.insert(aeli, 89);
-    beli = bel.insert(beli, 89);
+    aeli += 1;
+    beli += 1;
+    aeli = ael.insert(aeli, 1, 89);
+    beli = bel.insert(beli,  1,89);
     std::cout << "itb    after insert : "<< *aeli << std::endl;
     std::cout << "trueit after insert : "<< *beli << std::endl;
-    for (size_t i = 0; i < cinvect.size(); i++) {
-        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    for (size_t i = 0; i < ael.size(); i++) {
+        std::cout << i << " [" << ael[i] << "]"<< std::endl;
     }
     std::cout << "----\n" << std::endl;
-    for (size_t i = 0; i < truevect.size(); i++) {
-        std::cout << i << " [" << truevect[i] << "]"<< std::endl;
+    for (size_t i = 0; i < bel.size(); i++) {
+        std::cout << i << " [" << bel[i] << "]"<< std::endl;
     }
     return (0);
 }
