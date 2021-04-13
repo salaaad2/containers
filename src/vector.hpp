@@ -13,8 +13,9 @@ namespace ft {
             typedef T value_type;
             typedef size_t size_type;
             typedef random_access_iterator<value_type> iterator;
+// TODO: reverse it typedef/implementation
 
-// constructors TODO destructor
+// TODO: good destructor
             explicit vector () :
             _elements(NULL), _size(0), _capacity(0) {
                 return ;
@@ -34,7 +35,7 @@ namespace ft {
             }
 
             vector (const vector &x) :
-            _elements(NULL), _size(0), _capacity(0) {
+                _elements(NULL), _size(0), _capacity(0) {
                 *this = x;
                 return ;
             }
@@ -66,8 +67,8 @@ namespace ft {
               return (_elements[n]); }
 
 // member functions TODO: insert / resize better conditions
-// swap fullswap
-            void swap (vector &x) {
+
+            void swap (vector & x) {
                 std::swap(_elements, x._elements);
                 std::swap(_size, x._size);
                 std::swap(_capacity, x._capacity);
@@ -112,6 +113,10 @@ namespace ft {
                     _elements = tmpel;
                     _it.setPtr(_elements);
                 }
+            }
+
+            void assign(size_type n, const value_type & val) {
+                fill_vect(n, val, std::true_type());
             }
 
             void _insert(iterator & position,
@@ -268,7 +273,7 @@ namespace ft {
             { return (this->_capacity); }
 
             size_type max_size (void) const
-            { return (this->_capacity * 987); }
+            { return (this->_capacity * 987); } // TODO
 
             size_type size (void) const
             { return (this->_size); }
@@ -282,6 +287,13 @@ namespace ft {
 
             iterator end()
             { return iterator(_elements + _size); }
+
+
+            // reverse_iterator rbegin()
+            // { return iterator(_elements); }
+
+            // reverse_iterator rend()
+            // { return iterator(_elements); }
 
 // exceptions TODO true out of range is explicit. get back on that one
             class out_of_range : public std::exception {

@@ -164,15 +164,15 @@ int main(void) {
     for (size_t i = 0; i < swaptest.size(); i++) {
         std::cout << i << " [" << swaptest[i] << "]"<< std::endl;
     }
-    // std::cout << "-========= erase =========-" << std::endl;
-    // truevect.insert(truevect.end(), 12);
-    //  cinvect.insert(cinvect.end(), 12);
-    // for (size_t i = 0; i < cinvect.size(); i++) {
-    //     std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
-    // }
-    // std::cout << "----\n" << std::endl;
-    // for (size_t i = 0; i < truevect.size(); i++) {
-    //     std::cout << i << " [" << truevect[i] << "]"<< std::endl;
-    // }
+    std::cout << "-========= assign =========-" << std::endl;
+    std::cout << "-before-" << std::endl;
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
+	cinvect.assign(5, 19);
+    std::cout << "----\n" << std::endl;
+    for (size_t i = 0; i < cinvect.size(); i++) {
+        std::cout << i << " [" << cinvect[i] << "]"<< std::endl;
+    }
     return (0);
 }
