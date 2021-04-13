@@ -127,6 +127,7 @@ namespace ft {
                 iterator tmp = begin();
                 size_type spos = 0;
                 size_type olds = size();
+                value_type * tmpel;
 
                 while (tmp != position) {
                     tmp++;
@@ -134,8 +135,10 @@ namespace ft {
                 }
                 if ((_size + n) > _capacity) {
                     resize(_capacity * 2);
+                    tmpel = new value_type[_capacity]; // TODO inval operators only onr realloc
                 }
-                value_type * tmpel = new value_type[_capacity];
+                else
+                    tmpel = _elements;
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
 
@@ -148,8 +151,11 @@ namespace ft {
                     tmpel[i] = _elements[j];
                     j++;
                 }
-                delete [] _elements;
-                _elements = tmpel;
+                if (_elements != tmpel)
+                {
+                    delete [] _elements;
+                    _elements = tmpel;
+                }
                 _size += n;
                 _it.setPtr(_elements);
                 _it += n;
@@ -212,7 +218,7 @@ namespace ft {
             }
 
             iterator erase (iterator first,
-					iterator last) {
+                            iterator last) {
                 iterator tmp = first;
                 size_type n = 0;
 
