@@ -17,7 +17,7 @@ namespace ft {
 
 // TODO: good destructor
             explicit vector () :
-            _elements(NULL), _size(0), _capacity(0) {
+                _elements(NULL), _size(0), _capacity(0) {
                 return ;
             }
 
@@ -67,7 +67,6 @@ namespace ft {
               return (_elements[n]); }
 
 // member functions TODO: insert / resize better conditions
-
             void swap (vector & x) {
                 std::swap(_elements, x._elements);
                 std::swap(_size, x._size);
@@ -116,8 +115,8 @@ namespace ft {
             }
 
             void assign(size_type n,
-					const value_type & val) {
-				delete [] _elements;
+                        const value_type & val) {
+                delete [] _elements;
                 fill_vect(n, val, std::true_type());
             }
 
