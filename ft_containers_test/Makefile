@@ -25,9 +25,6 @@ SRC = $(shell find $(SRC_DIR) -type f -name '*.cpp')
 OBJ = $(SRC:.cpp=.o)
 INC = ft_containers_test.hpp
 
-run: all
-	@./$(SEGV_WRAPPER) ./$(NAME) $(SEGV_WRAPPER_OUT) $(PRETTIER)
-
 all: $(NAME)
 
 $(NAME): $(OBJ)

@@ -120,11 +120,15 @@ namespace ft {
             void assign (InputIterator first, InputIterator last) {
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
+                _size = 0;
+                _capacity = 0;
                 fill_vect(first, last, Integral());
             }
 
             void assign(size_type n,
                         const value_type & val) {
+                _size = 0;
+                _capacity = 0;
                 delete [] _elements;
                 fill_vect(n, val, std::true_type());
             }
@@ -145,6 +149,7 @@ namespace ft {
                 if ((_size + n) > _capacity) {
                     resize(_capacity * 2);
                     tmpel = new value_type[_capacity];
+                    std::cout << "size : " << _size << "qwe : " << _capacity<< std::endl;
                 }
                 else
                     tmpel = _elements;
@@ -170,13 +175,13 @@ namespace ft {
                 position = _it;
             }
 
-            iterator insert (iterator position,
+            iterator insert(iterator position,
                              const value_type &val = value_type()) {
                 _insert_dispatch(position, 1, val, std::true_type());
                 return (position);
             }
 
-            void insert (iterator position,
+            void insert(iterator position,
                              size_type n,
                              const value_type &val = value_type()) {
                 _insert_dispatch(position, n, val, std::true_type());
@@ -264,7 +269,9 @@ namespace ft {
             }
 
             void push_back(const value_type & val = value_type()) {
-                insert(end(), val);
+                iterator tmp = end();
+
+                _insert(tmp, 1, val);
             }
 
             void pop_back() {
@@ -285,14 +292,14 @@ namespace ft {
             value_type & front()
             {return (_elements[0]); }
 
-            value_type & back()
-            {return (_elements[_size]); }
-
             value_type const & front() const
             {return (_elements[0]); }
 
+            value_type & back()
+            {return (_elements[_size - 1]); }
+
             value_type const & back() const
-            {return (_elements[_size]); }
+            {return (_elements[_size - 1]); }
 
             size_type capacity (void) const
             { return (this->_capacity); }
