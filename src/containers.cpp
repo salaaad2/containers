@@ -181,8 +181,8 @@ int main(void) {
     std::vector<int>::iterator beli;
     aeli = ael.begin();
     beli = bel.begin();
-ael.insert(aeli, 2, 89);
-bel.insert(beli, 2, 89);
+    ael.insert(aeli, 2, 89);
+    bel.insert(beli, 2, 89);
     std::cout << "itb    after insert : "<< *aeli << std::endl;
     std::cout << "trueit after insert : "<< *beli << std::endl;
     for (size_t i = 0; i < ael.size(); i++) {
@@ -211,6 +211,12 @@ bel.insert(beli, 2, 89);
     }
     if (itcool == itcaal) {
         std::cout << "cool is the same" << std::endl;
+    }
+    std::cout << "-========= reverse iterators operators =========-" << std::endl;
+    ft::vector<int>::reverse_iterator rib = vecool.rbegin();
+    ft::vector<int>::reverse_iterator rie = vecool.rend();
+    for (; rib != rie; rib++) {
+        std::cout << "qwe" << std::endl;
     }
 
     return (0);

@@ -179,7 +179,7 @@ namespace ft {
                 return (position);
             }
 
-            iterator insert (iterator position,
+            void insert (iterator position,
                              size_type n,
                              const value_type &val = value_type()) {
                 _insert_dispatch(position, n, val, std::true_type());
@@ -195,12 +195,11 @@ namespace ft {
                 _insert_dispatch(position, first, last, Integral());
             }
 
-            iterator _insert_dispatch(iterator position,
+            void _insert_dispatch(iterator position,
                              size_type n,
                              const value_type &val,
                              std::true_type) {
                 _insert(position, n, val);
-                return (position);
             }
 
             template<class InputIterator>

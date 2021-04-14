@@ -106,7 +106,7 @@ class random_access_iterator {
         void getPtr(void) const
         { return this->_ptr; }
 
-        random_access_iterator const &operator=(random_access_iterator const & rhs)
+        random_access_iterator &operator=(random_access_iterator const & rhs)
         { this->_ptr = rhs._ptr;
           return *this; }
 
