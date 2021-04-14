@@ -322,10 +322,10 @@ namespace ft {
 
 
             reverse_iterator rbegin()
-            { return reverse_iterator(end()); }
+            { return reverse_iterator(end() - 1); }
 
             reverse_iterator rend()
-            { return reverse_iterator(begin()); }
+            { return reverse_iterator(begin() - 1); }
 
 // exceptions TODO true out of range is explicit. get back on that one
             class out_of_range : public std::exception {

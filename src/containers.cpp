@@ -183,8 +183,8 @@ int main(void) {
     beli = bel.begin();
     ael.insert(aeli, 2, 89);
     bel.insert(beli, 2, 89);
-    std::cout << "itb    after insert : "<< *aeli << std::endl;
-    std::cout << "trueit after insert : "<< *beli << std::endl;
+    // std::cout << "itb    after insert : "<< *aeli << std::endl;
+    // std::cout << "trueit after insert : "<< *beli << std::endl;
     for (size_t i = 0; i < ael.size(); i++) {
         std::cout << i << " [" << ael[i] << "]"<< std::endl;
     }
@@ -213,11 +213,18 @@ int main(void) {
         std::cout << "cool is the same" << std::endl;
     }
     std::cout << "-========= reverse iterators operators =========-" << std::endl;
-    ft::vector<int>::reverse_iterator rib = vecool.rbegin();
-    ft::vector<int>::reverse_iterator rie = vecool.rend();
-    for (; rib != rie; rib++) {
-        std::cout << "qwe" << std::endl;
-    }
+    ft::vector<int>::reverse_iterator rib;
+    rib = vecool.rbegin();
+    // ft::vector<int>::reverse_iterator rie = vecool.rend();
+    // rib++;
+   // (void)rib;
+   // std::cout << *rib << std::endl;
+   // std::cout << *rie << std::endl;
+
+
+    //     (; rib != rie; rib++) {
+    //     std::cout << "qwe" << std::endl;
+    // }
 
     return (0);
 }

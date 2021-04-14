@@ -14,13 +14,17 @@ class random_access_iterator {
         random_access_iterator(random_access_iterator const & src)
         { *this = src;}
 
+        random_access_iterator &operator=(const random_access_iterator & rhs)
+        { _ptr = rhs._ptr;
+          return *this; }
+
 // Prefix overloading
         random_access_iterator& operator++()
-        { this->_ptr++;
+        { _ptr++;
           return *this; }
 
         random_access_iterator& operator--()
-        { this->_ptr--;
+        { _ptr--;
           return *this; }
 
 //
@@ -59,22 +63,22 @@ class random_access_iterator {
 
 
         bool operator==(const random_access_iterator& iter) const
-        { return this->_ptr == iter._ptr; }
+        { return _ptr == iter._ptr; }
 
         bool operator!=(const random_access_iterator& iter) const
-        { return this->_ptr != iter._ptr; }
+        { return _ptr != iter._ptr; }
 
         bool operator<(const random_access_iterator& iter) const
-        { return this->_ptr <iter._ptr; }
+        { return _ptr <iter._ptr; }
 
         bool operator>(const random_access_iterator& iter) const
-        { return this->_ptr > iter._ptr; }
+        { return _ptr > iter._ptr; }
 
         bool operator<=(const random_access_iterator& iter) const
-        { return this->_ptr <= iter._ptr; }
+        { return _ptr <= iter._ptr; }
 
         bool operator>=(const random_access_iterator& iter) const
-        { return this->_ptr >= iter._ptr; }
+        { return _ptr >= iter._ptr; }
 
 //
 // Arithmetic overload
@@ -84,35 +88,27 @@ class random_access_iterator {
           return tmp += rhs; }
 
         random_access_iterator operator-(int rhs)
-        { return this->_ptr - rhs; }
+        { return _ptr - rhs; }
 
         difference_type operator-(const random_access_iterator &rhs)
-        { return this->_ptr - rhs._ptr; }
+        { return _ptr - rhs._ptr; }
 
 
 
         random_access_iterator &operator+=(int rhs)
-        { this->_ptr += rhs;
+        { _ptr += rhs;
           return *this; }
 
         random_access_iterator &operator-=(int rhs)
-        { this->_ptr -= rhs;
+        { _ptr -= rhs;
           return *this; }
 
 
         void setPtr(T * ptr)
-        { this->_ptr = ptr; }
+        { _ptr = ptr; }
 
         void getPtr(void) const
-        { return this->_ptr; }
-
-        random_access_iterator &operator=(random_access_iterator const & rhs)
-        { this->_ptr = rhs._ptr;
-          return *this; }
-
-        random_access_iterator &operator=(random_access_iterator & rhs)
-        { this->_ptr = rhs._ptr;
-          return *this; }
+        { return _ptr; }
 
     private :
         T * _ptr;
