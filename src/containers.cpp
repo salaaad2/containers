@@ -181,8 +181,8 @@ int main(void) {
     std::vector<int>::iterator beli;
     aeli = ael.begin();
     beli = bel.begin();
-    aeli = ael.insert(aeli, 2, 89);
-    beli = bel.insert(beli, 2, 89);
+ael.insert(aeli, 2, 89);
+bel.insert(beli, 2, 89);
     std::cout << "itb    after insert : "<< *aeli << std::endl;
     std::cout << "trueit after insert : "<< *beli << std::endl;
     for (size_t i = 0; i < ael.size(); i++) {

@@ -119,6 +119,13 @@ namespace ft {
                 }
             }
 
+            template <class InputIterator>
+            void assign (InputIterator first, InputIterator last) {
+                typedef typename std::is_integral<InputIterator>::type Integral;
+
+                fill_vect(first, last, Integral());
+            }
+
             void assign(size_type n,
                         const value_type & val) {
                 delete [] _elements;
@@ -140,12 +147,10 @@ namespace ft {
                 }
                 if ((_size + n) > _capacity) {
                     resize(_capacity * 2);
-                    tmpel = new value_type[_capacity]; // TODO inval operators only onr realloc
+                    tmpel = new value_type[_capacity];
                 }
                 else
-                {
                     tmpel = _elements;
-                }
                 for (size_type i = 0; i < size(); i++) {
                     tmpel[i] = _elements[i];
                     copy[i] = _elements[i];
@@ -169,31 +174,48 @@ namespace ft {
             }
 
             iterator insert (iterator position,
-                             size_type n,
                              const value_type &val = value_type()) {
-                _insert(position, n, val);
+                _insert_dispatch(position, 1, val, std::true_type());
                 return (position);
             }
 
             iterator insert (iterator position,
+                             size_type n,
                              const value_type &val = value_type()) {
-                _insert(position, 1, val);
+                _insert_dispatch(position, n, val, std::true_type());
                 return (position);
             }
 
-            // template <class InputIterator>
-            // void insert(iterator position,
-            //             InputIterator first,
-            //             InputIterator last) {
-            //     InputIterator tmp = first;
-            //     size_type ipos = 0;
+            template <class InputIterator>
+            void insert(iterator position,
+                        InputIterator first,
+                        InputIterator last) {
+                typedef typename std::is_integral<InputIterator>::type Integral;
 
-            //     while (tmp != last) {
-            //         _insert(position + ipos, 1, *tmp);
-            //         tmp++;
-            //         ipos++;
-            //     }
-            // }
+                _insert_dispatch(position, first, last, Integral());
+            }
+
+            iterator _insert_dispatch(iterator position,
+                             size_type n,
+                             const value_type &val,
+                             std::true_type) {
+                _insert(position, n, val);
+                return (position);
+            }
+
+            template<class InputIterator>
+            void _insert_dispatch(iterator position,
+                                    InputIterator first,
+                                    InputIterator last,
+                                  std::false_type) {
+                InputIterator tmp = first;
+
+                while (tmp != last) {
+                    _insert(position, 1, *tmp);
+                    tmp++;
+                    position++;
+                }
+            }
 
             iterator _erase(iterator position,
                             size_type n) {
@@ -339,17 +361,15 @@ namespace ft {
             void fill_vect(InputIterator first,
                            InputIterator last,
                            std::false_type) {
-                 iterator tmp = first;
-//TODO: std::bad_alloc
+                 InputIterator tmp = first;
+
                  while (tmp != last) {
-std::cout << "qwe" << std::endl;
                      _size++;
                      tmp++;
                  }
                  _capacity = 8;
                  while (_capacity < _size)
                      _capacity *= 2;
-                 std::cout << _size << " qweqwe "<< _capacity << std::endl;
                  _elements = new value_type[_capacity];
                  size_type i = 0;
                  while (first != last) {
