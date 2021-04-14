@@ -89,6 +89,23 @@ namespace ft {
                 }
             }
 
+            template <class InputIterator>
+            void assign (InputIterator first, InputIterator last) {
+                typedef typename std::is_integral<InputIterator>::type Integral;
+
+                _size = 0;
+                _capacity = 0;
+                fill_vect(first, last, Integral());
+            }
+
+            void assign(size_type n,
+                        const value_type & val) {
+                _size = 0;
+                _capacity = 0;
+                delete [] _elements;
+                fill_vect(n, val, std::true_type());
+            }
+
             void resize(size_type n,
                         value_type val = value_type()) {
                 size_type tmp = 0;
@@ -109,28 +126,9 @@ namespace ft {
                     for (; tmp < n; tmp++) {
                         tmpel[tmp] = val;
                     }
-                    delete [] _elements;
                     _elements = tmpel;
                     _it.setPtr(_elements);
                 }
-                _size = n;
-            }
-
-            template <class InputIterator>
-            void assign (InputIterator first, InputIterator last) {
-                typedef typename std::is_integral<InputIterator>::type Integral;
-
-                _size = 0;
-                _capacity = 0;
-                fill_vect(first, last, Integral());
-            }
-
-            void assign(size_type n,
-                        const value_type & val) {
-                _size = 0;
-                _capacity = 0;
-                delete [] _elements;
-                fill_vect(n, val, std::true_type());
             }
 
             void _insert(iterator & position,
@@ -149,7 +147,6 @@ namespace ft {
                 if ((_size + n) > _capacity) {
                     resize(_capacity * 2);
                     tmpel = new value_type[_capacity];
-                    std::cout << "size : " << _size << "qwe : " << _capacity<< std::endl;
                 }
                 else
                     tmpel = _elements;
@@ -172,7 +169,6 @@ namespace ft {
                 }
                 _size += n;
                 _it.setPtr(_elements);
-                position = _it;
             }
 
             iterator insert(iterator position,
