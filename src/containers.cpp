@@ -192,5 +192,26 @@ int main(void) {
     for (size_t i = 0; i < bel.size(); i++) {
         std::cout << i << " [" << bel[i] << "]"<< std::endl;
     }
+    std::cout << "-========= iterators operators =========-" << std::endl;
+    ft::vector<int> vecool(6 ,12);
+    ft::vector<int>::iterator itcool;
+    ft::vector<int>::iterator itcaal;
+
+    itcool = vecool.begin();
+    itcaal = vecool.begin();
+
+    if (itcool >= itcaal) {
+        std::cout << "cool is bigger" << std::endl;
+    }
+    if (itcool <= itcaal) {
+        std::cout << "cool is smaller" << std::endl;
+    }
+    if (itcool != itcaal) {
+        std::cout << "cool is different" << std::endl;
+    }
+    if (itcool == itcaal) {
+        std::cout << "cool is the same" << std::endl;
+    }
+
     return (0);
 }

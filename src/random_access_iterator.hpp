@@ -6,6 +6,7 @@
 template <class T>
 class random_access_iterator {
     public :
+        typedef std::ptrdiff_t difference_type;
 //
 // constructors
 //
@@ -34,7 +35,7 @@ class random_access_iterator {
 
         random_access_iterator operator--(int)
         { random_access_iterator tmp = *this;
-          --(this);
+          --(*this);
           return (tmp); }
 
 
@@ -84,8 +85,12 @@ class random_access_iterator {
         { random_access_iterator tmp = *this;
           return tmp += rhs; }
 
-        random_access_iterator operator-(const random_access_iterator &rhs)
+        random_access_iterator operator-(int rhs)
+        { return this->_ptr - rhs; }
+
+        difference_type operator-(const random_access_iterator &rhs)
         { return this->_ptr - rhs._ptr; }
+
 
 
         random_access_iterator &operator+=(int rhs)
