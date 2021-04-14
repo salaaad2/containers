@@ -183,7 +183,6 @@ namespace ft {
                              size_type n,
                              const value_type &val = value_type()) {
                 _insert_dispatch(position, n, val, std::true_type());
-                return (position);
             }
 
             template <class InputIterator>

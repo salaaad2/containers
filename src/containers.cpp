@@ -213,13 +213,13 @@ int main(void) {
         std::cout << "cool is the same" << std::endl;
     }
     std::cout << "-========= reverse iterators operators =========-" << std::endl;
-    ft::vector<int>::reverse_iterator rib;
-    rib = vecool.rbegin();
-    // ft::vector<int>::reverse_iterator rie = vecool.rend();
-    // rib++;
-   // (void)rib;
-   // std::cout << *rib << std::endl;
-   // std::cout << *rie << std::endl;
+    ft::vector<int>::reverse_iterator rit;
+    rit = vecool.rbegin();
+    for (; rit!= vecool.rend(); ++rit)
+    std::cout << *rit << std::endl;
+
+    for (size_t i = 0; i < vecool.size(); i++)
+    std::cout << vecool[i] << std::endl;
 
 
     //     (; rib != rie; rib++) {

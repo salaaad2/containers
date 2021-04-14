@@ -107,7 +107,7 @@ class random_access_iterator {
         void setPtr(T * ptr)
         { _ptr = ptr; }
 
-        void getPtr(void) const
+        T * getPtr(void) const
         { return _ptr; }
 
     private :

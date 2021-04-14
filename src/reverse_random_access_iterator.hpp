@@ -14,10 +14,10 @@ class reverse_random_access_iterator : public random_access_iterator<T> {
         reverse_random_access_iterator(T * ptr) : _ptr(ptr) {}
 
         reverse_random_access_iterator(random_access_iterator<T> const & src)
-        { *this = src;}
+        { *this = src; }
 
-        reverse_random_access_iterator &operator=(const reverse_random_access_iterator & rhs)
-        { _ptr = rhs._ptr;
+        reverse_random_access_iterator &operator=(const random_access_iterator<T> & rhs)
+        { _ptr = rhs.getPtr();
           return *this; }
 
 // Prefix overloading
@@ -51,10 +51,10 @@ class reverse_random_access_iterator : public random_access_iterator<T> {
 
 
         T &operator[](int i)
-        { return (*(operator+(i))); }
+        { return (*(this->_ptr - i)); }
 
         const T &operator[](int i) const
-        { return (*(operator+(i))); }
+        { return (*(this->_ptr - i)); }
 
 
         T *operator->(void)
@@ -86,11 +86,10 @@ class reverse_random_access_iterator : public random_access_iterator<T> {
 // Arithmetic overload
 //
         reverse_random_access_iterator operator+(int rhs)
-        { reverse_random_access_iterator tmp = *this;
-          return tmp -= rhs; }
+        { return (reverse_random_access_iterator(_ptr - rhs)); }
 
         reverse_random_access_iterator operator-(int rhs)
-        { return _ptr + rhs; }
+        { return (reverse_random_access_iterator(_ptr + rhs)); }
 
         difference_type operator-(const reverse_random_access_iterator &rhs)
         { return _ptr + rhs._ptr; }
