@@ -20,26 +20,26 @@ namespace ft {
 // TODO: reverse it typedef/implementation
 
 // TODO: good destructor
-            explicit vector () :
+            explicit vector() :
                 _elements(NULL), _size(0), _capacity(0) {
                 return ;
             }
 
-            explicit vector (size_type n,
+            explicit vector(size_type n,
                              const value_type& val = value_type()) {
                 fill_vect(n, val, std::true_type());
             }
 
             template <class InputIterator>
-            vector (InputIterator first,
+            vector(InputIterator first,
                     InputIterator last) :
-            _elements(NULL), _size(0), _capacity(0){
+                    _elements(NULL), _size(0), _capacity(0){
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
                 fill_vect(first, last, Integral());
             }
 
-            vector (const vector &x) :
+            vector(const vector &x) :
                 _elements(NULL), _size(0), _capacity(0) {
                 *this = x;
                 return ;
@@ -68,7 +68,7 @@ namespace ft {
             { return (_elements[n]); }
 
 // member functions TODO: insert / resize better conditions
-            void swap (vector & x) {
+            void swap(vector & x) {
                 std::swap(_elements, x._elements);
                 std::swap(_size, x._size);
                 std::swap(_capacity, x._capacity);
