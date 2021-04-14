@@ -27,34 +27,36 @@ class random_access_iterator {
 //
 // Postfix overloading
 //
-        random_access_iterator& operator++(int)
-        { ++*this;
-          return *this; }
+        random_access_iterator operator++(int)
+        { random_access_iterator tmp = *this;
+          ++(*this);
+          return (tmp); }
 
-        random_access_iterator& operator--(int)
-        { --*this;
-          return *this; }
+        random_access_iterator operator--(int)
+        { random_access_iterator tmp = *this;
+          --(this);
+          return (tmp); }
 
 
-        T operator*()
+        T &operator*()
         { return *_ptr; }
 
-        const T operator*() const
+        const T &operator*() const
         { return *_ptr; }
 
 
-        T operator[](int i)
-        { return _ptr[i]; }
+        T &operator[](int i)
+        { return (*(operator+(i))); }
 
-        const T operator[](int i) const
-        { return _ptr[i]; }
+        const T &operator[](int i) const
+        { return (*(operator+(i))); }
 
 
-        T operator->(void)
-        { return *_ptr; }
+        T *operator->(void)
+        { return _ptr; }
 
-        const T operator->(void) const
-        { return *_ptr; }
+        const T *operator->(void) const
+        { return _ptr; }
 
 
         bool operator==(const random_access_iterator& iter) const
@@ -62,18 +64,29 @@ class random_access_iterator {
 
         bool operator!=(const random_access_iterator& iter) const
         { return this->_ptr != iter._ptr; }
+
+        bool operator<(const random_access_iterator& iter) const
+        { return this->_ptr <iter._ptr; }
+
+        bool operator>(const random_access_iterator& iter) const
+        { return this->_ptr > iter._ptr; }
+
+        bool operator<=(const random_access_iterator& iter) const
+        { return this->_ptr <= iter._ptr; }
+
+        bool operator>=(const random_access_iterator& iter) const
+        { return this->_ptr >= iter._ptr; }
+
 //
 // Arithmetic overload
 //
-        random_access_iterator &operator+(int rhs)
-                { random_access_iterator tmp = *this;
-                        return tmp += rhs; }
+        random_access_iterator operator+(int rhs)
+        { random_access_iterator tmp = *this;
+          return tmp += rhs; }
 
-        random_access_iterator &operator-(const random_access_iterator &rhs)
+        random_access_iterator operator-(const random_access_iterator &rhs)
         { return this->_ptr - rhs._ptr; }
 
-        random_access_iterator operator-(int rhs)
-        { return this->_ptr - rhs; }
 
         random_access_iterator &operator+=(int rhs)
         { this->_ptr += rhs;

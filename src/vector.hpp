@@ -353,7 +353,6 @@ std::cout << "qwe" << std::endl;
                      first++;
                      i++;
                  }
-                 // _elements[i] = *first;
                  _it.setPtr(_elements);
             }
     };
