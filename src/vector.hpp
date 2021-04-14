@@ -4,7 +4,10 @@
 #include <iostream>
 #include <type_traits>
 
+#include <math.h>
+
 #include "random_access_iterator.hpp"
+#include "reverse_random_access_iterator.hpp"
 
 namespace ft {
     template <class T> class vector {
@@ -13,6 +16,7 @@ namespace ft {
             typedef T value_type;
             typedef size_t size_type;
             typedef random_access_iterator<value_type> iterator;
+            typedef reverse_random_access_iterator<value_type> reverse_iterator;
 // TODO: reverse it typedef/implementation
 
 // TODO: good destructor
@@ -275,12 +279,12 @@ namespace ft {
 
             value_type const * & data() const
             {return (_elements); }
-// capacity
+
             size_type capacity (void) const
             { return (this->_capacity); }
 
             size_type max_size (void) const
-            { return (this->_capacity * 987); } // TODO
+            { return (pow(2, sizeof(void *) * 8) / sizeof(ft::vector<T>) - 1);}
 
             size_type size (void) const
             { return (this->_size); }
@@ -296,11 +300,11 @@ namespace ft {
             { return _elements + _size; }
 
 
-            // reverse_iterator rbegin()
-            // { return iterator(_elements); }
+            reverse_iterator rbegin()
+            { return reverse_iterator(end()); }
 
-            // reverse_iterator rend()
-            // { return iterator(_elements); }
+            reverse_iterator rend()
+            { return reverse_iterator(begin()); }
 
 // exceptions TODO true out of range is explicit. get back on that one
             class out_of_range : public std::exception {
@@ -356,6 +360,60 @@ std::cout << "qwe" << std::endl;
                  _it.setPtr(_elements);
             }
     };
+}
+
+template <class T>
+bool operator==(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+{
+    for (size_t i = 0; i < lhs.size(); i++) {
+        if (lhs[i] != rhs[i]) { return false; }
+    }
+    return true;
+}
+
+template <class T>
+  bool operator!=(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+{
+    for (size_t i = 0; i < lhs.size(); i++) {
+        if (lhs[i] == rhs[i]) { return false; }
+    }
+    return true;
+}
+
+template <class T>
+bool operator<(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+{
+    for (size_t i = 0; i < lhs.size(); i++) {
+        if (lhs[i] >= rhs[i]) { return false; }
+    }
+    return true;
+}
+
+template <class T>
+bool operator<=(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+{
+    for (size_t i = 0; i < lhs.size(); i++) {
+        if (lhs[i] > rhs[i]) { return false; }
+    }
+    return true;
+}
+
+template <class T>
+bool operator>(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+{
+    for (size_t i = 0; i < lhs.size(); i++) {
+        if (lhs[i] <= rhs[i]) { return false; }
+    }
+    return true;
+}
+
+template <class T>
+bool operator>= (const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+{
+    for (size_t i = 0; i < lhs.size(); i++) {
+        if (lhs[i] < rhs[i]) { return false; }
+    }
+    return true;
 }
 
 #endif // FT_VECTOR_H
