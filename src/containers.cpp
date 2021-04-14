@@ -220,11 +220,37 @@ int main(void) {
 
     for (size_t i = 0; i < vecool.size(); i++)
     std::cout << vecool[i] << std::endl;
+    std::cout << "-========= reverse iterator fuckery =========-" << std::endl;
+    int             arr1[5] = {1, 2, 3, 4, 5};
+    ft::vector<int> v1(arr1, arr1 + 5);
+    ft::vector<int>::reverse_iterator v1_it = v1.rbegin();
+    ft::vector<int>::reverse_iterator v1_ite = v1.rbegin();
+    ft::vector<int>::reverse_iterator tmpit1 = v1.rbegin();
 
+    v1_ite++;
+    v1_ite++;
+    for (; tmpit1 != v1.rend(); ++tmpit1) {
+       std::cout << *tmpit1 << std::endl;
+    }
+    std::cout <<  "===="<< *v1_it << std::endl;
+    std::cout << *v1_ite << std::endl;
+    std::cout << (v1_it > v1_ite) << std::endl;
+    std::cout << (v1_it < v1_ite) << std::endl;
 
-    //     (; rib != rie; rib++) {
-    //     std::cout << "qwe" << std::endl;
-    // }
+    std::vector<int> v2(arr1, arr1 + 5);
+    std::vector<int>::reverse_iterator v2_it = v2.rbegin();
+    std::vector<int>::reverse_iterator v2_ite = v2.rbegin();
+    std::vector<int>::reverse_iterator tmpit2 = v2.rbegin();
+
+    v2_ite++;
+    v2_ite++;
+    for (; tmpit2 != v2.rend(); ++tmpit2) {
+       std::cout << *tmpit2 << std::endl;
+    }
+    std::cout << "===="<<  *v2_it << std::endl;
+    std::cout << *v2_ite << std::endl;
+    std::cout << (v2_it > v2_ite) << std::endl;
+    std::cout << (v2_it < v2_ite) << std::endl;
 
     return (0);
 }

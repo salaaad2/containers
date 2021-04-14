@@ -62,14 +62,10 @@ namespace ft {
             }
 
             value_type const & operator[](size_type n) const
-            { if (n > _size)
-              { throw out_of_range(); }
-              return (_elements[n]); }
+            {return (_elements[n]); }
 
             value_type & operator[](size_type n)
-            { if (n > _size)
-              { throw out_of_range(); }
-              return (_elements[n]); }
+            { return (_elements[n]); }
 
 // member functions TODO: insert / resize better conditions
             void swap (vector & x) {
@@ -117,6 +113,7 @@ namespace ft {
                     _elements = tmpel;
                     _it.setPtr(_elements);
                 }
+                _size = n;
             }
 
             template <class InputIterator>
@@ -277,12 +274,12 @@ namespace ft {
 // accessors
             value_type const & at(size_type n) const
             { if (n > _size)
-              { throw out_of_range(); }
+              { throw std::out_of_range("out of range"); }
               return (_elements[n]); }
 
             value_type & at(size_type n)
             { if (n > _size)
-              { throw out_of_range(); }
+              { throw std::out_of_range("out of range"); }
               return (_elements[n]); }
 
             value_type & front()
@@ -296,9 +293,6 @@ namespace ft {
 
             value_type const & back() const
             {return (_elements[_size]); }
-
-            value_type const * & data() const
-            {return (_elements); }
 
             size_type capacity (void) const
             { return (this->_capacity); }
@@ -326,13 +320,6 @@ namespace ft {
             reverse_iterator rend()
             { return reverse_iterator(begin() - 1); }
 
-// exceptions TODO true out of range is explicit. get back on that one
-            class out_of_range : public std::exception {
-                public :
-                    virtual const char * what() const throw() {
-                        return ("ft::vector: out of range");
-                    }
-            };
 
         private :
 // attributes

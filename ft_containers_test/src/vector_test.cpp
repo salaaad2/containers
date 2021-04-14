@@ -313,73 +313,73 @@ static void testEnd()
 
 static void testRbegin()
 {
-    testName = "vector.rbegin";
+//     testName = "vector.rbegin";
 
-    int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
-    ft::vector<int>::reverse_iterator v1_it = v1.rbegin();
-    std::cout << "Before" << '\n';
-    ASSERT(v1_it[0] == 5);
-    std::cout << "v1_it[0] : " << v1_it[0] << std::endl;
-    ASSERT(v1_it[1] == 4);
-    std::cout << "v1_it[1] : " << v1_it[1] << std::endl;
-    ASSERT(v1_it[2] == 3);
-    std::cout << "v1_it[2] : " << v1_it[2] << std::endl;
-    ASSERT(v1_it[3] == 2);
-    std::cout << "v1_it[3] : " << v1_it[3] << std::endl;
-    ASSERT(v1_it[4] == 1);
-    std::cout << "v1_it[4] : " << v1_it[4] << std::endl;
+//     int             arr1[5] = {1, 2, 3, 4, 5};
+//     ft::vector<int> v1(arr1, arr1 + 5);
+//     ft::vector<int>::reverse_iterator v1_it = v1.rbegin();
+//     std::cout << "Before" << '\n';
+//     ASSERT(v1_it[0] == 5);
+//     std::cout << "v1_it[0] : " << v1_it[0] << std::endl;
+//     ASSERT(v1_it[1] == 4);
+//     std::cout << "v1_it[1] : " << v1_it[1] << std::endl;
+//     ASSERT(v1_it[2] == 3);
+//     std::cout << "v1_it[2] : " << v1_it[2] << std::endl;
+//     ASSERT(v1_it[3] == 2);
+//     std::cout << "v1_it[3] : " << v1_it[3] << std::endl;
+//     ASSERT(v1_it[4] == 1);
+//     std::cout << "v1_it[4] : " << v1_it[4] << std::endl;
 
-    ASSERT(v1_it == v1.rbegin());
-    ASSERT(v1_it != v1.rend());
-    ASSERT(v1_it != v1.begin());
-    ASSERT(v1_it != v1.end());
+//     ASSERT(v1_it == v1.rbegin());
+//     ASSERT(v1_it != v1.rend());
+//     ASSERT(v1_it != v1.begin());
+//     ASSERT(v1_it != v1.end());
 
-    ASSERT(v1_it >= v1.rbegin());
-    ASSERT(v1_it >= v1.rbegin());
-    ASSERT(v1_it <= v1.rbegin());
-    ASSERT(v1_it <= v1.rbegin());
-    ASSERT(v1_it > v1.begin());
-    ASSERT(v1_it < v1.end());
-    ASSERT(v1_it < v1.rend());
+//     ASSERT(v1_it >= v1.rbegin());
+//     ASSERT(v1_it >= v1.rbegin());
+//     ASSERT(v1_it <= v1.rbegin());
+//     ASSERT(v1_it <= v1.rbegin());
+//     ASSERT(v1_it > v1.begin());
+//     ASSERT(v1_it < v1.end());
+//     ASSERT(v1_it < v1.rend());
 
 
-    for (size_t i = 0; i < v1.size(); i++)
-        ASSERT(*(v1_it + i) == arr1[4 - i]);
+//     for (size_t i = 0; i < v1.size(); i++)
+//         ASSERT(*(v1_it + i) == arr1[4 - i]);
 
-    for (size_t i = 0; i < v1.size(); i++)
-        ASSERT(*v1_it++ == arr1[4 - i]);
-    ASSERT(v1_it == v1.rend());
+//     for (size_t i = 0; i < v1.size(); i++)
+//         ASSERT(*v1_it++ == arr1[4 - i]);
+//     ASSERT(v1_it == v1.rend());
 }
 
 static void testRend()
 {
-    testName = "vector.rend";
+    // testName = "vector.rend";
 
-    int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    // int             arr1[5] = {1, 2, 3, 4, 5};
+    // ft::vector<int> v1(arr1, arr1 + 5);
 
-    ft::vector<int>::iterator v1_it = v1.rend();
-    ASSERT(v1_it[-1] == 1);
-    ASSERT(v1_it[-2] == 2);
-    ASSERT(v1_it[-3] == 3);
-    ASSERT(v1_it[-4] == 4);
-    ASSERT(v1_it[-5] == 5);
+    // ft::vector<int>::iterator v1_it = v1.rend();
+    // ASSERT(v1_it[-1] == 1);
+    // ASSERT(v1_it[-2] == 2);
+    // ASSERT(v1_it[-3] == 3);
+    // ASSERT(v1_it[-4] == 4);
+    // ASSERT(v1_it[-5] == 5);
 
-    ASSERT(v1_it == v1.rend());
-    ASSERT(v1_it != v1.rbegin());
-    ASSERT(v1_it != v1.begin());
-    ASSERT(v1_it != v1.end());
+    // ASSERT(v1_it == v1.rend());
+    // ASSERT(v1_it != v1.rbegin());
+    // ASSERT(v1_it != v1.begin());
+    // ASSERT(v1_it != v1.end());
 
-    ASSERT(v1_it >= v1.rend());
-    ASSERT(v1_it >= v1.rend());
-    ASSERT(v1_it <= v1.rend());
-    ASSERT(v1_it <= v1.rend());
-    ASSERT(v1_it > v1.rbegin());
+    // ASSERT(v1_it >= v1.rend());
+    // ASSERT(v1_it >= v1.rend());
+    // ASSERT(v1_it <= v1.rend());
+    // ASSERT(v1_it <= v1.rend());
+    // ASSERT(v1_it > v1.rbegin());
 
-    v1_it--;
-    for (size_t i = 0; i < v1.size(); i++)
-        ASSERT(*(v1_it - i) == arr1[i]);
+    // v1_it--;
+    // for (size_t i = 0; i < v1.size(); i++)
+    //     ASSERT(*(v1_it - i) == arr1[i]);
 }
 
 static void testResize()

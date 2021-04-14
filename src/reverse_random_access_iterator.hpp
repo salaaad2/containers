@@ -65,22 +65,22 @@ class reverse_random_access_iterator : public random_access_iterator<T> {
 
 
         bool operator==(const reverse_random_access_iterator& iter) const
-        { return _ptr == iter._ptr; }
+        { return (_ptr == iter._ptr); }
 
         bool operator!=(const reverse_random_access_iterator& iter) const
-        { return _ptr != iter._ptr; }
+        { return (_ptr != iter._ptr); }
 
         bool operator<(const reverse_random_access_iterator& iter) const
-        { return _ptr <iter._ptr; }
+        { return (_ptr < iter._ptr); }
 
         bool operator>(const reverse_random_access_iterator& iter) const
-        { return _ptr > iter._ptr; }
+        { return (_ptr > iter._ptr); }
 
         bool operator<=(const reverse_random_access_iterator& iter) const
-        { return _ptr <= iter._ptr; }
+        { return (_ptr <= iter._ptr); }
 
         bool operator>=(const reverse_random_access_iterator& iter) const
-        { return _ptr >= iter._ptr; }
+        { return (_ptr >= iter._ptr); }
 
 //
 // Arithmetic overload

@@ -63,22 +63,22 @@ class random_access_iterator {
 
 
         bool operator==(const random_access_iterator& iter) const
-        { return _ptr == iter._ptr; }
+        { return (_ptr == iter._ptr); }
 
         bool operator!=(const random_access_iterator& iter) const
-        { return _ptr != iter._ptr; }
+        { return (_ptr != iter._ptr); }
 
         bool operator<(const random_access_iterator& iter) const
-        { return _ptr <iter._ptr; }
+        { return (_ptr < iter._ptr); }
 
         bool operator>(const random_access_iterator& iter) const
-        { return _ptr > iter._ptr; }
+        { return (_ptr > iter._ptr); }
 
         bool operator<=(const random_access_iterator& iter) const
-        { return _ptr <= iter._ptr; }
+        { return (_ptr <= iter._ptr); }
 
         bool operator>=(const random_access_iterator& iter) const
-        { return _ptr >= iter._ptr; }
+        { return (_ptr >= iter._ptr); }
 
 //
 // Arithmetic overload
