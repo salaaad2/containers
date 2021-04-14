@@ -28,7 +28,8 @@ namespace ft {
 
             template <class InputIterator>
             vector (InputIterator first,
-                    InputIterator last) {
+                    InputIterator last) :
+            _elements(NULL), _size(0), _capacity(0){
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
                 fill_vect(first, last, Integral());
@@ -337,6 +338,7 @@ namespace ft {
                  iterator tmp = first;
 //TODO: std::bad_alloc
                  while (tmp != last) {
+std::cout << "qwe" << std::endl;
                      _size++;
                      tmp++;
                  }
@@ -351,7 +353,7 @@ namespace ft {
                      first++;
                      i++;
                  }
-                 _elements[i] = *first;
+                 // _elements[i] = *first;
                  _it.setPtr(_elements);
             }
     };

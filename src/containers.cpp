@@ -9,7 +9,7 @@ int main(void) {
 
     ft::vector<int> unovect;
     ft::vector<int> dosvect(qwe, 200);
-    std::vector<int> truevect (8, 2);
+   std::vector<int> truevect (8, 2);
     ft::vector<int> trevect(8, 2);
     ft::vector<int> quavect(trevect);
 
@@ -22,7 +22,7 @@ int main(void) {
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << "[" << cinvect[i] << "]"<< std::endl;
     }
-    std::cout << "print iterators"<< *itb << *ite << std::endl;
+    std::cout << "print iterators"<< *itb << *(ite - 1) << std::endl;
     std::cout << unovect.size() << " " << unovect.capacity() << std::endl;
     std::cout << dosvect.size() << " " << dosvect.capacity() << std::endl;
     std::cout << trevect.size() << " " << trevect.capacity() << std::endl;
