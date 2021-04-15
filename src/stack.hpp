@@ -12,14 +12,12 @@ namespace ft {
             typedef T value_type;
             typedef Container container_type;
             typedef size_t size_type;
-
 //
 // init
 //
             explicit stack (const container_type& ctnr = container_type()) {
                 _cont = ctnr;
             }
-
 //
 // elements access
 //
@@ -29,7 +27,7 @@ namespace ft {
             }
 
             void pop () {
-                _cont.pop_back(val);
+                _cont.pop_back();
             }
 
             value_type & top() {
@@ -52,8 +50,46 @@ namespace ft {
 
         private :
             vector<value_type> _cont;
-
     };
-};
+}
+
+//
+// operator overloading
+//
+template <class T, class Container>
+bool operator== (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+{
+    return (lhs._cont == rhs._cont);
+}
+
+template <class T, class Container>
+bool operator!= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+{
+    return (lhs._cont != rhs._cont);
+}
+
+template <class T, class Container>
+bool operator<  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+{
+    return (lhs._cont < rhs._cont);
+}
+
+template <class T, class Container>
+bool operator<= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+{
+    return (lhs._cont <= rhs._cont);
+}
+
+template <class T, class Container>
+bool operator>  (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+{
+    return (lhs._cont > rhs._cont);
+}
+
+template <class T, class Container>
+bool operator>= (const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs)
+{
+    return (lhs._cont >= rhs._cont);
+}
 
 #endif // STACK_H

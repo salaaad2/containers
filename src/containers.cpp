@@ -266,8 +266,24 @@ int main(void) {
 
     itdeux = vdeux.insert(vdeux.end(), 19);
     std::cout << *itdeux << std::endl;
-    // for (size_t i = 0; i < vdeux.size(); i++)
-    // std::cout << vdeux[i] << std::endl;
+    for (size_t i = 0; i < vdeux.size(); i++)
+    std::cout << vdeux[i] << std::endl;
 
+    std::cout << "#===================================#" << std::endl;
+    std::cout << "#============== stack ==============#" << std::endl;
+    std::cout << "#===================================#" << std::endl;
+    ft::stack<int> coolstack;
+
+    coolstack.push(1);
+    coolstack.push(2);
+    coolstack.push(3);
+    coolstack.push(5);
+    coolstack.push(5);
+    coolstack.push(5);
+    for (size_t i = 0; i < coolstack.size(); i++)
+    {
+        std::cout << coolstack.top() << std::endl;
+        coolstack.pop();
+    }
     return (0);
 }

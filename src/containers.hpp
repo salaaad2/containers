@@ -4,5 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "vector.hpp"
+#include <stack>
+#include "stack.hpp"
 
 #endif // CONTAINERS_H
