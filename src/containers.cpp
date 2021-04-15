@@ -272,15 +272,28 @@ int main(void) {
     std::cout << "#===================================#" << std::endl;
     std::cout << "#============== stack ==============#" << std::endl;
     std::cout << "#===================================#" << std::endl;
+    ft::vector<int> stvect;
     ft::stack<int> coolstack;
 
+
+    stvect.push_back(1);
+    stvect.push_back(2);
+    stvect.push_back(3);
+    stvect.push_back(5);
+    stvect.push_back(5);
+    stvect.push_back(5);
+    while (!stvect.empty())
+    {
+        std::cout << stvect.back() << std::endl;
+        stvect.pop_back();
+    }
     coolstack.push(1);
     coolstack.push(2);
     coolstack.push(3);
     coolstack.push(5);
     coolstack.push(5);
     coolstack.push(5);
-    for (size_t i = 0; i < coolstack.size(); i++)
+    while (!coolstack.empty())
     {
         std::cout << coolstack.top() << std::endl;
         coolstack.pop();
