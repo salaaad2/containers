@@ -6,5 +6,7 @@
 #include "vector.hpp"
 #include <stack>
 #include "stack.hpp"
+#include <queue>
+#include "queue.hpp"
 
 #endif // CONTAINERS_H

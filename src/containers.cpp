@@ -1,8 +1,7 @@
 #include "containers.hpp"
 
-#include <vector>
-
-int main(void) {
+int main(void)
+{
     size_t qwe = 8;
 
     ft::vector<int> svect;
@@ -272,21 +271,8 @@ int main(void) {
     std::cout << "#===================================#" << std::endl;
     std::cout << "#============== stack ==============#" << std::endl;
     std::cout << "#===================================#" << std::endl;
-    ft::vector<int> stvect;
     ft::stack<int> coolstack;
 
-
-    stvect.push_back(1);
-    stvect.push_back(2);
-    stvect.push_back(3);
-    stvect.push_back(5);
-    stvect.push_back(5);
-    stvect.push_back(5);
-    while (!stvect.empty())
-    {
-        std::cout << stvect.back() << std::endl;
-        stvect.pop_back();
-    }
     coolstack.push(1);
     coolstack.push(2);
     coolstack.push(3);
@@ -298,5 +284,21 @@ int main(void) {
         std::cout << coolstack.top() << std::endl;
         coolstack.pop();
     }
+    std::cout << "#===================================#" << std::endl;
+    std::cout << "#============== queue ==============#" << std::endl;
+    std::cout << "#===================================#" << std::endl;
+    ft::queue<int> coolqueue;
+
+
+    // while (!coolqueue.empty())
+    // {
+    //     std::cout << coolqueue.front() << std::endl;
+    //     coolqueue.pop();
+    // }
+    coolqueue.push(12);
+    coolqueue.push(75);
+    coolqueue.back() -= coolqueue.front();
+
+    std::cout << "myqueue.back() is now " << coolqueue.back() << '\n';
     return (0);
 }
