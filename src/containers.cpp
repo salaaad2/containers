@@ -259,10 +259,15 @@ int main(void) {
     std::cout << *itdeux << std::endl;
 
     itdeux = vdeux.insert(vdeux.end(), 2);
+    std::cout << *itdeux << std::endl;
 
-    itdeux = vdeux.insert(vdeux.begin(), 2);
-    for (size_t i = 0; i < vdeux.size(); i++)
-    std::cout << vdeux[i] << std::endl;
+    itdeux = vdeux.insert(vdeux.end(), 2);
+    std::cout << *itdeux << std::endl;
+
+    itdeux = vdeux.insert(vdeux.end(), 19);
+    std::cout << *itdeux << std::endl;
+    // for (size_t i = 0; i < vdeux.size(); i++)
+    // std::cout << vdeux[i] << std::endl;
 
     return (0);
 }

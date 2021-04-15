@@ -174,8 +174,11 @@ namespace ft {
                     delete [] _elements;
                     _elements = tmpel;
                 }
+                if (spos == _size)
+                {_it.setPtr(_elements + _size);}
+                else
+                {_it.setPtr(_elements);}
                 _size += n;
-                _it.setPtr(_elements);
             }
 
             iterator insert(iterator position,

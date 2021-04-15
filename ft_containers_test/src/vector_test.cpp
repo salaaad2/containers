@@ -670,8 +670,8 @@ static void testInsert()
     it = v1.insert(v1.end(), 2);
     ASSERT(v1.size() == 2);
     ASSERT(v1.capacity() >= 2);
-    // ASSERT(v1[0] == 1);
-    // ASSERT(v1[1] == 2);
+    ASSERT(v1[0] == 1);
+    ASSERT(v1[1] == 2);
     ASSERT(*it == 2);
 
     it = v1.insert(v1.begin(), 0);
