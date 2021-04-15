@@ -180,9 +180,8 @@ namespace ft {
 
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
-                std::cout << "qwe" << std::endl;
                 _insert_dispatch(position, 1, val, std::true_type());
-                return (position);
+                return (_it);
             }
 
             void insert(iterator position,
@@ -381,6 +380,9 @@ namespace ft {
 template <class T>
 bool operator==(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 {
+    if (lhs.size() != rhs.size())
+    {return (false);}
+
     for (size_t i = 0; i < lhs.size(); i++) {
         if (lhs[i] != rhs[i]) { return false; }
     }
@@ -390,17 +392,14 @@ bool operator==(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 template <class T>
   bool operator!=(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 {
-    for (size_t i = 0; i < lhs.size(); i++) {
-        if (lhs[i] == rhs[i]) { return false; }
-    }
-    return true;
+    return (!(lhs == rhs));
 }
 
 template <class T>
-bool operator<(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+bool operator<(const ft::vector<T> & lhs, const ft::vector<T> & rhs)
 {
     for (size_t i = 0; i < lhs.size(); i++) {
-        if (lhs[i] >= rhs[i]) { return false; }
+        if (lhs[i] > rhs[i]) { return false; }
     }
     return true;
 }
@@ -418,7 +417,7 @@ template <class T>
 bool operator>(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 {
     for (size_t i = 0; i < lhs.size(); i++) {
-        if (lhs[i] <= rhs[i]) { return false; }
+        if (lhs[i] < rhs[i]) { return false; }
     }
     return true;
 }
