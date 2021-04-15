@@ -8,5 +8,7 @@
 #include "stack.hpp"
 #include <queue>
 #include "queue.hpp"
+#include <list>
+#include "list.hpp"
 
 #endif // CONTAINERS_H

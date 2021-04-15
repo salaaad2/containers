@@ -300,5 +300,10 @@ int main(void)
     coolqueue.back() -= coolqueue.front();
 
     std::cout << "myqueue.back() is now " << coolqueue.back() << '\n';
+    std::cout << "#===================================#" << std::endl;
+    std::cout << "#============== LIST ===============#" << std::endl;
+    std::cout << "#===================================#" << std::endl;
+    ft::list<int> mylist(2, 12);
+
     return (0);
 }

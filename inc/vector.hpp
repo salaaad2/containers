@@ -12,13 +12,15 @@
 namespace ft {
     template <class T> class vector {
         public :
+//
 // typedefs
+//
             typedef T value_type;
             typedef size_t size_type;
             typedef random_access_iterator<value_type> iterator;
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
-// TODO: reverse it typedef/implementation
-
+//
+// construct/desytuct
 // TODO: good destructor
             explicit vector() :
                 _elements(NULL), _size(0), _capacity(0) {
@@ -52,7 +54,9 @@ namespace ft {
                 }
             };
 
+//
 // operators
+//
             vector & operator=(vector const & x) {
                 _capacity = x.capacity();
                 _size = x.size();
@@ -67,7 +71,9 @@ namespace ft {
             value_type & operator[](size_type n)
             { return (_elements[n]); }
 
+//
 // member functions TODO: insert / resize better conditions
+//
             void swap(vector & x) {
                 std::swap(_elements, x._elements);
                 std::swap(_size, x._size);
@@ -284,7 +290,9 @@ namespace ft {
                 _erase(end(), 1);
             }
 
+//
 // accessors
+//
             value_type const & at(size_type n) const
             { if (n > _size)
               { throw std::out_of_range("out of range"); }
@@ -319,7 +327,9 @@ namespace ft {
             bool empty (void) const
             { return (this->_size == 0); }
 
+//
 // iterators
+//
             iterator begin()
             { return _elements; }
 
