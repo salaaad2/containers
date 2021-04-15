@@ -22,20 +22,21 @@ namespace ft {
             }
 
             explicit list (size_type n, const value_type& val = value_type()) {
-               t_node *list = new t_node[n];
-               t_node *tmp = list;
-               size_type i = 0;
+                t_node * tmp;
+                _first = new t_node;
 
-               _first = &list[0];
-               _last = &list[n];
-               while (tmp != _last) {
-                   list[i].data = val;
-                   list[i].next = &list[i + 1];
-                   list[i].prev = &list[i - 1];
-                   tmp++;
-                  std::cout << "data "<< list[i].data<< "i " << i << std::endl;
-                   i++;
-               }
+                _first->prev = NULL;
+                _first->next = NULL;
+                _first->data = val;
+                tmp = _first;
+                while (--n) {
+                    tmp->next = new t_node;
+                    tmp->next->prev = tmp;
+                    tmp->next->next = NULL;
+                    tmp->next->data = val;
+                    tmp = tmp->next;
+                }
+                _last = tmp;
             }
 
             // template <class InputIterator>

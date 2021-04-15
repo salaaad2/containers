@@ -303,7 +303,7 @@ int main(void)
     std::cout << "#===================================#" << std::endl;
     std::cout << "#============== LIST ===============#" << std::endl;
     std::cout << "#===================================#" << std::endl;
-    ft::list<int> mylist(2, 12);
+    ft::list<int> mylist(5, 12);
 
     return (0);
 }
