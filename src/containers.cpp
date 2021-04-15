@@ -253,8 +253,14 @@ int main(void) {
     std::cout << (v2_it < v2_ite) << std::endl;
     std::cout << "-========= push back empty =========-" << std::endl;
     ft::vector<int> vdeux;
+    ft::vector<int>::iterator itdeux;
 
-    vdeux.push_back(13);
+    itdeux = vdeux.insert(vdeux.end(), 42);
+    std::cout << *itdeux << std::endl;
+
+    itdeux = vdeux.insert(vdeux.end(), 2);
+
+    itdeux = vdeux.insert(vdeux.begin(), 2);
     for (size_t i = 0; i < vdeux.size(); i++)
     std::cout << vdeux[i] << std::endl;
 

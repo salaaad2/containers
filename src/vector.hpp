@@ -180,8 +180,8 @@ namespace ft {
 
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
-                _insert_dispatch(position, 1, val, std::true_type());
                 std::cout << "qwe" << std::endl;
+                _insert_dispatch(position, 1, val, std::true_type());
                 return (position);
             }
 
