@@ -33,8 +33,6 @@ $(NAME): $(OBJ)
 $(SRC_DIR)/vector_test.o: $(SRC_DIR)/vector_test.cpp $(INC) $(FT_CONTAINERS_DIR)/src/vector.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
 %.o: %.cpp $(INC)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 

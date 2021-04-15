@@ -251,6 +251,12 @@ int main(void) {
     std::cout << *v2_ite << std::endl;
     std::cout << (v2_it > v2_ite) << std::endl;
     std::cout << (v2_it < v2_ite) << std::endl;
+    std::cout << "-========= push back empty =========-" << std::endl;
+    ft::vector<int> vdeux;
+
+    vdeux.push_back(13);
+    for (size_t i = 0; i < vdeux.size(); i++)
+    std::cout << vdeux[i] << std::endl;
 
     return (0);
 }

@@ -26,7 +26,7 @@ namespace ft {
             }
 
             explicit vector(size_type n,
-                             const value_type& val = value_type()) {
+                             const value_type& val = value_type()) : _elements(NULL), _size(0), _capacity(0){
                 fill_vect(n, val, std::true_type());
             }
 
@@ -113,6 +113,7 @@ namespace ft {
                 if (n < _size) {
                     for (tmp = _size; tmp > n; tmp--) {
                         _elements[tmp] = val;
+                        _size--;
                     }
                 }
                 else if (n > _capacity || n > _size) {
@@ -125,6 +126,7 @@ namespace ft {
                     }
                     for (; tmp < n; tmp++) {
                         tmpel[tmp] = val;
+                        _size++;
                     }
                     _elements = tmpel;
                     _it.setPtr(_elements);
@@ -145,7 +147,12 @@ namespace ft {
                     spos++;
                 }
                 if ((_size + n) > _capacity) {
-                    resize(_capacity * 2);
+                    if (_capacity == 0) {
+                        _capacity = 8;
+                    }
+                    while (_capacity < (_size + n)) {
+                        _capacity *= 2;
+                    }
                     tmpel = new value_type[_capacity];
                 }
                 else
@@ -174,6 +181,7 @@ namespace ft {
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
                 _insert_dispatch(position, 1, val, std::true_type());
+                std::cout << "qwe" << std::endl;
                 return (position);
             }
 

@@ -392,6 +392,8 @@ static void testResize()
     v1.resize(7);
     ASSERT(v1.size() == 7);
     ASSERT(v1.capacity() >= 7);
+
+
     for (size_t i = 0; i < 5; i++)
         ASSERT(v1[i] == arr1[i]);
     for (size_t i = 5; i < v1.size(); i++)
@@ -578,6 +580,8 @@ static void testPushBack()
     v1.push_back(1);
     ASSERT(v1.size() == 1);
     ASSERT(v1.capacity() >= 1);
+std::cout << v1.size() << std::endl;
+std::cout << v1.capacity() << std::endl;
     ASSERT(v1[0] == 1);
 
     v1.push_back(2);
