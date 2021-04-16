@@ -10,10 +10,14 @@ namespace ft {
     template <class T> class list {
         public :
             typedef T value_type;
+            typedef value_type& reference;
+            typedef const value_type& const_reference;
             typedef size_t size_type;
             typedef random_access_iterator<value_type> iterator;
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
-
+//
+// constructors
+//
             explicit list () {
                 t_node * list;
 
@@ -29,6 +33,7 @@ namespace ft {
                 _first->next = NULL;
                 _first->data = val;
                 tmp = _first;
+                _size = n;
                 while (--n) {
                     tmp->next = new t_node;
                     tmp->next->prev = tmp;
@@ -37,6 +42,7 @@ namespace ft {
                     tmp = tmp->next;
                 }
                 _last = tmp;
+                _last->next = tmp->prev;
             }
 
             // template <class InputIterator>
@@ -47,6 +53,50 @@ namespace ft {
             // list (const list& x) {
             //     *this = x;
             // }
+//
+// member functions
+//
+
+            void push_front(const value_type &val) {
+                t_node * tmp;
+                tmp = new t_node;
+
+                _size += 1;
+                tmp->data = val;
+                tmp->next = _first;
+                tmp->prev = _last;
+                _last->next = tmp;
+                _first = tmp;
+            }
+//
+// capacity
+//
+            size_type size() {
+                return (_size);
+            }
+
+            size_type empty() {
+                return (_size == 0);
+            }
+//
+// access
+//
+            reference front() {
+                return (_first->data);
+            }
+
+            const_reference front() const {
+                return (_first->data);
+            }
+
+
+            reference back() {
+                return (_last->data);
+            }
+
+            const_reference back() const {
+                return (_last->data);
+            }
 
         private :
             typedef struct s_node {
@@ -56,6 +106,7 @@ namespace ft {
             } t_node;
             t_node * _first;
             t_node * _last;
+            size_type _size;
     };
 }
 
