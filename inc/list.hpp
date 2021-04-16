@@ -42,13 +42,12 @@ namespace ft {
                     tmp = tmp->next;
                 }
                 _last = tmp;
-                _last->next = tmp->prev;
             }
 
             // template <class InputIterator>
             // list (InputIterator first, InputIterator last) {
 
-            // }
+            // } TODO: these
 
             // list (const list& x) {
             //     *this = x;
@@ -64,9 +63,19 @@ namespace ft {
                 _size += 1;
                 tmp->data = val;
                 tmp->next = _first;
-                tmp->prev = _last;
-                _last->next = tmp;
+                tmp->prev = NULL;
                 _first = tmp;
+            }
+
+            void push_back(const value_type &val) {
+                t_node *tmp;
+                tmp = new t_node;
+
+                _size += 1;
+                tmp->data = val;
+                tmp->next = NULL;
+                tmp->prev = _last;
+                _last = tmp;
             }
 //
 // capacity
@@ -78,6 +87,17 @@ namespace ft {
             size_type empty() {
                 return (_size == 0);
             }
+//
+// begin
+// TODO
+
+            // iterator begin() const {
+            //     return (_first);
+            // }
+
+            // iterator end() const {
+            //     return (_last);
+            // }
 //
 // access
 //

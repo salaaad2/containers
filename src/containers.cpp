@@ -305,5 +305,15 @@ int main(void)
     std::cout << "#===================================#" << std::endl;
     ft::list<int> mylist(5, 12);
 
+    std::cout << mylist.front() << std::endl;
+    mylist.front() = 1;
+    std::cout << mylist.front() << std::endl;
+    mylist.push_front(98);
+    mylist.push_front(98);
+    std::cout << mylist.front() << std::endl;
+
+    mylist.push_back(19);
+    std::cout << mylist.front() << std::endl;
+    std::cout << mylist.back() << std::endl;
     return (0);
 }
