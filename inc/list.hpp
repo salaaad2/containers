@@ -18,6 +18,7 @@ namespace ft {
 //
 // constructors
 // TODO: 2 more constructors
+// TODO: delete print
             explicit list () {
                 t_node * list;
 
@@ -44,6 +45,16 @@ namespace ft {
                 _last = tmp;
             }
 
+            void print() {
+                t_node * tmp;
+
+                tmp = _first;
+                while (tmp != NULL) {
+                   std::cout << tmp->data << std::endl;
+                   tmp = tmp->next;
+                }
+            }
+
             // template <class InputIterator>
             // list (InputIterator first, InputIterator last) {
 
@@ -58,8 +69,17 @@ namespace ft {
 
             void assign(size_type n, const value_type& val) {
                 t_node * tmp;
-                _first = new t_node;
 
+                if (_first != NULL)
+                {
+                    tmp = _first;
+                    while (tmp->next != NULL)
+                    {
+                        delete tmp;
+                        tmp = tmp->next;
+                    }
+                }
+                _first = new t_node;
                 _first->prev = NULL;
                 _first->next = NULL;
                 _first->data = val;
@@ -79,37 +99,41 @@ namespace ft {
                 t_node * tmp;
                 tmp = new t_node;
 
-                _size += 1;
                 tmp->data = val;
                 tmp->next = _first;
                 tmp->prev = NULL;
+
+                _first->prev = tmp;
                 _first = tmp;
+                _size += 1;
             }
 
             void push_back(const value_type &val) {
                 t_node *tmp;
                 tmp = new t_node;
 
-                _size += 1;
                 tmp->data = val;
                 tmp->next = NULL;
                 tmp->prev = _last;
+
+                _last->next = tmp;
                 _last = tmp;
+                _size += 1;
             }
 
             void pop_front() {
                 if (_size > 0) {
                     _size -= 1;
-                    _first = _first->next;
                     delete _first;
+                    _first = _first->next;
                 }
             }
 
             void pop_back() {
                 if (_size > 0){
                     _size -= 1;
-                    _last = _last->next;
                     delete _last;
+                    _last = _last->next;
                 }
             }
 //
