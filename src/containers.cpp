@@ -290,11 +290,6 @@ int main(void)
     ft::queue<int> coolqueue;
 
 
-    // while (!coolqueue.empty())
-    // {
-    //     std::cout << coolqueue.front() << std::endl;
-    //     coolqueue.pop();
-    // }
     coolqueue.push(12);
     coolqueue.push(75);
     coolqueue.back() -= coolqueue.front();
@@ -312,8 +307,7 @@ int main(void)
     mylist.push_front(98);
     std::cout << mylist.front() << std::endl;
 
-    mylist.push_back(19);
-    std::cout << mylist.front() << std::endl;
+    mylist.push_back(98);
     std::cout << mylist.back() << std::endl;
     return (0);
 }

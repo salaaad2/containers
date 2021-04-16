@@ -77,6 +77,18 @@ namespace ft {
                 tmp->prev = _last;
                 _last = tmp;
             }
+
+            void pop_front() {
+                _size -= 1;
+                _first = _first->next;
+                delete _first;
+            }
+
+            void pop_back() {
+                _size -= 1;
+                _last = _last->prev;
+                delete _last;
+            }
 //
 // capacity
 //
