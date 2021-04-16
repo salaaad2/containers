@@ -17,7 +17,7 @@ namespace ft {
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
 //
 // constructors
-//
+// TODO: 2 more constructors
             explicit list () {
                 t_node * list;
 
@@ -47,14 +47,33 @@ namespace ft {
             // template <class InputIterator>
             // list (InputIterator first, InputIterator last) {
 
-            // } TODO: these
+            // }
 
             // list (const list& x) {
             //     *this = x;
             // }
 //
 // member functions
-//
+// TODO assign delete ???
+
+            void assign(size_type n, const value_type& val) {
+                t_node * tmp;
+                _first = new t_node;
+
+                _first->prev = NULL;
+                _first->next = NULL;
+                _first->data = val;
+                tmp = _first;
+                _size = n;
+                while (--n) {
+                    tmp->next = new t_node;
+                    tmp->next->prev = tmp;
+                    tmp->next->next = NULL;
+                    tmp->next->data = val;
+                    tmp = tmp->next;
+                }
+                _last = tmp;
+            }
 
             void push_front(const value_type &val) {
                 t_node * tmp;
@@ -79,15 +98,19 @@ namespace ft {
             }
 
             void pop_front() {
-                _size -= 1;
-                _first = _first->next;
-                delete _first;
+                if (_size > 0) {
+                    _size -= 1;
+                    _first = _first->next;
+                    delete _first;
+                }
             }
 
             void pop_back() {
-                _size -= 1;
-                _last = _last->prev;
-                delete _last;
+                if (_size > 0){
+                    _size -= 1;
+                    _last = _last->next;
+                    delete _last;
+                }
             }
 //
 // capacity
@@ -101,7 +124,7 @@ namespace ft {
             }
 //
 // begin
-// TODO
+// TODO: iterators
 
             // iterator begin() const {
             //     return (_first);
