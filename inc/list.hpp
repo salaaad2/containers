@@ -100,17 +100,17 @@ namespace ft {
             }
 
 
-            iterator insert (iterator position, const value_type& val)
+            iterator _insert (iterator position, size_type n, const value_type& val)
             {
                 t_node * tmp = _first;
                 t_node * nu;
                 iterator it = begin();
 
-                if (position == begin()) {
+                if (position == begin() && n == 1) {
                     push_front(val);
                     return (it);
                 }
-                else if (position == end()) {
+                else if (position == end() && n == 1) {
                     push_back(val);
                     return (it);
                 }
@@ -118,18 +118,27 @@ namespace ft {
                     tmp = tmp->next;
                     it++;
                 }
-                nu = new t_node;
-                nu->data = val;
-                nu->next = tmp;
-                nu->prev = tmp->prev;
-
-                tmp->prev->next = nu;
-                tmp->prev = nu;
-                _size++;
+                while (n > 0)
+                {
+                    nu = new t_node;
+                    nu->data = val;
+                    nu->next = tmp;
+                    nu->prev = tmp->prev;
+                    tmp->prev->next = nu;
+                    tmp->prev = nu;
+                    n--;
+                }
+                _size += n;
                 return it;
             }
 
-//     void insert (iterator position, size_type n, const value_type& val);
+            iterator insert (iterator position, const value_type& val) {
+                return(_insert(position, 1, val));
+            }
+
+            void insert (iterator position, size_type n, const value_type& val) {
+                _insert(position, n, val);
+            }
 
 // template <class InputIterator>
 //     void insert (iterator position, InputIterator first, InputIterator last);

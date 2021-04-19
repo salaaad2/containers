@@ -304,7 +304,9 @@ int main(void)
     mylist.push_front(98);
     mylist.push_back(42);
     it = mylist.begin();
-    mylist.insert(it, 100);
+    it++;
+    it++;
+    mylist.insert(it, 1, 100);
     for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
        std::cout << "[" << *itmp << "]\n";
     }
