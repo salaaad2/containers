@@ -72,6 +72,9 @@ class list_iterator {
     t_node * getPtr(void) const
     { return _ptr; }
 
+    bool operator==(const list_iterator & rhs)
+    { return (_ptr == rhs._ptr); }
+
     bool operator!=(const list_iterator & rhs)
     { return (_ptr != rhs._ptr); }
 

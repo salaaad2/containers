@@ -106,6 +106,14 @@ namespace ft {
                 t_node * nu;
                 iterator it = begin();
 
+                if (position == begin()) {
+                    push_front(val);
+                    return (it);
+                }
+                else if (position == end()) {
+                    push_back(val);
+                    return (it);
+                }
                 while (it != position) {
                     tmp = tmp->next;
                     it++;
@@ -117,6 +125,7 @@ namespace ft {
 
                 tmp->prev->next = nu;
                 tmp->prev = nu;
+                _size++;
                 return it;
             }
 
