@@ -310,47 +310,23 @@ int main(void)
        std::cout << "[" << *itmp << "]\n";
     }
 
-   //  std::cout << "-========= erase =========-" << std::endl;
-   //  it = mylist.begin();
-   //  mylist.pop_front();
-   //  mylist.pop_front();
-   //  it++;
-   //  it++;
-   //  mylist.pop_back();
-   //  mylist.pop_back();
-   //  for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
-   //     std::cout << "[" << *itmp << "]\n";
-   //  }
-   //  std::cout << "[" << *itmp << "]\n------\n";
-   //  for (itmp = mylist.end(); itmp != mylist.begin(); itmp--) {
-   //     std::cout << "[" << *itmp << "]\n";
-   //  }
-   //  std::cout << "[" << *itmp << "]\n";
-   //  std::cout << "-========= compare =========-" << std::endl;
-
-   //  ft::list<int> mlist(5, 12);
-   // std::list<int> llist(5, 12);
-
-   //  ft::list<int>::iterator itm;
-   // std::list<int>::iterator itt;
-
-   //  itm = mlist.begin();
-   //  itt = llist.begin();
-   //  mlist.push_front(2);
-   //  llist.push_front(2);
-   //  mlist.push_back(112);
-   //  llist.push_back(112);
-   //  itm = mlist.end();
-   //  itt = llist.end();
-   //  std::cout << *itm << " ~~ "<<  *itt << "\n";
-   //  // mlist.insert(itm, 2, 100);;
-   //  // llist.insert(itt, 2, 100);
-   //  for (itm = mlist.begin(); itm != mlist.end(); itm++) {
-   //     std::cout << "[" << *itm << "]\n";
-   //  }
-   //  std::cout << "[---------]\n";
-   //  for (itt = llist.begin(); itt != llist.end(); itt++) {
-   //     std::cout << "[" << *itt << "]\n";
-   //  }
+    it = mylist.begin();
+    it++;
+    it++;
+    mylist.insert(it, 4, 213);
+    std::cout << "[------]\n";
+    for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
+       std::cout << "[" << *itmp << "]\n";
+    }
+     std::cout << "-========= erase =========-" << std::endl;
+     it = mylist.begin();
+     mylist.erase(it);
+     mylist.push_front(9);
+     mylist.push_front(9);
+     mylist.push_back(8);
+     mylist.push_back(8);
+     for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
+        std::cout << "[" << *itmp << "]\n";
+     }
     return (0);
 }

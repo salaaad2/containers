@@ -108,6 +108,7 @@ namespace ft {
                     tmp = tmp->next;
                     it++;
                 }
+                _size += n;
                 while (n > 0)
                 {
                     nu = new t_node;
@@ -118,7 +119,6 @@ namespace ft {
                     tmp->prev = nu;
                     n--;
                 }
-                _size += n;
                 return it;
             }
 
@@ -136,7 +136,6 @@ namespace ft {
 
                 if (position == begin()) {
                     pop_front();
-                    std::cout << "qwe";
                     return (position);
                 }
                 else if (position == end()) {
@@ -147,6 +146,7 @@ namespace ft {
                     it++;
                     tmp = tmp->next;
                 }
+                position++;
                 tmp->prev->next = tmp->next;
                 tmp->next->prev = tmp->prev;
                 delete tmp;
