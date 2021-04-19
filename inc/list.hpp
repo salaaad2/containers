@@ -38,7 +38,6 @@ namespace ft {
                 _first->next = NULL;
                 _first->data = val;
                 tmp = _first;
-                _size = n;
                 while (--n) {
                     tmp->next = new t_node;
                     tmp->next->prev = tmp;
@@ -78,7 +77,6 @@ namespace ft {
                 _first->next = NULL;
                 _first->data = val;
                 tmp = _first;
-                _size = n;
                 while (--n) {
                     tmp->next = new t_node;
                     tmp->next->prev = tmp;
@@ -108,7 +106,6 @@ namespace ft {
                     tmp = tmp->next;
                     it++;
                 }
-                _size += n;
                 while (n > 0)
                 {
                     nu = new t_node;
@@ -169,7 +166,6 @@ namespace ft {
 
                 _first->prev = tmp;
                 _first = tmp;
-                _size += 1;
             }
 
             void push_back(const value_type &val) {
@@ -182,20 +178,17 @@ namespace ft {
 
                 _last->next = tmp;
                 _last = tmp;
-                _size += 1;
             }
 
             void pop_front() {
-                if (_size > 0) {
-                    _size -= 1;
+                if (size()) {
                     _first = _first->next;
                     delete _first->prev;
                 }
             }
 
             void pop_back() {
-                if (_size > 0){
-                    _size -= 1;
+                if (size()){
                     delete _last;
                     _last = _last->prev;
                 }
@@ -204,11 +197,18 @@ namespace ft {
 // capacity
 //
             size_type size() {
-                return (_size);
+                iterator tmp;
+                size_type size = 0;
+
+                while (tmp != end()) {
+                    size++;
+                    tmp++;
+                }
+                return (size);
             }
 
             size_type empty() {
-                return (_size == 0);
+                return (_first == NULL);
             }
 //
 // begin
@@ -244,7 +244,6 @@ namespace ft {
         private :
             t_node * _first;
             t_node * _last;
-            size_type _size;
     };
 }
 

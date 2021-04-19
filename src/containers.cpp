@@ -320,11 +320,12 @@ int main(void)
     }
      std::cout << "-========= erase =========-" << std::endl;
      it = mylist.begin();
-     mylist.erase(it);
-     mylist.push_front(9);
-     mylist.push_front(9);
-     mylist.push_back(8);
-     mylist.push_back(8);
+     it++;
+     it = mylist.erase(it);
+     it = mylist.erase(it);
+     it = mylist.erase(it);
+     it = mylist.erase(it);
+     it = mylist.erase(it);
      for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
         std::cout << "[" << *itmp << "]\n";
      }
