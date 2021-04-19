@@ -299,8 +299,6 @@ int main(void)
     std::cout << "#============== LIST ===============#" << std::endl;
     std::cout << "#===================================#" << std::endl;
     ft::list<int> mylist(5, 12);
-
-    // std::cout << mylist.front() << std::endl;
     // mylist.front() = 1;
     //std::cout << mylist.front() << std::endl;
     mylist.push_front(98);
@@ -310,8 +308,14 @@ int main(void)
 
     mylist.push_back(42);
    // std::cout << mylist.back() << std::endl;
+   //
+    // mylist.insert(it, 21);
+    ft::list<int>::iterator it = mylist.begin();
 
+    std::cout << *it << std::endl;
+    it++;
+    std::cout << "[" << *it << "]" << std::endl;
     mylist.print();
-    std::cout << mylist.size() << mylist.back() << std::endl;
+    mylist.pop_front();
     return (0);
 }

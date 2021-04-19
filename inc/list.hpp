@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "node.hpp"
+#include "list_iterator.hpp"
 #include "random_access_iterator.hpp"
 #include "reverse_random_access_iterator.hpp"
 
@@ -10,10 +12,12 @@ namespace ft {
     template <class T> class list {
         public :
             typedef T value_type;
+            typedef s_node<value_type> t_node;
             typedef value_type& reference;
             typedef const value_type& const_reference;
             typedef size_t size_type;
-            typedef random_access_iterator<value_type> iterator;
+            typedef list_iterator<value_type> iterator;
+            typedef const list_iterator<value_type> const_iterator;
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
 //
 // constructors
@@ -95,6 +99,34 @@ namespace ft {
                 _last = tmp;
             }
 
+
+            // iterator insert (iterator position, const value_type& val)
+            // {
+            //     t_node * tmp;
+            //     t_node * nu;
+            //     iterator it;
+
+            //     tmp = _first;
+            //     it = begin();
+            //     while (it != position) {
+            //         tmp = tmp->next;
+            //         it++;
+            //     }
+            //     nu = new t_node;
+            //     nu->data = val;
+            //     nu->next = tmp;
+            //     nu->prev = tmp->prev;
+            //     tmp->prev = nu;
+            //     return it;
+
+            // }
+
+//     void insert (iterator position, size_type n, const value_type& val);
+
+// template <class InputIterator>
+//     void insert (iterator position, InputIterator first, InputIterator last);
+
+
             void push_front(const value_type &val) {
                 t_node * tmp;
                 tmp = new t_node;
@@ -150,13 +182,13 @@ namespace ft {
 // begin
 // TODO: iterators
 
-            // iterator begin() const {
-            //     return (_first);
-            // }
+            iterator begin() {
+                return (iterator(_first));
+            }
 
-            // iterator end() const {
-            //     return (_last);
-            // }
+            iterator end() {
+                return (iterator(_last));
+            }
 //
 // access
 //
@@ -178,11 +210,6 @@ namespace ft {
             }
 
         private :
-            typedef struct s_node {
-                value_type data;
-                s_node * next;
-                s_node * prev;
-            } t_node;
             t_node * _first;
             t_node * _last;
             size_type _size;
