@@ -49,16 +49,6 @@ namespace ft {
                 _last = tmp;
             }
 
-            void print() {
-                t_node * tmp;
-
-                tmp = _first;
-                while (tmp != NULL) {
-                   std::cout << tmp->data << std::endl;
-                   tmp = tmp->next;
-                }
-            }
-
             // template <class InputIterator>
             // list (InputIterator first, InputIterator last) {
 
