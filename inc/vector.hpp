@@ -21,7 +21,7 @@ namespace ft {
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
 //
 // construct/desytuct
-// TODO: good destructor
+//
             explicit vector() :
                 _elements(NULL), _size(0), _capacity(0) {
                 return ;
@@ -72,7 +72,7 @@ namespace ft {
             { return (_elements[n]); }
 
 //
-// member functions TODO: insert / resize better conditions
+// element modifiers
 //
             void swap(vector & x) {
                 std::swap(_elements, x._elements);
@@ -345,12 +345,16 @@ namespace ft {
 
 
         private :
+//
 // attributes
+//
             iterator _it;
             value_type * _elements;
             size_type _size;
             size_type _capacity;
+//
 // constructor helpers
+//
             void fill_vect (size_type n,
                             const value_type & val,
                             std::true_type) {
@@ -389,6 +393,10 @@ namespace ft {
             }
     };
 }
+
+//
+// comparison operators
+//
 
 template <class T>
 bool operator==(const ft::vector<T>& lhs, const ft::vector<T>& rhs)

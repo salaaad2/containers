@@ -22,12 +22,9 @@ namespace ft {
 //
 // constructors
 // TODO: 2 more constructors
-// TODO: delete print
-            explicit list () {
-                t_node * list;
-
-                _first = list;
-                _last = list;
+            explicit list () :
+                _first(NULL), _last(NULL)
+            {
             }
 
             explicit list (size_type n, const value_type& val = value_type()) {
@@ -56,9 +53,13 @@ namespace ft {
             // list (const list& x) {
             //     *this = x;
             // }
+
+            // reference operator=() {
+
+            // }
 //
-// member functions
-// TODO assign delete ???
+// modifier functions
+// TODO const & = assign delete ???
 
             void assign(size_type n, const value_type& val) {
                 t_node * tmp;
@@ -126,6 +127,9 @@ namespace ft {
             void insert (iterator position, size_type n, const value_type& val) {
                 _insert(position, n, val);
             }
+// template <class InputIterator>
+//     void insert (iterator position, InputIterator first, InputIterator last);
+//     TODO: delete
 
             iterator erase(iterator position) {
                 iterator it = begin();
@@ -152,8 +156,6 @@ namespace ft {
             // iterator erase(iterator first, iterator last) {
             // }
 
-// template <class InputIterator>
-//     void insert (iterator position, InputIterator first, InputIterator last);
 
 
             void push_front(const value_type &val) {
@@ -211,8 +213,8 @@ namespace ft {
                 return (_first == NULL);
             }
 //
-// begin
-// TODO: iterators
+// iterators
+//
 
             iterator begin() {
                 return (iterator(_first));
