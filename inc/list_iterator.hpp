@@ -61,8 +61,6 @@ class list_iterator {
     const T *operator->(void) const
     { return _ptr; }
 
-    void operator=(const T & rhs)
-    { *_ptr = rhs; }
 
 //
 // getters/setters
@@ -73,6 +71,9 @@ class list_iterator {
 
     t_node * getPtr(void) const
     { return _ptr; }
+
+    bool operator!=(const list_iterator & rhs)
+    { return (_ptr != rhs._ptr); }
 
   private :
     t_node * _ptr;

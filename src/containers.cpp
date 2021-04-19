@@ -299,23 +299,15 @@ int main(void)
     std::cout << "#============== LIST ===============#" << std::endl;
     std::cout << "#===================================#" << std::endl;
     ft::list<int> mylist(5, 12);
-    // mylist.front() = 1;
-    //std::cout << mylist.front() << std::endl;
+    ft::list<int>::iterator it;
+   ft::list<int>::iterator itmp;
     mylist.push_front(98);
-    mylist.push_front(97);
-    mylist.push_front(96);
-    // std::cout << mylist.front() << std::endl;
-
     mylist.push_back(42);
-   // std::cout << mylist.back() << std::endl;
-   //
-    // mylist.insert(it, 21);
-    ft::list<int>::iterator it = mylist.begin();
-
-    std::cout << *it << std::endl;
-    it++;
-    std::cout << "[" << *it << "]" << std::endl;
-    mylist.print();
-    mylist.pop_front();
+    it = mylist.begin();
+    mylist.insert(it, 100);
+    for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
+       std::cout << "[" << *itmp << "]\n";
+    }
+    std::cout << "[" << *itmp << "]\n";
     return (0);
 }

@@ -100,26 +100,25 @@ namespace ft {
             }
 
 
-            // iterator insert (iterator position, const value_type& val)
-            // {
-            //     t_node * tmp;
-            //     t_node * nu;
-            //     iterator it;
+            iterator insert (iterator position, const value_type& val)
+            {
+                t_node * tmp = _first;
+                t_node * nu;
+                iterator it = begin();
 
-            //     tmp = _first;
-            //     it = begin();
-            //     while (it != position) {
-            //         tmp = tmp->next;
-            //         it++;
-            //     }
-            //     nu = new t_node;
-            //     nu->data = val;
-            //     nu->next = tmp;
-            //     nu->prev = tmp->prev;
-            //     tmp->prev = nu;
-            //     return it;
+                while (it != position) {
+                    tmp = tmp->next;
+                    it++;
+                }
+                nu = new t_node;
+                nu->data = val;
+                nu->next = tmp;
+                nu->prev = tmp->prev;
 
-            // }
+                tmp->prev->next = nu;
+                tmp->prev = nu;
+                return it;
+            }
 
 //     void insert (iterator position, size_type n, const value_type& val);
 
