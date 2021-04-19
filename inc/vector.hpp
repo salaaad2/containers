@@ -187,27 +187,6 @@ namespace ft {
                 _size += n;
             }
 
-            iterator insert(iterator position,
-                             const value_type &val = value_type()) {
-                _insert_dispatch(position, 1, val, std::true_type());
-                return (_it);
-            }
-
-            void insert(iterator position,
-                             size_type n,
-                             const value_type &val = value_type()) {
-                _insert_dispatch(position, n, val, std::true_type());
-            }
-
-            template <class InputIterator>
-            void insert(iterator position,
-                        InputIterator first,
-                        InputIterator last) {
-                typedef typename std::is_integral<InputIterator>::type Integral;
-
-                _insert_dispatch(position, first, last, Integral());
-            }
-
             void _insert_dispatch(iterator position,
                              size_type n,
                              const value_type &val,
@@ -227,6 +206,27 @@ namespace ft {
                     tmp++;
                     position++;
                 }
+            }
+
+            iterator insert(iterator position,
+                             const value_type &val = value_type()) {
+                _insert_dispatch(position, 1, val, std::true_type());
+                return (_it);
+            }
+
+            void insert(iterator position,
+                             size_type n,
+                             const value_type &val = value_type()) {
+                _insert_dispatch(position, n, val, std::true_type());
+            }
+
+            template <class InputIterator>
+            void insert(iterator position,
+                        InputIterator first,
+                        InputIterator last) {
+                typedef typename std::is_integral<InputIterator>::type Integral;
+
+                _insert_dispatch(position, first, last, Integral());
             }
 
             iterator _erase(iterator position,

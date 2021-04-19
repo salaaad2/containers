@@ -298,6 +298,7 @@ int main(void)
     std::cout << "#===================================#" << std::endl;
     std::cout << "#============== LIST ===============#" << std::endl;
     std::cout << "#===================================#" << std::endl;
+    std::cout << "-========= insert =========-" << std::endl;
     ft::list<int> mylist(5, 12);
     ft::list<int>::iterator it;
    ft::list<int>::iterator itmp;
@@ -306,8 +307,29 @@ int main(void)
     it = mylist.begin();
     it++;
     it++;
-    mylist.insert(it, 1, 100);
+    mylist.insert(it, 2, 100);
     for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
+       std::cout << "[" << *itmp << "]\n";
+    }
+    std::cout << "[" << *itmp << "]\n------\n";
+
+    for (itmp = mylist.end(); itmp != mylist.begin(); itmp--) {
+       std::cout << "[" << *itmp << "]\n";
+    }
+    std::cout << "[" << *itmp << "]\n";
+    std::cout << "-========= erase =========-" << std::endl;
+    it = mylist.begin();
+    mylist.pop_front();
+    mylist.pop_front();
+    it++;
+    it++;
+    mylist.pop_back();
+    mylist.pop_back();
+    for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
+       std::cout << "[" << *itmp << "]\n";
+    }
+    std::cout << "[" << *itmp << "]\n------\n";
+    for (itmp = mylist.end(); itmp != mylist.begin(); itmp--) {
        std::cout << "[" << *itmp << "]\n";
     }
     std::cout << "[" << *itmp << "]\n";

@@ -140,6 +140,31 @@ namespace ft {
                 _insert(position, n, val);
             }
 
+            iterator erase(iterator position) {
+                iterator it = begin();
+                t_node * tmp = _first;
+
+                if (position == begin()) {
+                    pop_front();
+                    std::cout << "qwe";
+                    return (position);
+                }
+                else if (position == end()) {
+                    pop_back();
+                    return (position);
+                }
+                while (it != position) {
+                    it++;
+                    tmp = tmp->next;
+                }
+                tmp->prev->next = tmp->next;
+                tmp->next->prev = tmp->prev;
+                delete tmp;
+                return (position);
+            }
+            // iterator erase(iterator first, iterator last) {
+            // }
+
 // template <class InputIterator>
 //     void insert (iterator position, InputIterator first, InputIterator last);
 
@@ -173,8 +198,8 @@ namespace ft {
             void pop_front() {
                 if (_size > 0) {
                     _size -= 1;
-                    delete _first;
                     _first = _first->next;
+                    delete _first->prev;
                 }
             }
 
@@ -182,7 +207,7 @@ namespace ft {
                 if (_size > 0){
                     _size -= 1;
                     delete _last;
-                    _last = _last->next;
+                    _last = _last->prev;
                 }
             }
 //
