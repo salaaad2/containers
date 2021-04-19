@@ -219,7 +219,7 @@ namespace ft {
             }
 
             iterator end() {
-                return (iterator(_last));
+                return (iterator(_last->next));
             }
 //
 // access
