@@ -197,7 +197,7 @@ namespace ft {
 // capacity
 //
             size_type size() {
-                iterator tmp;
+                iterator tmp = begin();
                 size_type size = 0;
 
                 while (tmp != end()) {
