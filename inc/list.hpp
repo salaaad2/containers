@@ -21,7 +21,7 @@ namespace ft {
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
 //
 // constructors
-// TODO: 2 more constructors
+// TODO: 2 more constructors, delete 1 more node
             explicit list () :
                 _first(NULL), _last(NULL)
             {
@@ -57,6 +57,16 @@ namespace ft {
             // reference operator=() {
 
             // }
+
+            ~list() {
+                t_node * tmp = _first;
+
+                while (tmp != _last) {
+                    std::cout << "delete " << std::endl;
+                    tmp = tmp->next;
+                    delete tmp->prev;
+                }
+            }
 //
 // modifier functions
 // TODO const & = assign delete ???
@@ -198,6 +208,42 @@ namespace ft {
 //
 // capacity
 //
+            void resize(size_type n, value_type val = value_type()) {
+                size_type spos = 0;
+                t_node * ptr = _first;
+
+                if (n < size()) { // del n +
+                    while (spos < n) {
+                        ptr = ptr->next;
+                        spos++;
+                    }
+                    while (ptr != _last) {
+                        ptr = ptr->next;
+                        std::cout << "delete n" << ptr->data << std::endl;
+                        delete ptr->prev;
+                    }
+                        return ;
+                }
+                else if (n > size()){ // add size - n vals
+                    while (ptr != _last) {
+                        std::cout << "here" << std::endl;
+                        ptr = ptr->next;
+                        spos++;
+                    }
+                    n -= size();
+                    while (n) {
+                        ptr->next = new t_node;
+                        ptr->next->prev = ptr;
+                        ptr->next->next = NULL;
+                        ptr->next->data = val;
+                        ptr = ptr->next;
+                        n--;
+                    }
+                    _last = ptr;
+                    return ;
+                }
+            }
+
             size_type size() {
                 iterator tmp = begin();
                 size_type size = 0;

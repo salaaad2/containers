@@ -295,39 +295,54 @@ int main(void)
    //  coolqueue.back() -= coolqueue.front();
 
    //  std::cout << "myqueue.back() is now " << coolqueue.back() << '\n';
-    std::cout << "#===================================#" << std::endl;
-    std::cout << "#============== LIST ===============#" << std::endl;
-    std::cout << "#===================================#" << std::endl;
-    std::cout << "-========= insert =========-" << std::endl;
-    ft::list<int> mylist(5, 12);
+   std::cout << "#===================================#" << std::endl;
+   std::cout << "#============== LIST ===============#" << std::endl;
+   std::cout << "#===================================#" << std::endl;
+   std::cout << "-========= insert =========-" << std::endl;
+   ft::list<int> mylist(5, 12);
 
-    ft::list<int>::iterator it;
-    ft::list<int>::iterator itmp;
+   ft::list<int>::iterator it;
+   ft::list<int>::iterator itmp;
 
-    it = mylist.begin();
-    mylist.insert(it, 1, 100);
-    for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
-       std::cout << "[" << *itmp << "]\n";
-    }
+   it = mylist.begin();
+   mylist.insert(it, 1, 100);
+   for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
 
-    it = mylist.begin();
-    it++;
-    it++;
-    mylist.insert(it, 4, 213);
-    std::cout << "[------]\n";
-    for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
-       std::cout << "[" << *itmp << "]\n";
-    }
-     std::cout << "-========= erase =========-" << std::endl;
-     it = mylist.begin();
-     it++;
-     it = mylist.erase(it);
-     it = mylist.erase(it);
-     it = mylist.erase(it);
-     it = mylist.erase(it);
-     it = mylist.erase(it);
-     for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
-        std::cout << "[" << *itmp << "]\n";
-     }
-    return (0);
+   it = mylist.begin();
+   it++;
+   it++;
+   mylist.insert(it, 4, 213);
+   std::cout << "[------]\n";
+   for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
+   std::cout << "-========= erase =========-" << std::endl;
+   it = mylist.begin();
+   it++;
+   it = mylist.erase(it);
+   it = mylist.erase(it);
+   it = mylist.erase(it);
+   it = mylist.erase(it);
+   it = mylist.erase(it);
+   for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
+
+   std::cout << "-========= erase + resize =========-" << std::endl;
+   ft::list<int> resizeme(2, 1);
+  std::cout << "[" << resizeme.size() << "]" << std::endl;
+  it = resizeme.begin();
+  it++;
+   resizeme.insert(it, 2, 88);
+  std::cout << "[" << resizeme.size() << "]" << std::endl;
+  resizeme.resize(5);
+  std::cout << "[" << resizeme.size() << "]" << std::endl;
+
+   for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
+
+   return (0);
 }
