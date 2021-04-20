@@ -8,8 +8,8 @@
 
 #include "node.hpp"
 #include "list_iterator.hpp"
+#include "reverse_list_iterator.hpp"
 #include "random_access_iterator.hpp"
-#include "reverse_random_access_iterator.hpp"
 
 namespace ft {
     template <class T> class list {
@@ -21,7 +21,8 @@ namespace ft {
             typedef size_t size_type;
             typedef list_iterator<value_type> iterator;
             typedef const list_iterator<value_type> const_iterator;
-            typedef reverse_random_access_iterator<value_type> reverse_iterator;
+            typedef reverse_list_iterator<value_type> reverse_iterator;
+            typedef const reverse_list_iterator<value_type> const_reverse_iterator;
 
 //
 // constructors

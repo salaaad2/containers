@@ -335,10 +335,10 @@ int main(void)
    it = mylist.begin();
    it++;
    it = mylist.erase(it);
-   mylist.erase(it);
+   it = mylist.erase(it);
   itt++;
    itt = tlist.erase(itt);
-   tlist.erase(itt);
+   itt = tlist.erase(itt);
    for (it = mylist.begin(); it != mylist.end(); it++) {
       std::cout << "[" << *it << "]\n";
    }
