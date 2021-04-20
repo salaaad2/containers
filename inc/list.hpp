@@ -58,6 +58,7 @@ namespace ft {
                 clear();
                 while (tmp != x.end()) {
                     push_back(*tmp);
+                    tmp++;
                 }
             }
 
@@ -121,11 +122,13 @@ namespace ft {
                     push_front(val);
                     if (n == 1)
                         return (it);
+                    n--;
                 }
                 else if (position == end()) {
                     push_back(val);
                     if (n == 1)
                         return (it);
+                    n--;
                 }
                 while (it != position) {
                     tmp = tmp->next;
@@ -137,6 +140,7 @@ namespace ft {
                     nu->data = val;
                     nu->next = tmp;
                     nu->prev = tmp->prev;
+
                     tmp->prev->next = nu;
                     tmp->prev = nu;
                     n--;
@@ -144,12 +148,45 @@ namespace ft {
                 return it;
             }
 
-            iterator insert (iterator position, const value_type& val) {
-                return(_insert(position, 1, val));
+            void _insert_dispatch(iterator position,
+                             size_type n,
+                             const value_type &val,
+                             std::true_type) {
+                _insert(position, n, val);
             }
 
-            void insert (iterator position, size_type n, const value_type& val) {
-                _insert(position, n, val);
+            template<class InputIterator>
+            void _insert_dispatch(iterator position,
+                                    InputIterator first,
+                                    InputIterator last,
+                                  std::false_type) {
+                InputIterator tmp = first;
+
+                while (tmp != last) {
+                    _insert(position, 1, *tmp);
+                    tmp++;
+                    position++;
+                }
+            }
+            iterator insert(iterator position,
+                             const value_type &val = value_type()) {
+                return (_insert_dispatch(position, 1, val, std::true_type()));
+
+            }
+
+            void insert(iterator position,
+                             size_type n,
+                             const value_type &val = value_type()) {
+                _insert_dispatch(position, n, val, std::true_type());
+            }
+
+            template <class InputIterator>
+            void insert(iterator position,
+                        InputIterator first,
+                        InputIterator last) {
+                typedef typename std::is_integral<InputIterator>::type Integral;
+
+                _insert_dispatch(position, first, last, Integral());
             }
 // template <class InputIterator>
 //     void insert (iterator position, InputIterator first, InputIterator last);

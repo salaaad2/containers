@@ -332,16 +332,13 @@ int main(void)
 
    std::cout << "-========= erase + resize =========-" << std::endl;
    ft::list<int> resizeme(2, 1);
-  std::cout << "[" << resizeme.size() << "]" << std::endl;
   it = resizeme.begin();
    resizeme.insert(it, 2, 88);
-  // std::cout << "[" << resizeme.size() << "]" << std::endl;
-  // resizeme.resize(18, 1);
-  // std::cout << "[" << resizeme.size() << "]" << std::endl;
+  std::cout << "[" << resizeme.size() << "] it : " << *it << std::endl;
 
-  //  for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
-  //     std::cout << "[" << *itmp << "]\n";
-  //  }
+   for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
 
    return (0);
 }
