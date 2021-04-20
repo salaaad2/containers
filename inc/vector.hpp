@@ -12,15 +12,14 @@
 namespace ft {
     template <class T> class vector {
         public :
-//
-// typedefs
-//
             typedef T value_type;
             typedef size_t size_type;
             typedef random_access_iterator<value_type> iterator;
+            typedef const random_access_iterator<value_type> const_iterator;
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
+            typedef const reverse_random_access_iterator<value_type> const_reverse_iterator;
 //
-// construct/desytuct
+// constructor/destructor
 //
             explicit vector() :
                 _elements(NULL), _size(0), _capacity(0) {
@@ -331,17 +330,28 @@ namespace ft {
 // iterators
 //
             iterator begin()
-            { return _elements; }
+            { return iterator(_elements); }
 
             iterator end()
-            { return _elements + _size; }
+            { return iterator(_elements + _size); }
 
+            const_iterator begin() const
+            { return const_iterator(_elements); }
+
+            const_iterator end() const
+            { return const_iterator(_elements + _size); }
 
             reverse_iterator rbegin()
             { return reverse_iterator(end() - 1); }
 
             reverse_iterator rend()
             { return reverse_iterator(begin() - 1); }
+
+            const_reverse_iterator rbegin() const
+            { return const_reverse_iterator(end() - 1); }
+
+            const_reverse_iterator rend() const
+            { return const_reverse_iterator(begin() - 1); }
 
 
         private :

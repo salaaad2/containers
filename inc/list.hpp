@@ -335,16 +335,38 @@ namespace ft {
             iterator end() {
                 return (iterator(_last->next));
             }
+
+            const_iterator begin() const {
+                return (const_iterator(_first));
+            }
+
+            const_iterator end() const {
+                return (const_iterator(_last->next));
+            }
+
+            reverse_iterator rbegin() {
+                return reverse_iterator(_last);
+            }
+
+            reverse_iterator rend() {
+                return reverse_iterator(_first);
+            }
+
+            const_reverse_iterator rbegin() const {
+                return const_reverse_iterator(_last);
+            }
+
+            const_reverse_iterator rend() const {
+                return const_reverse_iterator(_first);
+            }
 //
 // access
 //
-            reference front() {
-                return (_first->data);
-            }
+            reference front()
+            {return (_first->data);}
 
-            const_reference front() const {
-                return (_first->data);
-            }
+            const_reference front() const
+            {return (_first->data);}
 
 
             reference back() {
