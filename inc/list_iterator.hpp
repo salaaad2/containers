@@ -39,12 +39,12 @@ class list_iterator {
 // TODO: double check
     list_iterator operator++(int)
     { list_iterator tmp = *this;
-      tmp._ptr = tmp._ptr->next;
+      ++(*this);
       return (tmp); }
 
     list_iterator operator--(int)
     { list_iterator tmp = *this;
-      tmp._ptr = tmp._ptr->prev;
+      --(*this);
       return (tmp); }
 
 
