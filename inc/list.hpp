@@ -62,7 +62,6 @@ namespace ft {
                 t_node * tmp = _first;
 
                 while (tmp != _last) {
-                    std::cout << "delete " << std::endl;
                     tmp = tmp->next;
                     delete tmp->prev;
                 }
@@ -105,13 +104,15 @@ namespace ft {
                 t_node * nu;
                 iterator it = begin();
 
-                if (position == begin() && n == 1) {
+                if (position == begin()) {
                     push_front(val);
-                    return (it);
+                    if (n == 1)
+                        return (it);
                 }
-                else if (position == end() && n == 1) {
+                else if (position == end()) {
                     push_back(val);
-                    return (it);
+                    if (n == 1)
+                        return (it);
                 }
                 while (it != position) {
                     tmp = tmp->next;
@@ -230,7 +231,6 @@ namespace ft {
                 }
                 else if (n > size()){ // add size - n vals
                     while (ptr != _last) {
-                        std::cout << "here" << std::endl;
                         ptr = ptr->next;
                         spos++;
                     }

@@ -334,15 +334,14 @@ int main(void)
    ft::list<int> resizeme(2, 1);
   std::cout << "[" << resizeme.size() << "]" << std::endl;
   it = resizeme.begin();
-  it++;
    resizeme.insert(it, 2, 88);
-  std::cout << "[" << resizeme.size() << "]" << std::endl;
-  resizeme.resize(1);
-  std::cout << "[" << resizeme.size() << "]" << std::endl;
+  // std::cout << "[" << resizeme.size() << "]" << std::endl;
+  // resizeme.resize(18, 1);
+  // std::cout << "[" << resizeme.size() << "]" << std::endl;
 
-   for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
-      std::cout << "print[" << *itmp << "]\n";
-   }
+  //  for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
+  //     std::cout << "[" << *itmp << "]\n";
+  //  }
 
    return (0);
 }
