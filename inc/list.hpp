@@ -50,13 +50,16 @@ namespace ft {
 
             // }
 
-            // list (const list& x) {
-            //     *this = x;
-            // }
+            //TODO: clear
+            //
+            list    & operator=(const list &x) {
+                iterator tmp = x.begin();
 
-            // reference operator=() {
-
-            // }
+                clear();
+                while (tmp != x.end()) {
+                    push_back(*tmp);
+                }
+            }
 
             ~list() {
                 t_node * tmp = _first;
@@ -69,6 +72,16 @@ namespace ft {
 //
 // modifier functions
 // TODO const & = assign delete ???
+
+
+            void clear() {
+                iterator tmp = begin();
+
+                while (tmp != end()) {
+                    erase(tmp);
+                    tmp++;
+                }
+            }
 
             void assign(size_type n, const value_type& val) {
                 t_node * tmp;
