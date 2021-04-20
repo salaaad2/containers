@@ -14,9 +14,7 @@ class list_iterator {
     list_iterator(t_node *rhs) : _ptr(rhs) {}
 
     list_iterator(list_iterator *rhs) : _ptr(NULL)
-    {
-      *this = rhs;
-    }
+    {*this = rhs;}
 
     list_iterator &operator=(const list_iterator &rhs)
     {
