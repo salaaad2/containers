@@ -211,18 +211,22 @@ namespace ft {
             void resize(size_type n, value_type val = value_type()) {
                 size_type spos = 0;
                 t_node * ptr = _first;
+                t_node * tmp;
 
                 if (n < size()) { // del n +
-                    while (spos < n) {
+                    while (spos < (n - 1)) {
                         ptr = ptr->next;
                         spos++;
                     }
-                    while (ptr != _last) {
+                    _last = ptr;
+                    ptr = ptr->next;
+                    while (ptr != NULL) {
+                        tmp = ptr;
                         ptr = ptr->next;
-                        std::cout << "delete n" << ptr->data << std::endl;
-                        delete ptr->prev;
+                        delete tmp;
                     }
-                        return ;
+                    _last->next = NULL;
+                    return ;
                 }
                 else if (n > size()){ // add size - n vals
                     while (ptr != _last) {

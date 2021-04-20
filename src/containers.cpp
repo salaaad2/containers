@@ -337,11 +337,11 @@ int main(void)
   it++;
    resizeme.insert(it, 2, 88);
   std::cout << "[" << resizeme.size() << "]" << std::endl;
-  resizeme.resize(5);
+  resizeme.resize(1);
   std::cout << "[" << resizeme.size() << "]" << std::endl;
 
    for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
-      std::cout << "[" << *itmp << "]\n";
+      std::cout << "print[" << *itmp << "]\n";
    }
 
    return (0);
