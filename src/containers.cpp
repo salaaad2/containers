@@ -318,18 +318,6 @@ int main(void)
    for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
       std::cout << "[" << *itmp << "]\n";
    }
-   std::cout << "-========= erase =========-" << std::endl;
-   it = mylist.begin();
-   it++;
-   it = mylist.erase(it);
-   it = mylist.erase(it);
-   it = mylist.erase(it);
-   it = mylist.erase(it);
-   it = mylist.erase(it);
-   for (itmp = mylist.begin(); itmp != mylist.end(); itmp++) {
-      std::cout << "[" << *itmp << "]\n";
-   }
-
    std::cout << "-========= erase + resize =========-" << std::endl;
    ft::list<int> resizeme(2, 1);
   it = resizeme.begin();
@@ -338,6 +326,25 @@ int main(void)
 
    for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
       std::cout << "[" << *itmp << "]\n";
+   }
+
+   std::cout << "-========= erase =========-" << std::endl;
+   std::list<int> tlist(5, 12);
+   std::list<int>::iterator itt = tlist.begin();
+   mylist.assign(5, 12);
+   it = mylist.begin();
+   it++;
+   it = mylist.erase(it);
+   it = mylist.erase(it);
+  itt++;
+   itt = tlist.erase(itt);
+   itt = tlist.erase(itt);
+   for (it = mylist.begin(); it != mylist.end(); it++) {
+      std::cout << "[" << *it << "]\n";
+   }
+   std::cout << "[-------]\n";
+   for (itt = tlist.begin(); itt != tlist.end(); itt++) {
+      std::cout << "[" << *itt << "]\n";
    }
 
    return (0);

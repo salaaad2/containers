@@ -2,6 +2,9 @@
 #define LIST_H
 
 #include <iostream>
+#include <type_traits>
+
+#include <math.h>
 
 #include "node.hpp"
 #include "list_iterator.hpp"
@@ -19,9 +22,11 @@ namespace ft {
             typedef list_iterator<value_type> iterator;
             typedef const list_iterator<value_type> const_iterator;
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
+
 //
 // constructors
-// TODO: delete 1 more node
+// TODO: delete 1 more node ???
+
             explicit list () :
                 _first(NULL), _last(NULL)
             {
@@ -45,12 +50,6 @@ namespace ft {
                 _last = tmp;
             }
 
-            // template <class InputIterator>
-            // list (InputIterator first, InputIterator last) {
-
-            // }
-
-            //
             list    & operator=(const list &x) {
                 iterator tmp = x.begin();
 
@@ -194,7 +193,7 @@ namespace ft {
 
                 if (position == begin()) {
                     pop_front();
-                    return (position);
+                    return (begin());
                 }
                 else if (position == end()) {
                     pop_back();
@@ -272,7 +271,7 @@ namespace ft {
                 t_node * ptr = _first;
                 t_node * tmp;
 
-                if (n < size()) { // del n +
+                if (n < size()) {
                     while (spos < (n - 1)) {
                         ptr = ptr->next;
                         spos++;
@@ -287,7 +286,7 @@ namespace ft {
                     _last->next = NULL;
                     return ;
                 }
-                else if (n > size()){ // add size - n vals
+                else if (n > size()){
                     while (ptr != _last) {
                         ptr = ptr->next;
                         spos++;
@@ -319,6 +318,10 @@ namespace ft {
 
             size_type empty() {
                 return (_first == NULL);
+            }
+
+            size_type max_size() {
+                return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);
             }
 //
 // iterators
