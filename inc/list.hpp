@@ -21,7 +21,7 @@ namespace ft {
             typedef reverse_random_access_iterator<value_type> reverse_iterator;
 //
 // constructors
-// TODO: 2 more constructors, delete 1 more node
+// TODO: delete 1 more node
             explicit list () :
                 _first(NULL), _last(NULL)
             {
@@ -50,7 +50,6 @@ namespace ft {
 
             // }
 
-            //TODO: clear
             //
             list    & operator=(const list &x) {
                 iterator tmp = x.begin();
@@ -72,7 +71,7 @@ namespace ft {
             }
 //
 // modifier functions
-// TODO const & = assign delete ???
+//
 
 
             void clear() {
@@ -188,11 +187,8 @@ namespace ft {
 
                 _insert_dispatch(position, first, last, Integral());
             }
-// template <class InputIterator>
-//     void insert (iterator position, InputIterator first, InputIterator last);
-//     TODO: delete
 
-            iterator erase(iterator position) {
+            iterator _erase(iterator position) {
                 iterator it = begin();
                 t_node * tmp = _first;
 
@@ -214,8 +210,20 @@ namespace ft {
                 delete tmp;
                 return (position);
             }
-            // iterator erase(iterator first, iterator last) {
-            // }
+
+            iterator erase(iterator position) {
+                return (_erase(position));
+            }
+
+            iterator erase(iterator first, iterator last) {
+                iterator tmp = first;
+
+                while (tmp != last) {
+                    _erase(tmp);
+                    tmp++;
+                }
+                return (tmp);
+            }
 
 
 
