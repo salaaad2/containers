@@ -229,15 +229,16 @@ namespace ft {
             void sort() { // bubble sort
                 t_node * s = _first;
                 t_node * tmp = _first;
+                value_type td;
 
-                while (s != _last) {
+                while (s != NULL) {
                     if (s->data < tmp->data) {
-                        tmp->next = s->next;
-                        s->prev = tmp->prev;
-                        tmp->prev = s;
-                        s->next = tmp;
+                        td = s->data;
+                        s->data = tmp->data;
+                        tmp->data = td;
                         s = _first;
                     }
+                    tmp = s;
                     s = s->next;
                 }
             }
@@ -246,15 +247,16 @@ namespace ft {
             void sort(Compare comp) { // bubble sort
                 t_node * s = _first;
                 t_node * tmp = _first;
+                value_type td;
 
-                while (s != _last) {
+                while (s != NULL) {
                     if (comp(s->data, tmp->data)) {
-                        tmp->next = s->next;
-                        s->prev = tmp->prev;
-                        tmp->prev = s;
-                        s->next = tmp;
+                        td = s->data;
+                        s->data = tmp->data;
+                        tmp->data = td;
                         s = _first;
                     }
+                    tmp = s;
                     s = s->next;
                 }
             }
@@ -357,7 +359,7 @@ namespace ft {
             {return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);}
 //
 // iterators
-//
+// TODO: last elem
 
             iterator begin()
             {return (iterator(_first));}

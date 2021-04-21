@@ -347,19 +347,27 @@ int main(void)
       std::cout << "[" << *itt << "]\n";
    }
    std::cout << "-========= sort =========-" << std::endl;
-   ft::list<int> sortme;
+   ft::list<int> sortme(5, 1);
    ft::list<int>::iterator sortit;
 
-   sortme.push_front(5);
-   sortme.push_front(4);
-   sortme.push_front(3);
-   sortme.push_front(2);
-   sortme.push_front(1);
+   // sortme.push_front(1);
+   // sortme.push_front(3);
+   // sortme.push_front(4);
+   // sortme.push_front(2);
+   // sortme.push_front(5);
+   //
+   sortit = sortme.begin();
 
-   // sortme.sort();
-   // for (sortit = sortme.begin(); sortit != sortme.end(); sortit++) {
-   //    std::cout << "[" << *sortit << "]\n";
-   // }
+   sortit++;
+   sortit++;
+   sortme.insert(sortit, 2, 12);
+   sortit--;
+   sortme.insert(sortit, 1, 9);
+
+   sortme.sort();
+   for (sortit = sortme.begin(); sortit != sortme.end(); sortit++) {
+      std::cout << "[" << *sortit << "]\n";
+   }
    std::cout << "[-------]\n";
 
    return (0);
