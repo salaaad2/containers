@@ -85,14 +85,15 @@ namespace ft {
 
             void assign(size_type n, const value_type& val) {
                 t_node * tmp;
+                t_node * ptr = _first;
 
                 if (_first != NULL)
                 {
-                    tmp = _first;
-                    while (tmp->next != NULL)
+                    while (ptr != NULL)
                     {
+                        tmp = ptr;
+                        ptr = ptr->next;
                         delete tmp;
-                        tmp = tmp->next;
                     }
                 }
                 _first = new t_node;
@@ -225,6 +226,38 @@ namespace ft {
                 return (tmp);
             }
 
+            void sort() { // bubble sort
+                t_node * s = _first;
+                t_node * tmp = _first;
+
+                while (s != _last) {
+                    if (s->data < tmp->data) {
+                        tmp->next = s->next;
+                        s->prev = tmp->prev;
+                        tmp->prev = s;
+                        s->next = tmp;
+                        s = _first;
+                    }
+                    s = s->next;
+                }
+            }
+
+            template <class Compare>
+            void sort(Compare comp) { // bubble sort
+                t_node * s = _first;
+                t_node * tmp = _first;
+
+                while (s != _last) {
+                    if (comp(s->data, tmp->data)) {
+                        tmp->next = s->next;
+                        s->prev = tmp->prev;
+                        tmp->prev = s;
+                        s->next = tmp;
+                        s = _first;
+                    }
+                    s = s->next;
+                }
+            }
 
 
             void push_front(const value_type &val) {

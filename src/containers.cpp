@@ -346,6 +346,21 @@ int main(void)
    for (itt = tlist.begin(); itt != tlist.end(); itt++) {
       std::cout << "[" << *itt << "]\n";
    }
+   std::cout << "-========= sort =========-" << std::endl;
+   ft::list<int> sortme;
+   ft::list<int>::iterator sortit;
+
+   sortme.push_front(5);
+   sortme.push_front(4);
+   sortme.push_front(3);
+   sortme.push_front(2);
+   sortme.push_front(1);
+
+   // sortme.sort();
+   // for (sortit = sortme.begin(); sortit != sortme.end(); sortit++) {
+   //    std::cout << "[" << *sortit << "]\n";
+   // }
+   std::cout << "[-------]\n";
 
    return (0);
 }
