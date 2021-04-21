@@ -384,12 +384,55 @@ int main(void)
    std::cout << "-========= remove =========-" << std::endl;
    ft::list<int> rmrf(1, 1);
    rmrf.push_front(5);
+   rmrf.push_front(5);
    rmrf.push_front(4);
    rmrf.push_front(3);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
    rmrf.push_front(2);
+   rmrf.push_back(1);
+   rmrf.push_back(90);
 
-   rmrf.remove(1);
+   rmrf.remove(5);
+   //rmrf.erase(rmrf.end());
    for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
+      std::cout << "[" << *qwe << "]\n";
+   }
+
+   std::cout << "-========= unique =========-" << std::endl;
+
+   ft::list<double> uni(4, 5);
+   ft::list<double>::iterator unit = uni.begin();
+
+   // unit = uni.erase(unit);
+   // unit = uni.erase(unit);
+   // unit = uni.erase(unit);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.unique();
+   for (ft::list<double>::iterator qwe = uni.begin(); qwe != uni.end(); qwe++) {
       std::cout << "[" << *qwe << "]\n";
    }
 

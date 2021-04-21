@@ -51,6 +51,21 @@ namespace ft {
                 _last = tmp;
             }
 
+            // TODO: MacOS
+            // template <class InputIterator>
+            // list(InputIterator first,
+            //         InputIterator last) :
+            //         _first(NULL), _last(NULL) {
+            //     typedef typename std::is_integral<InputIterator>::type Integral;
+
+            //     insert(first, last, Integral());
+            // }
+
+            list (const list & x) : _first(NULL), _last(NULL) {
+                *this = x;
+                return ;
+            }
+
             list    & operator=(const list &x) {
                 iterator tmp = x.begin();
 
@@ -112,25 +127,61 @@ namespace ft {
             }
 
             void remove (const value_type & val) {
-                t_node * ptr = _first;
-                t_node * tmp;
+                iterator tmp = begin();
+                iterator s;
 
                 if (empty()) return ;
 
-                while (ptr != NULL) {
-                    if (ptr->data == val) { // remove this
-                        tmp = ptr;
-                        ptr = ptr->next;
-                        tmp->prev->next = tmp->next;
-                        tmp->next->prev = tmp->prev;
-                        delete tmp;
+                while (tmp != end()) {
+                    if (*tmp == val) { //???TODO: segv on end
+                        erase(tmp);
+                        tmp = begin();
                     }
-                    else
-                    {
-                        ptr = ptr->next;
-                    }
+                    tmp++;
                 }
             }
+
+            template <class Predicate>
+            void remove_if(Predicate pred) {
+                iterator tmp = begin();
+                iterator s;
+
+                if (empty()) return ;
+
+                while (tmp != end()) {
+                    if (pred(*tmp)) { // ???TODO: segv on end 11111
+                        erase(tmp);
+                        tmp = begin();
+                    }
+                    tmp++;
+                }
+            }
+
+            void unique() {
+                iterator tmp = begin();
+                value_type rm = *tmp;
+
+                if (size() == 1)
+                {return ;}
+
+                tmp++; // ???TODO: segv on end 11111
+                for (; tmp != end(); tmp++) {
+                    std::cout << "rm :" << rm << std::endl;
+                    while (*tmp == rm) {
+                        tmp = erase(tmp);
+                        if (tmp == end())
+                        {
+                            return ;
+                        }
+                    }
+                    rm = *tmp;
+                }
+            }
+
+
+// template <class BinaryPredicate>
+//   void unique (BinaryPredicate binary_pred);
+//   void reverse();
 
             void splice (iterator position, list& x) {
                 t_node * tmp = _first;
@@ -206,6 +257,7 @@ namespace ft {
                     position++;
                 }
             }
+
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
                 return (_insert_dispatch(position, 1, val, std::true_type()));
