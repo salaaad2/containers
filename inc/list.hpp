@@ -111,6 +111,21 @@ namespace ft {
                 _last = tmp;
             }
 
+            void splice (iterator position, list& x) {
+                t_node * tmp = _first;
+                t_node * xtmp = x._first;
+                iterator itmp = begin();
+
+                while (itmp != position && tmp != NULL) {
+                    tmp = tmp->next;
+                    itmp++;
+                }
+                x._last->next = tmp->next;
+                tmp->next = xtmp;
+                xtmp->prev = tmp;
+                //std::cout <<  << std::endl;
+
+            }
 
             iterator _insert (iterator position, size_type n, const value_type& val)
             {

@@ -369,6 +369,17 @@ int main(void)
       std::cout << "[" << *sortit << "]\n";
    }
    std::cout << "[-------]\n";
+   std::cout << "-========= splice =========-" << std::endl;
+   ft::list<int> spl1(5, 1);
+   ft::list<int> spl2(5, 5);
+   ft::list<int>::iterator split1 = spl1.begin();
+   // ft::list<int>::iterator split2;
+
+   split1++;
+   spl1.splice(split1, spl2);
+   for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
+      std::cout << "[" << *split1 << "]\n";
+   }
 
    return (0);
 }
