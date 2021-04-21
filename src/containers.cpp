@@ -350,11 +350,11 @@ int main(void)
    ft::list<int> sortme(5, 1);
    ft::list<int>::iterator sortit;
 
-   // sortme.push_front(1);
-   // sortme.push_front(3);
-   // sortme.push_front(4);
-   // sortme.push_front(2);
-   // sortme.push_front(5);
+   sortme.push_front(1);
+   sortme.push_front(3);
+   sortme.push_front(4);
+   sortme.push_front(2);
+   sortme.push_front(5);
    //
    sortit = sortme.begin();
 
@@ -369,7 +369,7 @@ int main(void)
       std::cout << "[" << *sortit << "]\n";
    }
    std::cout << "[-------]\n";
-   // std::cout << "-========= splice =========-" << std::endl;
+   // std::cout << "-========= splice =========-" << std::endl; // TODO: SEGV
    // ft::list<int> spl1(5, 1);
    // ft::list<int> spl2(5, 5);
    // ft::list<int>::iterator split1 = spl1.begin();
@@ -381,7 +381,7 @@ int main(void)
    //    std::cout << "[" << *split1 << "]\n";
    // }
    // std::cout << "front : [" << spl2.front() << "]\n";
-   std::cout << "-========= remove =========-" << std::endl;
+   std::cout << "-========= remove =========-" << std::endl; // TODO: SEGV
    ft::list<int> rmrf(1, 1);
    rmrf.push_front(5);
    rmrf.push_front(5);
@@ -396,7 +396,7 @@ int main(void)
    rmrf.push_back(1);
    rmrf.push_back(90);
 
-   rmrf.remove(5);
+   rmrf.remove(1);
    //rmrf.erase(rmrf.end());
    for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
       std::cout << "[" << *qwe << "]\n";

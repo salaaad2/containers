@@ -31,15 +31,26 @@ namespace ft {
             explicit list () :
                 _first(NULL), _last(NULL)
             {
+                _last = new t_node;
+                _last->data = value_type();
+                _last->prev = _last;
+                _last->next = _last;
+                _first = _last;
             }
 
             explicit list (size_type n, const value_type& val = value_type()) {
                 t_node * tmp;
                 _first = new t_node;
+                _last = new t_node;
 
-                _first->prev = NULL;
-                _first->next = NULL;
+                _first->prev = _last;
+                _first->next = _last;
                 _first->data = val;
+
+                _last->next = _first;
+                _last->prev = _first;
+                _last->data = value_type();
+
                 tmp = _first;
                 while (--n) {
                     tmp->next = new t_node;
