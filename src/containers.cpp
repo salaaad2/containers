@@ -369,16 +369,28 @@ int main(void)
       std::cout << "[" << *sortit << "]\n";
    }
    std::cout << "[-------]\n";
-   std::cout << "-========= splice =========-" << std::endl;
-   ft::list<int> spl1(5, 1);
-   ft::list<int> spl2(5, 5);
-   ft::list<int>::iterator split1 = spl1.begin();
-   // ft::list<int>::iterator split2;
+   // std::cout << "-========= splice =========-" << std::endl;
+   // ft::list<int> spl1(5, 1);
+   // ft::list<int> spl2(5, 5);
+   // ft::list<int>::iterator split1 = spl1.begin();
+   // // ft::list<int>::iterator split2;
 
-   split1++;
-   spl1.splice(split1, spl2);
-   for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
-      std::cout << "[" << *split1 << "]\n";
+   // split1++;
+   // spl1.splice(split1, spl2);
+   // for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
+   //    std::cout << "[" << *split1 << "]\n";
+   // }
+   // std::cout << "front : [" << spl2.front() << "]\n";
+   std::cout << "-========= remove =========-" << std::endl;
+   ft::list<int> rmrf(1, 1);
+   rmrf.push_front(5);
+   rmrf.push_front(4);
+   rmrf.push_front(3);
+   rmrf.push_front(2);
+
+   rmrf.remove(1);
+   for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
+      std::cout << "[" << *qwe << "]\n";
    }
 
    return (0);

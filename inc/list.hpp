@@ -71,7 +71,7 @@ namespace ft {
             }
 //
 // modifier functions
-//
+//TODO: fix splice
 
 
             void clear() {
@@ -111,6 +111,27 @@ namespace ft {
                 _last = tmp;
             }
 
+            void remove (const value_type & val) {
+                t_node * ptr = _first;
+                t_node * tmp;
+
+                if (empty()) return ;
+
+                while (ptr != NULL) {
+                    if (ptr->data == val) { // remove this
+                        tmp = ptr;
+                        ptr = ptr->next;
+                        tmp->prev->next = tmp->next;
+                        tmp->next->prev = tmp->prev;
+                        delete tmp;
+                    }
+                    else
+                    {
+                        ptr = ptr->next;
+                    }
+                }
+            }
+
             void splice (iterator position, list& x) {
                 t_node * tmp = _first;
                 t_node * xtmp = x._first;
@@ -123,6 +144,8 @@ namespace ft {
                 x._last->next = tmp->next;
                 tmp->next = xtmp;
                 xtmp->prev = tmp;
+                x._first = NULL;
+                x._last = NULL;
                 //std::cout <<  << std::endl;
 
             }
