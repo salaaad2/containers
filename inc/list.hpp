@@ -177,19 +177,33 @@ namespace ft {
                     (size() == 1))
                 {return ;}
 
-                tmp++; // ???TODO: segv on end 11111
-                for (; tmp != end(); tmp++) {
-                    std::cout << "rm :" << rm << std::endl;
-                    while (*tmp == rm) {
-                        tmp = erase(tmp);
-                    }
+                while (tmp != end()) {
                     rm = *tmp;
+                    tmp++;
+                    while (tmp != end() && *tmp == rm) {
+                        tmp = _erase(tmp);
+                    }
                 }
             }
 
 
-// template <class BinaryPredicate>
-//   void unique (BinaryPredicate binary_pred);
+            template <class BinaryPredicate>
+            void unique (BinaryPredicate binary_pred) {
+                iterator tmp = begin();
+                value_type rm = *tmp;
+
+                if ((empty()) ||
+                    (size() == 1))
+                {return ;}
+
+                while (tmp != end()) {
+                    rm = *tmp;
+                    tmp++;
+                    while (tmp != end() && binary_pred(rm, *tmp)) {
+                        tmp = _erase(tmp);
+                    }
+                }
+            }
 //   void reverse();
 
             void splice (iterator position, list& x) {
@@ -313,6 +327,7 @@ namespace ft {
                 }
                 else {
                     pop_back();
+                    return (end());
                 }
                 return (position);
             }
