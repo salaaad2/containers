@@ -94,6 +94,7 @@ namespace ft {
                     tmp = tmp->next;
                     delete tmp->prev;
                 }
+                delete tmp;
             }
 //
 // modifier functions
@@ -205,23 +206,46 @@ namespace ft {
                 }
             }
 //   void reverse();
+//
+
+            void splice (iterator position, list &x, iterator i) {
+                iterator xit = x.begin();
+                t_node * xn = x._first;
+
+                iterator it = begin();
+                t_node * n = _first;
+
+                while (xit != i && xn != NULL) {
+                    xn = xn->next;
+                    xit++;
+                }
+                while (it != position && n != NULL) {
+                    n = n->next;
+                    it++;
+                }
+                xn->next->prev = xn->prev;
+                xn->prev->next = xn->next;
+                xn->next = n;
+                xn->prev = n->prev;
+
+                n->prev->next = xn;
+                n->prev = xn;
+            }
 
             void splice (iterator position, list& x) {
-                t_node * tmp = _first;
-                t_node * xtmp = x._first;
-                iterator itmp = begin();
+                t_node * n = _first;
+                t_node * xn = x._first;
+                iterator it= begin();
 
-                while (itmp != position && tmp != NULL) {
-                    tmp = tmp->next;
-                    itmp++;
+                while (it != position && n != NULL) {
+                    n = n->next;
+                    it++;
                 }
-                x._last->next = tmp->next;
-                tmp->next = xtmp;
-                xtmp->prev = tmp;
+                x._last->next = n->next;
+                n->next = xn;
+                xn->prev = n;
                 x._first = NULL;
                 x._last = NULL;
-                //std::cout <<  << std::endl;
-
             }
 
             iterator _insert (iterator position, size_type n, const value_type& val)
@@ -464,6 +488,9 @@ namespace ft {
             size_type size() {
                 iterator tmp = begin();
                 size_type size = 0;
+
+                if (_first == NULL)
+                {return 0;}
 
                 while (tmp != end()) {
                     size++;
