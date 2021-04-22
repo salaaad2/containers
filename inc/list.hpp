@@ -141,11 +141,12 @@ namespace ft {
                 iterator tmp = begin();
                 iterator s;
 
-                if (empty()) return ;
+                if (empty())
+                {return ;}
 
                 while (tmp != end()) {
-                    if (*tmp == val) { //???TODO: segv on end
-                        erase(tmp);
+                    if (*tmp == val) {
+                        _erase(tmp);
                         tmp = begin();
                     }
                     tmp++;
@@ -160,8 +161,8 @@ namespace ft {
                 if (empty()) return ;
 
                 while (tmp != end()) {
-                    if (pred(*tmp)) { // ???TODO: segv on end 11111
-                        erase(tmp);
+                    if (pred(*tmp)) {
+                        _erase(tmp);
                         tmp = begin();
                     }
                     tmp++;
@@ -172,7 +173,8 @@ namespace ft {
                 iterator tmp = begin();
                 value_type rm = *tmp;
 
-                if (size() == 1)
+                if ((empty()) ||
+                    (size() == 1))
                 {return ;}
 
                 tmp++; // ???TODO: segv on end 11111
@@ -180,10 +182,6 @@ namespace ft {
                     std::cout << "rm :" << rm << std::endl;
                     while (*tmp == rm) {
                         tmp = erase(tmp);
-                        if (tmp == end())
-                        {
-                            return ;
-                        }
                     }
                     rm = *tmp;
                 }
@@ -307,9 +305,15 @@ namespace ft {
                     tmp = tmp->next;
                 }
                 position++;
-                tmp->prev->next = tmp->next;
-                tmp->next->prev = tmp->prev;
-                delete tmp;
+                if (tmp != _last)
+                {
+                    tmp->prev->next = tmp->next;
+                    tmp->next->prev = tmp->prev;
+                    delete tmp;
+                }
+                else {
+                    pop_back();
+                }
                 return (position);
             }
 
@@ -396,8 +400,8 @@ namespace ft {
 
             void pop_back() {
                 if (size()){
-                    delete _last;
                     _last = _last->prev;
+                    delete _last->next;
                 }
             }
 //

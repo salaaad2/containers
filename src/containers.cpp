@@ -396,8 +396,9 @@ int main(void)
    rmrf.push_back(1);
    rmrf.push_back(90);
 
-   rmrf.remove(1);
-   //rmrf.erase(rmrf.end());
+   rmrf.remove(5);
+   // rmrf.erase(rmrf.end());
+   //rmrf.pop_back();
    for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
       std::cout << "[" << *qwe << "]\n";
    }
