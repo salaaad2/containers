@@ -98,7 +98,7 @@ namespace ft {
             }
 //
 // modifier functions
-//TODO: fix splice
+//
 
 
             void clear() {
@@ -170,6 +170,23 @@ namespace ft {
                 }
             }
 
+            void reverse() {
+                t_node * cur = _first;
+                t_node * tmp = NULL;
+
+                if (empty() || size() == 1)
+                {return ;}
+
+                _last = _first;
+                while (cur != NULL) {
+                    tmp = cur->prev;
+                    cur->prev = cur->next;
+                    cur->next = tmp;
+                    cur = cur->prev;
+                }
+                _first = tmp->prev;
+            }
+
             void unique() {
                 iterator tmp = begin();
                 value_type rm = *tmp;
@@ -207,8 +224,45 @@ namespace ft {
             }
 //   void reverse();
 //
+            void splice (iterator position,
+                         list &x,
+                         iterator first,
+                         iterator last) {
+                if (first == last)
+                { splice(position, x, first);
+                  return ;}
 
-            void splice (iterator position, list &x, iterator i) {
+                iterator xit = x.begin();
+                t_node * xfn = x._first;
+                t_node * xln = x._first;
+
+                iterator it = begin();
+                t_node * n = _first;
+
+                while (xit != first && xfn != NULL) {
+                    xfn = xfn->next;
+                    xit++;
+                }
+                while (xit != last && xln != NULL) {
+                    xln = xln->next;
+                    xit++;
+                }
+                while (it != position && n != NULL) {
+                    n = n->next;
+                    it++;
+                }
+                xln->next->prev = xln->prev;
+                xfn->prev->next = xfn->next;
+                xln->next = n;
+                xfn->prev = n->prev;
+
+                n->prev->next = xfn;
+                n->prev = xfn;
+            }
+
+            void splice (iterator position,
+                         list &x,
+                         iterator i) {
                 iterator xit = x.begin();
                 t_node * xn = x._first;
 
@@ -232,7 +286,8 @@ namespace ft {
                 n->prev = xn;
             }
 
-            void splice (iterator position, list& x) {
+            void splice (iterator position,
+                         list& x) {
                 t_node * n = _first;
                 t_node * xn = x._first;
                 iterator it= begin();
@@ -248,8 +303,10 @@ namespace ft {
                 x._last = NULL;
             }
 
-            iterator _insert (iterator position, size_type n, const value_type& val)
-            {
+
+            iterator _insert (iterator position,
+                              size_type n,
+                              const value_type& val) {
                 t_node * tmp = _first;
                 t_node * nu;
                 iterator it = begin();
@@ -360,7 +417,8 @@ namespace ft {
                 return (_erase(position));
             }
 
-            iterator erase(iterator first, iterator last) {
+            iterator erase(iterator first,
+                           iterator last) {
                 iterator tmp = first;
 
                 while (tmp != last) {
@@ -446,7 +504,8 @@ namespace ft {
 //
 // capacity
 //
-            void resize(size_type n, value_type val = value_type()) {
+            void resize(size_type n,
+                        value_type val = value_type()) {
                 size_type spos = 0;
                 t_node * ptr = _first;
                 t_node * tmp;

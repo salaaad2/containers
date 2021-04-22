@@ -424,7 +424,7 @@ int main(void)
    for (ft::list<double>::iterator qwe = uni.begin(); qwe != uni.end(); qwe++) {
       std::cout << "[" << *qwe << "]\n";
    }
-   std::cout << "-========= splice =========-" << std::endl; // TODO: SEGV
+   std::cout << "-========= splice =========-" << std::endl; // TODO: SEGV ?
    ft::list<int> spl1(5, 1);
    ft::list<int> spl2(8, 5);
    ft::list<int>::iterator split1 = spl1.begin();
@@ -445,6 +445,15 @@ int main(void)
    else {
       std::cout << "{" << spl2.size() << "}" << std::endl;
    }
+   std::cout << "-========= reverse =========-" << std::endl; //
+   ft::list<int> revl(1, 1); // empty const adds 1 zero
 
+   for (int i = 2; i < 10; i++) revl.push_back(i);
+
+
+   revl.reverse();
+   for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
+      std::cout << *qwe << std::endl;
+   }
    return (0);
 }
