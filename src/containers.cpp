@@ -455,5 +455,16 @@ int main(void)
    for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
       std::cout << *qwe << std::endl;
    }
+   std::cout << "-========= merge =========-" << std::endl; //
+   ft::list<int> merge1(1, 1); // empty const adds 1 zero
+   ft::list<int> merge2(2, 2); // empty const adds 1 zero
+
+   for (int i = 2; i < 20; i += 2) merge1.push_back(i);
+   for (int i = 0; i < 20; i += 2) merge2.push_back(i);
+
+   merge1.merge(merge1);
+   for (ft::list<int>::iterator qwe = merge1.begin(); qwe != merge1.end(); qwe++) {
+      std::cout << *qwe << std::endl;
+   }
    return (0);
 }

@@ -222,8 +222,24 @@ namespace ft {
                     }
                 }
             }
-//   void reverse();
-//
+
+            //
+            // TODO: merge
+            //
+
+            void merge(list &x) {
+                iterator tmpit;
+
+                for (iterator it = begin(); it != end(); it++) {
+                    while (*(x.begin()) < *it) {
+                        splice(it, x, x.begin());
+                        std::cout << *it;
+                        if (x.empty()) {return ;}
+                    }
+                }
+                splice(end(), x);
+            }
+
             void splice (iterator position,
                          list &x,
                          iterator first,
