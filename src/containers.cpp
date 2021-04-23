@@ -430,8 +430,6 @@ int main(void)
    ft::list<int>::iterator split1 = spl1.begin();
    ft::list<int>::iterator split2 = spl2.begin();
 
-   split1++;
-   split1++;
    spl1.splice(split1, spl2);
    for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
       std::cout << "[" << *split1 << "]\n";

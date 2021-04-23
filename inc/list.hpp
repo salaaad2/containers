@@ -320,11 +320,22 @@ namespace ft {
                     n = n->next;
                     it++;
                 }
-                n = n->prev;
-                x._last->next = n->next;
+                if (n != _first)
+                {
+                    n = n->prev;
+                    x._last->next = n->next;
 
-                n->next = xn;
-                xn->prev = n;
+                    n->next = xn;
+                    xn->prev = n;
+                }
+                else
+                {
+                    x._first->prev = NULL;
+                    x._last->next = n;
+                    n->prev = x._last;
+                    _first = x._first;
+
+                }
 
                 x._first = NULL;
                 x._last = NULL;
