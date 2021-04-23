@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef LISTNODE_H
+#define LISTNODE_H
 
 namespace ft {
     template <class T>

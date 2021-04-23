@@ -431,11 +431,8 @@ int main(void)
    ft::list<int>::iterator split2 = spl2.begin();
 
    split1++;
-   split2++;
-   split2++;
-   split2++;
-   split2++;
-   spl1.splice(split1, spl2, split2);
+   split1++;
+   spl1.splice(split1, spl2);
    for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
       std::cout << "[" << *split1 << "]\n";
    }
@@ -455,16 +452,25 @@ int main(void)
    for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
       std::cout << *qwe << std::endl;
    }
-   std::cout << "-========= merge =========-" << std::endl; //
-   ft::list<int> merge1(1, 1); // empty const adds 1 zero
-   ft::list<int> merge2(2, 2); // empty const adds 1 zero
+   // std::cout << "-========= merge =========-" << std::endl; //
+   // ft::list<int> merge1(1, 1); // empty const adds 1 zero
+   // ft::list<int> merge2(2, 2); // empty const adds 1 zero
 
-   for (int i = 2; i < 20; i += 2) merge1.push_back(i);
-   for (int i = 0; i < 20; i += 2) merge2.push_back(i);
+   // for (int i = 10; i < 20; i += 1) merge1.push_back(i);
+   // for (int i = 11; i < 20; i += 1) merge2.push_back(i);
 
-   merge1.merge(merge1);
-   for (ft::list<int>::iterator qwe = merge1.begin(); qwe != merge1.end(); qwe++) {
-      std::cout << *qwe << std::endl;
-   }
+   // merge1.merge(merge2);
+   // for (ft::list<int>::iterator qwe = merge1.begin(); qwe != merge1.end(); qwe++) {
+   //    std::cout << *qwe << std::endl;
+   // }
+   // std::cout << "#===================================#" << std::endl;
+   // std::cout << "#============== MAP ================#" << std::endl;
+   // std::cout << "#===================================#" << std::endl;
+   // std::cout << "-========= construct/insert ========-" << std::endl;
+
+   // ft::map<char, int> mymap;
+   // ft::map<char, int>::iterator it = mymap.begin();
+   // mymap.insert(it, 12);
+
    return (0);
 }

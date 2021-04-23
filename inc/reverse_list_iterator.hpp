@@ -1,7 +1,7 @@
 #ifndef REVERSE_LIST_ITERATOR_H_
 #define REVERSE_LIST_ITERATOR_H_
 
-#include "node.hpp"
+#include "ListNode.hpp"
 
 template <class T>
 class reverse_list_iterator {

@@ -6,10 +6,9 @@
 
 #include <math.h>
 
-#include "node.hpp"
+#include "ListNode.hpp"
 #include "list_iterator.hpp"
 #include "reverse_list_iterator.hpp"
-#include "random_access_iterator.hpp"
 
 namespace ft {
     template <class T> class list {
@@ -224,18 +223,23 @@ namespace ft {
             }
 
             //
-            // TODO: merge
+            // TODO: merge && comp overloads
             //
 
             void merge(list &x) {
                 iterator tmpit;
 
+                // if (x == *this)
+                // {return ;}
+
                 for (iterator it = begin(); it != end(); it++) {
+                    std::cout << *(x.begin()) << " " << *it << "start\n";
                     while (*(x.begin()) < *it) {
                         splice(it, x, x.begin());
-                        std::cout << *it;
+                        std::cout << "while" << *it;
                         if (x.empty()) {return ;}
                     }
+                    std::cout << "nexit in for" << *it;
                 }
                 splice(end(), x);
             }
@@ -300,21 +304,28 @@ namespace ft {
 
                 n->prev->next = xn;
                 n->prev = xn;
+                // std::cout << "here"<< xn->prev->data << std::endl;
+
             }
 
             void splice (iterator position,
                          list& x) {
                 t_node * n = _first;
                 t_node * xn = x._first;
-                iterator it= begin();
+                iterator it = begin();
 
                 while (it != position && n != NULL) {
+                    std::cout << "not pos yet" << std::endl;
+
                     n = n->next;
                     it++;
                 }
+                n = n->prev;
                 x._last->next = n->next;
+
                 n->next = xn;
                 xn->prev = n;
+
                 x._first = NULL;
                 x._last = NULL;
             }

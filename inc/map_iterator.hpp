@@ -1,47 +1,48 @@
-#ifndef LIST_ITERATOR_H_
-#define LIST_ITERATOR_H_
+#ifndef MAP_ITERATOR_H_
+#define MAP_ITERATOR_H_
 
-#include "ListNode.hpp"
+#include "MapNode.hpp"
 
-template <class T>
-class list_iterator {
+template <class Key,
+          class T>
+class map_iterator {
   public :
-    typedef ft::s_node<T> t_node;
+    typedef ft::s_node<Key, T> t_node;
 //
 // constructors
 //
-    list_iterator() : _ptr(NULL) {}
-    list_iterator(t_node *rhs) : _ptr(rhs) {}
+    map_iterator() : _ptr(NULL) {}
+    map_iterator(t_node *rhs) : _ptr(rhs) {}
 
-    list_iterator(list_iterator *rhs) : _ptr(NULL)
+    map_iterator(map_iterator *rhs) : _ptr(NULL)
     {*this = rhs;}
 
-    list_iterator &operator=(const list_iterator &rhs)
+    map_iterator &operator=(const map_iterator &rhs)
     {
       _ptr = rhs._ptr;
       return (*this);
     }
 
-    ~list_iterator() {}
+    ~map_iterator() {}
 
 //
 // Prefix overloading
 //
-    list_iterator& operator++()
-    { _ptr = _ptr->next;
+    map_iterator& operator++()
+    { _ptr = _ptr->right;
       return *this; }
 
-    list_iterator& operator--()
-    { _ptr = _ptr->prev;
+    map_iterator& operator--()
+    { _ptr = _ptr->left;
       return *this; }
 // TODO: double check
-    list_iterator operator++(int)
-    { list_iterator tmp = *this;
+    map_iterator operator++(int)
+    { map_iterator tmp = *this;
       ++(*this);
       return (tmp); }
 
-    list_iterator operator--(int)
-    { list_iterator tmp = *this;
+    map_iterator operator--(int)
+    { map_iterator tmp = *this;
       --(*this);
       return (tmp); }
 
@@ -70,14 +71,14 @@ class list_iterator {
     t_node * getPtr(void) const
     { return _ptr; }
 
-    bool operator==(const list_iterator & rhs)
+    bool operator==(const map_iterator & rhs)
     { return (_ptr == rhs._ptr); }
 
-    bool operator!=(const list_iterator & rhs)
+    bool operator!=(const map_iterator & rhs)
     { return (_ptr != rhs._ptr); }
 
   private :
     t_node * _ptr;
 };
 
-#endif // LIST_ITERATOR_H_
+#endif // MAP_ITERATOR_H_
