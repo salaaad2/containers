@@ -28,7 +28,7 @@ namespace ft {
 // TODO: delete 1 more node ???
 
             explicit list () :
-                _first(NULL), _last(NULL)
+                _first(NULL), _last(NULL), _size(0)
             {
                 _last = new t_node;
                 _last->data = value_type();
@@ -51,6 +51,7 @@ namespace ft {
                 _last->data = value_type();
 
                 tmp = _first;
+                _size = n;
                 while (--n) {
                     tmp->next = new t_node;
                     tmp->next->prev = tmp;
@@ -71,7 +72,7 @@ namespace ft {
             //     insert(first, last, Integral());
             // }
 
-            list (const list & x) : _first(NULL), _last(NULL) {
+            list (const list & x) : _first(NULL), _last(NULL), _size(0) {
                 *this = x;
                 return ;
             }
@@ -107,6 +108,7 @@ namespace ft {
                     erase(tmp);
                     tmp++;
                 }
+                _size = 0;
             }
 
             void assign(size_type n, const value_type& val) {
@@ -127,6 +129,7 @@ namespace ft {
                 _first->next = NULL;
                 _first->data = val;
                 tmp = _first;
+                _size = n;
                 while (--n) {
                     tmp->next = new t_node;
                     tmp->next->prev = tmp;
@@ -148,6 +151,7 @@ namespace ft {
                     if (*tmp == val) {
                         _erase(tmp);
                         tmp = begin();
+                        _size--;
                     }
                     tmp++;
                 }
@@ -164,6 +168,7 @@ namespace ft {
                     if (pred(*tmp)) {
                         _erase(tmp);
                         tmp = begin();
+                        _size--;
                     }
                     tmp++;
                 }
@@ -199,6 +204,7 @@ namespace ft {
                     tmp++;
                     while (tmp != end() && *tmp == rm) {
                         tmp = _erase(tmp);
+                        _size--;
                     }
                 }
             }
@@ -218,66 +224,62 @@ namespace ft {
                     tmp++;
                     while (tmp != end() && binary_pred(rm, *tmp)) {
                         tmp = _erase(tmp);
+                        _size--;
                     }
                 }
             }
 
             //
-            // TODO: merge && comp overloads
+            // TODO:
             //
 
             void merge(list &x) {
-                iterator tmpit;
+                iterator tmpit = begin();
 
                 // if (x == *this)
                 // {return ;}
 
-                for (iterator it = begin(); it != end(); it++) {
-                    std::cout << *(x.begin()) << " " << *it << "start\n";
-                    while (*(x.begin()) < *it) {
-                        splice(it, x, x.begin());
-                        std::cout << "while" << *it;
-                        if (x.empty()) {return ;}
-                    }
-                    std::cout << "nexit in for" << *it;
-                }
-                splice(end(), x);
+                // for (iterator it = begin(); it != end(); it++) {
+                //     std::cout << *(x.begin()) << " " << *it << "start\n";
+                //     while (*(x.begin()) < *it) {
+                //         splice(it, x, x.begin());
+                //         std::cout << "while" << *it;
+                //         if (x.empty()) {return ;}
+                //     }
+                //     std::cout << "nexit in for" << *it;
+                // }
+                splice(tmpit, x);
             }
 
             void splice (iterator position,
-                         list &x,
-                         iterator first,
-                         iterator last) {
-                if (first == last)
-                { splice(position, x, first);
-                  return ;}
-
-                iterator xit = x.begin();
-                t_node * xfn = x._first;
-                t_node * xln = x._first;
-
-                iterator it = begin();
+                         list& x) {
                 t_node * n = _first;
+                t_node * xn = x._first;
+                iterator it = begin();
 
-                while (xit != first && xfn != NULL) {
-                    xfn = xfn->next;
-                    xit++;
-                }
-                while (xit != last && xln != NULL) {
-                    xln = xln->next;
-                    xit++;
-                }
+                _size += x.size();
                 while (it != position && n != NULL) {
                     n = n->next;
                     it++;
                 }
-                xln->next->prev = xln->prev;
-                xfn->prev->next = xfn->next;
-                xln->next = n;
-                xfn->prev = n->prev;
+                if (n != _first)
+                {
+                    n = n->prev;
+                    x._last->next = n->next;
 
-                n->prev->next = xfn;
-                n->prev = xfn;
+                    n->next = xn;
+                    xn->prev = n;
+                }
+                else {
+                    x._first->prev = _first->prev;
+                    x._last->next = _first;
+                    _first->prev = x._last;
+                    _first = x._first;
+
+                }
+                x._first = NULL;
+                x._last = NULL;
+                x._size = 0;
             }
 
             void splice (iterator position,
@@ -297,48 +299,65 @@ namespace ft {
                     n = n->next;
                     it++;
                 }
-                xn->next->prev = xn->prev;
-                xn->prev->next = xn->next;
-                xn->next = n;
-                xn->prev = n->prev;
+                if (n != _first) {
+                    xn->next->prev = xn->prev;
+                    xn->prev->next = xn->next;
+                    xn->next = n;
+                    xn->prev = n->prev;
 
-                n->prev->next = xn;
-                n->prev = xn;
-                // std::cout << "here"<< xn->prev->data << std::endl;
+                    n->prev->next = xn;
+                    n->prev = xn;
+                }
+                else {
+                    xn->prev = _first->prev;
+                    xn->next = _first;
 
+                    _first = xn;
+                }
+                _size++;
+                x._size--;
             }
 
             void splice (iterator position,
-                         list& x) {
-                t_node * n = _first;
-                t_node * xn = x._first;
+                         list &x,
+                         iterator first,
+                         iterator last) {
+                if (first == last)
+                { splice(position, x, first);
+                  return ;}
+
+                size_type ns = 0;
+
+                iterator xit = x.begin();
+                t_node * xfn = x._first;
+                t_node * xln = x._first;
+
                 iterator it = begin();
+                t_node * n = _first;
 
+                while (xit != first && xfn != NULL) {
+                    xfn = xfn->next;
+                    xit++;
+                }
+                while (xit != last && xln != NULL) {
+                    xln = xln->next;
+                    xit++;
+
+                    ns++;
+                }
                 while (it != position && n != NULL) {
-                    std::cout << "not pos yet" << std::endl;
-
                     n = n->next;
                     it++;
                 }
-                if (n != _first)
-                {
-                    n = n->prev;
-                    x._last->next = n->next;
+                xln->next->prev = xln->prev;
+                xfn->prev->next = xfn->next;
+                xln->next = n;
+                xfn->prev = n->prev;
 
-                    n->next = xn;
-                    xn->prev = n;
-                }
-                else
-                {
-                    x._first->prev = NULL;
-                    x._last->next = n;
-                    n->prev = x._last;
-                    _first = x._first;
+                n->prev->next = xfn;
+                n->prev = xfn;
 
-                }
-
-                x._first = NULL;
-                x._last = NULL;
+                _size += ns;
             }
 
 
@@ -583,17 +602,7 @@ namespace ft {
             }
 
             size_type size() {
-                iterator tmp = begin();
-                size_type size = 0;
-
-                if (_first == NULL)
-                {return 0;}
-
-                while (tmp != end()) {
-                    size++;
-                    tmp++;
-                }
-                return (size);
+                return (_size);
             }
 
             size_type empty()
@@ -649,6 +658,7 @@ namespace ft {
         private :
             t_node * _first;
             t_node * _last;
+            size_type _size;
     };
 }
 

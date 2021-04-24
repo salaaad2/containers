@@ -440,16 +440,16 @@ int main(void)
    else {
       std::cout << "{" << spl2.size() << "}" << std::endl;
    }
-   std::cout << "-========= reverse =========-" << std::endl; //
-   ft::list<int> revl(1, 1); // empty const adds 1 zero
+   // std::cout << "-========= reverse =========-" << std::endl; //
+   // ft::list<int> revl(1, 1); // empty const adds 1 zero
 
-   for (int i = 2; i < 10; i++) revl.push_back(i);
+   // for (int i = 2; i < 10; i++) revl.push_back(i);
 
 
-   revl.reverse();
-   for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
-      std::cout << *qwe << std::endl;
-   }
+   // revl.reverse();
+   // for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
+   //    std::cout << *qwe << std::endl;
+   // }
    // std::cout << "-========= merge =========-" << std::endl; //
    // ft::list<int> merge1(1, 1); // empty const adds 1 zero
    // ft::list<int> merge2(2, 2); // empty const adds 1 zero
