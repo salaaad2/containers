@@ -252,37 +252,6 @@ namespace ft {
             }
 
             void splice (iterator position,
-                         list& x) {
-                t_node * n = _first;
-                t_node * xn = x._first;
-                iterator it = begin();
-
-                _size += x.size();
-                while (it != position && n != NULL) {
-                    n = n->next;
-                    it++;
-                }
-                if (n != _first)
-                {
-                    n = n->prev;
-                    x._last->next = n->next;
-
-                    n->next = xn;
-                    xn->prev = n;
-                }
-                else {
-                    x._first->prev = _first->prev;
-                    x._last->next = _first;
-                    _first->prev = x._last;
-                    _first = x._first;
-
-                }
-                x._first = NULL;
-                x._last = NULL;
-                x._size = 0;
-            }
-
-            void splice (iterator position,
                          list &x,
                          iterator i) {
                 iterator xit = x.begin();
@@ -319,45 +288,23 @@ namespace ft {
             }
 
             void splice (iterator position,
+                         list& x) {
+                iterator tmp = x.begin();
+
+                while (tmp != x.end()) {
+                    splice(position, x, tmp);
+                    tmp++;
+                }
+            }
+
+            void splice (iterator position,
                          list &x,
                          iterator first,
                          iterator last) {
-                if (first == last)
-                { splice(position, x, first);
-                  return ;}
-
-                size_type ns = 0;
-
-                iterator xit = x.begin();
-                t_node * xfn = x._first;
-                t_node * xln = x._first;
-
-                iterator it = begin();
-                t_node * n = _first;
-
-                while (xit != first && xfn != NULL) {
-                    xfn = xfn->next;
-                    xit++;
+                while (first != last) {
+                    splice(position, x, first);
+                    first++;
                 }
-                while (xit != last && xln != NULL) {
-                    xln = xln->next;
-                    xit++;
-
-                    ns++;
-                }
-                while (it != position && n != NULL) {
-                    n = n->next;
-                    it++;
-                }
-                xln->next->prev = xln->prev;
-                xfn->prev->next = xfn->next;
-                xln->next = n;
-                xfn->prev = n->prev;
-
-                n->prev->next = xfn;
-                n->prev = xfn;
-
-                _size += ns;
             }
 
 
@@ -486,20 +433,7 @@ namespace ft {
             }
 
             void sort() { // bubble sort
-                t_node * s = _first;
-                t_node * tmp = _first;
-                value_type td;
-
-                while (s != NULL) {
-                    if (s->data < tmp->data) {
-                        td = s->data;
-                        s->data = tmp->data;
-                        tmp->data = td;
-                        s = _first;
-                    }
-                    tmp = s;
-                    s = s->next;
-                }
+                sort(std::less<value_type>);
             }
 
             template <class Compare>

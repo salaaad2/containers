@@ -429,8 +429,12 @@ int main(void)
    ft::list<int> spl2(8, 5);
    ft::list<int>::iterator split1 = spl1.begin();
    ft::list<int>::iterator split2 = spl2.begin();
+   spl2.push_back(10);
 
-   spl1.splice(split1, spl2);
+   split2++;
+   split2++;
+   split2++;
+   spl1.splice(split1, spl2, spl2.begin(), split2);
    for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
       std::cout << "[" << *split1 << "]\n";
    }
@@ -438,7 +442,8 @@ int main(void)
       std::cout << "empty" << std::endl;
    }
    else {
-      std::cout << "{" << spl2.size() << "}" << std::endl;
+      std::cout << "spliced (1) {" << spl2.size() << "}" << std::endl;
+      std::cout << "inserted(2) {" << spl1.size() << "}" << std::endl;
    }
    // std::cout << "-========= reverse =========-" << std::endl; //
    // ft::list<int> revl(1, 1); // empty const adds 1 zero
