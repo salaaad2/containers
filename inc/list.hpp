@@ -97,216 +97,8 @@ namespace ft {
                 delete tmp;
             }
 //
-// modifier functions
+// content modifiers
 //
-
-
-            void clear() {
-                iterator tmp = begin();
-
-                while (tmp != end()) {
-                    erase(tmp);
-                    tmp++;
-                }
-                _size = 0;
-            }
-
-            void assign(size_type n, const value_type& val) {
-                t_node * tmp;
-                t_node * ptr = _first;
-
-                if (_first != NULL)
-                {
-                    while (ptr != NULL)
-                    {
-                        tmp = ptr;
-                        ptr = ptr->next;
-                        delete tmp;
-                    }
-                }
-                _first = new t_node;
-                _first->prev = NULL;
-                _first->next = NULL;
-                _first->data = val;
-                tmp = _first;
-                _size = n;
-                while (--n) {
-                    tmp->next = new t_node;
-                    tmp->next->prev = tmp;
-                    tmp->next->next = NULL;
-                    tmp->next->data = val;
-                    tmp = tmp->next;
-                }
-                _last = tmp;
-            }
-
-            void remove (const value_type & val) {
-                iterator tmp = begin();
-                iterator s;
-
-                if (empty())
-                {return ;}
-
-                while (tmp != end()) {
-                    if (*tmp == val) {
-                        _erase(tmp);
-                        tmp = begin();
-                        _size--;
-                    }
-                    tmp++;
-                }
-            }
-
-            template <class Predicate>
-            void remove_if(Predicate pred) {
-                iterator tmp = begin();
-                iterator s;
-
-                if (empty()) return ;
-
-                while (tmp != end()) {
-                    if (pred(*tmp)) {
-                        _erase(tmp);
-                        tmp = begin();
-                        _size--;
-                    }
-                    tmp++;
-                }
-            }
-
-            void reverse() {
-                t_node * cur = _first;
-                t_node * tmp = NULL;
-
-                if (empty() || size() == 1)
-                {return ;}
-
-                _last = _first;
-                while (cur != NULL) {
-                    tmp = cur->prev;
-                    cur->prev = cur->next;
-                    cur->next = tmp;
-                    cur = cur->prev;
-                }
-                _first = tmp->prev;
-            }
-
-            void unique() {
-                iterator tmp = begin();
-                value_type rm = *tmp;
-
-                if ((empty()) ||
-                    (size() == 1))
-                {return ;}
-
-                while (tmp != end()) {
-                    rm = *tmp;
-                    tmp++;
-                    while (tmp != end() && *tmp == rm) {
-                        tmp = _erase(tmp);
-                        _size--;
-                    }
-                }
-            }
-
-
-            template <class BinaryPredicate>
-            void unique (BinaryPredicate binary_pred) {
-                iterator tmp = begin();
-                value_type rm = *tmp;
-
-                if ((empty()) ||
-                    (size() == 1))
-                {return ;}
-
-                while (tmp != end()) {
-                    rm = *tmp;
-                    tmp++;
-                    while (tmp != end() && binary_pred(rm, *tmp)) {
-                        tmp = _erase(tmp);
-                        _size--;
-                    }
-                }
-            }
-
-            //
-            // TODO:
-            //
-
-            void merge(list &x) {
-                iterator tmpit = begin();
-
-                // if (x == *this)
-                // {return ;}
-
-                // for (iterator it = begin(); it != end(); it++) {
-                //     std::cout << *(x.begin()) << " " << *it << "start\n";
-                //     while (*(x.begin()) < *it) {
-                //         splice(it, x, x.begin());
-                //         std::cout << "while" << *it;
-                //         if (x.empty()) {return ;}
-                //     }
-                //     std::cout << "nexit in for" << *it;
-                // }
-                splice(tmpit, x);
-            }
-
-            void splice (iterator position,
-                         list &x,
-                         iterator i) {
-                iterator xit = x.begin();
-                t_node * xn = x._first;
-
-                iterator it = begin();
-                t_node * n = _first;
-
-                while (xit != i && xn != NULL) {
-                    xn = xn->next;
-                    xit++;
-                }
-                while (it != position && n != NULL) {
-                    n = n->next;
-                    it++;
-                }
-                if (n != _first) {
-                    xn->next->prev = xn->prev;
-                    xn->prev->next = xn->next;
-                    xn->next = n;
-                    xn->prev = n->prev;
-
-                    n->prev->next = xn;
-                    n->prev = xn;
-                }
-                else {
-                    xn->prev = _first->prev;
-                    xn->next = _first;
-
-                    _first = xn;
-                }
-                _size++;
-                x._size--;
-            }
-
-            void splice (iterator position,
-                         list& x) {
-                iterator tmp = x.begin();
-
-                while (tmp != x.end()) {
-                    splice(position, x, tmp);
-                    tmp++;
-                }
-            }
-
-            void splice (iterator position,
-                         list &x,
-                         iterator first,
-                         iterator last) {
-                while (first != last) {
-                    splice(position, x, first);
-                    first++;
-                }
-            }
-
 
             iterator _insert (iterator position,
                               size_type n,
@@ -432,8 +224,66 @@ namespace ft {
                 return (tmp);
             }
 
+
+            void clear() {
+                iterator tmp = begin();
+
+                while (tmp != end()) {
+                    erase(tmp);
+                    tmp++;
+                }
+                _size = 0;
+            }
+
+            void assign(size_type n, const value_type& val) {
+                t_node * tmp;
+                t_node * ptr = _first;
+
+                if (_first != NULL)
+                {
+                    while (ptr != NULL)
+                    {
+                        tmp = ptr;
+                        ptr = ptr->next;
+                        delete tmp;
+                    }
+                }
+                _first = new t_node;
+                _first->prev = NULL;
+                _first->next = NULL;
+                _first->data = val;
+                tmp = _first;
+                _size = n;
+                while (--n) {
+                    tmp->next = new t_node;
+                    tmp->next->prev = tmp;
+                    tmp->next->next = NULL;
+                    tmp->next->data = val;
+                    tmp = tmp->next;
+                }
+                _last = tmp;
+            }
+
+
+//
+// algo modifiers
+// TODO: merge & splice
+
             void sort() { // bubble sort
-                sort(std::less<value_type>);
+                t_node * s = _first;
+                t_node * tmp = _first;
+                value_type td;
+
+                while (s != NULL) {
+                    if (tmp->data < s->data) {
+                        td = s->data;
+                        s->data = tmp->data;
+                        tmp->data = td;
+                        s = _first;
+                    }
+                    tmp = s;
+                    s = s->next;
+                }
             }
 
             template <class Compare>
@@ -454,6 +304,159 @@ namespace ft {
                 }
             }
 
+            void remove (const value_type & val) {
+                iterator tmp = begin();
+                iterator s;
+
+                if (empty())
+                {return ;}
+
+                while (tmp != end()) {
+                    if (*tmp == val) {
+                        _erase(tmp);
+                        tmp = begin();
+                        _size--;
+                    }
+                    tmp++;
+                }
+            }
+
+            template <class Predicate>
+            void remove_if(Predicate pred) {
+                iterator tmp = begin();
+                iterator s;
+
+                if (empty()) return ;
+
+                while (tmp != end()) {
+                    if (pred(*tmp)) {
+                        _erase(tmp);
+                        tmp = begin();
+                        _size--;
+                    }
+                    tmp++;
+                }
+            }
+
+            void reverse() {
+                t_node * cur = _first;
+                t_node * tmp = NULL;
+
+                if (empty() ||
+                    size() == 1)
+                {return ;}
+
+                _last = _first;
+                while (cur != NULL) {
+                    tmp = cur->prev;
+                    cur->prev = cur->next;
+                    cur->next = tmp;
+                    cur = cur->prev;
+                }
+                _first = tmp->prev;
+            }
+
+            void unique() {
+                iterator tmp = begin();
+                value_type rm = *tmp;
+
+                if ((empty()) ||
+                    (size() == 1))
+                {return ;}
+
+                while (tmp != end()) {
+                    rm = *tmp;
+                    tmp++;
+                    while (tmp != end() && *tmp == rm) {
+                        tmp = _erase(tmp);
+                        _size--;
+                    }
+                }
+            }
+
+
+            template <class BinaryPredicate>
+            void unique (BinaryPredicate binary_pred) {
+                iterator tmp = begin();
+                value_type rm = *tmp;
+
+                if ((empty()) ||
+                    (size() == 1))
+                {return ;}
+
+                while (tmp != end()) {
+                    rm = *tmp;
+                    tmp++;
+                    while (tmp != end() && binary_pred(rm, *tmp)) {
+                        tmp = _erase(tmp);
+                        _size--;
+                    }
+                }
+            }
+
+            void merge(list &x) {
+                iterator tmpit = begin();
+
+                // if (x == *this)
+                // {return ;}
+
+                // for (iterator it = begin(); it != end(); it++) {
+                //     std::cout << *(x.begin()) << " " << *it << "start\n";
+                //     while (*(x.begin()) < *it) {
+                //         splice(it, x, x.begin());
+                //         std::cout << "while" << *it;
+                //         if (x.empty()) {return ;}
+                //     }
+                //     std::cout << "nexit in for" << *it;
+                // }
+                splice(tmpit, x);
+            }
+
+            void splice (iterator position,
+                         list &x,
+                         iterator i) {
+                iterator xit = x.begin();
+                t_node * xn = x._first;
+
+                iterator it = begin();
+                t_node * n = _first;
+
+                while (xit != i && xn != NULL) {
+                    xn = xn->next;
+                    xit++;
+                }
+                while (it != position && n != NULL) {
+                    n = n->next;
+                    it++;
+                }
+                n->prev = xn;
+                _size++;
+                x._size--;
+            }
+
+            void splice (iterator position,
+                         list& x) {
+                iterator tmp = x.begin();
+
+                while (tmp != x.end()) {
+                    splice(position, x, tmp);
+                    tmp++;
+                }
+            }
+
+            void splice (iterator position,
+                         list &x,
+                         iterator first,
+                         iterator last) {
+                while (first != last) {
+                    splice(position, x, first);
+                    first++;
+                }
+            }
+
+//
+// begin/end modifiers
+// TODO: rewrite most
 
             void push_front(const value_type &val) {
                 t_node * tmp;
@@ -535,9 +538,8 @@ namespace ft {
                 }
             }
 
-            size_type size() {
-                return (_size);
-            }
+            size_type size()
+            {return (_size);}
 
             size_type empty()
             {return (_first == NULL);}
