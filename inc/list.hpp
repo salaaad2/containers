@@ -429,6 +429,12 @@ namespace ft {
                     n = n->next;
                     it++;
                 }
+                xn->next->prev = xn->prev;
+                xn->prev->next = xn->next;
+                xn->next = n;
+                xn->prev = n->prev;
+
+                n->prev->next = xn;
                 n->prev = xn;
                 _size++;
                 x._size--;
