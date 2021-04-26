@@ -2,13 +2,14 @@
 #define MAPNODE_H
 
 namespace ft {
-    template <class Key,
-              class T >
+    template <class T>
     struct s_node {
-        Key key;
         T data;
         s_node * left;
         s_node * right;
+        s_node * parent;
+
+        s_node(T d) : data(d) {}
     };
 
 }

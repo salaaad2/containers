@@ -23,30 +23,37 @@ namespace ft {
             typedef const value_type&                        const_reference;
             typedef value_type*                              pointer;
             typedef const value_type*                        const_pointer;
-            typedef map_iterator<key_type, value_type>       iterator;
-            typedef const map_iterator<key_type, value_type> const_iterator;
+            typedef map_iterator<value_type>       iterator;
+            typedef const map_iterator<value_type> const_iterator;
             typedef size_t                                   size_type;
-            typedef s_node<key_type, value_type>             t_node;
+            typedef s_node<value_type>             t_node;
 //
 // constructor/destructors
 //
-            explicit map (const key_compare & compt = key_compare()) {
-                _head = NULL;
-                _compt = compt;
+            explicit map () : _size(0), _head(NULL) {}
+
+            template <class InputIterator>
+            map(InputIterator first, InputIterator last) : _size(0), _head(NULL) {
+                (void)first;
+                (void)last;
             }
 
-            iterator insert (iterator position, const value_type &val) {
-                iterator tmp = begin();
-
-                while (tmp != position) {
-                    tmp++;
-                }
-                if (key_compare(val, *tmp))
-                    tmp->right->data = val;
-                else
-                    tmp->left->data = val;
-
+            ~map() {
+                // clear();
             }
+//
+// content modifiers
+//
+
+            std::pair<iterator, bool> insert (const value_type &val) {
+                t_node * tn = _create_node(val);
+                iterator itmp;
+                key_compare comp;
+
+                (void)tn;
+                return std::pair<iterator, bool>(itmp, true);
+            }
+
 
             iterator begin() {
                 return iterator(_head);
@@ -56,9 +63,18 @@ namespace ft {
                 return const_iterator(_head);
             }
 
+            t_node * _create_node(const value_type &val) {
+                t_node * tmp = new t_node(val);
+
+                tmp->parent = NULL;
+                tmp->left = NULL;
+                tmp->right = NULL;
+                return (tmp);
+            }
+
         private :
+            size_type _size;
             t_node * _head;
-            key_compare _compt;
     };
 }
 

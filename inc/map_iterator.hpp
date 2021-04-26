@@ -3,11 +3,10 @@
 
 #include "MapNode.hpp"
 
-template <class Key,
-          class T>
+template <class T>
 class map_iterator {
   public :
-    typedef ft::s_node<Key, T> t_node;
+    typedef ft::s_node<T> t_node;
 //
 // constructors
 //

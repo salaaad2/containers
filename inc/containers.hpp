@@ -8,10 +8,10 @@
 //#include "stack.hpp"
 //#include <queue>
 //#include "queue.hpp"
-#include <list>
-#include "list.hpp"
-// #include <map>
-// #include "map.hpp"
+// #include <list>
+// #include "list.hpp"
+#include <map>
+#include "map.hpp"
 
 
 #endif // CONTAINERS_H
