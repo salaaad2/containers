@@ -441,8 +441,6 @@ namespace ft {
             void splice (iterator position,
                          list& x) {
                 iterator xit = x.begin();
-                t_node * xfn = x._first;
-                t_node * xln = x._first;
 
                 iterator it = begin();
                 t_node * n = _first;
@@ -451,11 +449,12 @@ namespace ft {
                     n = n->next;
                     it++;
                 }
-                n->prev = xln;
-                xln->next = n;
+                n->prev->next = x._first;
+                x._first->prev = n->prev;
+                n->prev = x._last;
+                x._last->next = n;
 
-                n->prev->next = xfn;
-                xfn->next = n;
+                _size += x.size();
             }
 
             void splice (iterator position,
