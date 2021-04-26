@@ -455,16 +455,42 @@ namespace ft {
                 x._last->next = n;
 
                 _size += x.size();
+                x._size = 0;
             }
 
             void splice (iterator position,
                          list &x,
                          iterator first,
                          iterator last) {
-                while (first != last) {
-                    splice(position, x, first);
-                    first++;
+                iterator xitb = x.begin();
+                t_node * xnb = x._first;
+                iterator xite;
+                t_node * xne;
+
+                iterator it = begin();
+                t_node * n = _first;
+
+                while (it != position && n != NULL) {
+                    n = n->next;
+                    it++;
                 }
+                while (xitb != first && n != NULL) {
+                    xnb = xnb->next;
+                    xitb++;
+                }
+                xite = xitb;
+                xne = xnb;
+                while (xite != last && n != NULL) {
+                    _size++;
+                    xne = xne->next;
+                    xite++;
+                }
+
+                n->prev->next = xnb;
+                xnb->prev = n->prev;
+                n->prev = xne;
+                xne->next = n;
+
             }
 
 //
