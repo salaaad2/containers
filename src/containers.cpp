@@ -384,7 +384,7 @@ int main(void)
    rmrf.push_back(1);
    rmrf.push_back(90);
 
-   rmrf.remove(5);
+   rmrf.remove(90);
    // rmrf.erase(rmrf.end());
    //rmrf.pop_back();
    for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
@@ -431,6 +431,7 @@ int main(void)
    ft::list<int>::iterator split2 = spl2.begin();
    spl2.push_back(10);
 
+   split1++;
    spl1.splice(split1, spl2);
    for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
       std::cout << "[" << *split1 << "]\n";
@@ -442,16 +443,18 @@ int main(void)
       std::cout << "spliced (1) {" << spl2.size() << "}" << std::endl;
       std::cout << "inserted(2) {" << spl1.size() << "}" << std::endl;
    }
-   // std::cout << "-========= reverse =========-" << std::endl; //
-   // ft::list<int> revl(1, 1); // empty const adds 1 zero
+   std::cout << "-========= reverse =========-" << std::endl; //
+   ft::list<int> revl(1, 1); // empty const adds 1 zero
 
-   // for (int i = 2; i < 10; i++) revl.push_back(i);
+   for (int i = 2; i < 10; i++) revl.push_back(i);
+   for (int i = 10; i < 20; i++) revl.push_front(i);
 
 
-   // revl.reverse();
-   // for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
-   //    std::cout << *qwe << std::endl;
-   // }
+   revl.reverse();
+   for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
+      std::cout << *qwe << std::endl;
+   }
+   std::cout << "-=========================-" << std::endl; //
    // std::cout << "-========= merge =========-" << std::endl; //
    // ft::list<int> merge1(1, 1); // empty const adds 1 zero
    // ft::list<int> merge2(2, 2); // empty const adds 1 zero

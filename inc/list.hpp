@@ -88,13 +88,10 @@ namespace ft {
             }
 
             ~list() {
-                t_node * tmp = _first;
-
-                while (tmp != _last) {
-                    tmp = tmp->next;
-                    delete tmp->prev;
+                while (_size) {
+                    pop_back();
+                    std::cout << _size << std::endl;
                 }
-                delete tmp;
             }
 //
 // content modifiers
@@ -438,16 +435,27 @@ namespace ft {
                 n->prev = xn;
                 _size++;
                 x._size--;
+                i.setPtr(xn);
             }
 
             void splice (iterator position,
                          list& x) {
-                iterator tmp = x.begin();
+                iterator xit = x.begin();
+                t_node * xfn = x._first;
+                t_node * xln = x._first;
 
-                while (tmp != x.end()) {
-                    splice(position, x, tmp);
-                    tmp++;
+                iterator it = begin();
+                t_node * n = _first;
+
+                while (it != position && n != NULL) {
+                    n = n->next;
+                    it++;
                 }
+                n->prev = xln;
+                xln->next = n;
+
+                n->prev->next = xfn;
+                xfn->next = n;
             }
 
             void splice (iterator position,
@@ -474,6 +482,7 @@ namespace ft {
 
                 _first->prev = tmp;
                 _first = tmp;
+                _size++;
             }
 
             void push_back(const value_type &val) {
@@ -486,12 +495,14 @@ namespace ft {
 
                 _last->next = tmp;
                 _last = tmp;
+                _size++;
             }
 
             void pop_front() {
                 if (size()) {
                     _first = _first->next;
                     delete _first->prev;
+                    _size--;
                 }
             }
 
@@ -499,6 +510,7 @@ namespace ft {
                 if (size()){
                     _last = _last->prev;
                     delete _last->next;
+                    _size--;
                 }
             }
 //
@@ -542,13 +554,14 @@ namespace ft {
                     _last = ptr;
                     return ;
                 }
+                _size = n;
             }
 
             size_type size()
             {return (_size);}
 
             size_type empty()
-            {return (_first == NULL);}
+            {return (_size == 0);}
 
             size_type max_size()
             {return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);}
