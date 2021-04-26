@@ -54,22 +54,24 @@ namespace ft {
                 if (_size == 0) {
                     _head = tn;
                 }
-                else if (_key_dup(val)) {
+                else if (_key_dup(val) == 1) {
                     while ((*itmp).first != val.first) {
                         itmp++;
                     }
                     return std::pair<iterator, bool>(itmp, false);
                 }
                 else {
-                    if ((comp(*itmp).first, val.first)) {
-                        nu = nu->right;
+                    if (comp((*itmp).first, val.first)) {
+                        nu->right = tn;
+                        std::cout << "qwe" << std::endl;
                     }
                     else {
                         nu->left = tn;
-                        tn->parent = nu;
                     }
+                    tn->parent = nu;
                 }
-                itmp.setPtr(tn);
+                itmp.setPtr(_head);
+                _size++;
                 return std::pair<iterator, bool>(itmp, true);
             }
 
@@ -106,11 +108,15 @@ namespace ft {
             bool _key_dup(const_reference val) {
                 iterator it = begin();
 
+                if ((*it).first == val.first)
+                {return (true);}
+
                 while (it != end()) {
                     if ((*it).first == val.first)
                     {return (true);}
                     it++;
                 }
+                std::cout << "(it)" << (*it).first << "(val)" << val.first << std::endl;
                 return (false);
             }
 

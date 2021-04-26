@@ -472,8 +472,13 @@ int main(void)
    std::cout << "-========= construct/insert ========-" << std::endl;
 
    ft::map<char, int> mymap;
-   ft::map<char, int>::iterator it = mymap.begin();
    mymap.insert(std::pair<char, int>('a', 100));
+   mymap.insert(std::pair<char, int>('b', 111));
+
+   ft::map<char, int>::iterator it = mymap.begin();
+   std::cout << (*it).second << std::endl;
+   it++;
+   std::cout << (*it).second << std::endl;
 
    return (0);
 }
