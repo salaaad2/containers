@@ -8,7 +8,6 @@
 
 #include "ListNode.hpp"
 #include "list_iterator.hpp"
-#include "reverse_list_iterator.hpp"
 
 namespace ft {
     template <class T> class list {

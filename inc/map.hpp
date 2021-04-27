@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include <math.h>
+
 #include "MapNode.hpp"
 #include "map_iterator.hpp"
 
@@ -44,6 +46,11 @@ namespace ft {
 //
 // content modifiers
 //
+// debug prints :
+// std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
+// std::cout << val.first << " goes right" << std::endl;
+// std::cout << val.first << " goes left" << std::endl;
+// std::cout << "next comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
 
             std::pair<iterator, bool> insert (const_reference &val) {
                 t_node * tn = _create_node(val);
@@ -62,15 +69,13 @@ namespace ft {
                     return std::pair<iterator, bool>(itmp, false);
                 }
                 else {
-                    while (1) {
+                    while (1) { // lol
                         itmp = iterator(_head);
-                        std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
                         if (comp((*itmp).first, val.first) == 1) {
                             if (nu->right != NULL) {
                                 nu = nu->right;
                             }
                             else  {
-                                std::cout << val.first << " goes right" << std::endl;
                                 nu->right = tn;
                                 break ;
                             }
@@ -80,13 +85,11 @@ namespace ft {
                                 nu = nu->left;
                             }
                             else  {
-                                std::cout << val.first << " goes left" << std::endl;
                                 nu->left = tn;
                                 break ;
                             }
                         }
                         itmp.setPtr(nu);
-                        std::cout << "next comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
                     }
                 }
                 tn->parent = nu;
@@ -120,6 +123,23 @@ namespace ft {
                 }
                 insert(val);
                 return find(val.first);
+            }
+//
+// capacity
+//
+            size_type max_size()
+            {return (pow(2, sizeof(void *) * 8) / sizeof(ft::map<Key, T, Compare>) - 1);}
+            size_type size () const {
+                size_type s;
+
+                for (iterator it = begin(); it != end(); it++) {
+                    s++;
+                }
+                return s;
+            }
+
+            bool empty () const {
+                return (_head == NULL);
             }
 //
 // access
@@ -199,6 +219,14 @@ namespace ft {
                 return (ite);
             }
 
+
+        private :
+            size_type _size;
+            t_node * _head;
+
+//
+// private helper functions
+//
             t_node * _create_node(const_reference val) {
                 t_node * tmp = new t_node(val);
 
@@ -219,13 +247,8 @@ namespace ft {
                     {return (true);}
                     it++;
                 }
-                // std::cout << "(it)" << (*it).first << "(val)" << val.first << std::endl;
                 return (false);
             }
-
-        private :
-            size_type _size;
-            t_node * _head;
     };
 }
 
