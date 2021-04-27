@@ -472,11 +472,11 @@ int main(void)
    std::cout << "-========= construct/insert ========-" << std::endl;
 
    ft::map<char, int> mymap;
-   mymap.insert(std::pair<char, int>('a', 100));
-   mymap.insert(std::pair<char, int>('c', 333));
-   mymap.insert(std::pair<char, int>('b', 222));
    mymap.insert(std::pair<char, int>('d', 444));
+   mymap.insert(std::pair<char, int>('c', 333));
    mymap.insert(std::pair<char, int>('z', 909));
+   mymap.insert(std::pair<char, int>('b', 222));
+   mymap.insert(std::pair<char, int>('a', 100));
 //
    ft::map<char, int>::iterator it = mymap.begin();
 //   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
@@ -492,7 +492,7 @@ int main(void)
 
    std::cout << "-========= iterators ========-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {
-   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    }
    std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    return (0);

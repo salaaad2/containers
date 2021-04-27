@@ -62,13 +62,14 @@ namespace ft {
                 }
                 else {
                     while (1) {
+                        std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
                         if (comp((*itmp).first, val.first) == 1) {
                             if (nu->right != NULL) {
                                 nu = nu->right;
                             }
                             else  {
+                                std::cout << val.first << " goes right" << std::endl;
                                 nu->right = tn;
-                                std::cout << "right" << std::endl;
                                 break ;
                             }
                         }
@@ -77,7 +78,7 @@ namespace ft {
                                 nu = nu->left;
                             }
                             else  {
-                                std::cout << "left" << std::endl;
+                                std::cout << val.first << " goes left" << std::endl;
                                 nu->left = tn;
                                 break ;
                             }
@@ -109,11 +110,11 @@ namespace ft {
                 }
                 if (comp((*position).first, val.first) == 1) {
                     if (n->right == NULL) {
+                        std::cout << "fast " << std::endl;
                         n->right = _create_node(val);
                         n->right->parent = n;
+                        return (iterator(n->right));
                     }
-                    std::cout << "fast " << std::endl;
-                    return (iterator(n->right));
                 }
                 insert(val);
                 return find(val.first);
@@ -153,7 +154,7 @@ namespace ft {
 //
 
             iterator begin() {
-                return iterator(_head);
+                return (iterator(_head));
             }
 
             const_iterator begin() const {
