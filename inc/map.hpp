@@ -41,7 +41,7 @@ namespace ft {
             }
 
             ~map() {
-                // clear();
+                _destroy(_head);
             }
 //
 // content modifiers
@@ -51,6 +51,7 @@ namespace ft {
 // std::cout << val.first << " goes right" << std::endl;
 // std::cout << val.first << " goes left" << std::endl;
 // std::cout << "next comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
+// std::cout << "fast " << std::endl;
 
             std::pair<iterator, bool> insert (const_reference &val) {
                 t_node * tn = _create_node(val);
@@ -69,8 +70,8 @@ namespace ft {
                     return std::pair<iterator, bool>(itmp, false);
                 }
                 else {
-                    while (1) { // lol
                         itmp = iterator(_head);
+                    while (1) { // lol
                         if (comp((*itmp).first, val.first) == 1) {
                             if (nu->right != NULL) {
                                 nu = nu->right;
@@ -115,7 +116,6 @@ namespace ft {
                 }
                 if (comp((*position).first, val.first) == 1) {
                     if (n->right == NULL) {
-                        std::cout << "fast " << std::endl;
                         n->right = _create_node(val);
                         n->right->parent = n;
                         return (iterator(n->right));
@@ -124,13 +124,26 @@ namespace ft {
                 insert(val);
                 return find(val.first);
             }
+
+            // TODO test this maybeeeeeeeeeeeeeeeeeeeeeeeeee?
+            template <class InputIterator>
+            void insert (InputIterator first, InputIterator last) {
+                InputIterator tmp = first;
+
+                while (tmp != last) {
+                    insert(*tmp);
+                    tmp++;
+                }
+            }
+
 //
 // capacity
 //
             size_type max_size()
             {return (pow(2, sizeof(void *) * 8) / sizeof(ft::map<Key, T, Compare>) - 1);}
+
             size_type size () const {
-                size_type s;
+                size_type s = 0;
 
                 for (iterator it = begin(); it != end(); it++) {
                     s++;
@@ -142,7 +155,7 @@ namespace ft {
                 return (_head == NULL);
             }
 //
-// access
+// operations
 //
             iterator find(const key_type & k) {
                 t_node *tmp = _head;
@@ -171,6 +184,44 @@ namespace ft {
             const_iterator find(const key_type &k) const {
                 return (const_iterator(find(k)));
             }
+
+            size_type count (const key_type & k) {
+                if (find(k) != end())
+                {return (1);}
+                else
+                {return (0);}
+            }
+
+            iterator lower_bound (const key_type& k) {
+                iterator it = begin();
+                key_compare c;
+                size_type s;
+
+                while (c((*it).first, k) == 1) {
+                    s++;
+                    it++;
+                }
+                if (s != size())
+                {return (it);}
+                else
+                {return (end());}
+            }
+// const_iterator lower_bound (const key_type& k) const;
+            iterator upper_bound (const key_type& k) {
+                iterator it = begin();
+                key_compare c;
+                size_type s;
+
+                while (c((*it).first, k) == 0) {
+                    s++;
+                    it++;
+                }
+                if (s != size())
+                {return (it);}
+                else
+                {return (end());}
+            }
+// const_iterator upper_bound (const key_type& k) const;
 //
 // iterators
 //
@@ -187,14 +238,12 @@ namespace ft {
             }
 
             const_iterator begin() const {
-                const_iterator ite;
                 t_node * tmp = _head;
 
                 while (tmp->left != NULL) {
                     tmp = tmp->left;
                 }
-                ite.setPtr(tmp);
-                return (ite);
+                return (const_iterator(tmp));
             }
 
             iterator end() {
@@ -209,14 +258,12 @@ namespace ft {
             }
 
             const_iterator end() const {
-                const_iterator ite;
                 t_node * tmp = _head;
 
                 while (tmp->right != NULL) {
                     tmp = tmp->right;
                 }
-                ite.setPtr(tmp->right);
-                return (ite);
+                return (const_iterator(tmp->right));
             }
 
 
@@ -248,6 +295,14 @@ namespace ft {
                     it++;
                 }
                 return (false);
+            }
+
+            void _destroy(t_node * leaf) {
+                if (leaf != NULL) {
+                    _destroy(leaf->left);
+                    _destroy(leaf->right);
+                    delete leaf;
+                }
             }
     };
 }
