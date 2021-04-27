@@ -36,16 +36,16 @@ namespace ft {
 
             template <class InputIterator>
             map(InputIterator first, InputIterator last) : _size(0), _head(NULL) {
-                (void)first;
-                (void)last;
+                insert(first, last);
             }
 
             ~map() {
                 _destroy(_head);
+                _size = 0;
             }
 //
 // content modifiers
-//
+// TODO: erase
 // debug prints :
 // std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
 // std::cout << val.first << " goes right" << std::endl;
@@ -70,7 +70,7 @@ namespace ft {
                     return std::pair<iterator, bool>(itmp, false);
                 }
                 else {
-                        itmp = iterator(_head);
+                    itmp = iterator(_head);
                     while (1) { // lol
                         if (comp((*itmp).first, val.first) == 1) {
                             if (nu->right != NULL) {
@@ -118,6 +118,7 @@ namespace ft {
                     if (n->right == NULL) {
                         n->right = _create_node(val);
                         n->right->parent = n;
+                        _size++;
                         return (iterator(n->right));
                     }
                 }
@@ -126,6 +127,7 @@ namespace ft {
             }
 
             // TODO test this maybeeeeeeeeeeeeeeeeeeeeeeeeee?
+            // no.
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last) {
                 InputIterator tmp = first;
@@ -134,6 +136,23 @@ namespace ft {
                     insert(*tmp);
                     tmp++;
                 }
+            }
+
+            void erase(iterator position) {
+                t_node * t = position.getPtr();
+
+                if (t->right != NULL && t->right == NULL) {
+                    if (t == t->parent->right)
+                    {t->parent->right = NULL;}
+                    else
+                    {t->parent->left = NULL;}
+                    delete t;
+                }
+            }
+
+            void clear() {
+                _destroy(_head);
+                _size = 0;
             }
 
 //
@@ -192,10 +211,41 @@ namespace ft {
                 {return (0);}
             }
 
+            iterator upper_bound (const key_type& k) {
+                iterator it = begin();
+                key_compare c;
+                size_type s = 0;
+
+                while (c(k, (*it).first) == 0) {
+                    s++;
+                    it++;
+                }
+                if (s != size())
+                {return (it);}
+                else
+                {return (end());}
+            }
+
+            const_iterator upper_bound (const key_type& k) const {
+                iterator it = begin();
+                key_compare c;
+                size_type s = 0;
+
+                while (c((*it).first, k) == 1) {
+                    s++;
+                    it++;
+                }
+                if (s != size())
+                {return (const_iterator(it.getPtr()));}
+                else
+                {return (end());}
+            }
+
+
             iterator lower_bound (const key_type& k) {
                 iterator it = begin();
                 key_compare c;
-                size_type s;
+                size_type s = 0;
 
                 while (c((*it).first, k) == 1) {
                     s++;
@@ -206,22 +256,28 @@ namespace ft {
                 else
                 {return (end());}
             }
-// const_iterator lower_bound (const key_type& k) const;
-            iterator upper_bound (const key_type& k) {
+
+            const_iterator lower_bound (const key_type& k) const {
                 iterator it = begin();
                 key_compare c;
-                size_type s;
+                size_type s = 0;
 
-                while (c((*it).first, k) == 0) {
+                while (c(k, (*it).first) == 0) {
                     s++;
                     it++;
                 }
                 if (s != size())
-                {return (it);}
+                {return (const_iterator(it.getPtr()));}
                 else
                 {return (end());}
             }
-// const_iterator upper_bound (const key_type& k) const;
+//
+// observers
+//
+            key_compare key_comp() {
+                key_compare kc;
+                return (kc);
+            }
 //
 // iterators
 //

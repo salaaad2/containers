@@ -490,12 +490,16 @@ int main(void)
 //it = mymap.insert(it, std::pair<char, int>('b', 424));
 //std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
 
-   mymap.insert(it, std::pair<char, int>('j', 666));
+   mymap.insert(std::pair<char, int>('j', 666));
    std::cout << "-========= iterators ========-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {
 	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    }
    std::cout << "size : " << mymap.size() << std::endl;
+   it = mymap.lower_bound('b');
+   std::cout << "lower bound : " << (*it).first << std::endl;
+   it = mymap.upper_bound('j');
+   std::cout << "upper bound : " << (*it).first << std::endl;
  //  std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    return (0);
 }

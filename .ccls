@@ -1,4 +1,3 @@
--std=c++89
 -Wall
 -Werror
 -Wextra
