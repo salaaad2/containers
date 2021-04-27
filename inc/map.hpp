@@ -91,6 +91,32 @@ namespace ft {
                 _size++;
                 return std::pair<iterator, bool>(itmp, true);
             }
+
+            iterator insert (iterator position, const_reference &val) {
+                t_node * n = position.getPtr();
+                iterator itmp(n);
+                key_compare comp;
+
+                if (_size == 0) {
+                    _head = _create_node(val);
+                    return (itmp);
+                }
+                else if (_key_dup(val) == 1) {
+                    while ((*itmp).first != val.first) {
+                        itmp++;
+                    }
+                    return (itmp);
+                }
+                if (comp((*position).first, val.first) == 1) {
+                    if (n->right == NULL) {
+                        n->right = _create_node(val);
+                        n->right->parent = n;
+                    }
+                    return (iterator(n->right));
+                }
+                insert(val);
+                return find(val.first);
+            }
 //
 // access
 //
@@ -116,6 +142,10 @@ namespace ft {
                     it.setPtr(tmp);
                 }
                 return (end());
+            }
+
+            const_iterator find(const key_type &k) const {
+                return (const_iterator(find(k)));
             }
 //
 // iterators
