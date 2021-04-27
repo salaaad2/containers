@@ -112,6 +112,7 @@ namespace ft {
                         n->right = _create_node(val);
                         n->right->parent = n;
                     }
+                    std::cout << "fast " << std::endl;
                     return (iterator(n->right));
                 }
                 insert(val);
