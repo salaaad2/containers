@@ -2,3 +2,4 @@
 -Wall
 -Werror
 -Wextra
+-isystem/usr/lib/clang/

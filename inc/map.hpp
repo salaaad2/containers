@@ -61,16 +61,32 @@ namespace ft {
                     return std::pair<iterator, bool>(itmp, false);
                 }
                 else {
-                    if (comp((*itmp).first, val.first)) {
-                        nu->right = tn;
-                        std::cout << "qwe" << std::endl;
-                    }
-                    else {
-                        nu->left = tn;
+                    while (1) {
+                        if (comp((*itmp).first, val.first) == 1) {
+                            if (nu->right != NULL) {
+                                nu = nu->right;
+                            }
+                            else  {
+                                nu->right = tn;
+                                std::cout << "right" << std::endl;
+                                return std::pair<iterator, bool>(itmp, true);
+                            }
+                        }
+                        else {
+                            if (nu->left != NULL) {
+                                nu = nu->left;
+                            }
+                            else  {
+                                std::cout << "left" << std::endl;
+                                nu->left = tn;
+                                return std::pair<iterator, bool>(itmp, true);
+                            }
+                        }
+                        itmp.setPtr(nu);
                     }
                     tn->parent = nu;
                 }
-                itmp.setPtr(_head);
+                itmp.setPtr(tn);
                 _size++;
                 return std::pair<iterator, bool>(itmp, true);
             }
@@ -116,7 +132,7 @@ namespace ft {
                     {return (true);}
                     it++;
                 }
-                std::cout << "(it)" << (*it).first << "(val)" << val.first << std::endl;
+                // std::cout << "(it)" << (*it).first << "(val)" << val.first << std::endl;
                 return (false);
             }
 
