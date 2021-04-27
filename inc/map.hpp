@@ -69,7 +69,7 @@ namespace ft {
                             else  {
                                 nu->right = tn;
                                 std::cout << "right" << std::endl;
-                                return std::pair<iterator, bool>(itmp, true);
+                                break ;
                             }
                         }
                         else {
@@ -79,14 +79,14 @@ namespace ft {
                             else  {
                                 std::cout << "left" << std::endl;
                                 nu->left = tn;
-                                return std::pair<iterator, bool>(itmp, true);
+                                break ;
                             }
                         }
                         itmp.setPtr(nu);
                         std::cout << "next comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
                     }
-                    tn->parent = nu;
                 }
+                tn->parent = nu;
                 itmp.setPtr(tn);
                 _size++;
                 return std::pair<iterator, bool>(itmp, true);
@@ -161,12 +161,11 @@ namespace ft {
             }
 
             iterator end() {
-                iterator ite = begin();
+                iterator ite;
                 t_node * tmp = _head;
 
-                while (tmp->right) {
+                while (tmp->right != NULL) {
                     tmp = tmp->right;
-                    ite++;
                 }
                 ite.setPtr(tmp);
                 return (ite);

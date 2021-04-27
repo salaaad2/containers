@@ -28,15 +28,22 @@ class map_iterator {
 // Prefix overloading
 // TODO: successor algorithm
     map_iterator& operator++()
-    { if (_ptr->right == NULL) {
-        _ptr = _ptr->parent;
-        return *this;
-      }
-      else if (_ptr->right != NULL) {
+    {
+      if (_ptr == NULL) {return *this;}
+      if (_ptr->right != NULL) {
         _ptr = _ptr->right;
         while (_ptr->left != NULL) {
           _ptr = _ptr->left;
         }
+        return *this;
+      }
+      else if (_ptr->right == NULL) {
+        t_node * tmp = _ptr->parent;
+        while (tmp != NULL && _ptr == tmp->right) {
+          _ptr = tmp;
+          tmp = tmp->parent;
+        }
+        _ptr = tmp;
         return *this;
       }
 

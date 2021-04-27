@@ -473,21 +473,22 @@ int main(void)
 
    ft::map<char, int> mymap;
    mymap.insert(std::pair<char, int>('a', 100));
-   mymap.insert(std::pair<char, int>('c', 222));
-   mymap.insert(std::pair<char, int>('d', 333));
+   mymap.insert(std::pair<char, int>('c', 333));
+   mymap.insert(std::pair<char, int>('b', 222));
+   mymap.insert(std::pair<char, int>('d', 444));
    mymap.insert(std::pair<char, int>('z', 909));
-
+//
    ft::map<char, int>::iterator it = mymap.begin();
-   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
-   it++;         
-   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
-
-   it = mymap.find('z');
-   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
-
-it = mymap.begin();
-it = mymap.insert(it, std::pair<char, int>('b', 424));
-std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
+//   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
+//   it++;         
+//   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
+//
+//   it = mymap.find('z');
+//   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
+//
+//it = mymap.begin();
+//it = mymap.insert(it, std::pair<char, int>('b', 424));
+//std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
 
    std::cout << "-========= iterators ========-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {
