@@ -26,7 +26,7 @@ class map_iterator {
 
 //
 // Prefix overloading
-// TODO: successor algorithm
+// Successor Algorithm
     map_iterator& operator++() {
       if (_ptr == NULL) {return *this;}
       if (_ptr->right != NULL) {
@@ -43,8 +43,6 @@ class map_iterator {
         }
         _ptr = tmp;
       }
-     std::cout << "next : " << _ptr->data.first << std::endl;
-
       return *this;
     }
 

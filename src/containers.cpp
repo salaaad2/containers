@@ -479,7 +479,7 @@ int main(void)
    mymap.insert(std::pair<char, int>('a', 100));
 //
    ft::map<char, int>::iterator it = mymap.begin();
-//   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
+   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
 //   it++;         
 //   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
 //
@@ -494,6 +494,6 @@ int main(void)
    for (it = mymap.begin(); it != mymap.end(); it++) {
 	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    }
-   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+ //  std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    return (0);
 }

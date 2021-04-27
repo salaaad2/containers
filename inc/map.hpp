@@ -48,13 +48,14 @@ namespace ft {
             std::pair<iterator, bool> insert (const_reference &val) {
                 t_node * tn = _create_node(val);
                 t_node * nu = _head;
-                iterator itmp = begin();
+                iterator itmp;
                 key_compare comp;
 
                 if (_size == 0) {
                     _head = tn;
                 }
                 else if (_key_dup(val) == 1) {
+                    itmp = begin();
                     while ((*itmp).first != val.first) {
                         itmp++;
                     }
@@ -62,6 +63,7 @@ namespace ft {
                 }
                 else {
                     while (1) {
+                        itmp = iterator(_head);
                         std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
                         if (comp((*itmp).first, val.first) == 1) {
                             if (nu->right != NULL) {
@@ -154,11 +156,25 @@ namespace ft {
 //
 
             iterator begin() {
-                return (iterator(_head));
+                iterator ite;
+                t_node * tmp = _head;
+
+                while (tmp->left != NULL) {
+                    tmp = tmp->left;
+                }
+                ite.setPtr(tmp);
+                return (ite);
             }
 
             const_iterator begin() const {
-                return const_iterator(_head);
+                const_iterator ite;
+                t_node * tmp = _head;
+
+                while (tmp->left != NULL) {
+                    tmp = tmp->left;
+                }
+                ite.setPtr(tmp);
+                return (ite);
             }
 
             iterator end() {
@@ -168,7 +184,18 @@ namespace ft {
                 while (tmp->right != NULL) {
                     tmp = tmp->right;
                 }
-                ite.setPtr(tmp);
+                ite.setPtr(tmp->right);
+                return (ite);
+            }
+
+            const_iterator end() const {
+                const_iterator ite;
+                t_node * tmp = _head;
+
+                while (tmp->right != NULL) {
+                    tmp = tmp->right;
+                }
+                ite.setPtr(tmp->right);
                 return (ite);
             }
 
