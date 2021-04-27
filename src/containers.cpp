@@ -476,10 +476,14 @@ int main(void)
    mymap.insert(std::pair<char, int>('c', 222));
    mymap.insert(std::pair<char, int>('d', 333));
    mymap.insert(std::pair<char, int>('b', 111));
+   mymap.insert(std::pair<char, int>('z', 909));
 
    ft::map<char, int>::iterator it = mymap.begin();
    std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
    it++;         
+   std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
+
+   it = mymap.find('z');
    std::cout << "first : " << (*it).first << " second : " << (*it).second << std::endl;
 
    return (0);

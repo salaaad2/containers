@@ -83,6 +83,7 @@ namespace ft {
                             }
                         }
                         itmp.setPtr(nu);
+                        std::cout << "next comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
                     }
                     tn->parent = nu;
                 }
@@ -90,7 +91,35 @@ namespace ft {
                 _size++;
                 return std::pair<iterator, bool>(itmp, true);
             }
+//
+// access
+//
+            iterator find(const key_type & k) {
+                t_node *tmp = _head;
+                iterator it(tmp);
+                key_compare comp;
 
+                if ((*it).first == k) {
+                    return it;
+                }
+                while (it != end())
+                {
+                    if ((*it).first == k) {
+                        return (it);
+                    }
+                    else if (comp((*it).first, k) == 1) {
+                        tmp = tmp->right;
+                    }
+                    else {
+                        tmp = tmp->left;
+                    }
+                    it.setPtr(tmp);
+                }
+                return (end());
+            }
+//
+// iterators
+//
 
             iterator begin() {
                 return iterator(_head);
