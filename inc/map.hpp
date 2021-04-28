@@ -39,6 +39,10 @@ namespace ft {
                 insert(first, last);
             }
 
+            map(const map & x) {
+                insert(x.begin(), x.end());
+            }
+
             ~map() {
                 _destroy(_head);
                 _size = 0;

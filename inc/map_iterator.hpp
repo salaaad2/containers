@@ -47,8 +47,24 @@ class map_iterator {
     }
 
     map_iterator& operator--()
-    { _ptr = _ptr->left;
-      return *this; }
+    {
+      if (_ptr == NULL) {return *this;}
+      if (_ptr->left != NULL) {
+        _ptr = _ptr->left;
+        while (_ptr->right != NULL) {
+          _ptr = _ptr->right;
+        }
+      }
+      else {
+        t_node * tmp = _ptr->parent;
+        while (tmp != NULL && _ptr == tmp->left) {
+          _ptr = tmp;
+          tmp = tmp->parent;
+        }
+        _ptr = tmp;
+      }
+      return *this;
+    }
 
 // TODO: double check
     map_iterator operator++(int)

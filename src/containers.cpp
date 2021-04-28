@@ -500,6 +500,13 @@ int main(void)
    std::cout << "lower bound : " << (*it).first << std::endl;
    it = mymap.upper_bound('j');
    std::cout << "upper bound : " << (*it).first << std::endl;
+   it--;
+   it--;
+   it--;
+   it--;
+   it--;
+   std::cout << "-- : " << (*it).first << std::endl;
+
  //  std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    return (0);
 }
