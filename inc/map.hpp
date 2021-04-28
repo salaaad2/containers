@@ -342,6 +342,24 @@ namespace ft {
                 return (const_iterator(tmp));
             }
 
+            reverse_iterator rbegin() {
+                iterator ite;
+                t_node * tmp = _head;
+
+                if (_size == 0 || _head == NULL) {
+                    return (reverse_iterator(_head));
+                }
+                while (tmp->right != NULL) {
+                    tmp = tmp->right;
+                }
+                ite.setPtr(tmp);
+                return (reverse_iterator(ite.getPtr()));
+            }
+
+            reverse_iterator rend() {
+                return (reverse_iterator(_head));
+            }
+
             iterator end() {
                 iterator ite;
                 t_node * tmp = _head;
