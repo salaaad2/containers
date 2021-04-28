@@ -326,6 +326,9 @@ namespace ft {
             const_iterator begin() const {
                 t_node * tmp = _head;
 
+                if (_size == 0 || _head == NULL) {
+                    return (const_iterator(_head));
+                }
                 while (tmp->left != NULL) {
                     tmp = tmp->left;
                 }
@@ -336,6 +339,9 @@ namespace ft {
                 iterator ite;
                 t_node * tmp = _head;
 
+                if (_size == 0 || _head == NULL) {
+                    return (iterator(_head));
+                }
                 while (tmp->right != NULL) {
                     tmp = tmp->right;
                 }
@@ -346,6 +352,9 @@ namespace ft {
             const_iterator end() const {
                 t_node * tmp = _head;
 
+                if (_size == 0 || _head == NULL) {
+                    return (const_iterator(_head));
+                }
                 while (tmp->right != NULL) {
                     tmp = tmp->right;
                 }
