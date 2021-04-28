@@ -5,7 +5,7 @@
 
 #include <math.h>
 
-#include "MapNode.hpp"
+#include "map_node.hpp"
 #include "map_iterator.hpp"
 
 namespace ft {
@@ -27,6 +27,8 @@ namespace ft {
             typedef const value_type*                        const_pointer;
             typedef map_iterator<value_type>                 iterator;
             typedef const map_iterator<value_type>           const_iterator;
+            typedef reverse_map_iterator<value_type>         reverse_iterator;
+            typedef const reverse_map_iterator<value_type>   reverse_const_iterator;
             typedef size_t                                   size_type;
             typedef s_node<value_type>                       t_node;
 //
@@ -127,8 +129,6 @@ namespace ft {
                 return find(val.first);
             }
 
-            // TODO test this maybeeeeeeeeeeeeeeeeeeeeeeeeee?
-            // no.
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last) {
                 InputIterator tmp = first;
@@ -139,25 +139,21 @@ namespace ft {
                 }
             }
 
-            // void erase(iterator position) {
-            //     // t_node * t = position.getPtr();
-            //     // t_node * tmp;
+            void erase(iterator position) {
+                t_node * t = position.getPtr();
 
-            //     // if (t->right == NULL && t->left == NULL) {
-            //     //     delete t;
-            //     // }
-            //     // else if (t->right != NULL) {
-            //     //     // t->right->parent = t->parent;
-            //     //     delete t;
-            //     // }
-            //     // else if (t->left != NULL) {
-            //     //     tmp = t;
-            //     //     // std::cout << t->left->data.first << t->data.first<< t->parent->data.first  << std::endl;
-            //     //     t->left->parent = t->parent;
-            //     //     t = t->left;
-            //     //     delete tmp;
-            //     // }
-            // }
+                if (t->right == NULL && t->left == NULL) {
+                    delete t;
+                }
+                else if (t->right != NULL) {
+                    t->right->parent = t->parent;
+                    delete t;
+                }
+                else if (t->left != NULL) {
+                    t = t->left;
+                    delete t;
+                }
+            }
 
             void swap(map & x) {
                 map tmp(x);

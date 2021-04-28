@@ -1,7 +1,7 @@
 #ifndef LIST_ITERATOR_H_
 #define LIST_ITERATOR_H_
 
-#include "ListNode.hpp"
+#include "list_node.hpp"
 
 ////////////////////////////
 // REGULAR LIST ITERATOR  //

@@ -507,51 +507,51 @@ int main(void)
    it--;
    std::cout << "-- : " << (*it).first << std::endl;
 
-   // std::cout << "-========= remove ========-" << std::endl;
+   // std::cout << "-========= operator[] ========-" << std::endl;
+   // mymap['k'] = 777;
+   // mymap['k'] = 778;
+   // mymap['k'] = 779;
    // for (it = mymap.begin(); it != mymap.end(); it++) {
    //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    // }
-   // it = mymap.begin();
 
-   // it = mymap.find('j');
-   // std::cout << "remove : " << (*it).first << std::endl;
-   // mymap.erase(it);
-   // std::cout << "-=================-" << std::endl;
+   // std::cout << "-========= swap ========-" << std::endl;
+
+   // ft::map<char, int> dosmap;
+   // dosmap.insert(std::pair<char, int>('s', 444));
+   // dosmap.insert(std::pair<char, int>('t', 333));
+   // dosmap.insert(std::pair<char, int>('u', 909));
+   // dosmap.insert(std::pair<char, int>('v', 222));
+   // dosmap.insert(std::pair<char, int>('s', 100));
+   // std::cout << "------ before -----" << std::endl;
    // for (it = mymap.begin(); it != mymap.end(); it++) {
    //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    // }
-   std::cout << "-========= operator[] ========-" << std::endl;
-   mymap['k'] = 777;
-   mymap['k'] = 778;
-   mymap['k'] = 779;
+   // std::cout << "-----------" << std::endl;
+   // for (it = dosmap.begin(); it != dosmap.end(); it++) {
+   //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+   // }
+   // mymap.swap(dosmap);
+   // std::cout << "------ after -----" << std::endl;
+   // for (it = mymap.begin(); it != mymap.end(); it++) {
+   //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+   // }
+   // std::cout << "-----------" << std::endl;
+   // for (it = dosmap.begin(); it != dosmap.end(); it++) {
+   //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+   // }
+   std::cout << "-========= remove ========-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {
-	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+       std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    }
+   it = mymap.begin();
 
-   std::cout << "-========= swap ========-" << std::endl;
-
-   ft::map<char, int> dosmap;
-   dosmap.insert(std::pair<char, int>('s', 444));
-   dosmap.insert(std::pair<char, int>('t', 333));
-   dosmap.insert(std::pair<char, int>('u', 909));
-   dosmap.insert(std::pair<char, int>('v', 222));
-   dosmap.insert(std::pair<char, int>('s', 100));
-   std::cout << "------ before -----" << std::endl;
+   it = mymap.find('a');
+   std::cout << "remove : " << (*it).first << std::endl;
+   mymap.erase(it);
+   std::cout << "-=================-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {
-	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
-   }
-   std::cout << "-----------" << std::endl;
-   for (it = dosmap.begin(); it != dosmap.end(); it++) {
-	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
-   }
-   mymap.swap(dosmap);
-   std::cout << "------ after -----" << std::endl;
-   for (it = mymap.begin(); it != mymap.end(); it++) {
-	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
-   }
-   std::cout << "-----------" << std::endl;
-   for (it = dosmap.begin(); it != dosmap.end(); it++) {
-	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+       std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    }
    return (0);
 }
