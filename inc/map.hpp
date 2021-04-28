@@ -141,20 +141,22 @@ namespace ft {
 
             // TODO: erase
             void erase(iterator position) {
-                t_node * t = position.getPtr();
-                t_node * tmp = t->parent;
-                t_node * d = t->parent;
+                t_node * t;
+                t_node * tmp;
+                t_node * d;
 
+                t = position.getPtr();
                 d = t;
+                tmp = t->parent;
                 if ((t->right != NULL && t->left == NULL) ||
-                    (t->right == NULL && t->left != NULL)) { // onechild
-                    if (tmp->right == t) {                   // if right
+                    (t->right == NULL && t->left != NULL)) {    // onechild
+                    if (tmp->right == t) {                      // if right
                         tmp->right = (t->right == NULL) ? t->left : t->right;
                         t = (t->right == NULL) ? t->left : t->right;
                         t->parent = tmp;
                         delete d;
                     }
-                    else {
+                    else {                                      // if left
                         tmp->left = (t->right == NULL) ? t->left : t->right;
                         t = (t->right == NULL) ? t->left : t->right;
                         t->parent = tmp;
@@ -162,7 +164,25 @@ namespace ft {
                     }
                 }
                 else if (t->right == NULL && t->left == NULL) { // leaf
-                    delete t;
+                    if (tmp->right == t) {                      // if right
+                        tmp->right = NULL;
+                        delete d;
+                    }
+                    else {                                      // if left
+                        tmp->left = NULL;
+                        delete d;
+                    }
+                }
+                else if (t->right == NULL && t->left == NULL) { // children
+                    if (tmp->right == t) {
+                        t_node * ch = _get_child(t);
+                        ch->left = ch->parent->left;
+                        ch->right = ch->parent->right;
+                        // tmp->right = _get_child();
+                        // t = _get_child();
+                        t = ch;
+                        t->parent = tmp;
+                    }
                 }
             }
 
