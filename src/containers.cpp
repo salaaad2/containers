@@ -546,7 +546,7 @@ int main(void)
    }
    it = mymap.begin();
 
-   it = mymap.find('a');
+   it = mymap.find('b');
    std::cout << "remove : " << (*it).first << std::endl;
    mymap.erase(it);
    std::cout << "-=================-" << std::endl;

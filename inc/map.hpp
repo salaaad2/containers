@@ -139,18 +139,29 @@ namespace ft {
                 }
             }
 
+            // TODO: erase
             void erase(iterator position) {
                 t_node * t = position.getPtr();
+                t_node * tmp = t->parent;
+                t_node * d = t->parent;
 
-                if (t->right == NULL && t->left == NULL) {
-                    delete t;
+                d = t;
+                if ((t->right != NULL && t->left == NULL) ||
+                    (t->right == NULL && t->left != NULL)) { // onechild
+                    if (tmp->right == t) {                   // if right
+                        tmp->right = (t->right == NULL) ? t->left : t->right;
+                        t = (t->right == NULL) ? t->left : t->right;
+                        t->parent = tmp;
+                        delete d;
+                    }
+                    else {
+                        tmp->left = (t->right == NULL) ? t->left : t->right;
+                        t = (t->right == NULL) ? t->left : t->right;
+                        t->parent = tmp;
+                        delete d;
+                    }
                 }
-                else if (t->right != NULL) {
-                    t->right->parent = t->parent;
-                    delete t;
-                }
-                else if (t->left != NULL) {
-                    t = t->left;
+                else if (t->right == NULL && t->left == NULL) { // leaf
                     delete t;
                 }
             }
