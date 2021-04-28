@@ -159,8 +159,18 @@ namespace ft {
             //     // }
             // }
 
+            void swap(map & x) {
+                map tmp(x);
+
+                x.clear();
+                x.insert(begin(), end());
+                this->clear();
+                this->insert(tmp.begin(), tmp.end());
+            }
+
             void clear() {
                 _destroy(_head);
+                _head = NULL;
                 _size = 0;
             }
 
@@ -303,6 +313,9 @@ namespace ft {
                 iterator ite;
                 t_node * tmp = _head;
 
+                if (_size == 0 || _head == NULL) {
+                    return iterator(_head);
+                }
                 while (tmp->left != NULL) {
                     tmp = tmp->left;
                 }
