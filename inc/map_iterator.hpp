@@ -28,7 +28,9 @@ class map_iterator {
 // Prefix overloading
 // Successor Algorithm
     map_iterator& operator++() {
-      if (_ptr == NULL) {return *this;}
+      if (_ptr == NULL)
+      {return *this;}
+
       if (_ptr->right != NULL) {
         _ptr = _ptr->right;
         while (_ptr->left != NULL) {
@@ -48,7 +50,9 @@ class map_iterator {
 
     map_iterator& operator--()
     {
-      if (_ptr == NULL) {return *this;}
+      if (_ptr == NULL)
+      {return *this;}
+
       if (_ptr->left != NULL) {
         _ptr = _ptr->left;
         while (_ptr->right != NULL) {

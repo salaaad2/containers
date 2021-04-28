@@ -32,14 +32,16 @@ namespace ft {
 //
 // constructor/destructors
 //
-            explicit map () : _size(0), _head(NULL) {}
+            explicit map () :
+                _size(0), _head(NULL) {}
 
             template <class InputIterator>
             map(InputIterator first, InputIterator last) : _size(0), _head(NULL) {
                 insert(first, last);
             }
 
-            map(const map & x) {
+            map(const map & x) :
+                _size(0), _head(NULL) {
                 insert(x.begin(), x.end());
             }
 
@@ -75,24 +77,19 @@ namespace ft {
                 }
                 else {
                     itmp = iterator(_head);
-                    while (1) { // lol
+                    while (nu->right != tn &&
+                           nu->left != tn) {
                         if (comp((*itmp).first, val.first) == 1) {
-                            if (nu->right != NULL) {
-                                nu = nu->right;
-                            }
-                            else  {
-                                nu->right = tn;
-                                break ;
-                            }
+                            if (nu->right != NULL)
+                            {nu = nu->right;}
+                            else
+                            {nu->right = tn;}
                         }
                         else {
-                            if (nu->left != NULL) {
-                                nu = nu->left;
-                            }
-                            else  {
-                                nu->left = tn;
-                                break ;
-                            }
+                            if (nu->left != NULL)
+                            {nu = nu->left;}
+                            else
+                            {nu->left = tn;}
                         }
                         itmp.setPtr(nu);
                     }
@@ -142,17 +139,25 @@ namespace ft {
                 }
             }
 
-            void erase(iterator position) {
-                t_node * t = position.getPtr();
+            // void erase(iterator position) {
+            //     // t_node * t = position.getPtr();
+            //     // t_node * tmp;
 
-                if (t->right != NULL && t->right == NULL) {
-                    if (t == t->parent->right)
-                    {t->parent->right = NULL;}
-                    else
-                    {t->parent->left = NULL;}
-                    delete t;
-                }
-            }
+            //     // if (t->right == NULL && t->left == NULL) {
+            //     //     delete t;
+            //     // }
+            //     // else if (t->right != NULL) {
+            //     //     // t->right->parent = t->parent;
+            //     //     delete t;
+            //     // }
+            //     // else if (t->left != NULL) {
+            //     //     tmp = t;
+            //     //     // std::cout << t->left->data.first << t->data.first<< t->parent->data.first  << std::endl;
+            //     //     t->left->parent = t->parent;
+            //     //     t = t->left;
+            //     //     delete tmp;
+            //     // }
+            // }
 
             void clear() {
                 _destroy(_head);
@@ -176,6 +181,14 @@ namespace ft {
 
             bool empty () const {
                 return (_head == NULL);
+            }
+//
+// element access
+//
+            mapped_type & operator[](const key_type & k) {
+                iterator tmp = find(k);
+
+                return (*((this->insert(std::make_pair(k,mapped_type()))).first)).second;
             }
 //
 // operations

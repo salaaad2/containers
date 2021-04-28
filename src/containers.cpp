@@ -507,6 +507,27 @@ int main(void)
    it--;
    std::cout << "-- : " << (*it).first << std::endl;
 
+   // std::cout << "-========= remove ========-" << std::endl;
+   // for (it = mymap.begin(); it != mymap.end(); it++) {
+   //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+   // }
+   // it = mymap.begin();
+
+   // it = mymap.find('j');
+   // std::cout << "remove : " << (*it).first << std::endl;
+   // mymap.erase(it);
+   // std::cout << "-=================-" << std::endl;
+   // for (it = mymap.begin(); it != mymap.end(); it++) {
+   //     std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+   // }
+   std::cout << "-========= operator[] ========-" << std::endl;
+   mymap['k'] = 777;
+   mymap['k'] = 778;
+   mymap['k'] = 779;
+   for (it = mymap.begin(); it != mymap.end(); it++) {
+	   std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
+   }
+
  //  std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;
    return (0);
 }
