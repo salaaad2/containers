@@ -25,7 +25,6 @@ namespace ft {
 //
 // constructors
 // TODO: delete 1 more node ???
-
             explicit list () :
                 _first(NULL), _last(NULL), _size(0)
             {

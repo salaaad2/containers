@@ -52,9 +52,6 @@ namespace ft {
                 }
             };
 
-//
-// operators
-//
             vector & operator=(vector const & x) {
                 _capacity = x.capacity();
                 _size = x.size();
@@ -62,22 +59,20 @@ namespace ft {
                 for (size_type i = 0; i < _size; i++) {_elements[i] = x[i];}
                 return *this;
             }
-
-            value_type const & operator[](size_type n) const
-            {return (_elements[n]); }
-
-            value_type & operator[](size_type n)
-            { return (_elements[n]); }
-
 //
-// element modifiers
+// capacity
 //
-            void swap(vector & x) {
-                std::swap(_elements, x._elements);
-                std::swap(_size, x._size);
-                std::swap(_capacity, x._capacity);
-                std::swap(_it, x._it);
-            }
+            size_type capacity (void) const
+            { return (this->_capacity); }
+
+            size_type max_size (void) const
+            { return (pow(2, sizeof(void *) * 8) / sizeof(ft::vector<T>) - 1);}
+
+            size_type size (void) const
+            { return (this->_size); }
+
+            bool empty (void) const
+            { return (this->_size == 0); }
 
             void reserve(size_type n) {
                 size_type tmp;
@@ -92,6 +87,76 @@ namespace ft {
                     _capacity = n;
                 }
             }
+
+//
+// iterators
+//
+            iterator begin()
+            { return iterator(_elements); }
+
+            iterator end()
+            { return iterator(_elements + _size); }
+
+            const_iterator begin() const
+            { return const_iterator(_elements); }
+
+            const_iterator end() const
+            { return const_iterator(_elements + _size); }
+
+            reverse_iterator rbegin()
+            { return reverse_iterator(end() - 1); }
+
+            reverse_iterator rend()
+            { return reverse_iterator(begin() - 1); }
+
+            const_reverse_iterator rbegin() const
+            { return const_reverse_iterator(end() - 1); }
+
+            const_reverse_iterator rend() const
+            { return const_reverse_iterator(begin() - 1); }
+
+
+//
+// element access
+//
+            value_type const & operator[](size_type n) const
+            {return (_elements[n]); }
+
+            value_type & operator[](size_type n)
+            { return (_elements[n]); }
+            value_type const & at(size_type n) const
+            { if (n > _size)
+              { throw std::out_of_range("out of range"); }
+              return (_elements[n]); }
+
+            value_type & at(size_type n)
+            { if (n > _size)
+              { throw std::out_of_range("out of range"); }
+              return (_elements[n]); }
+
+            value_type & front()
+            {return (_elements[0]); }
+
+            value_type const & front() const
+            {return (_elements[0]); }
+
+            value_type & back()
+            {return (_elements[_size - 1]); }
+
+            value_type const & back() const
+            {return (_elements[_size - 1]); }
+
+
+//
+// modifiers
+//
+            void swap(vector & x) {
+                std::swap(_elements, x._elements);
+                std::swap(_size, x._size);
+                std::swap(_capacity, x._capacity);
+                std::swap(_it, x._it);
+            }
+
 
             template <class InputIterator>
             void assign (InputIterator first, InputIterator last) {
@@ -287,70 +352,6 @@ namespace ft {
             void pop_back() {
                 _erase(end(), 1);
             }
-
-//
-// accessors
-//
-            value_type const & at(size_type n) const
-            { if (n > _size)
-              { throw std::out_of_range("out of range"); }
-              return (_elements[n]); }
-
-            value_type & at(size_type n)
-            { if (n > _size)
-              { throw std::out_of_range("out of range"); }
-              return (_elements[n]); }
-
-            value_type & front()
-            {return (_elements[0]); }
-
-            value_type const & front() const
-            {return (_elements[0]); }
-
-            value_type & back()
-            {return (_elements[_size - 1]); }
-
-            value_type const & back() const
-            {return (_elements[_size - 1]); }
-
-            size_type capacity (void) const
-            { return (this->_capacity); }
-
-            size_type max_size (void) const
-            { return (pow(2, sizeof(void *) * 8) / sizeof(ft::vector<T>) - 1);}
-
-            size_type size (void) const
-            { return (this->_size); }
-
-            bool empty (void) const
-            { return (this->_size == 0); }
-
-//
-// iterators
-//
-            iterator begin()
-            { return iterator(_elements); }
-
-            iterator end()
-            { return iterator(_elements + _size); }
-
-            const_iterator begin() const
-            { return const_iterator(_elements); }
-
-            const_iterator end() const
-            { return const_iterator(_elements + _size); }
-
-            reverse_iterator rbegin()
-            { return reverse_iterator(end() - 1); }
-
-            reverse_iterator rend()
-            { return reverse_iterator(begin() - 1); }
-
-            const_reverse_iterator rbegin() const
-            { return const_reverse_iterator(end() - 1); }
-
-            const_reverse_iterator rend() const
-            { return const_reverse_iterator(begin() - 1); }
 
 
         private :
