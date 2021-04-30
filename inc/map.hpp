@@ -178,8 +178,6 @@ namespace ft {
                         t_node * ch = _get_child(t);
                         ch->left = ch->parent->left;
                         ch->right = ch->parent->right;
-                        // tmp->right = _get_child();
-                        // t = _get_child();
                         t = ch;
                         t->parent = tmp;
                     }
@@ -376,9 +374,8 @@ namespace ft {
                 return (reverse_iterator(ite.getPtr()));
             }
 
-            reverse_iterator rend() {
-                return (reverse_iterator(_head));
-            }
+            reverse_iterator rend()
+            {return (reverse_iterator(_head));}
 
             iterator end() {
                 iterator ite;

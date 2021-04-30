@@ -93,6 +93,103 @@ namespace ft {
                 }
             }
 //
+// iterators
+// TODO: last elem
+
+            iterator begin()
+            {return (iterator(_first));}
+
+            const_iterator begin() const
+            {return (const_iterator(_first));}
+
+            iterator end()
+            {return (iterator(_last->next));}
+
+            const_iterator end() const
+            {return (const_iterator(_last->next));}
+
+            reverse_iterator rend()
+            {return reverse_iterator(_first);}
+
+            const_reverse_iterator rend() const
+            {return const_reverse_iterator(_first);}
+
+            reverse_iterator rbegin()
+            {return reverse_iterator(_last);}
+
+            const_reverse_iterator rbegin() const
+            {return const_reverse_iterator(_last);}
+//
+// capacity
+//
+            void resize(size_type n,
+                        value_type val = value_type()) {
+                size_type spos = 0;
+                t_node * ptr = _first;
+                t_node * tmp;
+
+                if (n < size()) {
+                    while (spos < (n - 1)) {
+                        ptr = ptr->next;
+                        spos++;
+                    }
+                    _last = ptr;
+                    ptr = ptr->next;
+                    while (ptr != NULL) {
+                        tmp = ptr;
+                        ptr = ptr->next;
+                        delete tmp;
+                    }
+                    _last->next = NULL;
+                    return ;
+                }
+                else if (n > size()){
+                    while (ptr != _last) {
+                        ptr = ptr->next;
+                        spos++;
+                    }
+                    n -= size();
+                    while (n) {
+                        ptr->next = new t_node;
+                        ptr->next->prev = ptr;
+                        ptr->next->next = NULL;
+                        ptr->next->data = val;
+                        ptr = ptr->next;
+                        n--;
+                    }
+                    _last = ptr;
+                    return ;
+                }
+                _size = n;
+            }
+
+            size_type size()
+            {return (_size);}
+
+            size_type empty()
+            {return (_size == 0);}
+
+            size_type max_size()
+            {return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);}
+
+//
+// element access
+//
+            reference front()
+            {return (_first->data);}
+
+            const_reference front() const
+            {return (_first->data);}
+
+
+            reference back()
+            {return (_last->data);}
+
+            const_reference back() const
+            {return (_last->data);}
+
+
+//
 // content modifiers
 //
 
@@ -235,10 +332,8 @@ namespace ft {
                 t_node * tmp;
                 t_node * ptr = _first;
 
-                if (_first != NULL)
-                {
-                    while (ptr != NULL)
-                    {
+                if (_first != NULL) {
+                    while (ptr != NULL) {
                         tmp = ptr;
                         ptr = ptr->next;
                         delete tmp;
@@ -262,7 +357,7 @@ namespace ft {
 
 
 //
-// algo modifiers
+// operations
 // TODO: merge & splice
 
             void sort() { // bubble sort
@@ -494,7 +589,7 @@ namespace ft {
 
 //
 // begin/end modifiers
-// TODO: rewrite most
+//
 
             void push_front(const value_type &val) {
                 t_node * tmp;
@@ -537,108 +632,54 @@ namespace ft {
                     _size--;
                 }
             }
-//
-// capacity
-//
-            void resize(size_type n,
-                        value_type val = value_type()) {
-                size_type spos = 0;
-                t_node * ptr = _first;
-                t_node * tmp;
-
-                if (n < size()) {
-                    while (spos < (n - 1)) {
-                        ptr = ptr->next;
-                        spos++;
-                    }
-                    _last = ptr;
-                    ptr = ptr->next;
-                    while (ptr != NULL) {
-                        tmp = ptr;
-                        ptr = ptr->next;
-                        delete tmp;
-                    }
-                    _last->next = NULL;
-                    return ;
-                }
-                else if (n > size()){
-                    while (ptr != _last) {
-                        ptr = ptr->next;
-                        spos++;
-                    }
-                    n -= size();
-                    while (n) {
-                        ptr->next = new t_node;
-                        ptr->next->prev = ptr;
-                        ptr->next->next = NULL;
-                        ptr->next->data = val;
-                        ptr = ptr->next;
-                        n--;
-                    }
-                    _last = ptr;
-                    return ;
-                }
-                _size = n;
-            }
-
-            size_type size()
-            {return (_size);}
-
-            size_type empty()
-            {return (_size == 0);}
-
-            size_type max_size()
-            {return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);}
-//
-// iterators
-// TODO: last elem
-
-            iterator begin()
-            {return (iterator(_first));}
-
-            const_iterator begin() const
-            {return (const_iterator(_first));}
-
-            iterator end()
-            {return (iterator(_last->next));}
-
-            const_iterator end() const
-            {return (const_iterator(_last->next));}
-
-            reverse_iterator rend()
-            {return reverse_iterator(_first);}
-
-            const_reverse_iterator rend() const
-            {return const_reverse_iterator(_first);}
-
-            reverse_iterator rbegin()
-            {return reverse_iterator(_last);}
-
-            const_reverse_iterator rbegin() const
-            {return const_reverse_iterator(_last);}
-
-
-//
-// access
-//
-            reference front()
-            {return (_first->data);}
-
-            const_reference front() const
-            {return (_first->data);}
-
-
-            reference back()
-            {return (_last->data);}
-
-            const_reference back() const
-            {return (_last->data);}
-
         private :
             t_node * _first;
             t_node * _last;
             size_type _size;
     };
+}
+
+template <class T, class Alloc>
+bool operator== (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+    std::list<T, Alloc>::iterator it1 = lhs.begin();
+    std::list<T, Alloc>::iterator it2 = rhs.begin();
+
+    if (lhs.size() != rhs.size())
+    {return (false);}
+
+    while (it1 != lhs.end() && it2 != rhs.end()) {
+        if (*it1 != *it2) {
+            return (false);
+        }
+        it1++;
+        it2++;
+    }
+    return (true);
+}
+
+template <class T, class Alloc>
+bool operator!= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+
+}
+
+template <class T, class Alloc>
+bool operator<  (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+
+}
+
+template <class T, class Alloc>
+bool operator<= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+
+}
+
+template <class T, class Alloc>
+bool operator>  (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+
+}
+
+template <class T, class Alloc>
+bool operator>= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+
 }
 
 #endif // LIST_H
