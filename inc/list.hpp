@@ -659,27 +659,37 @@ bool operator== (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
 
 template <class T, class Alloc>
 bool operator!= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
-
+    return (!(lhs == rhs));
 }
 
 template <class T, class Alloc>
-bool operator<  (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+bool operator<(const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+    std::list<T, Alloc>::iterator it1 = lhs.begin();
+    std::list<T, Alloc>::iterator it2 = rhs.begin();
 
+    while (it1 != lhs.end() && it2 != rhs.end()) {
+        if (*it1 > *it2) {
+            return (false);
+        }
+        it1++;
+        it2++;
+    }
+    return (true);
 }
 
 template <class T, class Alloc>
 bool operator<= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
-
+    return (!(rhs < lhs));
 }
 
 template <class T, class Alloc>
 bool operator>  (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
-
+    return (rhs < lhs);
 }
 
 template <class T, class Alloc>
 bool operator>= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
-
+    return (!(lhs < rhs));
 }
 
 #endif // LIST_H
