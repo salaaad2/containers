@@ -173,14 +173,15 @@ namespace ft {
                         delete d;
                     }
                 }
-                else if (t->right == NULL && t->left == NULL) { // children
-                    if (tmp->right == t) {
-                        t_node * ch = _get_child(t);
-                        ch->left = ch->parent->left;
-                        ch->right = ch->parent->right;
-                        t = ch;
-                        t->parent = tmp;
-                    }
+                else if (t->right != NULL && t->left != NULL) { // children
+                    t_node * ch = _get_child(t);
+
+                    ch->parent->left = NULL;
+                    ch->parent->parent = ch;
+                    ch->left = t->left;
+                    ch->right = t->right;
+                    ch->parent = t->parent;
+                    delete d;
                 }
             }
 
@@ -462,6 +463,16 @@ namespace ft {
                     _destroy(leaf->right);
                     delete leaf;
                 }
+            }
+
+            t_node * _get_child(t_node * t) {
+                t_node * next = t;
+
+                next = next->right;
+                while (next->left != NULL) {
+                    next = next->left;
+                }
+                return (next);
             }
     };
 }
