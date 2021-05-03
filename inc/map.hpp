@@ -53,7 +53,6 @@ namespace ft {
             }
 //
 // content modifiers
-// TODO: erase
 // debug prints :
 // std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
 // std::cout << val.first << " goes right" << std::endl;
@@ -154,23 +153,19 @@ namespace ft {
                         tmp->right = (t->right == NULL) ? t->left : t->right;
                         t = (t->right == NULL) ? t->left : t->right;
                         t->parent = tmp;
-                        delete d;
                     }
                     else {                                      // if left
                         tmp->left = (t->right == NULL) ? t->left : t->right;
                         t = (t->right == NULL) ? t->left : t->right;
                         t->parent = tmp;
-                        delete d;
                     }
                 }
                 else if (t->right == NULL && t->left == NULL) { // leaf
                     if (tmp->right == t) {                      // if right
                         tmp->right = NULL;
-                        delete d;
                     }
                     else {                                      // if left
                         tmp->left = NULL;
-                        delete d;
                     }
                 }
                 else if (t->right != NULL && t->left != NULL) { // children
@@ -181,8 +176,8 @@ namespace ft {
                     ch->left = t->left;
                     ch->right = t->right;
                     ch->parent = t->parent;
-                    delete d;
                 }
+                delete d;
             }
 
             void swap(map & x) {
@@ -327,32 +322,34 @@ namespace ft {
 //
 // observers
 //
-            // template <class Key, class T, class Compare>
-            // class map<Key, T, Compare>::value_compare
-            // {   // TODO: ????
-            //     friend class map;
-            //     protected:
-            //         Compare comp;
-            //         value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
-            //     public:
-            //         typedef bool result_type;
-            //         typedef value_type first_argument_type;
-            //         typedef value_type second_argument_type;
-            //         bool operator() (const value_type& x, const value_type& y) const
-            //         {
-            //             return comp(x.first, y.first);
-            //         }
-            // }
+            class value_compare
+            {
+                friend class map;
+                protected:
+                    Compare comp;
+                    value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
+                public:
+                    typedef bool result_type;
+                    typedef value_type first_argument_type;
+                    typedef value_type second_argument_type;
+                    bool operator() (const value_type& x, const value_type& y) const
+                    {
+                        return comp(x.first, y.first);
+                    }
+            };
 
             key_compare key_comp() const {
                 key_compare kc;
                 return (kc);
             }
 
-            // value_compare value_comp() const {
-            //     ley_compare kc;
-            //     return (value_compare<key_type, value, key_compare>(kc));
-            // }
+            value_compare value_comp() const {
+                key_compare kc;
+
+                value_compare vc = value_compare(kc);
+
+                return (vc);
+            }
 //
 // iterators
 //

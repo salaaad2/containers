@@ -56,7 +56,9 @@ namespace ft {
                 _capacity = x.capacity();
                 _size = x.size();
                 _elements = new value_type[_size];
-                for (size_type i = 0; i < _size; i++) {_elements[i] = x[i];}
+
+                for (size_type i = 0; i < _size; i++)
+                {_elements[i] = x[i];}
                 return *this;
             }
 //
@@ -159,7 +161,8 @@ namespace ft {
 
 
             template <class InputIterator>
-            void assign (InputIterator first, InputIterator last) {
+            void assign (InputIterator first,
+                         InputIterator last) {
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
                 _size = 0;
