@@ -295,177 +295,178 @@ int main(void)
    //  coolqueue.back() -= coolqueue.front();
 
    //  std::cout << "myqueue.back() is now " << coolqueue.back() << '\n';
-   // std::cout << "#===================================#" << std::endl;
-   // std::cout << "#============== LIST ===============#" << std::endl;
-   // std::cout << "#===================================#" << std::endl;
-   // std::cout << "-========= insert =========-" << std::endl;
-   // ft::list<int> mylist(5, 12);
+   std::cout << "#===================================#" << std::endl;
+   std::cout << "#============== LIST ===============#" << std::endl;
+   std::cout << "#===================================#" << std::endl;
+   std::cout << "-========= insert =========-" << std::endl;
+   ft::list<int> mylist(5, 12);
 
-   // ft::list<int>::iterator it;
-   // ft::list<int>::iterator itmp;
+   ft::list<int>::iterator it;
+   ft::list<int>::iterator itmp;
 
-   // it = mylist.begin();
-   // mylist.insert(it, 1, 100);
-   // for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
-   //    std::cout << "[" << *itmp << "]\n";
-   // }
+   it = mylist.begin();
+   mylist.insert(it, 1, 100);
+   for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
 
-   // it = mylist.begin();
-   // it++;
-   // it++;
-   // mylist.insert(it, 4, 213);
-   // std::cout << "[------]\n";
-   // for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
-   //    std::cout << "[" << *itmp << "]\n";
-   // }
-  //  std::cout << "-========= erase + resize =========-" << std::endl;
-  //  ft::list<int> resizeme(2, 1);
-  // it = resizeme.begin();
-  //  resizeme.insert(it, 2, 88);
-  // std::cout << "[" << resizeme.size() << "] it : " << *it << std::endl;
+   it = mylist.begin();
+   it++;
+   it++;
+   mylist.insert(it, 4, 213);
+   std::cout << "[------]\n";
+   for (itmp = mylist.begin(); itmp != mylist.end() ; itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
+   std::cout << "-========= erase + resize =========-" << std::endl;
+   ft::list<int> resizeme(2, 1);
+  it = resizeme.begin();
+   resizeme.insert(it, 2, 88);
+  std::cout << "[" << resizeme.size() << "] it : " << *it << std::endl;
 
-  //  for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
-  //     std::cout << "[" << *itmp << "]\n";
-  //  }
+   for (itmp = resizeme.begin(); itmp != resizeme.end(); itmp++) {
+      std::cout << "[" << *itmp << "]\n";
+   }
 
-  //  std::cout << "-========= erase =========-" << std::endl;
-  //  std::list<int> tlist(5, 12);
-  //  std::list<int>::iterator itt = tlist.begin();
-  //  mylist.assign(5, 12);
-  //  it = mylist.begin();
-  //  it++;
-  //  it = mylist.erase(it);
-  //  it = mylist.erase(it);
-  // itt++;
-  //  itt = tlist.erase(itt);
-  //  itt = tlist.erase(itt);
-  //  for (it = mylist.begin(); it != mylist.end(); it++) {
-  //     std::cout << "[" << *it << "]\n";
-  //  }
-  //  std::cout << "[-------]\n";
-  //  for (itt = tlist.begin(); itt != tlist.end(); itt++) {
-  //     std::cout << "[" << *itt << "]\n";
-  //  }
-  //  std::cout << "-========= sort =========-" << std::endl;
-  //  ft::list<int> sortme(5, 1);
-  //  ft::list<int>::iterator sortit;
+   std::cout << "-========= erase =========-" << std::endl;
+   std::list<int> tlist(5, 12);
+   std::list<int>::iterator itt = tlist.begin();
+   mylist.assign(5, 12);
+   it = mylist.begin();
+   it++;
+   it = mylist.erase(it);
+   it = mylist.erase(it);
+  itt++;
+   itt = tlist.erase(itt);
+   itt = tlist.erase(itt);
+   for (it = mylist.begin(); it != mylist.end(); it++) {
+      std::cout << "[" << *it << "]\n";
+   }
+   std::cout << "[-------]\n";
+   for (itt = tlist.begin(); itt != tlist.end(); itt++) {
+      std::cout << "[" << *itt << "]\n";
+   }
+   std::cout << "-========= sort =========-" << std::endl;
+   ft::list<int> sortme(5, 1);
+   ft::list<int>::iterator sortit;
 
-  //  sortme.push_front(1);
-  //  sortme.push_front(3);
-  //  sortme.push_front(4);
-  //  sortme.push_front(2);
-  //  sortme.push_front(5);
-  //  //
-  //  sortit = sortme.begin();
+   sortme.push_front(1);
+   sortme.push_front(3);
+   sortme.push_front(4);
+   sortme.push_front(2);
+   sortme.push_front(5);
+   //
+   sortit = sortme.begin();
 
-  //  sortit++;
-  //  sortit++;
-  //  sortme.insert(sortit, 2, 12);
-  //  sortit--;
-  //  sortme.insert(sortit, 1, 9);
+   sortit++;
+   sortit++;
+   sortme.insert(sortit, 2, 12);
+   sortit--;
+   sortme.insert(sortit, 1, 9);
 
-  //  sortme.sort();
-  //  for (sortit = sortme.begin(); sortit != sortme.end(); sortit++) {
-  //     std::cout << "[" << *sortit << "]\n";
-  //  }
-  //  std::cout << "[-------]\n";
-  //  std::cout << "-========= remove =========-" << std::endl; // TODO: SEGV
-  //  ft::list<int> rmrf(1, 1);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(4);
-  //  rmrf.push_front(3);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(5);
-  //  rmrf.push_front(2);
-  //  rmrf.push_back(1);
-  //  rmrf.push_back(90);
+   sortme.sort();
+   for (sortit = sortme.begin(); sortit != sortme.end(); sortit++) {
+      std::cout << "[" << *sortit << "]\n";
+   }
+   std::cout << "[-------]\n";
+   std::cout << "-========= remove =========-" << std::endl; // TODO: SEGV
+   ft::list<int> rmrf(1, 1);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(4);
+   rmrf.push_front(3);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(5);
+   rmrf.push_front(2);
+   rmrf.push_back(1);
+   rmrf.push_back(90);
 
-  //  rmrf.remove(90);
-  //  // rmrf.erase(rmrf.end());
-  //  //rmrf.pop_back();
-  //  for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
-  //     std::cout << "[" << *qwe << "]\n";
-  //  }
+   rmrf.remove(90);
+   // rmrf.erase(rmrf.end());
+   //rmrf.pop_back();
+   for (ft::list<int>::iterator qwe = rmrf.begin(); qwe != rmrf.end(); qwe++) {
+      std::cout << "[" << *qwe << "]\n";
+   }
 
-  //  std::cout << "-========= unique =========-" << std::endl;
+   std::cout << "-========= unique =========-" << std::endl;
 
-  //  ft::list<double> uni(4, 5);
-  //  ft::list<double>::iterator unit = uni.begin();
+   ft::list<double> uni(4, 5);
+   ft::list<double>::iterator unit = uni.begin();
 
-  //  // unit = uni.erase(unit);
-  //  // unit = uni.erase(unit);
-  //  // unit = uni.erase(unit);
-  //  uni.push_back(1);
-  //  uni.push_back(1);
-  //  uni.push_back(1);
-  //  uni.push_back(1);
-  //  uni.push_back(1);
-  //  uni.push_back(1);
-  //  uni.push_back(2);
-  //  uni.push_back(2);
-  //  uni.push_back(2);
-  //  uni.push_back(2);
-  //  uni.push_back(2);
-  //  uni.push_back(2);
-  //  uni.push_back(2);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.push_back(3);
-  //  uni.unique();
-  //  for (ft::list<double>::iterator qwe = uni.begin(); qwe != uni.end(); qwe++) {
-  //     std::cout << "[" << *qwe << "]\n";
-  //  }
-  //  std::cout << "-========= splice =========-" << std::endl; // TODO: SEGV ?
-  //  ft::list<int> spl1(5, 1);
-  //  ft::list<int> spl2(8, 5);
-  //  ft::list<int>::iterator split1 = spl1.begin();
-  //  ft::list<int>::iterator split2 = spl2.begin();
-  //  spl2.push_back(10);
+   // unit = uni.erase(unit);
+   // unit = uni.erase(unit);
+   // unit = uni.erase(unit);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(1);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(2);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.push_back(3);
+   uni.unique();
+   for (ft::list<double>::iterator qwe = uni.begin(); qwe != uni.end(); qwe++) {
+      std::cout << "[" << *qwe << "]\n";
+   }
+   std::cout << "-========= splice =========-" << std::endl; // TODO: SEGV ?
+   ft::list<int> spl1(5, 1);
+   ft::list<int> spl2(8, 5);
+   ft::list<int>::iterator split1 = spl1.begin();
+   ft::list<int>::iterator split2 = spl2.begin();
+   spl2.push_back(10);
 
-  //  split1++;
-  //  spl1.splice(split1, spl2);
-  //  for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
-  //     std::cout << "[" << *split1 << "]\n";
-  //  }
-  //  if (spl2.empty()) {
-  //     std::cout << "empty" << std::endl;
-  //  }
-  //  else {
-  //     std::cout << "spliced (1) {" << spl2.size() << "}" << std::endl;
-  //     std::cout << "inserted(2) {" << spl1.size() << "}" << std::endl;
-  //  }
-  //  std::cout << "-========= reverse =========-" << std::endl; //
-  //  ft::list<int> revl(1, 1); // empty const adds 1 zero
+   split1++;
+   spl1.splice(split1, spl2);
+   for (split1 = spl1.begin(); split1 != spl1.end(); split1++) {
+      std::cout << "[" << *split1 << "]\n";
+   }
+   if (spl2.empty()) {
+      std::cout << "empty" << std::endl;
+   }
+   else {
+      std::cout << "spliced (1) {" << spl2.size() << "}" << std::endl;
+      std::cout << "inserted(2) {" << spl1.size() << "}" << std::endl;
+   }
+   std::cout << "-========= reverse =========-" << std::endl; //
+   ft::list<int> revl(1, 1); // empty const adds 1 zero
 
-  //  for (int i = 2; i < 10; i++) revl.push_back(i);
-  //  for (int i = 10; i < 20; i++) revl.push_front(i);
+   for (int i = 2; i < 10; i++) revl.push_back(i);
+   for (int i = 10; i < 20; i++) revl.push_front(i);
 
 
-  //  revl.reverse();
-  //  for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
-  //     std::cout << *qwe << std::endl;
-  //  }
-  //  std::cout << "-=========================-" << std::endl; //
-   // std::cout << "-========= merge =========-" << std::endl; //
-   // ft::list<int> merge1(1, 1); // empty const adds 1 zero
-   // ft::list<int> merge2(2, 2); // empty const adds 1 zero
+   revl.reverse();
+   for (ft::list<int>::iterator qwe = revl.begin(); qwe != revl.end(); qwe++) {
+      std::cout << *qwe << std::endl;
+   }
+   std::cout << "-=========================-" << std::endl; //
+   std::cout << "-========= merge =========-" << std::endl; //
+   ft::list<int> merge1(1, 1); // empty const adds 1 zero
+   ft::list<int> merge2(2, 2); // empty const adds 1 zero
 
-   // for (int i = 10; i < 20; i += 1) merge1.push_back(i);
+   for (int i = 10; i < 20; i += 1) merge1.push_back(i);
    // for (int i = 11; i < 20; i += 1) merge2.push_back(i);
 
-   // merge1.merge(merge2);
-   // for (ft::list<int>::iterator qwe = merge1.begin(); qwe != merge1.end(); qwe++) {
-   //    std::cout << *qwe << std::endl;
-   // }
+   merge1.merge(merge2);
+   for (ft::list<int>::iterator qwe = merge1.begin(); qwe != merge1.end(); qwe++) {
+      std::cout << "{" << *qwe << "}" << std::endl;
+   }
+      std::cout << "{after}" << std::endl;
 //    std::cout << "#===================================#" << std::endl;
 //    std::cout << "#============== MAP ================#" << std::endl;
 //    std::cout << "#===================================#" << std::endl;
