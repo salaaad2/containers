@@ -1,15 +1,15 @@
 #ifndef MAPNODE_H
-#define MAPNODE_H
+# define MAPNODE_H
 
 namespace ft {
     template <class T>
-    struct s_node {
+    struct m_node {
         T data;
-        s_node * left;
-        s_node * right;
-        s_node * parent;
+        m_node * left;
+        m_node * right;
+        m_node * parent;
 
-        s_node(T d) : data(d) {}
+        m_node(T d) : data(d) {}
     };
 
 }

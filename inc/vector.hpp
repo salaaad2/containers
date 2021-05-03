@@ -1,12 +1,12 @@
 #ifndef FT_VECTOR_H
-#define FT_VECTOR_H
+# define FT_VECTOR_H
 
-#include <iostream>
-#include <type_traits>
+# include <iostream>
+# include <type_traits>
 
-#include <math.h>
+# include <math.h>
 
-#include "random_access_iterator.hpp"
+# include "random_access_iterator.hpp"
 
 namespace ft {
     template <class T> class vector {
@@ -204,7 +204,7 @@ namespace ft {
 
             void _insert(iterator & position,
                          size_type n,
-                         const value_type val = value_type()) {
+                         const value_type val) {
                 iterator tmp = begin();
                 size_type spos = 0;
                 size_type olds = size();
@@ -247,6 +247,7 @@ namespace ft {
                 {_it.setPtr(_elements + _size);}
                 else
                 {_it.setPtr(_elements);}
+                delete [] copy; // lol
                 _size += n;
             }
 

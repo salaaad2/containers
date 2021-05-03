@@ -1,7 +1,7 @@
 #ifndef LIST_ITERATOR_H_
-#define LIST_ITERATOR_H_
+# define LIST_ITERATOR_H_
 
-#include "list_node.hpp"
+# include "list_node.hpp"
 
 ////////////////////////////
 // REGULAR LIST ITERATOR  //
@@ -9,7 +9,7 @@
 template <class T>
 class list_iterator {
   public :
-    typedef ft::s_node<T> t_node;
+    typedef ft::l_node<T> t_node;
 //
 // constructors
 //
@@ -89,7 +89,7 @@ class list_iterator {
 template <class T>
 class reverse_list_iterator {
   public :
-    typedef ft::s_node<T> t_node;
+    typedef ft::l_node<T> t_node;
 //
 // constructors
 //

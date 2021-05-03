@@ -1,19 +1,19 @@
 #ifndef LIST_H
-#define LIST_H
+# define LIST_H
 
-#include <iostream>
-#include <type_traits>
+# include <iostream>
+# include <type_traits>
 
-#include <math.h>
+# include <math.h>
 
-#include "list_node.hpp"
-#include "list_iterator.hpp"
+# include "list_node.hpp"
+# include "list_iterator.hpp"
 
 namespace ft {
     template <class T> class list {
         public :
             typedef T value_type;
-            typedef s_node<value_type> t_node;
+            typedef l_node<value_type> t_node;
             typedef value_type& reference;
             typedef const value_type& const_reference;
             typedef size_t size_type;
@@ -86,9 +86,9 @@ namespace ft {
             }
 
             ~list() {
-                while (_size) {
-                    pop_back();
+                while (_size > 0) {
                     std::cout << _size << std::endl;
+                    pop_back();
                 }
             }
 //
@@ -224,6 +224,7 @@ namespace ft {
 
                     tmp->prev->next = nu;
                     tmp->prev = nu;
+                    _size++;
                     n--;
                 }
                 return it;
@@ -638,10 +639,10 @@ namespace ft {
     };
 }
 
-template <class T, class Alloc>
-bool operator== (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
-    std::list<T, Alloc>::iterator it1 = lhs.begin();
-    std::list<T, Alloc>::iterator it2 = rhs.begin();
+template <class T>
+bool operator== (const ft::list<T>& lhs, const ft::list<T>& rhs) {
+    typename ft::list<T>::iterator it1 = lhs.begin();
+    typename ft::list<T>::iterator it2 = rhs.begin();
 
     if (lhs.size() != rhs.size())
     {return (false);}
@@ -656,15 +657,15 @@ bool operator== (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
     return (true);
 }
 
-template <class T, class Alloc>
-bool operator!= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+template <class T>
+bool operator!= (const ft::list<T>& lhs, const ft::list<T>& rhs) {
     return (!(lhs == rhs));
 }
 
-template <class T, class Alloc>
-bool operator<(const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
-    std::list<T, Alloc>::iterator it1 = lhs.begin();
-    std::list<T, Alloc>::iterator it2 = rhs.begin();
+template <class T>
+bool operator<(const ft::list<T>& lhs, const ft::list<T>& rhs) {
+    typename ft::list<T>::iterator it1 = lhs.begin();
+    typename ft::list<T>::iterator it2 = rhs.begin();
 
     while (it1 != lhs.end() && it2 != rhs.end()) {
         if (*it1 > *it2) {
@@ -676,18 +677,18 @@ bool operator<(const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
     return (true);
 }
 
-template <class T, class Alloc>
-bool operator<= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+template <class T>
+bool operator<= (const ft::list<T>& lhs, const ft::list<T>& rhs) {
     return (!(rhs < lhs));
 }
 
-template <class T, class Alloc>
-bool operator>  (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+template <class T>
+bool operator>  (const ft::list<T>& lhs, const ft::list<T>& rhs) {
     return (rhs < lhs);
 }
 
-template <class T, class Alloc>
-bool operator>= (const std::list<T,Alloc>& lhs, const std::list<T,Alloc>& rhs) {
+template <class T>
+bool operator>= (const ft::list<T>& lhs, const ft::list<T>& rhs) {
     return (!(lhs < rhs));
 }
 

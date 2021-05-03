@@ -3,10 +3,10 @@
 
 namespace ft {
     template <class T>
-    struct s_node {
+    struct l_node {
         T data;
-        s_node * next;
-        s_node * prev;
+        l_node * next;
+        l_node * prev;
     };
 }
 

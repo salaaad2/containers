@@ -6,7 +6,7 @@
 template <class T>
 class map_iterator {
   public :
-    typedef ft::s_node<T> t_node;
+    typedef ft::m_node<T> t_node;
 //
 // constructors
 //
@@ -119,7 +119,7 @@ class map_iterator {
 template <class T>
 class reverse_map_iterator {
   public :
-    typedef ft::s_node<T> t_node;
+    typedef ft::m_node<T> t_node;
 //
 // constructors
 //
