@@ -410,7 +410,8 @@ namespace ft {
 //
 
 template <class T>
-bool operator==(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+bool operator==(const ft::vector<T>& lhs,
+                const ft::vector<T>& rhs)
 {
     if (lhs.size() != rhs.size())
     {return (false);}
@@ -422,13 +423,15 @@ bool operator==(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 }
 
 template <class T>
-  bool operator!=(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+bool operator!=(const ft::vector<T>& lhs,
+                const ft::vector<T>& rhs)
 {
     return (!(lhs == rhs));
 }
 
 template <class T>
-bool operator<(const ft::vector<T> & lhs, const ft::vector<T> & rhs)
+bool operator<(const ft::vector<T> & lhs,
+               const ft::vector<T> & rhs)
 {
     for (size_t i = 0; i < lhs.size(); i++) {
         if (lhs[i] > rhs[i]) { return false; }
@@ -437,7 +440,8 @@ bool operator<(const ft::vector<T> & lhs, const ft::vector<T> & rhs)
 }
 
 template <class T>
-bool operator<=(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+bool operator<=(const ft::vector<T>& lhs,
+                const ft::vector<T>& rhs)
 {
     for (size_t i = 0; i < lhs.size(); i++) {
         if (lhs[i] > rhs[i]) { return false; }
@@ -446,7 +450,8 @@ bool operator<=(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 }
 
 template <class T>
-bool operator>(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+bool operator>(const ft::vector<T>& lhs,
+               const ft::vector<T>& rhs)
 {
     for (size_t i = 0; i < lhs.size(); i++) {
         if (lhs[i] < rhs[i]) { return false; }
@@ -455,7 +460,8 @@ bool operator>(const ft::vector<T>& lhs, const ft::vector<T>& rhs)
 }
 
 template <class T>
-bool operator>= (const ft::vector<T>& lhs, const ft::vector<T>& rhs)
+bool operator>= (const ft::vector<T>& lhs,
+                 const ft::vector<T>& rhs)
 {
     for (size_t i = 0; i < lhs.size(); i++) {
         if (lhs[i] < rhs[i]) { return false; }

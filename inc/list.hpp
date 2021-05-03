@@ -28,14 +28,15 @@ namespace ft {
             explicit list () :
                 _first(NULL), _last(NULL), _size(0)
             {
-                _last = new t_node;
-                _last->data = value_type();
-                _last->prev = _last;
-                _last->next = _last;
-                _first = _last;
+                // _last = new t_node; // WTF ???
+                // _last->data = value_type();
+                // _last->prev = _last;
+                // _last->next = _last;
+                // _first = _last;
             }
 
-            explicit list (size_type n, const value_type& val = value_type()) {
+            explicit list (size_type n,
+                           const value_type& val = value_type()) {
                 t_node * tmp;
                 _first = new t_node;
                 _last = new t_node;
@@ -327,7 +328,8 @@ namespace ft {
                 _size = 0;
             }
 
-            void assign(size_type n, const value_type& val) {
+            void assign(size_type n,
+                        const value_type& val) {
                 t_node * tmp;
                 t_node * ptr = _first;
 
