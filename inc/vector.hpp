@@ -205,75 +205,6 @@ namespace ft {
                 }
             }
 
-            void _insert(iterator & position,
-                         size_type n,
-                         const value_type val) {
-                iterator tmp = begin();
-                size_type spos = 0;
-                size_type olds = size();
-                value_type * tmpel;
-                value_type * copy = new value_type[_capacity];
-
-                while (tmp != position) {
-                    tmp++;
-                    spos++;
-                }
-                if ((_size + n) > _capacity) {
-                    if (_capacity == 0) {
-                        _capacity = 8;
-                    }
-                    while (_capacity < (_size + n)) {
-                        _capacity *= 2;
-                    }
-                    tmpel = new value_type[_capacity];
-                }
-                else
-                    tmpel = _elements;
-                for (size_type i = 0; i < size(); i++) {
-                    tmpel[i] = _elements[i];
-                    copy[i] = _elements[i];
-                }
-                for (size_type i = spos; i < (spos + n); i++) {
-                    tmpel[i] = val;
-                }
-                size_type j = spos;
-                for (size_type i = spos + n; j < (olds); i++) {
-                    tmpel[i] = copy[j];
-                    j++;
-                }
-                if (_elements != tmpel)
-                {
-                    delete [] _elements;
-                    _elements = tmpel;
-                }
-                if (spos == _size)
-                {_it.setPtr(_elements + _size);}
-                else
-                {_it.setPtr(_elements);}
-                delete [] copy; // lol
-                _size += n;
-            }
-
-            void _insert_dispatch(iterator position,
-                             size_type n,
-                             const value_type &val,
-                             std::true_type) {
-                _insert(position, n, val);
-            }
-
-            template<class InputIterator>
-            void _insert_dispatch(iterator position,
-                                    InputIterator first,
-                                    InputIterator last,
-                                  std::false_type) {
-                InputIterator tmp = first;
-
-                while (tmp != last) {
-                    _insert(position, 1, *tmp);
-                    tmp++;
-                    position++;
-                }
-            }
 
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
@@ -294,34 +225,6 @@ namespace ft {
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
                 _insert_dispatch(position, first, last, Integral());
-            }
-
-            iterator _erase(iterator position,
-                            size_type n) {
-                iterator tmp = begin();
-                size_type spos = 0;
-                size_type j = 0;
-
-                while (tmp != position) {
-                    tmp++;
-                    spos++;
-                }
-                size_type i = 0;
-                while (i < size()) {
-                    if (j != spos)
-                    {
-                        _elements[i] = _elements[j];
-                        j++;
-                        i++;
-                    }
-                    else
-                    {
-                        j += n;
-                    }
-                }
-                _size -= n;
-                _it.setPtr(_elements);
-                return (position);
             }
 
             iterator erase (iterator first,
@@ -405,6 +308,105 @@ namespace ft {
                  }
                  _it.setPtr(_elements);
             }
+
+            void _insert(iterator & position,
+                         size_type n,
+                         const value_type val) {
+                iterator tmp = begin();
+                size_type spos = 0;
+                size_type olds = size();
+                value_type * tmpel;
+                value_type * copy = new value_type[_capacity];
+
+                while (tmp != position) {
+                    tmp++;
+                    spos++;
+                }
+                if ((_size + n) > _capacity) {
+                    if (_capacity == 0) {
+                        _capacity = 8;
+                    }
+                    while (_capacity < (_size + n)) {
+                        _capacity *= 2;
+                    }
+                    tmpel = new value_type[_capacity];
+                }
+                else
+                    tmpel = _elements;
+                for (size_type i = 0; i < size(); i++) {
+                    tmpel[i] = _elements[i];
+                    copy[i] = _elements[i];
+                }
+                for (size_type i = spos; i < (spos + n); i++) {
+                    tmpel[i] = val;
+                }
+                size_type j = spos;
+                for (size_type i = spos + n; j < (olds); i++) {
+                    tmpel[i] = copy[j];
+                    j++;
+                }
+                if (_elements != tmpel)
+                {
+                    delete [] _elements;
+                    _elements = tmpel;
+                }
+                if (spos == _size)
+                {_it.setPtr(_elements + _size);}
+                else
+                {_it.setPtr(_elements);}
+                delete [] copy; // lol
+                _size += n;
+            }
+
+            void _insert_dispatch(iterator position,
+                             size_type n,
+                             const value_type &val,
+                             std::true_type) {
+                _insert(position, n, val);
+            }
+
+            template<class InputIterator>
+            void _insert_dispatch(iterator position,
+                                    InputIterator first,
+                                    InputIterator last,
+                                  std::false_type) {
+                InputIterator tmp = first;
+
+                while (tmp != last) {
+                    _insert(position, 1, *tmp);
+                    tmp++;
+                    position++;
+                }
+            }
+
+            iterator _erase(iterator position,
+                            size_type n) {
+                iterator tmp = begin();
+                size_type spos = 0;
+                size_type j = 0;
+
+                while (tmp != position) {
+                    tmp++;
+                    spos++;
+                }
+                size_type i = 0;
+                while (i < size()) {
+                    if (j != spos)
+                    {
+                        _elements[i] = _elements[j];
+                        j++;
+                        i++;
+                    }
+                    else
+                    {
+                        j += n;
+                    }
+                }
+                _size -= n;
+                _it.setPtr(_elements);
+                return (position);
+            }
+
     };
 }
 
