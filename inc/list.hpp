@@ -50,7 +50,6 @@ namespace ft {
                 _fill_list(first, last, Integral());
             }
 
-
             list (const list & x) : _first(NULL), _last(NULL), _size(0) {
                 *this = x;
                 return ;
@@ -250,7 +249,7 @@ namespace ft {
 
 //
 // operations
-// TODO: merge & splice
+// TODO: fix merge & splice
 
             void sort() { // bubble sort
                 t_node * s = _first;
@@ -476,7 +475,6 @@ namespace ft {
                 xnb->prev = n->prev;
                 n->prev = xne;
                 xne->next = n;
-
             }
 
 //
@@ -673,7 +671,7 @@ bool operator== (const ft::list<T>& lhs,
     if (lhs.size() != rhs.size())
     {return (false);}
 
-    while (it1 != lhs.end() && it2 != rhs.end()) {
+    while (it1 != lhs.end()) {
         if (*it1 != *it2) {
             return (false);
         }
@@ -695,7 +693,7 @@ bool operator<(const ft::list<T>& lhs,
     typename ft::list<T>::iterator it1 = lhs.begin();
     typename ft::list<T>::iterator it2 = rhs.begin();
 
-    while (it1 != lhs.end() && it2 != rhs.end()) {
+    while (it1 != lhs.end()) {
         if (*it1 > *it2) {
             return (false);
         }
