@@ -53,12 +53,7 @@ namespace ft {
             }
 //
 // content modifiers
-// debug prints :
-// std::cout << "first comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
-// std::cout << val.first << " goes right" << std::endl;
-// std::cout << val.first << " goes left" << std::endl;
-// std::cout << "next comp : [" << (*itmp).first << "]" << "[" << val.first << "]" << std::endl;
-// std::cout << "fast " << std::endl;
+//
 
             std::pair<iterator, bool> insert (const_reference &val) {
                 t_node * tn = _create_node(val);
@@ -138,7 +133,7 @@ namespace ft {
                 }
             }
 
-            // TODO: erase
+            // TODO: erase decapitation
             void erase(iterator position) {
                 t_node * t;
                 t_node * tmp;
@@ -168,7 +163,7 @@ namespace ft {
                         tmp->left = NULL;
                     }
                 }
-                else if (t->right != NULL && t->left != NULL) { // children
+                else if (t->right != NULL && t->left != NULL && t->parent != NULL) { // children
                     t_node * ch = _get_child(t);
 
                     ch->parent->left = NULL;
@@ -176,6 +171,12 @@ namespace ft {
                     ch->left = t->left;
                     ch->right = t->right;
                     ch->parent = t->parent;
+                }
+                else if (t->right != NULL && t->left != NULL) { // decapitation
+                    t_node * ch = _get_child(t);
+
+                    t->data = ch->data;
+                    d = ch;
                 }
                 delete d;
             }
@@ -318,6 +319,11 @@ namespace ft {
                 {return (const_iterator(it.getPtr()));}
                 else
                 {return (end());}
+            }
+
+            std::pair<iterator, iterator> equal_range(const key_type & k) {
+
+                return (std::pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
             }
 //
 // observers
@@ -472,6 +478,64 @@ namespace ft {
                 return (next);
             }
     };
+}
+template <class Key, class T>
+  bool operator== ( const ft::map<Key,T>& lhs,
+                    const ft::map<Key,T>& rhs ) {
+    typename ft::map<Key, T>::iterator it1 = lhs.begin();
+    typename ft::map<Key, T>::iterator it2 = rhs.begin();
+
+    if (lhs.size() != rhs.size())
+    {return (false);}
+
+    while (it1 != lhs.end()) {
+        if ((*it1).second != (*it2).second)
+        {return (false);}
+        it1++;
+        it2++;
+    }
+    return (true);
+}
+
+template <class Key, class T>
+  bool operator!= ( const ft::map<Key,T>& lhs,
+                    const ft::map<Key,T>& rhs ) {
+    return (!(lhs == rhs));
+}
+
+template <class Key, class T>
+  bool operator<  ( const ft::map<Key,T>& lhs,
+                    const ft::map<Key,T>& rhs ) {
+    typename ft::map<Key, T>::iterator it1 = lhs.begin();
+    typename ft::map<Key, T>::iterator it2 = rhs.begin();
+
+    while (it1 != lhs.end()) {
+        if ((*it1).second > (*it2).second) {
+            return (false);
+        }
+        it1++;
+        it2++;
+    }
+    return (true);
+
+}
+
+template <class Key, class T>
+  bool operator<= ( const ft::map<Key,T>& lhs,
+                    const ft::map<Key,T>& rhs ) {
+    return (!(rhs < lhs));
+}
+
+template <class Key, class T>
+  bool operator>  ( const ft::map<Key,T>& lhs,
+                    const ft::map<Key,T>& rhs ) {
+    return (rhs < lhs);
+}
+
+template <class Key, class T>
+  bool operator>= ( const ft::map<Key,T>& lhs,
+                    const ft::map<Key,T>& rhs ) {
+    return (!(lhs < rhs));
 }
 
 #endif // MAP_H

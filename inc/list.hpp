@@ -37,38 +37,17 @@ namespace ft {
 
             explicit list (size_type n,
                            const value_type& val = value_type()) {
-                t_node * tmp;
-                _first = new t_node;
-                _last = new t_node;
-
-                _first->prev = _last;
-                _first->next = _last;
-                _first->data = val;
-
-                _last->next = _first;
-                _last->prev = _first;
-                _last->data = value_type();
-
-                tmp = _first;
-                _size = n;
-                while (--n) {
-                    tmp->next = new t_node;
-                    tmp->next->prev = tmp;
-                    tmp->next->next = NULL;
-                    tmp->next->data = val;
-                    tmp = tmp->next;
-                }
-                _last = tmp;
+                _fill_list(n, val, std::true_type());
             }
 
-            // TODO: MacOS
+            // TODO: test
             template <class InputIterator>
             list(InputIterator first,
-                    InputIterator last) :
+                 InputIterator last) :
                     _first(NULL), _last(NULL) {
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
-                _insert_dispatch(begin(), first, last, Integral());
+                _fill_list(first, last, Integral());
             }
 
             list (const list & x) : _first(NULL), _last(NULL), _size(0) {
@@ -192,65 +171,6 @@ namespace ft {
 // content modifiers
 //
 
-            iterator _insert (iterator position,
-                              size_type n,
-                              const value_type& val) {
-                t_node * tmp = _first;
-                t_node * nu;
-                iterator it = begin();
-
-                if (position == begin()) {
-                    push_front(val);
-                    if (n == 1)
-                        return (it);
-                    n--;
-                }
-                else if (position == end()) {
-                    push_back(val);
-                    if (n == 1)
-                        return (it);
-                    n--;
-                }
-                while (it != position) {
-                    tmp = tmp->next;
-                    it++;
-                }
-                while (n > 0)
-                {
-                    nu = new t_node;
-                    nu->data = val;
-                    nu->next = tmp;
-                    nu->prev = tmp->prev;
-
-                    tmp->prev->next = nu;
-                    tmp->prev = nu;
-                    _size++;
-                    n--;
-                }
-                return it;
-            }
-
-            iterator _insert_dispatch(iterator position,
-                             size_type n,
-                             const value_type &val,
-                             std::true_type) {
-                return (_insert(position, n, val));
-            }
-
-            template<class InputIterator>
-            void _insert_dispatch(iterator position,
-                                    InputIterator first,
-                                    InputIterator last,
-                                  std::false_type) {
-                InputIterator tmp = first;
-
-                while (tmp != last) {
-                    _insert(position, 1, *tmp);
-                    tmp++;
-                    position++;
-                }
-            }
-
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
                 return (_insert_dispatch(position, 1, val, std::true_type()));
@@ -270,36 +190,6 @@ namespace ft {
                 typedef typename std::is_integral<InputIterator>::type Integral;
 
                 _insert_dispatch(position, first, last, Integral());
-            }
-
-            iterator _erase(iterator position) {
-                iterator it = begin();
-                t_node * tmp = _first;
-
-                if (position == begin()) {
-                    pop_front();
-                    return (begin());
-                }
-                else if (position == end()) {
-                    pop_back();
-                    return (position);
-                }
-                while (it != position) {
-                    it++;
-                    tmp = tmp->next;
-                }
-                position++;
-                if (tmp != _last)
-                {
-                    tmp->prev->next = tmp->next;
-                    tmp->next->prev = tmp->prev;
-                    delete tmp;
-                }
-                else {
-                    pop_back();
-                    return (end());
-                }
-                return (position);
             }
 
             iterator erase(iterator position) {
@@ -359,7 +249,7 @@ namespace ft {
 
 //
 // operations
-// TODO: merge & splice
+// TODO: fix merge & splice
 
             void sort() { // bubble sort
                 t_node * s = _first;
@@ -585,7 +475,6 @@ namespace ft {
                 xnb->prev = n->prev;
                 n->prev = xne;
                 xne->next = n;
-
             }
 
 //
@@ -638,6 +527,138 @@ namespace ft {
             t_node * _first;
             t_node * _last;
             size_type _size;
+
+            void _fill_list(size_type n,
+                           const value_type & val,
+                           std::true_type) {
+                t_node * tmp;
+                _first = new t_node;
+                _last = new t_node;
+
+                _first->prev = _last;
+                _first->next = _last;
+                _first->data = val;
+
+                _last->next = _first;
+                _last->prev = _first;
+                _last->data = value_type();
+
+                tmp = _first;
+                _size = n;
+                while (--n) {
+                    tmp->next = new t_node;
+                    tmp->next->prev = tmp;
+                    tmp->next->next = NULL;
+                    tmp->next->data = val;
+                    tmp = tmp->next;
+                }
+                _last = tmp;
+            }
+
+            template<class InputIterator>
+            void _fill_list(InputIterator first,
+                           InputIterator last,
+                           std::false_type) {
+                InputIterator tmp = first;
+                iterator position = begin();
+
+                while (tmp != last) {
+                    _insert(position, 1, *tmp);
+                    tmp++;
+                    position++;
+                }
+            }
+
+            iterator _insert (iterator position,
+                              size_type n,
+                              const value_type& val) {
+                t_node * tmp = _first;
+                t_node * nu;
+                iterator it = begin();
+
+                if (position == begin()) {
+                    push_front(val);
+                    if (n == 1)
+                        return (it);
+                    n--;
+                }
+                else if (position == end()) {
+                    push_back(val);
+                    if (n == 1)
+                        return (it);
+                    n--;
+                }
+                while (it != position) {
+                    tmp = tmp->next;
+                    it++;
+                }
+                while (n > 0)
+                {
+                    nu = new t_node;
+                    nu->data = val;
+                    nu->next = tmp;
+                    nu->prev = tmp->prev;
+
+                    tmp->prev->next = nu;
+                    tmp->prev = nu;
+                    _size++;
+                    n--;
+                }
+                return it;
+            }
+
+            void _insert_dispatch(iterator position,
+                             size_type n,
+                             const value_type &val,
+                             std::true_type) {
+                _insert(position, n, val);
+            }
+
+            template<class InputIterator>
+            void _insert_dispatch(iterator position,
+                                    InputIterator first,
+                                    InputIterator last,
+                                  std::false_type) {
+                InputIterator tmp = first;
+
+                while (tmp != last) {
+                    _insert(position, 1, *tmp);
+                    tmp++;
+                    position++;
+                }
+            }
+
+
+            iterator _erase(iterator position) {
+                iterator it = begin();
+                t_node * tmp = _first;
+
+                if (position == begin()) {
+                    pop_front();
+                    return (begin());
+                }
+                else if (position == end()) {
+                    pop_back();
+                    return (position);
+                }
+                while (it != position) {
+                    it++;
+                    tmp = tmp->next;
+                }
+                position++;
+                if (tmp != _last)
+                {
+                    tmp->prev->next = tmp->next;
+                    tmp->next->prev = tmp->prev;
+                    delete tmp;
+                }
+                else {
+                    pop_back();
+                    return (end());
+                }
+                return (position);
+            }
+
     };
 }
 
@@ -650,7 +671,7 @@ bool operator== (const ft::list<T>& lhs,
     if (lhs.size() != rhs.size())
     {return (false);}
 
-    while (it1 != lhs.end() && it2 != rhs.end()) {
+    while (it1 != lhs.end()) {
         if (*it1 != *it2) {
             return (false);
         }
@@ -672,7 +693,7 @@ bool operator<(const ft::list<T>& lhs,
     typename ft::list<T>::iterator it1 = lhs.begin();
     typename ft::list<T>::iterator it2 = rhs.begin();
 
-    while (it1 != lhs.end() && it2 != rhs.end()) {
+    while (it1 != lhs.end()) {
         if (*it1 > *it2) {
             return (false);
         }
