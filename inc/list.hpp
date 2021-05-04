@@ -62,14 +62,14 @@ namespace ft {
             }
 
             // TODO: MacOS
-            // template <class InputIterator>
-            // list(InputIterator first,
-            //         InputIterator last) :
-            //         _first(NULL), _last(NULL) {
-            //     typedef typename std::is_integral<InputIterator>::type Integral;
+            template <class InputIterator>
+            list(InputIterator first,
+                    InputIterator last) :
+                    _first(NULL), _last(NULL) {
+                typedef typename std::is_integral<InputIterator>::type Integral;
 
-            //     insert(first, last, Integral());
-            // }
+                _insert_dispatch(begin(), first, last, Integral());
+            }
 
             list (const list & x) : _first(NULL), _last(NULL), _size(0) {
                 *this = x;
@@ -230,11 +230,11 @@ namespace ft {
                 return it;
             }
 
-            void _insert_dispatch(iterator position,
+            iterator _insert_dispatch(iterator position,
                              size_type n,
                              const value_type &val,
                              std::true_type) {
-                _insert(position, n, val);
+                return (_insert(position, n, val));
             }
 
             template<class InputIterator>
