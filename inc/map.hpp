@@ -163,20 +163,19 @@ namespace ft {
                         tmp->left = NULL;
                     }
                 }
-                else if (t->right != NULL && t->left != NULL && t->parent != NULL) { // children
+                else if (t->right != NULL && t->left != NULL) { // children
                     t_node * ch = _get_child(t);
 
-                    ch->parent->left = NULL;
-                    ch->parent->parent = ch;
-                    ch->left = t->left;
-                    ch->right = t->right;
-                    ch->parent = t->parent;
-                }
-                else if (t->right != NULL && t->left != NULL) { // decapitation
-                    t_node * ch = _get_child(t);
-
-                    t->data = ch->data;
-                    d = ch;
+                    if (t->parent != NULL) {
+                        ch->parent->left = NULL;
+                        ch->parent->parent = ch;
+                        ch->left = t->left;
+                        ch->right = t->right;
+                        ch->parent = t->parent;
+                    }
+                    else {
+                        //TODO SOMETHING
+                    }
                 }
                 delete d;
             }

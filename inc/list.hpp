@@ -59,9 +59,15 @@ namespace ft {
                 iterator tmp = x.begin();
 
                 clear();
+                _last = new t_node; // WTF ???
+                _last->data = value_type();
+                _last->prev = _last;
+                _last->next = _last;
+                _first = _last;
                 while (tmp != x.end()) {
                     push_back(*tmp);
                     tmp++;
+                    _size++;
                 }
                 return (*this);
             }
@@ -211,13 +217,9 @@ namespace ft {
 
 
             void clear() {
-                iterator tmp = begin();
-
-                while (tmp != end()) {
-                    erase(tmp);
-                    tmp++;
+                while (_size) {
+                    pop_back();
                 }
-                _size = 0;
             }
 
             void assign(size_type n,

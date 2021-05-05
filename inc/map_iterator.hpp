@@ -90,10 +90,10 @@ class map_iterator {
 
 
     T *operator->(void)
-    { return _ptr; }
+    { return &_ptr->data; }
 
     const T *operator->(void) const
-    { return _ptr; }
+    { return &_ptr->data; }
 
 
 //
@@ -203,10 +203,10 @@ class reverse_map_iterator {
 
 
     T *operator->(void)
-    { return _ptr; }
+    { return &_ptr->data; }
 
     const T *operator->(void) const
-    { return _ptr; }
+    { return &_ptr->data; }
 
 
 //
