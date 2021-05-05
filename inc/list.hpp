@@ -63,6 +63,7 @@ namespace ft {
                     push_back(*tmp);
                     tmp++;
                 }
+                return (*this);
             }
 
             ~list() {
@@ -173,7 +174,8 @@ namespace ft {
 
             iterator insert(iterator position,
                              const value_type &val = value_type()) {
-                return (_insert_dispatch(position, 1, val, std::true_type()));
+                _insert_dispatch(position, 1, val, std::true_type());
+                return (position);
 
             }
 
@@ -559,13 +561,23 @@ namespace ft {
             void _fill_list(InputIterator first,
                            InputIterator last,
                            std::false_type) {
-                InputIterator tmp = first;
-                iterator position = begin();
+                t_node * tmp;
+                iterator position;
+                _first = new t_node;
+                _last = new t_node;
 
-                while (tmp != last) {
-                    _insert(position, 1, *tmp);
+                _first->prev = _last;
+                _first->next = _last;
+                _first->data = *first;
+
+                _last->next = _first;
+                _last->prev = _first;
+                _last->data = value_type();
+                position = begin();
+                while (first != last) {
+                    _insert(position, 1, *first);
                     tmp++;
-                    position++;
+                    first++;
                 }
             }
 
