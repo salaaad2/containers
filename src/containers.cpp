@@ -547,9 +547,13 @@ int main(void)
    }
    it = mymap.begin();
 
-   it = mymap.find('c');
    std::cout << "remove : " << (*it).first << std::endl;
-   mymap.erase(it);
+   it = mymap.find('s');
+   // std::cout << "remove : " << (*it).first << std::endl;
+   if (it != mymap.end())
+   {
+       mymap.erase(it);
+   }
    std::cout << "-=================-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {
        std::cout << "key : " << (*it).first << " data : " << (*it).second << std::endl;

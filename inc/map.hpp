@@ -166,6 +166,7 @@ namespace ft {
                 else if (t->right != NULL && t->left != NULL) { // children
                     t_node * ch = _get_child(t);
 
+                    std::cout << "decapitate" << "\n";
                     if (t->parent != NULL) {
                         ch->parent->left = NULL;
                         ch->parent->parent = ch;
@@ -174,7 +175,6 @@ namespace ft {
                         ch->parent = t->parent;
                     }
                     else {
-                        //TODO SOMETHING
                     }
                 }
                 delete d;
