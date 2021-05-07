@@ -548,11 +548,11 @@ int main(void)
    it = mymap.begin();
 
    std::cout << "remove : " << (*it).first << std::endl;
-   it = mymap.find('s');
+   // it = mymap.find('s');
    // std::cout << "remove : " << (*it).first << std::endl;
    if (it != mymap.end())
    {
-       mymap.erase(it);
+       // mymap.erase(it);
    }
    std::cout << "-=================-" << std::endl;
    for (it = mymap.begin(); it != mymap.end(); it++) {

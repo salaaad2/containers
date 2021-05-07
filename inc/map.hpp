@@ -65,6 +65,7 @@ namespace ft {
                     _head = tn;
                 }
                 else if (_key_dup(val) == 1) {
+                    delete tn;
                     itmp = begin();
                     while ((*itmp).first != val.first) {
                         itmp++;
@@ -217,8 +218,6 @@ namespace ft {
 // element access
 //
             mapped_type & operator[](const key_type & k) {
-                iterator tmp = find(k);
-
                 return (*((this->insert(std::make_pair(k,mapped_type()))).first)).second;
             }
 //
