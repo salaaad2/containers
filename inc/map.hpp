@@ -480,7 +480,23 @@ namespace ft {
             }
     };
 }
-template <class Key, class T>
+//
+// non-member overloads
+//
+template <class Key,
+          class T,
+          class Compare = std::less<Key> >
+void swap (ft::map<Key,T,Compare>& x, ft::map<Key,T,Compare>& y) {
+    ft::map<Key, T, Compare> tmp(x);
+
+    x.clear();
+    x.insert(y.begin(), y.end());
+    y.clear();
+    y.insert(tmp.begin(), tmp.end());
+}
+
+template <class Key,
+          class T>
   bool operator== ( const ft::map<Key,T>& lhs,
                     const ft::map<Key,T>& rhs ) {
     typename ft::map<Key, T>::iterator it1 = lhs.begin();
@@ -498,13 +514,15 @@ template <class Key, class T>
     return (true);
 }
 
-template <class Key, class T>
+template <class Key,
+          class T>
   bool operator!= ( const ft::map<Key,T>& lhs,
                     const ft::map<Key,T>& rhs ) {
     return (!(lhs == rhs));
 }
 
-template <class Key, class T>
+template <class Key,
+          class T>
   bool operator<  ( const ft::map<Key,T>& lhs,
                     const ft::map<Key,T>& rhs ) {
     typename ft::map<Key, T>::iterator it1 = lhs.begin();
@@ -521,19 +539,22 @@ template <class Key, class T>
 
 }
 
-template <class Key, class T>
+template <class Key,
+          class T>
   bool operator<= ( const ft::map<Key,T>& lhs,
                     const ft::map<Key,T>& rhs ) {
     return (!(rhs < lhs));
 }
 
-template <class Key, class T>
+template <class Key,
+          class T>
   bool operator>  ( const ft::map<Key,T>& lhs,
                     const ft::map<Key,T>& rhs ) {
     return (rhs < lhs);
 }
 
-template <class Key, class T>
+template <class Key,
+          class T>
   bool operator>= ( const ft::map<Key,T>& lhs,
                     const ft::map<Key,T>& rhs ) {
     return (!(lhs < rhs));

@@ -154,7 +154,7 @@ int main(void)
     for (size_t i = 0; i < swaptest.size(); i++) {
         std::cout << i << " [" << swaptest[i] << "]"<< std::endl;
     }
-    // swaptest.swap(cinvect);
+    swaptest.swap(cinvect);
     std::cout << "-post :: --" << std::endl;
     for (size_t i = 0; i < cinvect.size(); i++) {
         std::cout << i << " [" << cinvect[i] << "]"<< std::endl;

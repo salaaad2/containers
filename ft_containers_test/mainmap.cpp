@@ -208,10 +208,10 @@ void check_equalrange(T1 &f, T2 &f2, char c, bool debug = false)
   fe = f5;
   fe2 = f52;
   is_same(checker(fe, fe2));  std::cout << '\n' << "Swap:" << '\n';
-  // f3['k'] = 2;
-  // f32['k'] = 2;
-  // swap(f, f3);
-  // swap(f2, f32);
+  f3['k'] = 2;
+  f32['k'] = 2;
+  swap(f, f3);
+  swap(f2, f32);
   // is_same(checker(f, f2));
   // is_same(checker(f3, f32));
   // f.swap(f3);
