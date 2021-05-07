@@ -112,7 +112,7 @@ namespace ft {
                     }
                     return (itmp);
                 }
-                if (comp((*position).first, val.first) == 1) {
+                if (comp((*position).first, val.first) == 0) {// this is never used. Too bad !
                     if (n->right == NULL) {
                         n->right = _create_node(val);
                         n->right->parent = n;
@@ -508,7 +508,7 @@ template <class Key, class T>
     typename ft::map<Key, T>::iterator it2 = rhs.begin();
 
     while (it1 != lhs.end()) {
-        if ((*it1).second > (*it2).second) {
+        if (it2 == rhs.end() || (*it1).second > (*it2).second) {
             return (false);
         }
         it1++;
