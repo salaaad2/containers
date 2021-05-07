@@ -46,11 +46,8 @@ namespace ft {
             }
 
             ~vector() {
-                if (_elements)
-                {
                     delete [] _elements;
-                }
-            };
+            }
 
             vector & operator=(vector const & x) {
                 _capacity = x.capacity();
@@ -167,6 +164,10 @@ namespace ft {
 
                 _size = 0;
                 _capacity = 0;
+                if (_elements)
+                {
+                    delete [] _elements;
+                }
                 fill_vect(first, last, Integral());
             }
 
@@ -174,7 +175,10 @@ namespace ft {
                         const value_type & val) {
                 _size = 0;
                 _capacity = 0;
-                delete [] _elements;
+                if (_elements)
+                {
+                    delete [] _elements;
+                }
                 fill_vect(n, val, std::true_type());
             }
 
