@@ -48,7 +48,10 @@ namespace ft {
             }
 
             ~map() {
-                _destroy(_head);
+                if (_head != NULL)
+                {
+                    _destroy(_head);
+                }
                 _size = 0;
             }
 //
@@ -460,8 +463,8 @@ namespace ft {
 
             void _destroy(t_node * leaf) {
                 if (leaf != NULL) {
-                    _destroy(leaf->left);
                     _destroy(leaf->right);
+                    _destroy(leaf->left);
                     delete leaf;
                 }
             }
