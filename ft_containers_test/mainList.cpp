@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <list>
-#include "inc/list.hpp"
+#include "../inc/list.hpp"
 struct is_odd
 {
   bool operator()(const int &value)

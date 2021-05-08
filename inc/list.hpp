@@ -28,11 +28,11 @@ namespace ft {
             explicit list () :
                 _first(NULL), _last(NULL), _size(0)
             {
-                // _last = new t_node; // WTF ???
-                // _last->data = value_type();
-                // _last->prev = _last;
-                // _last->next = _last;
-                // _first = _last;
+                _last = new t_node; // WTF ???
+                _last->data = value_type();
+                _last->prev = _last;
+                _last->next = _last;
+                _first = _last;
             }
 
             explicit list (size_type n,
@@ -57,14 +57,15 @@ namespace ft {
 
             list    & operator=(const list &x) {
                 iterator tmp = x.begin();
+                iterator tmpe = x.end();
 
-                clear();
+                this->clear();
                 _last = new t_node; // WTF ???
                 _last->data = value_type();
                 _last->prev = _last;
                 _last->next = _last;
                 _first = _last;
-                while (tmp != x.end()) {
+                while (tmp != tmpe) {
                     push_back(*tmp);
                     tmp++;
                     _size++;
@@ -568,6 +569,7 @@ namespace ft {
                 _first = new t_node;
                 _last = new t_node;
 
+                tmp = _first;
                 _first->prev = _last;
                 _first->next = _last;
                 _first->data = *first;
