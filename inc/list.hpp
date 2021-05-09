@@ -74,9 +74,9 @@ namespace ft {
             }
 
             ~list() {
-                while (_size > 0) {
-                    pop_back();
-                }
+                // while (_size > 0) {
+                //     pop_back();
+                // }
             }
 //
 // iterators
@@ -546,7 +546,6 @@ namespace ft {
 
                 _last->next = _first;
                 _last->prev = _first;
-                _last->data = value_type();
 
                 tmp = _first;
                 _size = n;
