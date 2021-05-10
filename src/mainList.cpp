@@ -244,11 +244,11 @@ int mainList()
 
   ft::list< int >::iterator insert_list_it = insert_list.begin();
   ft::list< int >::iterator insert_list_it_e = insert_list.end();
-  insert_list.insert(++insert_list_it, insert_list_it, insert_list_it_e);
+  insert_list.insert(insert_list_it, insert_list_it, insert_list_it_e);
 
   std::list< int >::iterator it_test_insert = insert_list_test.begin();
   std::list< int >::iterator it_test_insert_e = insert_list_test.end();
-  insert_list_test.insert(++it_test_insert, it_test_insert, it_test_insert_e);
+  insert_list_test.insert(it_test_insert, it_test_insert, it_test_insert_e);
 
   pcheck(insert_list, insert_list_test, debug);
   std::cout << std::endl;

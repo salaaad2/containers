@@ -220,6 +220,7 @@ namespace ft {
                     _begin = new_node;
                 return (iterator(new_node));
             }
+
             void insert(iterator position, size_type n, const value_type &val) {
                 insert_func(position, n, val, std::true_type());
             }
@@ -615,34 +616,51 @@ namespace ft {
             }
 
             void insert_func(iterator position, size_type n, const value_type val, std::true_type) {
-                t_node *current = position.getPtr();
-                current = current->prev;
-                while (n) {
-                    current->next = new t_node;
-                    current->next->data = val;
-                    current->next->prev = current;
-                    current = current->next;
-                    n--;
-                    _size++;
+                if (position != begin())
+                {
+                    t_node *current = position.getPtr();
+                    current = current->prev;
+                    while (n) {
+                        current->next = new t_node;
+                        current->next->data = val;
+                        current->next->prev = current;
+                        current = current->next;
+                        n--;
+                        _size++;
+                    }
+                    current->next = position.getPtr();
+                    position.getPtr()->prev = current;
                 }
-                current->next = position.getPtr();
-                position.getPtr()->prev = current;
+                else {
+                    while (n) {
+                        push_front(val);
+                        n--;
+                    }
+                }
             }
 
             template <class InputIterator>
             void insert_func(iterator position, InputIterator first, InputIterator last, std::false_type) {
-                t_node *current = position.getPtr();
-                current = current->prev;
-                while (first != last) {
-                    current->next = new t_node;
-                    current->next->data = *first;
-                    current->next->prev = current;
-                    current = current->next;
-                    first++;
-                    _size++;
+                if (position != begin())
+                {
+                    t_node *current = position.getPtr();
+                    current = current->prev;
+                    while (first != last) {
+                        current->next = new t_node;
+                        current->next->data = *first;
+                        current->next->prev = current;
+                        current = current->next;
+                        first++;
+                        _size++;
+                    }
+                    current->next = position.getPtr();
+                    position.getPtr()->prev = current;
                 }
-                current->next = position.getPtr();
-                position.getPtr()->prev = current;
+                else {
+                    while (last-- != first) {
+                        push_front(*last);
+                    }
+                }
             }
 
             template <class T1>
