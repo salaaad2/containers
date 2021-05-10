@@ -1,13 +1,14 @@
-#pragma once
-#include <cstddef>
-#include <iostream>
-#include <math.h>
-#include <stdexcept>
-#include <typeinfo>
+#ifndef LIST_H
+# define LIST_H
 
-#include "list_iterator.class.hpp"
-#include "reverse_list_iterator.class.hpp"
-#include "list_node.hpp"
+# include <cstddef>
+# include <iostream>
+# include <math.h>
+# include <stdexcept>
+# include <typeinfo>
+
+# include "list_iterator.hpp"
+# include "list_node.hpp"
 
 namespace ft {
     template <class T> class list {
@@ -42,7 +43,8 @@ namespace ft {
                 init_list(n, val, std::true_type());
             }
 
-            template <class InputIterator> list(InputIterator first, InputIterator last) {
+            template <class InputIterator>
+            list(InputIterator first, InputIterator last) {
                 typedef typename std::is_integral<InputIterator>::type Integral;
                 init_list(first, last, Integral());
             }
@@ -745,3 +747,5 @@ namespace ft {
         return(false);
     }
 } // namespace ft
+
+#endif

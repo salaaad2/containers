@@ -1,168 +1,156 @@
-#ifndef LIST_ITERATOR_H_
-# define LIST_ITERATOR_H_
+#ifndef LIST_ITERATOR_H
+# define LIST_ITERATOR_H
 
+# include <cstddef>
 # include "list_node.hpp"
 
-////////////////////////////
-// REGULAR LIST ITERATOR  //
-////////////////////////////
-template <class T>
+template<class T>
 class list_iterator {
-  public :
-    typedef ft::l_node<T> t_node;
-//
-// constructors
-//
-    list_iterator() : _ptr(NULL) {}
-    list_iterator(t_node *rhs) : _ptr(rhs) {}
 
-    list_iterator(list_iterator *rhs) : _ptr(NULL)
-    {*this = rhs;}
-
-    list_iterator &operator=(const list_iterator &rhs)
-    {
-      _ptr = rhs._ptr;
-      return (*this);
-    }
-
-    ~list_iterator() {}
-
-//
-// Prefix overloading
-//
-    list_iterator& operator++()
-    { _ptr = _ptr->next;
-      return *this; }
-
-    list_iterator& operator--()
-    { _ptr = _ptr->prev;
-      return *this; }
-// TODO: double check
-    list_iterator operator++(int)
-    { list_iterator tmp = *this;
-      ++(*this);
-      return (tmp); }
-
-    list_iterator operator--(int)
-    { list_iterator tmp = *this;
-      --(*this);
-      return (tmp); }
-
-
-    T &operator*()
-    { return _ptr->data; }
-
-    const T &operator*() const
-    { return _ptr->data; }
-
-
-    T *operator->(void)
-    { return _ptr; }
-
-    const T *operator->(void) const
-    { return _ptr; }
-
-
-//
-// getters/setters
-//
-
-    void setPtr(t_node * ptr)
-    { _ptr = ptr; }
-
-    t_node * getPtr(void) const
-    { return _ptr; }
-
-    bool operator==(const list_iterator & rhs)
-    { return (_ptr == rhs._ptr); }
-
-    bool operator!=(const list_iterator & rhs)
-    { return (_ptr != rhs._ptr); }
-
-  private :
-    t_node * _ptr;
-};
-
-///////////////////////
-// REVERSE LIST ITER //
-///////////////////////
-template <class T>
-class reverse_list_iterator {
-  public :
-    typedef ft::l_node<T> t_node;
-//
-// constructors
-//
-    reverse_list_iterator() : _ptr(NULL) {}
-    reverse_list_iterator(t_node *rhs) : _ptr(rhs) {}
-
-    reverse_list_iterator(reverse_list_iterator *rhs) : _ptr(NULL)
+  public:
+    typedef struct ft::l_node<T> t_node;
+/*
+ *-----------------------------CONSTRUCTORS--------------------------------------
+ */
+    list_iterator() : _pointer(NULL) {}
+    list_iterator(t_node *rhs) : _pointer(rhs) {}
+    list_iterator(const list_iterator *rhs) : _pointer(NULL)
     {
       *this = rhs;
     }
-
-    reverse_list_iterator &operator=(const reverse_list_iterator &rhs)
+    list_iterator &operator=(const list_iterator &rhs)
     {
-      _ptr = rhs._ptr;
+      _pointer = rhs._pointer;
       return (*this);
     }
+    ~list_iterator() {}
 
-    ~reverse_list_iterator() {}
+    t_node *getPtr() const {return (_pointer);}
+    void setPtr(t_node *current) { _pointer = current;}
 
-//
-// Prefix overloading
-//
-    reverse_list_iterator& operator++()
-    { _ptr = _ptr->prev;
-      return *this; }
+/*
+ *------------------------------COMPARISONS OPERATORS------------------------
+ */
 
-    reverse_list_iterator& operator--()
-    { _ptr = _ptr->next;
-      return *this; }
-// TODO: double check
-    reverse_list_iterator operator++(int)
-    { reverse_list_iterator tmp = *this;
-      --(*this);
-      return (tmp); }
+    bool operator==(const list_iterator &rhs) const {
+      return (_pointer == rhs._pointer);
+    }
+    bool operator!=(const list_iterator &rhs) const {
+      return (_pointer != rhs._pointer);
+    }
 
-    reverse_list_iterator operator--(int)
-    { reverse_list_iterator tmp = *this;
-      ++(*this);
-      return (tmp); }
+/*
+ * dereference operators
+ */
 
+    T &operator*(void) { return (_pointer->data); }
+    const T &operator*(void) const { return (_pointer->data); }
 
-    T &operator*()
-    { return _ptr->data; }
+    T *operator->(void) { return (_pointer); }
+    const T *operator->(void) const { return (_pointer); }
 
-    const T &operator*() const
-    { return _ptr->data; }
+    void operator=(const T &rhs) { _pointer = rhs._pointer; }
 
+    /*
+     * incrementation and decrementation operators
+     */
 
-    T *operator->(void)
-    { return _ptr; }
-
-    const T *operator->(void) const
-    { return _ptr; }
-
-
-//
-// getters/setters
-//
-
-    void setPtr(t_node * ptr)
-    { _ptr = ptr; }
-
-    t_node * getPtr(void) const
-    { return _ptr; }
-
-    bool operator==(const reverse_list_iterator & rhs)
-    { return (_ptr == rhs._ptr); }
-
-    bool operator!=(const reverse_list_iterator & rhs)
-    { return (_ptr != rhs._ptr); }
-
-  private :
-    t_node * _ptr;
+    // prefix
+    list_iterator &operator++() {
+      _pointer = _pointer->next;
+      return (*this);
+    }
+    // postfix
+    list_iterator operator++(int) {
+      list_iterator tmp = *this;
+      this->operator++();
+      return (tmp);
+    }
+    // prefix
+    list_iterator &operator--() {
+      _pointer = _pointer->prev;
+      return (*this);
+    }
+    // postfix
+    list_iterator operator--(int) {
+      list_iterator tmp = *this;
+      this->operator--();
+      return (tmp);
+    }
+  private:
+    t_node *_pointer;
 };
 
-#endif // LIST_ITERATOR_H_
+template<class T> class reverse_list_iterator : public list_iterator<T> {
+
+  public:
+    typedef struct ft::l_node<T> t_node;
+/*
+ *-----------------------------CONSTRUCTORS--------------------------------------
+ */
+    reverse_list_iterator() : _pointer(NULL) {}
+    reverse_list_iterator(t_node *rhs) : _pointer(rhs) {}
+    reverse_list_iterator(const reverse_list_iterator *rhs) : _pointer(NULL)
+    {
+      *this = rhs;
+    }
+    reverse_list_iterator(const list_iterator<T> *rhs) : _pointer(NULL)
+    {
+      *this = rhs;
+    }
+    reverse_list_iterator &operator=(const reverse_list_iterator &rhs)
+    {
+      _pointer = rhs._pointer;
+      return (*this);
+    }
+    reverse_list_iterator &operator=(const list_iterator<T> &rhs)
+    {
+      _pointer = rhs._pointer;
+      return (*this);
+    }
+    ~reverse_list_iterator() {}
+
+/*
+ * dereference operators
+ */
+
+    T &operator*(void) { return (_pointer->data); }
+    const T &operator*(void) const { return (_pointer->data); }
+
+    T *operator->(void) { return (_pointer); }
+    const T *operator->(void) const { return (_pointer); }
+
+    void operator=(const T &rhs) { _pointer = rhs._pointer; }
+
+    /*
+     * incrementation and decrementation operators
+     */
+
+    // prefix
+    reverse_list_iterator &operator++() {
+      _pointer = _pointer->prev;
+      return (*this);
+    }
+    // postfix
+    reverse_list_iterator operator++(int) {
+      reverse_list_iterator tmp = *this;
+      this->operator++();
+      return tmp;
+    }
+    // prefix
+    reverse_list_iterator &operator--() {
+      _pointer = _pointer->next;
+      return (*this);
+    }
+    // postfix
+    reverse_list_iterator operator--(int) {
+      reverse_list_iterator tmp = *this;
+      this->operator--();
+      return (tmp);
+    }
+
+  private:
+    t_node *_pointer;
+};
+
+#endif
