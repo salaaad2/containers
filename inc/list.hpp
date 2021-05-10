@@ -1,739 +1,716 @@
-#ifndef LIST_H
-# define LIST_H
+#pragma once
+#include <cstddef>
+#include <iostream>
+#include <math.h>
+#include <stdexcept>
+#include <typeinfo>
 
-# include <iostream>
-# include <type_traits>
-
-# include <math.h>
-
-# include "list_node.hpp"
-# include "list_iterator.hpp"
+#include "list_iterator.class.hpp"
+#include "reverse_list_iterator.class.hpp"
+#include "list_node.hpp"
 
 namespace ft {
-    template <class T> class list {
-        public :
-            typedef T value_type;
-            typedef l_node<value_type> t_node;
-            typedef value_type& reference;
-            typedef const value_type& const_reference;
-            typedef size_t size_type;
-            typedef list_iterator<value_type> iterator;
-            typedef const list_iterator<value_type> const_iterator;
-            typedef reverse_list_iterator<value_type> reverse_iterator;
-            typedef const reverse_list_iterator<value_type> const_reverse_iterator;
-
-//
-// constructors
-// TODO: delete 1 more node ???
-            explicit list () :
-                _first(NULL), _last(NULL), _size(0)
-            {
-                _last = new t_node; // WTF ???
-                _last->data = value_type();
-                _last->prev = _last;
-                _last->next = _last;
-                _first = _last;
-            }
-
-            explicit list (size_type n,
-                           const value_type& val = value_type()) {
-                _fill_list(n, val, std::true_type());
-            }
-
-            // TODO: test
-            template <class InputIterator>
-            list(InputIterator first,
-                 InputIterator last) :
-                    _first(NULL), _last(NULL) {
-                typedef typename std::is_integral<InputIterator>::type Integral;
-
-                _fill_list(first, last, Integral());
-            }
-
-            list (const list & x) : _first(NULL), _last(NULL), _size(0) {
-                *this = x;
-                return ;
-            }
-
-            list    & operator=(const list &x) {
-                iterator tmp = x.begin();
-                iterator tmpe = x.end();
-
-                this->clear();
-                _last = new t_node; // WTF ???
-                _last->data = value_type();
-                _last->prev = _last;
-                _last->next = _last;
-                _first = _last;
-                while (tmp != tmpe) {
-                    push_back(*tmp);
-                    tmp++;
-                    _size++;
-                }
-                return (*this);
-            }
-
-            ~list() {
-                // while (_size > 0) {
-                //     pop_back();
-                // }
-            }
-//
-// iterators
-// TODO: last elem
-
-            iterator begin()
-            {return (iterator(_first));}
-
-            const_iterator begin() const
-            {return (const_iterator(_first));}
-
-            iterator end()
-            {return (iterator(_last->next));}
-
-            const_iterator end() const
-            {return (const_iterator(_last->next));}
-
-            reverse_iterator rend()
-            {return reverse_iterator(_first);}
-
-            const_reverse_iterator rend() const
-            {return const_reverse_iterator(_first);}
-
-            reverse_iterator rbegin()
-            {return reverse_iterator(_last);}
-
-            const_reverse_iterator rbegin() const
-            {return const_reverse_iterator(_last);}
-//
-// capacity
-//
-            void resize(size_type n,
-                        value_type val = value_type()) {
-                size_type spos = 0;
-                t_node * ptr = _first;
-                t_node * tmp;
-
-                if (n < size()) {
-                    while (spos < (n - 1)) {
-                        ptr = ptr->next;
-                        spos++;
-                    }
-                    _last = ptr;
-                    ptr = ptr->next;
-                    while (ptr != NULL) {
-                        tmp = ptr;
-                        ptr = ptr->next;
-                        delete tmp;
-                    }
-                    _last->next = NULL;
-                    return ;
-                }
-                else if (n > size()){
-                    while (ptr != _last) {
-                        ptr = ptr->next;
-                        spos++;
-                    }
-                    n -= size();
-                    while (n) {
-                        ptr->next = new t_node;
-                        ptr->next->prev = ptr;
-                        ptr->next->next = NULL;
-                        ptr->next->data = val;
-                        ptr = ptr->next;
-                        n--;
-                    }
-                    _last = ptr;
-                    return ;
-                }
-                _size = n;
-            }
-
-            size_type size()
-            {return (_size);}
-
-            size_type empty()
-            {return (_size == 0);}
-
-            size_type max_size()
-            {return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);}
-
-//
-// element access
-//
-            reference front()
-            {return (_first->data);}
-
-            const_reference front() const
-            {return (_first->data);}
-
-
-            reference back()
-            {return (_last->data);}
-
-            const_reference back() const
-            {return (_last->data);}
-
-
-//
-// content modifiers
-//
-
-            iterator insert(iterator position,
-                             const value_type &val = value_type()) {
-                _insert_dispatch(position, 1, val, std::true_type());
-                return (position);
-
-            }
-
-            void insert(iterator position,
-                             size_type n,
-                             const value_type &val = value_type()) {
-                _insert_dispatch(position, n, val, std::true_type());
-            }
-
-            template <class InputIterator>
-            void insert(iterator position,
-                        InputIterator first,
-                        InputIterator last) {
-                typedef typename std::is_integral<InputIterator>::type Integral;
-
-                _insert_dispatch(position, first, last, Integral());
-            }
-
-            iterator erase(iterator position) {
-                return (_erase(position));
-            }
-
-            iterator erase(iterator first,
-                           iterator last) {
-                iterator tmp = first;
-
-                while (tmp != last) {
-                    _erase(tmp);
-                    tmp++;
-                }
-                return (tmp);
-            }
-
-
-            void clear() {
-                while (_size) {
-                    pop_back();
-                }
-            }
-
-            void assign(size_type n,
-                        const value_type& val) {
-                t_node * tmp;
-                t_node * ptr = _first;
-
-                if (_first != NULL) {
-                    while (ptr != NULL) {
-                        tmp = ptr;
-                        ptr = ptr->next;
-                        delete tmp;
-                    }
-                }
-                _first = new t_node;
-                _first->prev = NULL;
-                _first->next = NULL;
-                _first->data = val;
-                tmp = _first;
-                _size = n;
-                while (--n) {
-                    tmp->next = new t_node;
-                    tmp->next->prev = tmp;
-                    tmp->next->next = NULL;
-                    tmp->next->data = val;
-                    tmp = tmp->next;
-                }
-                _last = tmp;
-            }
-
-
-//
-// operations
-// TODO: fix merge & splice
-
-            void sort() { // bubble sort
-                t_node * s = _first;
-                t_node * tmp = _first;
-                value_type td;
-
-                while (s != NULL) {
-                    if (tmp->data < s->data) {
-                        td = s->data;
-                        s->data = tmp->data;
-                        tmp->data = td;
-                        s = _first;
-                    }
-                    tmp = s;
-                    s = s->next;
-                }
-            }
-
-            template <class Compare>
-            void sort(Compare comp) { // bubble sort
-                t_node * s = _first;
-                t_node * tmp = _first;
-                value_type td;
-
-                while (s != NULL) {
-                    if (comp(s->data, tmp->data)) {
-                        td = s->data;
-                        s->data = tmp->data;
-                        tmp->data = td;
-                        s = _first;
-                    }
-                    tmp = s;
-                    s = s->next;
-                }
-            }
-
-            void remove (const value_type & val) {
-                iterator tmp = begin();
-                iterator s;
-
-                if (empty())
-                {return ;}
-
-                while (tmp != end()) {
-                    if (*tmp == val) {
-                        _erase(tmp);
-                        tmp = begin();
-                        _size--;
-                    }
-                    tmp++;
-                }
-            }
-
-            template <class Predicate>
-            void remove_if(Predicate pred) {
-                iterator tmp = begin();
-                iterator s;
-
-                if (empty()) return ;
-
-                while (tmp != end()) {
-                    if (pred(*tmp)) {
-                        _erase(tmp);
-                        tmp = begin();
-                        _size--;
-                    }
-                    tmp++;
-                }
-            }
-
-            void reverse() {
-                t_node * cur = _first;
-                t_node * tmp = NULL;
-
-                if (empty() ||
-                    size() == 1)
-                {return ;}
-
-                _last = _first;
-                while (cur != NULL) {
-                    tmp = cur->prev;
-                    cur->prev = cur->next;
-                    cur->next = tmp;
-                    cur = cur->prev;
-                }
-                _first = tmp->prev;
-            }
-
-            void unique() {
-                iterator tmp = begin();
-                value_type rm = *tmp;
-
-                if ((empty()) ||
-                    (size() == 1))
-                {return ;}
-
-                while (tmp != end()) {
-                    rm = *tmp;
-                    tmp++;
-                    while (tmp != end() && *tmp == rm) {
-                        tmp = _erase(tmp);
-                        _size--;
-                    }
-                }
-            }
-
-
-            template <class BinaryPredicate>
-            void unique (BinaryPredicate binary_pred) {
-                iterator tmp = begin();
-                value_type rm = *tmp;
-
-                if ((empty()) ||
-                    (size() == 1))
-                {return ;}
-
-                while (tmp != end()) {
-                    rm = *tmp;
-                    tmp++;
-                    while (tmp != end() && binary_pred(rm, *tmp)) {
-                        tmp = _erase(tmp);
-                        _size--;
-                    }
-                }
-            }
-
-            void merge(list &x) {
-                iterator tmpit = begin();
-
-                if (&x == this)
-                {return ;}
-
-                for (iterator it = begin(); it != end(); it++) {
-                    std::cout << *(x.begin()) << " " << *it << "start\n";
-                    while (*(x.begin()) < *it) {
-                        splice(it, x, x.begin());
-                        std::cout << "while" << *it;
-                        if (x.empty()) {return ;}
-                    }
-                    std::cout << "nexit in for" << *it;
-                }
-                splice(tmpit, x);
-            }
-
-            void splice (iterator position,
-                         list &x,
-                         iterator i) {
-                iterator xit = x.begin();
-                t_node * xn = x._first;
-
-                iterator it = begin();
-                t_node * n = _first;
-
-                while (xit != i && xn != NULL) {
-                    xn = xn->next;
-                    xit++;
-                }
-                while (it != position && n != NULL) {
-                    n = n->next;
-                    it++;
-                }
-                xn->next->prev = xn->prev;
-                xn->prev->next = xn->next;
-                xn->next = n;
-                xn->prev = n->prev;
-
-                n->prev->next = xn;
-                n->prev = xn;
-                _size++;
-                x._size--;
-                i.setPtr(xn);
-            }
-
-            void splice (iterator position,
-                         list& x) {
-                iterator xit = x.begin();
-
-                iterator it = begin();
-                t_node * n = _first;
-
-                while (it != position && n != NULL) {
-                    n = n->next;
-                    it++;
-                }
-                n->prev->next = x._first;
-                x._first->prev = n->prev;
-                n->prev = x._last;
-                x._last->next = n;
-
-                _size += x.size();
-                x._size = 0;
-            }
-
-            void splice (iterator position,
-                         list &x,
-                         iterator first,
-                         iterator last) {
-                iterator xitb = x.begin();
-                t_node * xnb = x._first;
-                iterator xite;
-                t_node * xne;
-
-                iterator it = begin();
-                t_node * n = _first;
-
-                while (it != position && n != NULL) {
-                    n = n->next;
-                    it++;
-                }
-                while (xitb != first && n != NULL) {
-                    xnb = xnb->next;
-                    xitb++;
-                }
-                xite = xitb;
-                xne = xnb;
-                while (xite != last && n != NULL) {
-                    _size++;
-                    xne = xne->next;
-                    xite++;
-                }
-
-                n->prev->next = xnb;
-                xnb->prev = n->prev;
-                n->prev = xne;
-                xne->next = n;
-            }
-
-//
-// begin/end modifiers
-//
-
-            void push_front(const value_type &val) {
-                t_node * tmp;
-                tmp = new t_node;
-
-                tmp->data = val;
-                tmp->next = _first;
-                tmp->prev = NULL;
-
-                _first->prev = tmp;
-                _first = tmp;
-                _size++;
-            }
-
-            void push_back(const value_type &val) {
-                t_node *tmp;
-                tmp = new t_node;
-
-                tmp->data = val;
-                tmp->next = NULL;
-                tmp->prev = _last;
-
-                _last->next = tmp;
-                _last = tmp;
-                _size++;
-            }
-
-            void pop_front() {
-                if (size()) {
-                    _first = _first->next;
-                    delete _first->prev;
-                    _size--;
-                }
-            }
-
-            void pop_back() {
-                if (_size) {
-                    _last = _last->prev;
-                    delete _last->next;
-                    _size--;
-                }
-            }
-
-        private :
-            t_node * _first;
-            t_node * _last;
-            size_type _size;
-
-            void _fill_list(size_type n,
-                           const value_type & val,
-                           std::true_type) {
-                t_node * tmp;
-                _first = new t_node;
-                _last = new t_node;
-
-                _first->prev = _last;
-                _first->next = _last;
-                _first->data = val;
-
-                _last->next = _first;
-                _last->prev = _first;
-
-                tmp = _first;
-                _size = n;
-                while (--n) {
-                    tmp->next = new t_node;
-                    tmp->next->prev = tmp;
-                    tmp->next->next = NULL;
-                    tmp->next->data = val;
-                    tmp = tmp->next;
-                }
-                _last = tmp;
-            }
-
-            template<class InputIterator>
-            void _fill_list(InputIterator first,
-                           InputIterator last,
-                           std::false_type) {
-                t_node * tmp;
-                iterator position;
-                _first = new t_node;
-                _last = new t_node;
-
-                tmp = _first;
-                _first->prev = _last;
-                _first->next = _last;
-                _first->data = *first;
-
-                _last->next = _first;
-                _last->prev = _first;
-                _last->data = value_type();
-                position = begin();
-                while (first != last) {
-                    _insert(position, 1, *first);
-                    tmp++;
-                    first++;
-                }
-            }
-
-            iterator _insert (iterator position,
-                              size_type n,
-                              const value_type& val) {
-                t_node * tmp = _first;
-                t_node * nu;
-                iterator it = begin();
-
-                if (position == begin()) {
-                    push_front(val);
-                    if (n == 1)
-                        return (it);
-                    n--;
-                }
-                else if (position == end()) {
-                    push_back(val);
-                    if (n == 1)
-                        return (it);
-                    n--;
-                }
-                while (it != position) {
-                    tmp = tmp->next;
-                    it++;
-                }
-                while (n > 0)
-                {
-                    nu = new t_node;
-                    nu->data = val;
-                    nu->next = tmp;
-                    nu->prev = tmp->prev;
-
-                    tmp->prev->next = nu;
-                    tmp->prev = nu;
-                    _size++;
-                    n--;
-                }
-                return it;
-            }
-
-            void _insert_dispatch(iterator position,
-                             size_type n,
-                             const value_type &val,
-                             std::true_type) {
-                _insert(position, n, val);
-            }
-
-            template<class InputIterator>
-            void _insert_dispatch(iterator position,
-                                    InputIterator first,
-                                    InputIterator last,
-                                  std::false_type) {
-                InputIterator tmp = first;
-
-                while (tmp != last) {
-                    _insert(position, 1, *tmp);
-                    tmp++;
-                    position++;
-                }
-            }
-
-
-            iterator _erase(iterator position) {
-                iterator it = begin();
-                t_node * tmp = _first;
-
-                if (position == begin()) {
-                    pop_front();
-                    return (begin());
-                }
-                else if (position == end()) {
-                    pop_back();
-                    return (position);
-                }
-                while (it != position) {
-                    it++;
-                    tmp = tmp->next;
-                }
-                position++;
-                if (tmp != _last)
-                {
-                    tmp->prev->next = tmp->next;
-                    tmp->next->prev = tmp->prev;
-                    delete tmp;
-                }
-                else {
-                    pop_back();
-                    return (end());
-                }
-                return (position);
-            }
-
-    };
-}
-
-template <class T>
-bool operator== (const ft::list<T>& lhs,
-                 const ft::list<T>& rhs) {
-    typename ft::list<T>::iterator it1 = lhs.begin();
-    typename ft::list<T>::iterator it2 = rhs.begin();
-
-    if (lhs.size() != rhs.size())
-    {return (false);}
-
-    while (it1 != lhs.end()) {
-        if (*it1 != *it2) {
-            return (false);
+  template <class T> class list {
+    public:
+      typedef size_t size_type;
+      typedef T value_type;
+      typedef value_type &reference;
+      typedef const value_type &const_reference;
+      typedef value_type *pointer;
+      typedef const value_type *const_pointer;
+      typedef std::ptrdiff_t difference_type;
+      typedef list_iterator<value_type> iterator;
+      typedef const list_iterator<value_type> const_iterator;
+      typedef reverse_list_iterator<value_type> reverse_iterator;
+      typedef const reverse_list_iterator<value_type>
+      const_reverse_iterator;
+      typedef struct l_node<T> t_node;
+
+      /*
+       * ------------------------CONSTRUCTORS----------------------------------------
+       */
+      explicit list() : _size(0) {
+        _end = new t_node;
+        _end->data = value_type();
+        _end->prev = _end;
+        _end->next = _end;
+        _begin = _end;
+        _size = 0;
+      }
+      explicit list(size_type n, const value_type &val = value_type()) {
+        init_list(n, val, std::true_type());
+      }
+      template <class InputIterator> list(InputIterator first, InputIterator last) {
+        typedef typename std::is_integral<InputIterator>::type Integral;
+        init_list(first, last, Integral());
+      }
+
+      list(const list &x) {
+        _begin = new t_node;
+        _begin->data = value_type();
+        _begin->prev = _end;
+        _end = new t_node;
+        _end->data = value_type();
+        _end->prev = _begin;
+        _end->next = _begin;
+        _begin->next = _end;
+        *this = x;
+      }
+      ~list() {
+        t_node *tmp;
+        while (_begin != _end) {
+          tmp = _begin;
+          _begin = _begin->next;
+          delete tmp;
         }
-        it1++;
-        it2++;
+        delete _end;
+      }
+      list &operator=(const list &x) {
+        t_node *tmp;
+        t_node *current;
+        while (_begin != _end)
+        {
+          tmp = _begin;
+          _begin = _begin->next;
+          delete tmp;
+        }
+        tmp = x._begin;
+        _begin = new t_node;
+        _begin->data = x._begin->data;
+        _begin->prev = _end;
+        _begin->next = _end;
+        current = _begin;
+        _end->next = _begin;
+        tmp = tmp->next;
+        while (tmp != x._end)
+        {
+          current->next = new t_node;
+          current->next->next = _end;
+          current->next->data = tmp->data;
+          current->next->prev = current;
+          tmp = tmp->next;
+          current = current->next;
+        }
+        _end->prev = current;
+        _size = x._size;
+        return (*this);
+      }
+      /*
+       *----------------------------ITERATORS---------------------------------------
+       */
+
+      iterator begin()
+      {
+        return (iterator(_begin));
+      }
+      const_iterator begin() const {
+        return (iterator(_begin));
+      }
+      iterator end() { return (iterator(_end)); }
+      const_iterator end() const { return (iterator(_end)); }
+
+      reverse_iterator rbegin() { return (reverse_iterator(_end->prev)); }
+      const_reverse_iterator rbegin() const { return (reverse_iterator(_end->prev)); }
+      reverse_iterator rend() { return (reverse_iterator(_begin)); }
+      const_reverse_iterator rend() const { return (reverse_iterator(_begin)); }
+
+      /*
+       *----------------------------CAPACITY----------------------------------------
+       */
+      bool empty() const { return ((_size == 0) ? true : false); }
+      size_type size() const {
+        return (_size);
+      }
+      size_type max_size() const {
+        return (pow(2, sizeof(void *) * 8) / sizeof(ft::list<T>) - 1);
+      }
+      reference front() { return (_begin->data); }
+      const_reference front() const { return (_begin->data); }
+      reference back() { return (_end->data); }
+      const_reference back() const { return (_end->data); }
+      /*
+       * ------------------------------MODIFIERS------------------------------------
+       */
+      template <class InputIterator>
+      void assign(InputIterator first, InputIterator last) {
+        typedef typename std::is_integral<InputIterator>::type Integral;
+        assign_func(first, last, Integral());
+      }
+      void assign(size_type n, const value_type &val) {
+        assign_func(n, val, std::true_type());
+      }
+      void push_front(const value_type &val) {
+        _begin->prev = new t_node;
+        _begin->prev->data = val;
+        _begin->prev->next = _begin;
+        _begin->prev->prev = _end;
+        _begin = _begin->prev;
+        _end->next = _begin;
+        _size++;
+      }
+      void pop_front() {
+        _begin = _begin->next;
+        delete _begin->prev;
+        _begin->prev = _end;
+        _end->next = _begin;
+        _size--;
+      }
+
+      void push_back(const value_type &val) {
+        _end->next = new t_node;
+        _end->data = val;
+        _end->next->prev = _end;
+        _end->next->next = _begin;
+        _end->next->data = value_type();
+        _end = _end->next;
+        _begin->prev = _end;
+        _size++;
+      }
+
+      void pop_back() {
+        _end = _end->prev;
+        delete _end->next;
+        _end->next = _begin;
+        _end->data = value_type();
+        _size--;
+      }
+
+      iterator insert(iterator position, const value_type &val) {
+        t_node *new_node = new t_node;
+        t_node *pos = position.getPtr();
+        t_node *prev = pos->prev;
+        new_node->data = val;
+        new_node->next = pos;
+        new_node->prev = prev;
+        prev->next = new_node;
+        pos->prev = new_node;
+        _size++;
+        if (pos == _begin)
+          _begin = new_node;
+        return (iterator(new_node));
+      }
+      void insert(iterator position, size_type n, const value_type &val) {
+        insert_func(position, n, val, std::true_type());
+      }
+      template <class InputIterator>
+      void insert(iterator position, InputIterator first, InputIterator last) {
+        typedef typename std::is_integral<InputIterator>::type Integral;
+        insert_func(position, first, last, Integral());
+      }
+      iterator erase(iterator position) {
+        t_node *current = position.getPtr();
+        iterator ret;
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+        ret.setPtr(current->next);
+        if (_begin == current)
+        {
+          _begin = current->next;
+          _begin->prev = _end;
+        }
+        delete current;
+        _size--;
+        return (ret);
+      }
+      iterator erase(iterator first, iterator last) {
+        t_node *current = first.getPtr();
+        t_node *tmp;
+        iterator ret;
+        while (first != last) {
+          tmp = current;
+          current->prev->next = current->next;
+          current->next->prev = current->prev;
+          if (_begin == current)
+          {
+            _begin = current->next;
+            _begin->prev = _end;
+          }
+          current = current->next;
+          first++;
+          delete tmp;
+          _size--;
+        }
+        ret.setPtr(current);
+        return (ret);
+      }
+      void swap(list &x) {
+        t_node *tmp;
+        size_type tmp_size;
+        tmp = _begin;
+        _begin = x._begin;
+        x._begin = tmp;
+        tmp = _end;
+        _end = x._end;
+        x._end = tmp;
+        tmp_size = _size;
+        _size = x._size;
+        x._size = tmp_size;
+      }
+      void resize(size_type n, value_type val = value_type()) {
+        if (n > _size)
+          while (n > _size)
+            push_back(val);
+        else if (n < _size)
+          while (n < _size)
+            pop_back();
+      }
+      void clear() {
+        t_node *tmp;
+        while (_begin != _end) {
+          tmp = _begin;
+          _begin = _begin->next;
+          delete tmp;
+        }
+        _end->next = _end;
+        _end->prev = _end;
+        _begin = _end;
+        _size = 0;
+      }
+
+      /*
+       *------------------------------OPERATIONS---------------------------------------
+       */
+
+      void splice(iterator position, list &x) {
+        t_node *pos = position.getPtr();
+        t_node *current = pos->prev;
+
+        current->next = x._begin;
+        x._begin->prev = current;
+
+        x._end->prev->next = pos;
+        pos->prev = x._end->prev;
+
+        if (pos == _begin)
+          _begin = current->next;
+        _size += x._size;
+        x._size = 0;
+        x._end->next = x._end;
+        x._end->prev = x._end;
+        x._begin = x._end;
+      }
+
+      void splice(iterator position, list &x, iterator i) {
+        t_node *current = position.getPtr();
+        t_node *current_x = i.getPtr();
+        t_node *tmp_prev = current->prev;
+        if (x._begin == current_x)
+        {
+          x._begin = x._begin->next;
+          x._begin->prev = x._end;
+          x._end->next = x._begin;
+        }
+        current_x->prev->next = current_x->next;
+        current_x->next->prev = current_x->prev;
+        current->prev = current_x;
+        current_x->next = current;
+        current_x->prev = tmp_prev;
+        tmp_prev->next = current_x;
+        x._size--;
+        _size++;
+        if (position == _begin)
+          _begin = current->prev;
+      }
+
+      void splice(iterator position, list &x, iterator first, iterator last) {
+        iterator tmp;
+        while (first != last)
+        {
+          tmp = first;
+          tmp++;
+          splice(position, x, first);
+          first = tmp;
+        }
+      }
+
+      void remove(const value_type &val) {
+        t_node *current = _begin;
+        t_node *tmp;
+        while (current != _end) {
+          if (current->data == val) {
+            tmp = current->next;
+            erase(iterator(current));
+            current = tmp;
+            continue;
+          }
+          current = current->next;
+        }
+      }
+
+      template <class Predicate> void remove_if(Predicate pred) {
+        t_node *current = _begin;
+        t_node *tmp;
+        while (current != _end) {
+          if (pred(current->data) == true) {
+            tmp = current->next;
+            erase(iterator(current));
+            current = tmp;
+            continue;
+          }
+          current = current->next;
+        }
+      }
+
+
+      void sort()
+      {
+        t_node *current = _begin->next;
+        t_node *tmp;
+        while (current != _end)
+        {
+          if (current->data < current->prev->data)
+          {
+            current->next->prev = current->prev;
+            current->prev->next = current->next;
+            tmp = current->prev->prev;
+            current->prev->prev = current;
+            current->next = current->prev;
+            current->prev = tmp;
+            tmp->next = current;
+            if (current->next == _begin)
+              _begin = current;
+            current = _begin;
+          }
+          current = current->next;
+        }
+      }
+      template <class Compare>
+      void sort (Compare comp)
+      {
+        t_node *current = _begin->next;
+        t_node *tmp;
+        while (current != _end)
+        {
+          if (comp(current->data, current->prev->data))
+          {
+            current->next->prev = current->prev;
+            current->prev->next = current->next;
+            tmp = current->prev->prev;
+            current->prev->prev = current;
+            current->next = current->prev;
+            current->prev = tmp;
+            tmp->next = current;
+            if (current->next == _begin)
+              _begin = current;
+            current = _begin;
+          }
+          current = current->next;
+        }
+      }
+      void reverse()
+      {
+        t_node *current = _end->prev;
+        t_node *tmp_next;
+        t_node *tmp_prev;
+        while (current != _end)
+        {
+          tmp_next = current->next;
+          tmp_prev = current->prev;;
+          current->next = current->prev;
+          current->prev = current->next;
+          current = tmp_prev;
+        }
+        tmp_next = _end->next;
+        tmp_prev = _end->prev;
+        _end->next = tmp_prev;
+        _end->prev = tmp_next;
+        _end->data = tmp_prev->data;
+        _end = _begin->next;
+        _begin = tmp_prev;
+
+      }
+
+      void merge (list& x)
+      {
+        t_node *current = _end->prev;
+        t_node *current_x = x._begin;
+        while (current_x != x._end)
+        {
+          push_back(current_x->data);
+          current_x = current_x->next;
+          current = current->next;
+        }
+        x.clear();
+        current->next = _end;
+        _end->prev = current;
+      }
+      template <class Compare>
+      void merge (list& x, Compare comp)
+      {
+        t_node *current = _end->prev;
+        t_node *current_x = x._begin;
+        while (current_x != x._end)
+        {
+          push_back(current_x->data);
+          current_x = current_x->next;
+          current = current->next;
+        }
+        x.clear();
+        current->next = _end;
+        _end->prev = current;
+        sort(comp);
+      }
+
+      void unique()
+      {
+        t_node *current = _begin->next;
+        t_node *first;
+        t_node *last;
+        while (current != _end)
+        {
+          if (current->prev->data == current->data)
+          {
+            first = current;
+            while (current->next != _end && current->data == current->prev->data)
+              current = current->next;
+            last = current;
+            current = current->next;
+            erase(iterator(first), iterator(last));
+            continue;
+          }
+          current = current->next;
+        }
+      }
+
+      template <class BinaryPredicate>
+      void unique (BinaryPredicate binary_pred)
+      {
+        t_node *current = _begin->next;
+        t_node *first;
+        t_node *last;
+        while (current != _end)
+        {
+          if (binary_pred(current->data, current->prev->data) == true)
+          {
+            first = current;
+            while (current->next != _end && binary_pred(current->data, current->prev->data) == true)
+              current = current->next;
+            if (current->next != _end)
+              current = current->next;
+            last = current;
+            current = current->next;
+            erase(iterator(first), iterator(last));
+            continue;
+          }
+          current = current->next;
+        }      }
+
+
+/*
+ *------------------------------PRIVATE------------------------------------------
+ */
+    private:
+      t_node *_begin;
+      t_node *_end;
+      size_type _size;
+
+      /*
+       * -----------------------------DISPATCH
+       * INIT-------------------------------------------
+       */
+
+      void init_list(size_type n, const value_type val, std::true_type)  {
+        if (n) {
+          t_node *current;
+          _size = n;
+          _begin = new t_node;
+          _end = new t_node;
+          _begin->data = val;
+          _begin->next = _end;
+          _begin->prev = _end;
+          _end->data = value_type();
+          _end->prev = _begin;
+          _end->next = _begin;
+          n--;
+          current = _begin;
+          while (n) {
+            current->next = new t_node;
+            current->next->data = val;
+            current->next->prev = current;
+            current->next->next = _end;
+            current = current->next;
+            _end->prev = current;
+            n--;
+          }
+        }
+      }
+      template <class InputIterator>
+      void init_list(InputIterator first, InputIterator last, std::false_type) {
+        t_node *current;
+        _size = 1;
+        _begin = new t_node;
+        _end = new t_node;
+        _begin->data = *first;
+        _begin->next = _end;
+        _begin->prev = _end;
+        _end->data = value_type();
+        _end->prev = _begin;
+        _end->next = _begin;
+        first++;
+        current = _begin;
+        while (first != last) {
+          current->next = new t_node;
+          current->next->data = *first;
+          current->next->prev = current;
+          current->next->next = _end;
+          current = current->next;
+          _end->prev = current;
+          first++;
+          _size++;
+        }
+      }
+
+      /*
+       *-----------------------------DISPATCH
+       *OTHERS---------------------------------
+       */
+
+      void assign_func(size_type n, const value_type val, std::true_type) {
+        clear();
+        while (n)
+        {
+          push_back(val);
+          n--;
+        }
+      }
+      template <class InputIterator>
+      void assign_func(InputIterator first, InputIterator last, std::false_type) {
+        list<T> new_list;
+        while (first != last)
+        {
+          new_list.push_back(*first);
+          first++;
+        }
+        *this = new_list;
+      }
+      void insert_func(iterator position, size_type n, const value_type val, std::true_type) {
+        t_node *current = position.getPtr();
+        current = current->prev;
+        while (n) {
+          current->next = new t_node;
+          current->next->data = val;
+          current->next->prev = current;
+          current = current->next;
+          n--;
+          _size++;
+        }
+        current->next = position.getPtr();
+        position.getPtr()->prev = current;
+      }
+      template <class InputIterator>
+      void insert_func(iterator position, InputIterator first, InputIterator last, std::false_type) {
+        t_node *current = position.getPtr();
+        current = current->prev;
+        while (first != last) {
+          current->next = new t_node;
+          current->next->data = *first;
+          current->next->prev = current;
+          current = current->next;
+          first++;
+          _size++;
+        }
+        current->next = position.getPtr();
+        position.getPtr()->prev = current;
+      }
+      template <class T1>
+      friend  bool operator== (const list<T1>& lhs, const list<T1>& rhs);
+      template <class T1>
+      friend  bool operator!= (const list<T1>& lhs, const list<T1>& rhs);
+      template <class T1>
+      friend  bool operator<  (const list<T1>& lhs, const list<T1>& rhs);
+      template <class T1>
+      friend  bool operator<= (const list<T1>& lhs, const list<T1>& rhs);
+      template <class T1>
+      friend  bool operator>  (const list<T1>& lhs, const list<T1>& rhs);
+      template <class T1>
+      friend  bool operator>= (const list<T1>& lhs, const list<T1>& rhs);
+
+  };
+
+/*
+ *-----------------NON MEMBER FUNCTIONS OVERLOADS-------------------------------
+ */
+
+  template <class T>
+  void swap(list<T> &l1, list<T> &l2)
+  {
+    l1.swap(l2);
+  }
+
+  template <class T>
+  bool operator== (const list<T>& lhs, const list<T>& rhs)
+  {
+    list_iterator<T> lhs_current = lhs._begin;
+    list_iterator<T> rhs_current = rhs._begin;
+    if (lhs.size() == rhs.size())
+    {
+      while (lhs_current != lhs._end)
+      {
+        if (*lhs_current != *rhs_current)
+          return (false);
+        lhs_current++;
+        rhs_current++;
+      }
+      return (true);
+    }
+    return (false);
+  }
+  template <class T>
+  bool operator!= (const list<T>& lhs, const list<T>& rhs)
+  {
+    if ((lhs == rhs) == true)
+      return (false);
+    else
+      return (true);
+  }
+  template <class T>
+  bool operator<  (const list<T>& lhs, const list<T>& rhs)
+  {
+    list_iterator<T> lhs_current = lhs._begin;
+    list_iterator<T> rhs_current = rhs._begin;
+
+    if (lhs.size() < rhs.size())
+      return (true);
+    else if (lhs.size() > rhs.size())
+      return (false);
+    while (lhs_current != lhs._end)
+    {
+      if (*lhs_current < *rhs_current)
+        return (true);
+      lhs_current++;
+      rhs_current++;
+    }
+    return (false);
+  }
+  template <class T>
+  bool operator<= (const list<T>& lhs, const list<T>& rhs)
+  {
+    list_iterator<T> lhs_current = lhs._begin;
+    list_iterator<T> rhs_current = rhs._begin;
+
+    if (lhs.size() > rhs.size())
+      return (false);
+    while (lhs_current != lhs._end)
+    {
+      if (*lhs_current > *rhs_current)
+        return (false);
+      lhs_current++;
+      rhs_current++;
     }
     return (true);
-}
-
-template <class T>
-bool operator!= (const ft::list<T>& lhs,
-                 const ft::list<T>& rhs) {
-    return (!(lhs == rhs));
-}
-
-template <class T>
-bool operator<(const ft::list<T>& lhs,
-               const ft::list<T>& rhs) {
-    typename ft::list<T>::iterator it1 = lhs.begin();
-    typename ft::list<T>::iterator it2 = rhs.begin();
-
-    while (it1 != lhs.end()) {
-        if (*it1 > *it2) {
-            return (false);
-        }
-        it1++;
-        it2++;
-    }
-    return (true);
-}
-
-template <class T>
-bool operator<= (const ft::list<T>& lhs,
-                 const ft::list<T>& rhs) {
-    return (!(rhs < lhs));
-}
-
-template <class T>
-bool operator>  (const ft::list<T>& lhs,
-                 const ft::list<T>& rhs) {
-    return (rhs < lhs);
-}
-
-template <class T>
-bool operator>= (const ft::list<T>& lhs,
-                 const ft::list<T>& rhs) {
-    return (!(lhs < rhs));
-}
-
-#endif // LIST_H
+  }
+  template <class T>
+  bool operator>  (const list<T>& lhs, const list<T>& rhs)
+  {
+    if ((lhs <= rhs) == false)
+      return (true);
+    return (false);
+  }
+  template <class T>
+  bool operator>= (const list<T>& lhs, const list<T>& rhs)
+  {
+    if ((lhs < rhs) == false)
+      return (true);
+    return(false);
+  }
+} // namespace ft

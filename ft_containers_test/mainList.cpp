@@ -222,8 +222,8 @@ int mainList()
   std::list< int >::iterator ret_test;
   ft::list< int >::iterator  it_end = second.end();
   std::list< int >::iterator it_test_end = second_test.end();
-  ret = second.insert(it, 6);
-  ret_test = second_test.insert(it_test, 6);
+  second.insert(it, 1, 6);
+  second_test.insert(it_test, 1, 6);
   ret = second.insert(it, 7);
   ret_test = second_test.insert(it_test, 7);
   ret = second.insert(it_end, 8);
