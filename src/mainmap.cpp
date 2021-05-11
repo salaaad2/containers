@@ -194,6 +194,7 @@ void check_equalrange(T1 &f, T2 &f2, char c, bool debug = false)
   std::map<char, int, std::less<char> > f32(f2.begin(), f2.end());
   f32['k'] = 99;
   is_same(checker(f3, f32));
+  display(f3);
   ft::map<char, int, std::less<char> > f4(f3);
   f4['y'] = 101;
   std::map<char, int, std::less<char> > f42(f32);
@@ -231,11 +232,11 @@ void check_equalrange(T1 &f, T2 &f2, char c, bool debug = false)
   f.clear();
   f2.clear();
   is_same(checker(f, f2));
-  // ft::map<char, int, std::less<char> > emp;
+  ft::map<char, int, std::less<char> > emp;
   std::map<char, int, std::less<char> > emp2;
-  // emp.clear();
+  emp.clear();
   emp2.clear();
-  // is_same(checker(emp, emp2));	return 0;
+  is_same(checker(emp, emp2));	return 0;
   return (0);
 }
 

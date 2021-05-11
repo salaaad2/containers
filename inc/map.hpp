@@ -50,8 +50,15 @@ namespace ft {
             ~map() {
                 if (_head != NULL)
                 {
+                    std::cout << "kill me" << std::endl;
                     _destroy(_head);
                 }
+            }
+
+            map& operator=(const map& x) {
+                this->clear();
+                insert(x.begin(), x.end());
+                return (*this);
             }
 //
 // content modifiers
