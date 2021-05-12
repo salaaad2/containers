@@ -52,7 +52,12 @@ namespace ft {
                 {
                     _destroy(_head);
                 }
-                _size = 0;
+            }
+
+            map& operator=(const map& x) {
+                this->clear();
+                insert(x.begin(), x.end());
+                return (*this);
             }
 //
 // content modifiers
@@ -484,10 +489,9 @@ namespace ft {
 // non-member overloads
 //
 template <class Key,
-          class T,
-          class Compare = std::less<Key> >
-void swap (ft::map<Key,T,Compare>& x, ft::map<Key,T,Compare>& y) {
-    ft::map<Key, T, Compare> tmp(x);
+          class T>
+void swap (ft::map<Key,T>& x, ft::map<Key,T>& y) {
+    ft::map<Key, T> tmp(x);
 
     x.clear();
     x.insert(y.begin(), y.end());

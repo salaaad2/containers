@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include <iostream>
 #include <map>
-#include "inc/map.hpp"
+#include "../inc/map.hpp"
 template <class T>
 void display(T &m)
 {
@@ -193,11 +193,14 @@ void check_equalrange(T1 &f, T2 &f2, char c, bool debug = false)
   f3['k'] = 99;
   std::map<char, int, std::less<char> > f32(f2.begin(), f2.end());
   f32['k'] = 99;
-  is_same(checker(f3, f32));  ft::map<char, int, std::less<char> > f4(f3);
+  is_same(checker(f3, f32));
+  display(f3);
+  ft::map<char, int, std::less<char> > f4(f3);
   f4['y'] = 101;
   std::map<char, int, std::less<char> > f42(f32);
   f42['y'] = 101;
-  is_same(checker(f4, f42));  ft::map<char, int, std::less<char> > f5;
+  is_same(checker(f4, f42));
+  ft::map<char, int, std::less<char> > f5;
   f5 = f4;
   f5['o'] = 55;
   std::map<char, int, std::less<char> > f52;
@@ -234,6 +237,7 @@ void check_equalrange(T1 &f, T2 &f2, char c, bool debug = false)
   emp.clear();
   emp2.clear();
   is_same(checker(emp, emp2));	return 0;
+  return (0);
 }
 
 int main(void) {
