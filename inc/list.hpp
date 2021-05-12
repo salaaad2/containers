@@ -678,9 +678,9 @@ namespace ft {
 
     };
 
-/*
- *-----------------NON MEMBER FUNCTIONS OVERLOADS-------------------------------
- */
+//
+// non member overloads
+//
 
     template <class T>
     void swap(list<T> &l1, list<T> &l2)
