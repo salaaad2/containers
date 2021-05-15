@@ -142,7 +142,6 @@ namespace ft {
                 }
             }
 
-            // TODO: erase decapitation
             void erase(iterator position) {
                 t_node * t;
                 t_node * tmp;
@@ -175,7 +174,6 @@ namespace ft {
                 else if (t->right != NULL && t->left != NULL) { // children
                     t_node * ch = _get_child(t);
 
-                    std::cout << "decapitate" << "\n";
                     if (t->parent != NULL) {
                         ch->parent->left = NULL;
                         ch->parent->parent = ch;
@@ -184,6 +182,17 @@ namespace ft {
                         ch->parent = t->parent;
                     }
                     else {
+                        std::cout << "decapitate" << "\n";
+                        if (ch->parent->right == ch) {
+                            ch->parent->right = NULL;
+                        }
+                        else {
+                            ch->parent->left = NULL;
+                        }
+                        ch->left = t->left;
+                        ch->left->parent = ch;
+                        ch->right = t->right;
+                        ch->right->parent = ch;
                     }
                 }
                 delete d;
