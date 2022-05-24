@@ -41,13 +41,13 @@ namespace ft {
             }
 
             explicit list(size_type n, const value_type &val = value_type()) {
-                init_list(n, val, ft::is_integral<value_type>::value);
+                init_list(n, val, std::true_type());
             }
 
             template <class InputIterator>
             list(InputIterator first, InputIterator last) {
-                typedef typename ft::is_integral<InputIterator>::value v;
-                init_list(first, last, v);
+                typedef typename std::is_integral<InputIterator>::type Integral;
+                init_list(first, last, Integral());
             }
 
             list(const list &x) {
@@ -544,7 +544,7 @@ namespace ft {
 //
 // helpers / dispatchers
 
-            void init_list(size_type n, const value_type val, ft::bool_type<true>)  {
+            void init_list(size_type n, const value_type val, std::true_type)  {
                 if (n) {
                     t_node *current;
                     _size = n;
@@ -571,7 +571,7 @@ namespace ft {
             }
 
             template <class InputIterator>
-            void init_list(InputIterator first, InputIterator last, ft::false_type) {
+            void init_list(InputIterator first, InputIterator last, std::false_type) {
                 t_node *current;
                 _size = 1;
                 _begin = new t_node;
